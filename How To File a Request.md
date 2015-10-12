@@ -2,4 +2,4 @@ I'm a simple guy. And as it happens, as a student, right now I've got some spare
 
 If you want me to add an ore to the Electroextractor's item list, let me know. I can do this quite easily (so can you if you just know the GameRegistry and how to pick the right number for your color!). Preesh as always guys, don't forget, requests below!:
 
-_________________________________________________________________
+_____________________________________________________________________________________________________________________________
