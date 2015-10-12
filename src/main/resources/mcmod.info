@@ -1,0 +1,16 @@
+[
+{
+  "modid": "CrissCross",
+  "name": "CrissCross",
+  "description": "A highly confused mod!.",
+  "version": "1.0A",
+  "mcversion": "1.7.10",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["oitsjustjose"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
