@@ -1,7 +1,8 @@
-package com.oitsjustjose.criss_cross.Util;
+package com.oitsjustjose.criss_cross.Recipes;
 
 import com.oitsjustjose.criss_cross.Blocks.BlockManager;
 import com.oitsjustjose.criss_cross.Items.ItemManager;
+import com.oitsjustjose.criss_cross.Util.ConfigHandler;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Blocks;

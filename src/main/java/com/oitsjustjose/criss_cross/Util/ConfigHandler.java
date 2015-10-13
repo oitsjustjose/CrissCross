@@ -33,7 +33,6 @@ public class ConfigHandler
     public static int electroextractorProcessTime;
     public static int electroextractorOutput;
     public static String electroextractorRecipeItem;
-    public static String[] electroextractorInputs;
     public static String[] electroextractorEnergySources;
 
     public static String[] defaultElectroextractorEnergySources = new String[]
@@ -41,7 +40,15 @@ public class ConfigHandler
     				"minecraft:redstone_block"
     		};
     
-
+    public static int woodchipperProcessTime;
+    public static int woodchipperOutput;
+    public static String woodchipperRecipeItem;
+    public static String[] woodchipperFuels;
+    
+    public static String[] defaultWoodchipperFuels = new String[]
+    		{
+    			"minecraft:water_bucket"	
+    		};
     
     public static void init(File configFile)
     {
@@ -79,11 +86,23 @@ public class ConfigHandler
     			"Control how many ticks it takes the Electroextractor to process an item. Default is 250; furnaces are 200.");
     	
     	electroextractorOutput = config.getInt("Electroextractor Output Quantity", config.CATEGORY_GENERAL, 2, 0, 64, 
-    			"Control how many of the input item you get as the output item. Default is 2.");
+    			"Control how many dusts you get as the output. Default is 2.");
     	
     	electroextractorRecipeItem = config.getString("Key crafting item of the Electroextractor.", config.CATEGORY_GENERAL, "minecraft:diamond_block",
     			"This is the item located in the center of the crafting recipe for the Electroextractor. Formatted as: <modid>:<item>:<meta> or <modid>:<item>.");
     	
+    	//Woodchipper's Configs
+    	woodchipperFuels = config.get(config.CATEGORY_GENERAL, "Items to be added as the Woodchipper's 'fuels'", defaultWoodchipperFuels,
+    			"A list of items to be added as the Woodchipper's 'fuels'. Formatted as: <modid>:<item>:<meta> or <modid>:<item>.").getStringList();
+    	
+    	woodchipperProcessTime = config.getInt("Woodchipper Process Time", config.CATEGORY_GENERAL, 400, 0, Short.MAX_VALUE, 
+    			"Control how many ticks it takes the Woodchipper to process an item. Default is 400; furnaces are 200.");
+    	
+    	woodchipperOutput = config.getInt("Woodchipper Output Quantity", config.CATEGORY_GENERAL, 6, 0, 64, 
+    			"Control how many planks are yielded from processing a log. Default is 6.");
+    	
+    	woodchipperRecipeItem = config.getString("Key crafting item of the Woodchipper", config.CATEGORY_GENERAL, "minecraft:diamond_block", 
+     			"This is the item located in the center of the crafting recipe for the Woodchipper. Formatted as: <modid>:<item>:<meta> or <modid>:<item>.");
     	
         if (config.hasChanged())
             config.save();

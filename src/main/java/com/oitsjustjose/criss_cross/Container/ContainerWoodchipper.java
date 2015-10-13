@@ -1,6 +1,6 @@
 package com.oitsjustjose.criss_cross.Container;
 
-import com.oitsjustjose.criss_cross.TileEntity.TileEntityElectroextractor;
+import com.oitsjustjose.criss_cross.TileEntity.TileEntityWoodchipper;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -11,56 +11,51 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerElectroextractor extends Container
+public class ContainerWoodchipper extends Container
 {
-	TileEntityElectroextractor electroextractor;
+	TileEntityWoodchipper woodchipper;
 	EntityPlayer player;
 	
 	private int lastUseTime;
-	private int lastCrushTime;
+	private int lastChopTime;
 	private int lastFuelTime;
 	
-	public ContainerElectroextractor(EntityPlayer player, TileEntityElectroextractor electroextractor)
+	public ContainerWoodchipper(EntityPlayer player, TileEntityWoodchipper woodchipper)
 	{
 		this.player = player;
-		this.electroextractor = electroextractor;
+		this.woodchipper = woodchipper;
 		
 		lastUseTime = 0;
-		lastCrushTime = 0;
+		lastChopTime = 0;
 		lastFuelTime = 0;
 		
-		this.addSlotToContainer(new Slot(electroextractor, 0, 56, 17)); //input
-		this.addSlotToContainer(new Slot(electroextractor, 1, 56, 53)); //fuelitem
-		this.addSlotToContainer(new MachineOutputSlot(player, electroextractor, 2, 116, 35));
+		this.addSlotToContainer(new Slot(woodchipper, 0, 56, 17)); //input
+		this.addSlotToContainer(new Slot(woodchipper, 1, 56, 53)); //catalyst
+		this.addSlotToContainer(new MachineOutputSlot(player, woodchipper, 2, 116, 35));
 		this.addInventorySlots();
 	}
 	
     @SideOnly(Side.CLIENT)
     public void updateProgressBar(int timeType1, int timeType2)
     {
-        if (timeType1 == 0)
-        {
-            this.electroextractor.crushTime = timeType2;
-        }
-
-        if (timeType1 == 1)
-        {
-            this.electroextractor.fuelTime = timeType2;
-        }
-
-        if (timeType1 == 2)
-        {
-            this.electroextractor.fuelInUseTime = timeType2;
-        }
+    	switch(timeType1)
+    	{
+    	case 0:this.woodchipper.processTime = timeType2;
+    		break;
+    	case 1:this.woodchipper.fuelTime = timeType2;
+    		break;
+    	case 2:this.woodchipper.fuelUsetime = timeType2;
+    		break;
+    	}
     }
 	
 	@Override
 	public void addCraftingToCrafters(ICrafting crafting)
     {
         super.addCraftingToCrafters(crafting);
-        crafting.sendProgressBarUpdate(this, 0, this.electroextractor.crushTime);
-        crafting.sendProgressBarUpdate(this, 1, this.electroextractor.fuelTime);
-        crafting.sendProgressBarUpdate(this, 2, this.electroextractor.fuelInUseTime);
+        crafting.sendProgressBarUpdate(this, 0, this.woodchipper.processTime);
+        crafting.sendProgressBarUpdate(this, 1, this.woodchipper.fuelTime);
+        crafting.sendProgressBarUpdate(this, 2, this.woodchipper.fuelUsetime);
     }
 	
 	@Override
@@ -71,16 +66,16 @@ public class ContainerElectroextractor extends Container
 		{
 			ICrafting crafting = (ICrafting)this.crafters.get(i);
 			
-			if(this.lastUseTime != this.electroextractor.crushTime)
-				crafting.sendProgressBarUpdate(this, 0, this.electroextractor.crushTime);
-			if(this.lastCrushTime != this.electroextractor.fuelTime)
-				crafting.sendProgressBarUpdate(this, 1, this.electroextractor.fuelTime);
-			if(this.lastFuelTime != this.electroextractor.fuelInUseTime)
-				crafting.sendProgressBarUpdate(this, 2, this.electroextractor.fuelInUseTime);
+			if(this.lastUseTime != this.woodchipper.processTime)
+				crafting.sendProgressBarUpdate(this, 0, this.woodchipper.processTime);
+			if(this.lastChopTime != this.woodchipper.fuelTime)
+				crafting.sendProgressBarUpdate(this, 1, this.woodchipper.fuelTime);
+			if(this.lastFuelTime != this.woodchipper.fuelUsetime)
+				crafting.sendProgressBarUpdate(this, 2, this.woodchipper.fuelUsetime);
 		}
-		this.lastUseTime = this.electroextractor.crushTime;
-		this.lastCrushTime = this.electroextractor.fuelTime;
-		this.lastFuelTime = this.electroextractor.fuelInUseTime;
+		this.lastUseTime = this.woodchipper.processTime;
+		this.lastChopTime = this.woodchipper.fuelTime;
+		this.lastFuelTime = this.woodchipper.fuelUsetime;
 	}
 	
 	@Override
@@ -105,14 +100,14 @@ public class ContainerElectroextractor extends Container
             }
             else if (slotID != 1 && slotID != 0)
             {
-                if (TileEntityElectroextractor.isValidForElectroextractor(itemstack1))
+                if (TileEntityWoodchipper.isValidForWoodchipper(itemstack1))
                 {
                     if (!this.mergeItemStack(itemstack1, 0, 1, false))
                     {
                         return null;
                     }
                 }
-                else if (TileEntityElectroextractor.isItemEnergetic(itemstack1))
+                else if (TileEntityWoodchipper.isItemFuel(itemstack1))
                 {
                     if (!this.mergeItemStack(itemstack1, 1, 2, false))
                     {
@@ -159,7 +154,7 @@ public class ContainerElectroextractor extends Container
 	@Override
 	public boolean canInteractWith(EntityPlayer player)
 	{
-		return this.electroextractor.isUseableByPlayer(this.player);
+		return this.woodchipper.isUseableByPlayer(this.player);
 	}
 	
 	public final void addInventorySlots()

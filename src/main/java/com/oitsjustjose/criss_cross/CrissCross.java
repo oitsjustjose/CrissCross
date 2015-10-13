@@ -2,9 +2,9 @@ package com.oitsjustjose.criss_cross;
 
 import com.oitsjustjose.criss_cross.Blocks.BlockManager;
 import com.oitsjustjose.criss_cross.Items.ItemManager;
+import com.oitsjustjose.criss_cross.Recipes.RecipeHandler;
 import com.oitsjustjose.criss_cross.Util.CommonProxy;
 import com.oitsjustjose.criss_cross.Util.ConfigHandler;
-import com.oitsjustjose.criss_cross.Util.RecipeHandler;
 import com.oitsjustjose.criss_cross.Util.Reference;
 
 import cpw.mods.fml.common.FMLCommonHandler;

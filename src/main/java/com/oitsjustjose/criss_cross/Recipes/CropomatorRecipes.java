@@ -1,6 +1,7 @@
-package com.oitsjustjose.criss_cross.Util;
+package com.oitsjustjose.criss_cross.Recipes;
 
 import com.oitsjustjose.criss_cross.TileEntity.TileEntityCropomator;
+import com.oitsjustjose.criss_cross.Util.ConfigHandler;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.ItemStack;
