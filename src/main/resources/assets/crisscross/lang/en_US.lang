@@ -1,6 +1,7 @@
 #Tiles
 tile.CrissCross.Cropomator.name=Cropomator
 tile.CrissCross.ElectroExtractor.name=ElectroExtractor
+tile.CrissCross.WoodChipper.name=Wood Chipper
 
 #Items
 item.CrissCross.Iron.name=Electrolytic Iron Dust
@@ -9,3 +10,4 @@ item.CrissCross.Gold.name=Electrolytic Gold Dust
 #Containers
 container.cropomator=Cropomator
 container.electroextractor=ElectroExtractor
+container.woodchipper=Wood Chipper

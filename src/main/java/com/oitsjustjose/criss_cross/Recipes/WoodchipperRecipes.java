@@ -1,39 +1,97 @@
 package com.oitsjustjose.criss_cross.Recipes;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import com.mojang.authlib.GameProfile;
+import com.oitsjustjose.criss_cross.TileEntity.TileEntityCropomator;
 import com.oitsjustjose.criss_cross.TileEntity.TileEntityWoodchipper;
 import com.oitsjustjose.criss_cross.Util.ConfigHandler;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
+import net.minecraftforge.common.util.FakePlayer;
+import net.minecraftforge.common.util.FakePlayerFactory;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class WoodchipperRecipes
 {
 	public static void initRecipes()
 	{
-		ArrayList<ItemStack> logs = OreDictionary.getOres("logWood");
-		ArrayList<ItemStack> planks = OreDictionary.getOres("plankWood");
 		
-		for(int i = 0; i < logs.size(); i++)
+		
+		//Iterates through the inputItems String array
+		for(int i = 0; i < ConfigHandler.woodchipperLogs.length; i++)
 		{
-			for(int j = 0; j < planks.size(); j++)
+			//Done in a try loop just in case there's an issue with reading a value in.
+			try
 			{
-				ItemStack tempLog = logs.get(i);
-				ItemStack tempPlank = planks.get(j);
+				//Splits the modid:item / modid:item:metadata string at the ':' and makes a 
+				//new Array of strings, each element containing the newly separated parts.
+				String[] logs = ConfigHandler.woodchipperLogs[i].split(":");
+				String[] planks = ConfigHandler.woodchipperPlanks[i].split(":");
 				
-				String logName = tempLog.getDisplayName().toLowerCase();
-				String plankName = tempPlank.getDisplayName().toLowerCase();
 				
-				logName.replaceFirst("wood", "");
-				logName.trim();
+				ItemStack log = GameRegistry.findItemStack(logs[0], logs[1], 1);
+				ItemStack plank = GameRegistry.findItemStack(planks[0], planks[1], 1);
 				
-				if(plankName.contains(logName))
-					TileEntityWoodchipper.addRecipe(tempLog, tempPlank);
+				boolean flag = (log != null) && (plank != null);
+				
+				if(!flag)
+				{
+					if(log == null)
+						System.out.println("[CrissCross] Item " + ConfigHandler.woodchipperLogs[i] + " could not be added to the Woodchipper's recipe list. Please confirm you have the name and formatting correct.");
+					if(plank == null)
+						System.out.println("[CrissCross] Item " + ConfigHandler.woodchipperPlanks[i] + " could not be added to the Woodchipper's recipe list. Please confirm you have the name and formatting correct.");
+					break;
+				}
+				
+				//Checks the read in string as modid:item
+				if(flag)
+				{
+					if(logs.length == 2)
+					{
+						if(planks.length == 2)
+						{
+							TileEntityWoodchipper.addRecipe(log, plank);
+						}
+						else if(planks.length == 3)
+						{
+							TileEntityWoodchipper.addRecipe(log, new ItemStack(plank.getItem(), 1, Integer.parseInt(planks[2])));
+						}
+					}
+					else if(logs.length == 3)
+					{
+						if(planks.length == 2)
+						{
+							TileEntityWoodchipper.addRecipe(new ItemStack(log.getItem(), 1, Integer.parseInt(logs[2])), plank);
+						}
+						else if(planks.length == 3)
+						{
+							TileEntityWoodchipper.addRecipe(new ItemStack(log.getItem(), 1, Integer.parseInt(logs[2])), new ItemStack(plank.getItem(), 1, Integer.parseInt(planks[2])));
+						}
+					}
+				}
+			}
+			//Gotta catch em all
+			catch(Exception e)
+			{
+				System.out.println("[CrissCross]: Error reading itemstack for inputs from input file at item: " + (i + 1));
 			}
 		}
 	}
+	
+	
+	
+	
+	
 	
 	public static void initFuels()
 	{

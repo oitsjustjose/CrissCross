@@ -44,10 +44,24 @@ public class ConfigHandler
     public static int woodchipperOutput;
     public static String woodchipperRecipeItem;
     public static String[] woodchipperFuels;
+    public static String[] woodchipperLogs;
+    public static String[] woodchipperPlanks;
+    
+    public static String[] defaultWoodchipperLogs = new String[]
+    		{
+    			"minecraft:log:0", "minecraft:log:1", "minecraft:log:2",
+    			"minecraft:log:3", "minecraft:log2:0", "minecraft:log2:1"
+    		};
+    
+    public static String[] defaultWoodchipperPlanks = new String[]
+    		{
+    			"minecraft:planks:0", "minecraft:planks:1", "minecraft:planks:2",
+    			"minecraft:planks:3", "minecraft:planks:4", "minecraft:planks:5"
+    		};
     
     public static String[] defaultWoodchipperFuels = new String[]
     		{
-    			"minecraft:water_bucket"	
+    			"minecraft:water_bucket", "minecraft:potion:0"
     		};
     
     public static void init(File configFile)
@@ -103,6 +117,14 @@ public class ConfigHandler
     	
     	woodchipperRecipeItem = config.getString("Key crafting item of the Woodchipper", config.CATEGORY_GENERAL, "minecraft:diamond_block", 
      			"This is the item located in the center of the crafting recipe for the Woodchipper. Formatted as: <modid>:<item>:<meta> or <modid>:<item>.");
+    	
+    	woodchipperLogs = config.get(config.CATEGORY_GENERAL, "Items that the Woodchipper shall consider as logs.", defaultWoodchipperLogs, 
+    			"These should 1:1 match what you put in the list of planks. So the first item on this list corresponds to the first item on the planks list, etc. etc." + "\n" + 
+    			"Formatted as: <modid>:<item>:<meta> or <modid>:<item>.").getStringList();
+    	
+    	woodchipperPlanks = config.get(config.CATEGORY_GENERAL, "Items that the Woodchipper shall consider as planks.", defaultWoodchipperPlanks, 
+    			"These should 1:1 match what you put in the list of logs. So the first item on this list corresponds to the first item on the logs list, etc. etc." + "\n" + 
+    			"Formatted as: <modid>:<item>:<meta> or <modid>:<item>.").getStringList();
     	
         if (config.hasChanged())
             config.save();

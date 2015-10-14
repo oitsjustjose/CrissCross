@@ -3,7 +3,6 @@ package com.oitsjustjose.criss_cross.TileEntity;
 import java.util.ArrayList;
 
 import com.oitsjustjose.criss_cross.Blocks.BlockCropomator;
-import com.oitsjustjose.criss_cross.Recipes.WoodchipperRecipes;
 import com.oitsjustjose.criss_cross.Util.ConfigHandler;
 
 import cpw.mods.fml.relauncher.Side;
