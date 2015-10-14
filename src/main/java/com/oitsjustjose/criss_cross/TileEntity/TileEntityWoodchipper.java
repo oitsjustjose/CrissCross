@@ -2,7 +2,7 @@ package com.oitsjustjose.criss_cross.TileEntity;
 
 import java.util.ArrayList;
 
-import com.oitsjustjose.criss_cross.Blocks.BlockCropomator;
+import com.oitsjustjose.criss_cross.Blocks.BlockWoodchipper;
 import com.oitsjustjose.criss_cross.Util.ConfigHandler;
 
 import cpw.mods.fml.relauncher.Side;
@@ -15,7 +15,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
 
 public class TileEntityWoodchipper extends TileEntity implements ISidedInventory
 {
@@ -242,7 +241,7 @@ public class TileEntityWoodchipper extends TileEntity implements ISidedInventory
             if (flag != this.fuelTime > 0)
             {
                 flag1 = true;
-                BlockCropomator.updateBlockState(this.fuelTime > 0, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
+                BlockWoodchipper.updateBlockState(this.fuelTime > 0, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
             }
         }
 
@@ -260,22 +259,23 @@ public class TileEntityWoodchipper extends TileEntity implements ISidedInventory
         }
         else
         {
-        	int posInArList = 0;
+        	ItemStack output = null;
         	for(int i = 0; i < inputItems.size(); i++)
         	{
         		if(inputItems.get(i).getItem() == ItemStacks[0].getItem() && inputItems.get(i).getItemDamage() == ItemStacks[0].getItemDamage())
         		{
-        			posInArList = i;
+        			output = new ItemStack(outputItems.get(i).getItem(), qty, outputItems.get(i).getItemDamage());
         		}
         	}
         	
-            ItemStack itemstack = new ItemStack(outputItems.get(posInArList).getItem(), qty, outputItems.get(posInArList).getItemDamage());
-            
+        	if(output == null)
+        		return false;
+        	            
             if(this.ItemStacks[2] == null)
             	return true;
-            if(!this.ItemStacks[2].isItemEqual(itemstack))
+            if(!this.ItemStacks[2].isItemEqual(output))
             	return false;
-            int result = ItemStacks[2].stackSize + itemstack.stackSize;
+            int result = ItemStacks[2].stackSize + output.stackSize;
             
             return result <= getInventoryStackLimit() && result <= this.ItemStacks[2].getMaxStackSize();
         }
@@ -345,18 +345,19 @@ public class TileEntityWoodchipper extends TileEntity implements ISidedInventory
 
     public void processItem()
     {
-    	if (this.canProcess())
+        if (this.canProcess())
         {
-        	int posInArList = 0;
+        	ItemStack output = null;
         	for(int i = 0; i < inputItems.size(); i++)
         	{
         		if(inputItems.get(i).getItem() == ItemStacks[0].getItem() && inputItems.get(i).getItemDamage() == ItemStacks[0].getItemDamage())
         		{
-        			posInArList = i;
+        			output = new ItemStack(outputItems.get(i).getItem(), qty, outputItems.get(i).getItemDamage());
         		}
         	}
         	
-            ItemStack output = new ItemStack(outputItems.get(posInArList).getItem(), qty, outputItems.get(posInArList).getItemDamage());
+        	if(output == null)
+        		return;
 
             if (this.ItemStacks[2] == null)
             {

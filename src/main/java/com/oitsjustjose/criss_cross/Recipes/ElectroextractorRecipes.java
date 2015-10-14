@@ -1,7 +1,6 @@
 package com.oitsjustjose.criss_cross.Recipes;
 
 import com.oitsjustjose.criss_cross.Items.ItemManager;
-import com.oitsjustjose.criss_cross.TileEntity.TileEntityCropomator;
 import com.oitsjustjose.criss_cross.TileEntity.TileEntityElectroextractor;
 import com.oitsjustjose.criss_cross.Util.ConfigHandler;
 
