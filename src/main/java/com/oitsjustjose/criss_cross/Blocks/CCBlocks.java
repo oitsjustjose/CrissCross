@@ -9,7 +9,7 @@ import com.oitsjustjose.criss_cross.Recipes.WoodchipperRecipes;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.block.Block;
 
-public class BlockManager
+public class CCBlocks
 {
 	public static Block cropomator;
 	public static Block electroextractor;

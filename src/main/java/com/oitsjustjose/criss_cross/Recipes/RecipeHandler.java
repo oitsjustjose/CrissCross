@@ -1,7 +1,7 @@
 package com.oitsjustjose.criss_cross.Recipes;
 
-import com.oitsjustjose.criss_cross.Blocks.BlockManager;
-import com.oitsjustjose.criss_cross.Items.ItemManager;
+import com.oitsjustjose.criss_cross.Blocks.CCBlocks;
+import com.oitsjustjose.criss_cross.Items.CCItems;
 import com.oitsjustjose.criss_cross.Util.ConfigHandler;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -16,8 +16,8 @@ public class RecipeHandler
 	{
 		cropomatorRecipe();
 		electroextractorRecipe();
-		GameRegistry.addSmelting(new ItemStack(ItemManager.dusts, 1, 0), new ItemStack(Items.iron_ingot), 1.0F);
-		GameRegistry.addSmelting(new ItemStack(ItemManager.dusts, 1, 1), new ItemStack(Items.gold_ingot), 1.0F);
+		GameRegistry.addSmelting(new ItemStack(CCItems.dusts, 1, 0), new ItemStack(Items.iron_ingot), 1.0F);
+		GameRegistry.addSmelting(new ItemStack(CCItems.dusts, 1, 1), new ItemStack(Items.gold_ingot), 1.0F);
 
 	}
 	
@@ -39,7 +39,7 @@ public class RecipeHandler
 			System.out.println("[CrissCross] Item " + ConfigHandler.electroextractorRecipeItem + " could not be added as part of the recipe of the cropomator. Please confirm you have the name and formatting correct.");
 		}
 		
-		GameRegistry.addRecipe(new ItemStack(BlockManager.electroextractor), new Object[]
+		GameRegistry.addRecipe(new ItemStack(CCBlocks.electroextractor), new Object[]
 		{
 				"I#I",
 				"SCS",
@@ -66,7 +66,7 @@ public class RecipeHandler
 			System.out.println("[CrissCross] Item " + ConfigHandler.cropomatorRecipeItem + " could not be added as part of the recipe of the cropomator. Please confirm you have the name and formatting correct.");
 		}
 		
-		GameRegistry.addRecipe(new ItemStack(BlockManager.cropomator), new Object[]
+		GameRegistry.addRecipe(new ItemStack(CCBlocks.cropomator), new Object[]
 		{
 				"I#I",
 				"SCS",

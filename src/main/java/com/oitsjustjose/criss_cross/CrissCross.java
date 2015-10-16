@@ -1,7 +1,7 @@
 package com.oitsjustjose.criss_cross;
 
-import com.oitsjustjose.criss_cross.Blocks.BlockManager;
-import com.oitsjustjose.criss_cross.Items.ItemManager;
+import com.oitsjustjose.criss_cross.Blocks.CCBlocks;
+import com.oitsjustjose.criss_cross.Items.CCItems;
 import com.oitsjustjose.criss_cross.Recipes.RecipeHandler;
 import com.oitsjustjose.criss_cross.Util.CommonProxy;
 import com.oitsjustjose.criss_cross.Util.ConfigHandler;
@@ -29,8 +29,8 @@ public class CrissCross
 	{
 		ConfigHandler.init(event.getSuggestedConfigurationFile());
         FMLCommonHandler.instance().bus().register(new ConfigHandler());
-		ItemManager.init();
-		BlockManager.init();
+		CCItems.init();
+		CCBlocks.init();
 		proxy.preInit();
 	}
 	
