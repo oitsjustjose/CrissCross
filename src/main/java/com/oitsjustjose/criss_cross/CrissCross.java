@@ -2,7 +2,7 @@ package com.oitsjustjose.criss_cross;
 
 import com.oitsjustjose.criss_cross.Blocks.CCBlocks;
 import com.oitsjustjose.criss_cross.Items.CCItems;
-import com.oitsjustjose.criss_cross.Recipes.RecipeHandler;
+import com.oitsjustjose.criss_cross.Recipes.CRecipes;
 import com.oitsjustjose.criss_cross.Util.CommonProxy;
 import com.oitsjustjose.criss_cross.Util.ConfigHandler;
 import com.oitsjustjose.criss_cross.Util.Reference;
@@ -37,7 +37,7 @@ public class CrissCross
 	@EventHandler
 	public static void init(FMLInitializationEvent event)
 	{
-		RecipeHandler.init();
+		CRecipes.init();
 		proxy.init();
 	}
 }

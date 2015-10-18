@@ -2,6 +2,7 @@ package com.oitsjustjose.criss_cross.Recipes;
 
 import com.oitsjustjose.criss_cross.Blocks.CCBlocks;
 import com.oitsjustjose.criss_cross.Items.CCItems;
+import com.oitsjustjose.criss_cross.Items.ItemDust;
 import com.oitsjustjose.criss_cross.Util.ConfigHandler;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -10,15 +11,12 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 
-public class RecipeHandler
+public class CRecipes
 {
 	public static void init()
 	{
 		cropomatorRecipe();
 		electroextractorRecipe();
-		GameRegistry.addSmelting(new ItemStack(CCItems.dusts, 1, 0), new ItemStack(Items.iron_ingot), 1.0F);
-		GameRegistry.addSmelting(new ItemStack(CCItems.dusts, 1, 1), new ItemStack(Items.gold_ingot), 1.0F);
-
 	}
 	
 	static void electroextractorRecipe()
