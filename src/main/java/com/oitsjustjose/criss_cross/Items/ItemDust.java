@@ -3,6 +3,7 @@ package com.oitsjustjose.criss_cross.Items;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.oitsjustjose.criss_cross.TileEntity.TileEntityElectroextractor;
 import com.oitsjustjose.criss_cross.Util.ConfigHandler;
 import com.oitsjustjose.criss_cross.Util.Reference;
 
@@ -27,7 +28,6 @@ public class ItemDust extends Item
 	{
 		this.setHasSubtypes(true);
 		this.setCreativeTab(CreativeTabs.tabMaterials);
-		this.oreDictionaryInit();
 		GameRegistry.registerItem(this, this.getUnlocalizedName());
 	}
 	
@@ -81,13 +81,18 @@ public class ItemDust extends Item
 			list.add(new ItemStack(item, 1, i));
 	}
 	
-	void oreDictionaryInit()
+	public static void oreDictionaryInit()
 	{
 		for(int i = 0; i < ConfigHandler.electroextractorOreDictInputs.length; i++)
 		{
 			String[] entry = ConfigHandler.electroextractorOreDictInputs[i].split(":");
 			if(OreDictionary.doesOreNameExist("ore" + entry[0]))
+			{
+				ArrayList<ItemStack> ores = OreDictionary.getOres("ore" + entry[0]);
 				ItemDust.addDustType(entry[0], Integer.parseInt(entry[1]));
+				for(int j = 0; j < ores.size(); j++)
+					TileEntityElectroextractor.addRecipe(ores.get(j), new ItemStack(CCItems.dusts, 1, i));
+			}
 		}
 		
 		for(int i = 0; i < dustNames.size(); i++)
@@ -96,7 +101,8 @@ public class ItemDust extends Item
 			if(OreDictionary.doesOreNameExist("ingot" + dustNames.get(i)))
 				ingot = OreDictionary.getOres("ingot" + dustNames.get(i)).get(0);
 			if(ingot != null)
-				GameRegistry.addSmelting(new ItemStack(this, 1, i), ingot, 0.0F);
+				GameRegistry.addSmelting(new ItemStack(CCItems.dusts, 1, i), ingot, 0.0F);
+			OreDictionary.registerOre("dust" + dustNames.get(i), new ItemStack(CCItems.dusts, 1, i));
 		}
 	}
 }

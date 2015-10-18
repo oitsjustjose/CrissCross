@@ -15,10 +15,7 @@ public class ElectroextractorRecipes
 	{
 		TileEntityElectroextractor.addBlockRecipe(Blocks.diamond_ore, new ItemStack(Items.diamond));
 		TileEntityElectroextractor.addBlockRecipe(Blocks.emerald_ore, new ItemStack(Items.emerald));
-		TileEntityElectroextractor.addBlockRecipe(Blocks.iron_ore, new ItemStack(CCItems.dusts, 1, 0));
-		TileEntityElectroextractor.addBlockRecipe(Blocks.gold_ore, new ItemStack(CCItems.dusts, 1, 1));
 		TileEntityElectroextractor.addBlockRecipe(Blocks.coal_ore, new ItemStack(Items.coal));
-		
 	}
 	
 	public static void initFuels()
