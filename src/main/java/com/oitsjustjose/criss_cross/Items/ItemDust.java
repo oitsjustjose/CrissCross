@@ -91,9 +91,6 @@ public class ItemDust extends Item
 		}
 		
 		for(int i = 0; i < dustNames.size(); i++)
-			OreDictionary.registerOre("dust" + dustNames.get(i), new ItemStack(this, 1, i));
-		
-		for(int i = 0; i < dustNames.size(); i++)
 		{
 			ItemStack ingot = null;
 			if(OreDictionary.doesOreNameExist("ingot" + dustNames.get(i)))
