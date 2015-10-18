@@ -301,24 +301,24 @@ public class TileEntityWoodchipper extends TileEntity implements ISidedInventory
     	outputItems.add(output);
     }
     
-    public static void addItemRecipe(Item item, ItemStack output)
+    public static void addRecipe(Item item, ItemStack output)
     {
     	inputItems.add(new ItemStack(item));
     	outputItems.add(output);
     }
     
-    public static void addBlockRecipe(Block block, ItemStack output)
+    public static void addRecipe(Block block, ItemStack output)
     {
     	inputItems.add(new ItemStack(block));
     	outputItems.add(output);
     }
     
-    public static void addItemStackToFuels(ItemStack itemstack)
+    public static void addFuel(ItemStack itemstack)
     {
     	fuelItems.add(itemstack);
     }
     
-    public static boolean removeItemStackFromFuels(ItemStack itemstack)
+    public static boolean removeFuel(ItemStack itemstack)
     {
     	for(int i = 0; i < fuelItems.size(); i++)
     	{

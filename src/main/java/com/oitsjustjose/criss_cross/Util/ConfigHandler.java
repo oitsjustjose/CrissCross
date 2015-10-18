@@ -51,21 +51,6 @@ public class ConfigHandler
     public static int woodchipperOutput;
     public static String woodchipperRecipeItem;
     public static String[] woodchipperFuels;
-    public static String[] woodchipperLogs;
-    public static String[] woodchipperPlanks;
-    
-    public static String[] defaultWoodchipperLogs = new String[]
-    		{
-    			"minecraft:log:0", "minecraft:log:1", "minecraft:log:2",
-    			"minecraft:log:3", "minecraft:log2:0", "minecraft:log2:1"
-    		};
-    
-    public static String[] defaultWoodchipperPlanks = new String[]
-    		{
-    			"minecraft:planks:0", "minecraft:planks:1", "minecraft:planks:2",
-    			"minecraft:planks:3", "minecraft:planks:4", "minecraft:planks:5"
-    		};
-    
     public static String[] defaultWoodchipperFuels = new String[]
     		{
     			"minecraft:water_bucket", "minecraft:potion:0"
@@ -84,10 +69,10 @@ public class ConfigHandler
     private static void loadConfiguration()
     {
     	//Cropomator Configs
-    	cropomatorInputs = config.get(config.CATEGORY_GENERAL, "Items to be added to the Cropomator's recipes.", defaultCropomatorInputs, 
+    	cropomatorInputs = config.get(config.CATEGORY_GENERAL, "Cropomator's Recipe Items.", defaultCropomatorInputs, 
     			"A list of items to be added to the Cropomator's recipe list. Formatted as: <modid>:<item>:<meta> or <modid>:<item>.").getStringList();
     	
-    	cropomatorCatalysts = config.get(config.CATEGORY_GENERAL, "Items to be added to the Cropomator's Catalyst list.", defaultCropomatorCatalystItems, 
+    	cropomatorCatalysts = config.get(config.CATEGORY_GENERAL, "Cropomator's Catalyst Items.", defaultCropomatorCatalystItems, 
     			"A list of items to be added to the Cropomator's catalyst list. Formatted as: <modid>:<item>:<meta> or <modid>:<item>.").getStringList();
     	
     	cropomatorProcessTime = config.getInt("Cropomator Processing Time", config.CATEGORY_GENERAL, 150, 1, Short.MAX_VALUE,
@@ -96,11 +81,11 @@ public class ConfigHandler
     	cropomatorOutput = config.getInt("Cropomator Output Quantity", config.CATEGORY_GENERAL, 3, 0, 64,
     			"Control how many of the input item you get as the output item. Default is 3.");
     	
-    	cropomatorRecipeItem = config.getString("Key crafting item of the Cropomator.", config.CATEGORY_GENERAL, "minecraft:diamond_block",
+    	cropomatorRecipeItem = config.getString("Cropomator Crafting Item.", config.CATEGORY_GENERAL, "minecraft:diamond_block",
     			"This is the item located in the center of the crafting recipe for the Cropomator. Formatted as: <modid>:<item>:<meta> or <modid>:<item>.");
     	
     	//Electroextractor's Configs
-    	electroextractorEnergySources = config.get(config.CATEGORY_GENERAL, "Items to be added to the Electroextractor's energy sources.", defaultElectroextractorEnergySources,
+    	electroextractorEnergySources = config.get(config.CATEGORY_GENERAL, "Electroextractor's Fuel Items.", defaultElectroextractorEnergySources,
     			"A list of items to be added as the Electroextractor's energy sources. Formatted as: <modid>:<item>:<meta> or <modid>:<item>.").getStringList();
     	
     	electroextractorProcessTime = config.getInt("Electroextractor Processing Time", config.CATEGORY_GENERAL, 250, 0, Short.MAX_VALUE, 
@@ -109,15 +94,15 @@ public class ConfigHandler
     	electroextractorOutput = config.getInt("Electroextractor Output Quantity", config.CATEGORY_GENERAL, 2, 0, 64, 
     			"Control how many dusts you get as the output. Default is 2.");
     	
-    	electroextractorRecipeItem = config.getString("Key crafting item of the Electroextractor.", config.CATEGORY_GENERAL, "minecraft:diamond_block",
+    	electroextractorRecipeItem = config.getString("Electroextractor Crafting Item.", config.CATEGORY_GENERAL, "minecraft:diamond_block",
     			"This is the item located in the center of the crafting recipe for the Electroextractor. Formatted as: <modid>:<item>:<meta> or <modid>:<item>.");
     	
-    	electroextractorOreDictInputs = config.get(config.CATEGORY_GENERAL, "Ore Dictionary Entries to be added to the Electroextractor.", defaultElectroextractorOreDictInputs,
+    	electroextractorOreDictInputs = config.get(config.CATEGORY_GENERAL, "Electroextractor OreDictionary Entries.", defaultElectroextractorOreDictInputs,
     			"Formatted as <OreDictName>:<DecimalColorYouWant>." + "\n" + " Remove the 'ore' part of the oredict name (i.e. 'oreIron' should be entered as 'Iron')" + "\n"
     			+ "Use http://www.colorpicker.com/ to find a color and http://bit.ly/1RhPhcX to convert it from Hex to Decimal.").getStringList();
     	
     	//Woodchipper's Configs
-    	woodchipperFuels = config.get(config.CATEGORY_GENERAL, "Items to be added as the Woodchipper's 'fuels'", defaultWoodchipperFuels,
+    	woodchipperFuels = config.get(config.CATEGORY_GENERAL, "Woodchipper Fuel Items", defaultWoodchipperFuels,
     			"A list of items to be added as the Woodchipper's 'fuels'. Formatted as: <modid>:<item>:<meta> or <modid>:<item>.").getStringList();
     	
     	woodchipperProcessTime = config.getInt("Woodchipper Process Time", config.CATEGORY_GENERAL, 400, 0, Short.MAX_VALUE, 
@@ -126,16 +111,8 @@ public class ConfigHandler
     	woodchipperOutput = config.getInt("Woodchipper Output Quantity", config.CATEGORY_GENERAL, 6, 0, 64, 
     			"Control how many planks are yielded from processing a log. Default is 6.");
     	
-    	woodchipperRecipeItem = config.getString("Key crafting item of the Woodchipper", config.CATEGORY_GENERAL, "minecraft:diamond_block", 
+    	woodchipperRecipeItem = config.getString("Woodchipper Crafting Item", config.CATEGORY_GENERAL, "minecraft:diamond_block", 
      			"This is the item located in the center of the crafting recipe for the Woodchipper. Formatted as: <modid>:<item>:<meta> or <modid>:<item>.");
-    	
-    	woodchipperLogs = config.get(config.CATEGORY_GENERAL, "Items that the Woodchipper shall consider as logs.", defaultWoodchipperLogs, 
-    			"These should 1:1 match what you put in the list of planks. So the first item on this list corresponds to the first item on the planks list, etc. etc." + "\n" + 
-    			"Formatted as: <modid>:<item>:<meta> or <modid>:<item>.").getStringList();
-    	
-    	woodchipperPlanks = config.get(config.CATEGORY_GENERAL, "Items that the Woodchipper shall consider as planks.", defaultWoodchipperPlanks, 
-    			"These should 1:1 match what you put in the list of logs. So the first item on this list corresponds to the first item on the logs list, etc. etc." + "\n" + 
-    			"Formatted as: <modid>:<item>:<meta> or <modid>:<item>.").getStringList();
     	
         if (config.hasChanged())
             config.save();

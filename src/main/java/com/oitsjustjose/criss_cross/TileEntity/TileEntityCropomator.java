@@ -31,8 +31,7 @@ public class TileEntityCropomator extends TileEntity implements ISidedInventory
     public int catalystTime;
     public int processTime;
     public int catalystInUseTime;
-    
-    
+        
 	@Override
     public int getSizeInventory()
     {

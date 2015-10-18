@@ -26,9 +26,8 @@ public class BlockCropomator extends BlockMachineBase
 	public BlockCropomator()
 	{
 		super(unlocName);
-		
-		GameRegistry.registerBlock(this, unlocName);
 		GameRegistry.registerTileEntity(TileEntityCropomator.class, unlocName);
+		GameRegistry.registerBlock(this, unlocName);
 	}
 
 	@Override

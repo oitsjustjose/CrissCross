@@ -25,9 +25,8 @@ public class BlockWoodchipper extends BlockMachineBase
 	public BlockWoodchipper()
 	{
 		super(unlocName);
-		
-		GameRegistry.registerBlock(this, unlocName);
 		GameRegistry.registerTileEntity(TileEntityWoodchipper.class, unlocName);
+		GameRegistry.registerBlock(this, unlocName);
 	}
 	
 	@Override

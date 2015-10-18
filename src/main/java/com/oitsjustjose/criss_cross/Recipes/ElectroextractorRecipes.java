@@ -1,6 +1,6 @@
 package com.oitsjustjose.criss_cross.Recipes;
 
-import com.oitsjustjose.criss_cross.Items.CCItems;
+import com.oitsjustjose.criss_cross.CrissCross;
 import com.oitsjustjose.criss_cross.TileEntity.TileEntityElectroextractor;
 import com.oitsjustjose.criss_cross.Util.ConfigHandler;
 
@@ -13,9 +13,9 @@ public class ElectroextractorRecipes
 {
 	public static void initRecipes()
 	{
-		TileEntityElectroextractor.addBlockRecipe(Blocks.diamond_ore, new ItemStack(Items.diamond));
-		TileEntityElectroextractor.addBlockRecipe(Blocks.emerald_ore, new ItemStack(Items.emerald));
-		TileEntityElectroextractor.addBlockRecipe(Blocks.coal_ore, new ItemStack(Items.coal));
+		TileEntityElectroextractor.addRecipe(Blocks.diamond_ore, new ItemStack(Items.diamond));
+		TileEntityElectroextractor.addRecipe(Blocks.emerald_ore, new ItemStack(Items.emerald));
+		TileEntityElectroextractor.addRecipe(Blocks.coal_ore, new ItemStack(Items.coal));
 	}
 	
 	public static void initFuels()
@@ -28,9 +28,10 @@ public class ElectroextractorRecipes
 				if(unlocStack.length == 2)
 				{
 					if(GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 1) != null)
-						TileEntityElectroextractor.addItemStackToFuels(GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 0));
+						TileEntityElectroextractor.addFuel(GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 0));
 					else
-						System.out.println("[CrissCross] Item " + ConfigHandler.electroextractorEnergySources[i] + " could not be added to the Electroextractor's fuel list. Please confirm you have the name and formatting correct.");
+						CrissCross.printErr("[CrissCross] Item " + ConfigHandler.electroextractorEnergySources[i] +
+								" could not be added to the Electroextractor's fuel list. Please confirm you have the name and formatting correct.");
 				}
 				
 				if(unlocStack.length == 3)
@@ -38,15 +39,16 @@ public class ElectroextractorRecipes
 					if(GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 1) != null)
 					{
 						ItemStack newStack = new ItemStack(GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 1).getItem(), 1, Integer.parseInt(unlocStack[2]));
-						TileEntityElectroextractor.addItemStackToFuels(newStack);
+						TileEntityElectroextractor.addFuel(newStack);
 					}
 					else
-						System.out.println("[CrissCross] Item " + ConfigHandler.electroextractorEnergySources[i] + " could not be added to the Electroextractor's fuel list. Please confirm you have the name and formatting correct.");
+						CrissCross.printErr("[CrissCross] Item " + ConfigHandler.electroextractorEnergySources[i] +
+								" could not be added to the Electroextractor's fuel list. Please confirm you have the name and formatting correct.");
 				}
 			}
 			catch(Exception e)
 			{
-				System.out.println("[CrissCross]: Error reading itemstack for electroextractor's energy sources at item: " + (i + 1));
+				CrissCross.printErr("[CrissCross]: Error reading itemstack for electroextractor's energy sources at item: " + (i + 1));
 			}
 		}
 	}

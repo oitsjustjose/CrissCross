@@ -3,6 +3,7 @@ package com.oitsjustjose.criss_cross.TileEntity;
 import java.util.ArrayList;
 
 import com.oitsjustjose.criss_cross.Blocks.BlockElectroextractor;
+import com.oitsjustjose.criss_cross.Items.ItemDust;
 import com.oitsjustjose.criss_cross.Util.ConfigHandler;
 
 import cpw.mods.fml.relauncher.Side;
@@ -302,24 +303,24 @@ public class TileEntityElectroextractor extends TileEntity implements ISidedInve
     	outputItems.add(output);
     }
     
-    public static void addItemRecipe(Item item, ItemStack output)
+    public static void addRecipe(Item item, ItemStack output)
     {
     	inputItems.add(new ItemStack(item));
     	outputItems.add(output);
     }
     
-    public static void addBlockRecipe(Block block, ItemStack output)
+    public static void addRecipe(Block block, ItemStack output)
     {
     	inputItems.add(new ItemStack(block));
     	outputItems.add(output);
     }
     
-    public static void addItemStackToFuels(ItemStack itemstack)
+    public static void addFuel(ItemStack itemstack)
     {
     	fuelItems.add(itemstack);
     }
     
-    public static boolean removeItemStackFromFuels(ItemStack itemstack)
+    public static boolean removeFuel(ItemStack itemstack)
     {
     	for(int i = 0; i < fuelItems.size(); i++)
     	{
@@ -354,6 +355,7 @@ public class TileEntityElectroextractor extends TileEntity implements ISidedInve
         		if(inputItems.get(i).getItem() == ItemStacks[0].getItem() && inputItems.get(i).getItemDamage() == ItemStacks[0].getItemDamage())
         		{
         			output = new ItemStack(outputItems.get(i).getItem(), qty, outputItems.get(i).getItemDamage());
+        			output.setStackDisplayName("Electrolytic " + ItemDust.getName(outputItems.get(i).getItemDamage()) + " Dust");
         		}
         	}
         	

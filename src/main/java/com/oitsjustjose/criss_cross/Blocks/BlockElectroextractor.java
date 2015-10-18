@@ -26,9 +26,8 @@ public class BlockElectroextractor extends BlockMachineBase
 	public BlockElectroextractor()
 	{
 		super(unlocName);
-		
-		GameRegistry.registerBlock(this, unlocName);
 		GameRegistry.registerTileEntity(TileEntityElectroextractor.class, unlocName);
+		GameRegistry.registerBlock(this, unlocName);
 	}
 	
 	@Override

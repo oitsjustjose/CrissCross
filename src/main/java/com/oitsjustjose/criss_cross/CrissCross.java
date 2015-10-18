@@ -48,4 +48,9 @@ public class CrissCross
 	{
 		ItemDust.oreDictionaryInit();
 	}
+	
+	public static void printErr(String string)
+	{
+		System.out.println(string);
+	}
 }

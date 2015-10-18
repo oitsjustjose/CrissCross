@@ -37,6 +37,11 @@ public class ItemDust extends Item
 		colors.add(color);
 	}
 	
+	public static String getName(int meta)
+	{
+		return dustNames.get(meta);
+	}
+	
 	@Override
 	public boolean requiresMultipleRenderPasses()
 	{

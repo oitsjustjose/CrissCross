@@ -1,5 +1,6 @@
 package com.oitsjustjose.criss_cross.Recipes;
 
+import com.oitsjustjose.criss_cross.CrissCross;
 import com.oitsjustjose.criss_cross.Blocks.CCBlocks;
 import com.oitsjustjose.criss_cross.Items.CCItems;
 import com.oitsjustjose.criss_cross.Items.ItemDust;
@@ -17,6 +18,35 @@ public class CRecipes
 	{
 		cropomatorRecipe();
 		electroextractorRecipe();
+		woodChipperRecipe();
+	}
+	
+	static void woodChipperRecipe()
+	{
+		String[] unlocItem = ConfigHandler.woodchipperRecipeItem.split(":");
+		ItemStack centerItem = new ItemStack(Blocks.diamond_block);
+		
+		if(GameRegistry.findItemStack(unlocItem[0], unlocItem[1], 1) != null)
+		{
+			ItemStack newStack = GameRegistry.findItemStack(unlocItem[0], unlocItem[1], 1);
+			if(unlocItem.length == 2)
+				centerItem = newStack;
+			if(unlocItem.length == 3)
+				centerItem = new ItemStack(newStack.getItem(), 1, Integer.parseInt(unlocItem[2]));
+		}
+		else
+		{
+			CrissCross.printErr("[CrissCross] Item " + ConfigHandler.woodchipperRecipeItem + 
+					"could not be added as part of the recipe of the Woodchipper. Please confirm you have the name and formatting correct.");
+		}
+		
+		GameRegistry.addRecipe(new ItemStack(CCBlocks.woodchipper), new Object[]
+		{
+				"I#I",
+				"SCS",
+				"I#I",
+				'#', Items.diamond_axe, 'I', Blocks.iron_bars, 'S', Items.golden_axe, 'C', centerItem
+		});
 	}
 	
 	static void electroextractorRecipe()
@@ -34,7 +64,8 @@ public class CRecipes
 		}
 		else
 		{
-			System.out.println("[CrissCross] Item " + ConfigHandler.electroextractorRecipeItem + " could not be added as part of the recipe of the cropomator. Please confirm you have the name and formatting correct.");
+			CrissCross.printErr("[CrissCross] Item " + ConfigHandler.electroextractorRecipeItem +
+					" could not be added as part of the recipe of the electroextractor. Please confirm you have the name and formatting correct.");
 		}
 		
 		GameRegistry.addRecipe(new ItemStack(CCBlocks.electroextractor), new Object[]
@@ -61,7 +92,8 @@ public class CRecipes
 		}
 		else
 		{
-			System.out.println("[CrissCross] Item " + ConfigHandler.cropomatorRecipeItem + " could not be added as part of the recipe of the cropomator. Please confirm you have the name and formatting correct.");
+			CrissCross.printErr("[CrissCross] Item " + ConfigHandler.cropomatorRecipeItem +
+					" could not be added as part of the recipe of the cropomator. Please confirm you have the name and formatting correct.");
 		}
 		
 		GameRegistry.addRecipe(new ItemStack(CCBlocks.cropomator), new Object[]
@@ -69,7 +101,7 @@ public class CRecipes
 				"I#I",
 				"SCS",
 				"I#I",
-				'#', Blocks.hay_block, 'I', Items.iron_ingot, 'S', Items.iron_hoe, 'C', centerItem
+				'#', Blocks.hay_block, 'I', Items.iron_ingot, 'S', Items.golden_hoe, 'C', centerItem
 		});
 	}
 }
