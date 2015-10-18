@@ -83,15 +83,15 @@ public class ItemDust extends Item
 	
 	void oreDictionaryInit()
 	{
-		for(int i = 0; i < dustNames.size(); i++)
-			OreDictionary.registerOre("dust" + dustNames.get(i), new ItemStack(this, 1, i));
-		
 		for(int i = 0; i < ConfigHandler.electroextractorOreDictInputs.length; i++)
 		{
 			String[] entry = ConfigHandler.electroextractorOreDictInputs[i].split(":");
 			if(OreDictionary.doesOreNameExist("ore" + entry[0]))
 				ItemDust.addDustType(entry[0], Integer.parseInt(entry[1]));
 		}
+		
+		for(int i = 0; i < dustNames.size(); i++)
+			OreDictionary.registerOre("dust" + dustNames.get(i), new ItemStack(this, 1, i));
 		
 		for(int i = 0; i < dustNames.size(); i++)
 		{
