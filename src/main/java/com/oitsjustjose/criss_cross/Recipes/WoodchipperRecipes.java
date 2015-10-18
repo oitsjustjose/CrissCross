@@ -20,26 +20,33 @@ public class WoodchipperRecipes
 		String logName;
 		String plankName;
 		
+		System.out.println(logs.toString());
+		System.out.println(planks.toString());
+		
 		for(int i = 0; i < logs.size(); i++)
 		{
-			logName = logs.get(i).getDisplayName();
-			logName = logName.replace("Wood", "");
-			logName = logName.trim();
-			System.out.println(logName);
-			
-			for(int j = 0; j < planks.size(); j++)
+			for(int logMeta = 0; logMeta < 16; logMeta++)
 			{
-				plankName = planks.get(j).getDisplayName();
-				plankName = plankName.replace("Wood", "");
-				plankName = plankName.replace("Planks", "");
-				plankName = plankName.trim();
-				System.out.println(plankName);
-				if(plankName.contains(logName))
+				ItemStack log = new ItemStack(logs.get(i).getItem(), 1, logMeta);
+				logName = log.getDisplayName();
+				logName = logName.replace("Wood", "");
+				logName = logName.trim();
+				
+				for(int j = 0; j < planks.size(); j++)
 				{
-					TileEntityWoodchipper.addRecipe(new ItemStack(logs.get(i).getItem(), 1, logs.get(i).getItemDamage()),
-							new ItemStack(planks.get(j).getItem(), 1, planks.get(j).getItemDamage()));
-					System.out.println("plankName.contains(logName) evaluated to True");
-					break;
+					for(int plankMeta = 0; plankMeta < 16; plankMeta++)
+					{
+						ItemStack plank = new ItemStack(planks.get(j).getItem(), 1, plankMeta);
+						plankName = plank.getDisplayName();
+						plankName = plankName.replace("Wood", "");
+						plankName = plankName.replace("Planks", "");
+						plankName = plankName.trim();
+						if(plankName.contains(logName))
+						{
+							TileEntityWoodchipper.addRecipe(log, plank);
+							break;
+						}
+					}
 				}
 			}
 		}
