@@ -36,7 +36,7 @@ public class ElectroextractorRecipes
 				ArrayList<ItemStack> ores = OreDictionary.getOres("ore" + entry[0]);
 				ItemDust.addDustType(entry[0], Integer.parseInt(entry[1]));
 				for(int j = 0; j < ores.size(); j++)
-					TileEntityElectroextractor.addRecipe(ores.get(j), new ItemStack(CCItems.dusts, 1, i));
+					TileEntityElectroextractor.addRecipe(ores.get(j), new ItemStack(CCItems.dusts, 1, dustNames.size() - 1));
 			}
 			else
 			{
@@ -55,7 +55,6 @@ public class ElectroextractorRecipes
 				ingot = OreDictionary.getOres("ingot" + dustNames.get(i)).get(0);
 			if(ingot != null)
 				GameRegistry.addSmelting(new ItemStack(CCItems.dusts, 1, i), ingot, 0.0F);
-			OreDictionary.registerOre("dust" + dustNames.get(i), new ItemStack(CCItems.dusts, 1, i));
 		}
 	}
 	

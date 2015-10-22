@@ -3,6 +3,7 @@ package com.oitsjustjose.criss_cross.Items;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.oitsjustjose.criss_cross.CrissCross;
 import com.oitsjustjose.criss_cross.TileEntity.TileEntityElectroextractor;
 import com.oitsjustjose.criss_cross.Util.ConfigHandler;
 import com.oitsjustjose.criss_cross.Util.Reference;
@@ -27,7 +28,7 @@ public class ItemDust extends Item
 	public ItemDust()
 	{
 		this.setHasSubtypes(true);
-		this.setCreativeTab(CreativeTabs.tabMaterials);
+		this.setCreativeTab(CrissCross.CCTab);
 		GameRegistry.registerItem(this, this.getUnlocalizedName());
 	}
 	
@@ -62,6 +63,11 @@ public class ItemDust extends Item
 	@Override
 	public String getUnlocalizedName(ItemStack itemStack)
 	{
+		if(itemStack.getItemDamage() >= colors.size() || itemStack.getItemDamage() >= dustNames.size())
+		{
+			itemStack.setStackDisplayName("This is a bad item, please trash it.");
+			return ("item." + Reference.modid + ".trash");
+		}
 		return "item." + Reference.modid + "." + dustNames.get(itemStack.getItemDamage());
 	}
 	
@@ -78,7 +84,11 @@ public class ItemDust extends Item
 	public int getColorFromItemStack(ItemStack stack, int pass)
 	{
 		if(pass == 1)
+		{
+			if(stack.getItemDamage() >= colors.size())
+				return 0;
 			return colors.get(stack.getItemDamage());
+		}
 		else
 			return 16777215;
 	}

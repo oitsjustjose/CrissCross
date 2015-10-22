@@ -350,12 +350,14 @@ public class TileEntityElectroextractor extends TileEntity implements ISidedInve
         if (this.canProcess())
         {
         	ItemStack output = null;
+        	
         	for(int i = 0; i < inputItems.size(); i++)
         	{
         		if(inputItems.get(i).getItem() == ItemStacks[0].getItem() && inputItems.get(i).getItemDamage() == ItemStacks[0].getItemDamage())
         		{
         			output = new ItemStack(outputItems.get(i).getItem(), qty, outputItems.get(i).getItemDamage());
-        			output.setStackDisplayName("Electrolytic " + ItemDust.getName(outputItems.get(i).getItemDamage()) + " Dust");
+        			if(output.getItem() instanceof ItemDust)
+            			output.setStackDisplayName("Electrolytic " + ItemDust.getName(outputItems.get(i).getItemDamage()) + " Dust");
         		}
         	}
         	

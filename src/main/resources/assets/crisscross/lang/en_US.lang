@@ -16,8 +16,12 @@ item.CrissCross.Lead.name=Electrolytic Lead Dust
 item.CrissCross.Platinum.name=Electrolytic Platinum Dust
 item.CrissCross.Mithril.name=Electrolytic Mithril Dust
 item.CrissCross.Nickel.name=Electrolytic Nickel Dust
+item.CrissCross.trash.name=This is a bad item, please trash it.
 
 #Containers
 container.cropomator=Cropomator
 container.electroextractor=ElectroExtractor
 container.woodchipper=Wood Chipper
+
+#Tab
+itemGroup.tabCrissCross=Criss Cross

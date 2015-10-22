@@ -1,5 +1,6 @@
 package com.oitsjustjose.criss_cross.Blocks;
 
+import com.oitsjustjose.criss_cross.CrissCross;
 import com.oitsjustjose.criss_cross.Util.Reference;
 
 import cpw.mods.fml.relauncher.Side;
@@ -30,7 +31,7 @@ public class BlockMachineBase extends BlockContainer
 		this.setResistance(2.0F);              //3 - Front
 		this.setStepSound(soundTypeMetal);     //4 - Sides
 		this.setBlockName(Reference.modid + "." + unlocName);
-		this.setCreativeTab(CreativeTabs.tabBlock);
+		this.setCreativeTab(CrissCross.CCTab);
 		
 		this.unlocalizedName = unlocName;
 	}
