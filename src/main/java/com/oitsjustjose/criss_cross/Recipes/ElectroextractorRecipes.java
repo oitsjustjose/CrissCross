@@ -1,21 +1,53 @@
 package com.oitsjustjose.criss_cross.Recipes;
 
+import java.util.ArrayList;
+
 import com.oitsjustjose.criss_cross.CrissCross;
+import com.oitsjustjose.criss_cross.Items.CCItems;
+import com.oitsjustjose.criss_cross.Items.ItemDust;
 import com.oitsjustjose.criss_cross.TileEntity.TileEntityElectroextractor;
+import com.oitsjustjose.criss_cross.Util.CCLog;
 import com.oitsjustjose.criss_cross.Util.ConfigHandler;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class ElectroextractorRecipes
 {
 	public static void initRecipes()
 	{
+		oreDictionaryInit();
 		TileEntityElectroextractor.addRecipe(Blocks.diamond_ore, new ItemStack(Items.diamond));
 		TileEntityElectroextractor.addRecipe(Blocks.emerald_ore, new ItemStack(Items.emerald));
 		TileEntityElectroextractor.addRecipe(Blocks.coal_ore, new ItemStack(Items.coal));
+	}
+	
+	public static void oreDictionaryInit()
+	{		
+		for(int i = 0; i < ConfigHandler.electroextractorOreDictInputs.length; i++)
+		{
+			String[] entry = ConfigHandler.electroextractorOreDictInputs[i].split(":");
+			if(OreDictionary.doesOreNameExist("ore" + entry[0]) && OreDictionary.doesOreNameExist("ingot" + entry[0]))
+			{
+				ArrayList<ItemStack> ores = OreDictionary.getOres("ore" + entry[0]);
+				ItemDust.addDustType(entry[0], Integer.parseInt(entry[1]));
+				for(int j = 0; j < ores.size(); j++)
+					TileEntityElectroextractor.addRecipe(ores.get(j), new ItemStack(CCItems.dusts, 1, i));
+			}
+		}
+		
+		for(int i = 0; i < ItemDust.dustNames.size(); i++)
+		{
+			ItemStack ingot = null;
+			if(OreDictionary.doesOreNameExist("ingot" + ItemDust.dustNames.get(i)))
+				ingot = OreDictionary.getOres("ingot" + ItemDust.dustNames.get(i)).get(0);
+			if(ingot != null)
+				GameRegistry.addSmelting(new ItemStack(CCItems.dusts, 1, i), ingot, 0.0F);
+			OreDictionary.registerOre("dust" + ItemDust.dustNames.get(i), new ItemStack(CCItems.dusts, 1, i));
+		}
 	}
 	
 	public static void initFuels()
@@ -30,7 +62,7 @@ public class ElectroextractorRecipes
 					if(GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 1) != null)
 						TileEntityElectroextractor.addFuel(GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 0));
 					else
-						CrissCross.printErr("[CrissCross] Item " + ConfigHandler.electroextractorEnergySources[i] +
+						CCLog.warn("Item " + ConfigHandler.electroextractorEnergySources[i] +
 								" could not be added to the Electroextractor's fuel list. Please confirm you have the name and formatting correct.");
 				}
 				
@@ -42,13 +74,13 @@ public class ElectroextractorRecipes
 						TileEntityElectroextractor.addFuel(newStack);
 					}
 					else
-						CrissCross.printErr("[CrissCross] Item " + ConfigHandler.electroextractorEnergySources[i] +
+						CCLog.warn("Item " + ConfigHandler.electroextractorEnergySources[i] +
 								" could not be added to the Electroextractor's fuel list. Please confirm you have the name and formatting correct.");
 				}
 			}
 			catch(Exception e)
 			{
-				CrissCross.printErr("[CrissCross]: Error reading itemstack for electroextractor's energy sources at item: " + (i + 1));
+				CCLog.warn("[CrissCross]: Error reading itemstack for electroextractor's energy sources at item: " + (i + 1));
 			}
 		}
 	}

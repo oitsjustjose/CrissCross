@@ -4,6 +4,7 @@ import com.oitsjustjose.criss_cross.CrissCross;
 import com.oitsjustjose.criss_cross.Blocks.CCBlocks;
 import com.oitsjustjose.criss_cross.Items.CCItems;
 import com.oitsjustjose.criss_cross.Items.ItemDust;
+import com.oitsjustjose.criss_cross.Util.CCLog;
 import com.oitsjustjose.criss_cross.Util.ConfigHandler;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -36,7 +37,7 @@ public class CRecipes
 		}
 		else
 		{
-			CrissCross.printErr("[CrissCross] Item " + ConfigHandler.woodchipperRecipeItem + 
+			CCLog.warn("Item " + ConfigHandler.woodchipperRecipeItem + 
 					"could not be added as part of the recipe of the Woodchipper. Please confirm you have the name and formatting correct.");
 		}
 		
@@ -64,7 +65,7 @@ public class CRecipes
 		}
 		else
 		{
-			CrissCross.printErr("[CrissCross] Item " + ConfigHandler.electroextractorRecipeItem +
+			CCLog.warn("Item " + ConfigHandler.electroextractorRecipeItem +
 					" could not be added as part of the recipe of the electroextractor. Please confirm you have the name and formatting correct.");
 		}
 		
@@ -92,7 +93,7 @@ public class CRecipes
 		}
 		else
 		{
-			CrissCross.printErr("[CrissCross] Item " + ConfigHandler.cropomatorRecipeItem +
+			CCLog.warn("Item " + ConfigHandler.cropomatorRecipeItem +
 					" could not be added as part of the recipe of the cropomator. Please confirm you have the name and formatting correct.");
 		}
 		

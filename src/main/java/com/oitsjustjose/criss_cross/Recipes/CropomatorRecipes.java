@@ -2,6 +2,7 @@ package com.oitsjustjose.criss_cross.Recipes;
 
 import com.oitsjustjose.criss_cross.CrissCross;
 import com.oitsjustjose.criss_cross.TileEntity.TileEntityCropomator;
+import com.oitsjustjose.criss_cross.Util.CCLog;
 import com.oitsjustjose.criss_cross.Util.ConfigHandler;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -21,7 +22,7 @@ public class CropomatorRecipes
 					if(GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 1) != null)
 						TileEntityCropomator.addItemStackToOutputs(GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 1));
 					else
-						CrissCross.printErr("[CrissCross] Item " + ConfigHandler.cropomatorInputs[i] +
+						CCLog.warn("Item " + ConfigHandler.cropomatorInputs[i] +
 								" could not be added to the Cropomator's recipe list. Please confirm you have the name and formatting correct.");
 				}
 				if(unlocStack.length == 3)
@@ -32,14 +33,14 @@ public class CropomatorRecipes
 						TileEntityCropomator.addItemStackToOutputs(newStack);
 					}
 					else
-						CrissCross.printErr("[CrissCross] Item " + ConfigHandler.cropomatorInputs[i] +
+						CCLog.warn("Item " + ConfigHandler.cropomatorInputs[i] +
 								" could not be added to the Cropomator's recipe list. Please confirm you have the name and formatting correct.");
 				}
 
 			}
 			catch(Exception e)
 			{
-				CrissCross.printErr("[CrissCross]: Error reading itemstack for inputs from input file at item: " + (i + 1));
+				CCLog.warn("[CrissCross]: Error reading itemstack for inputs from input file at item: " + (i + 1));
 			}
 			
 		}
@@ -57,7 +58,7 @@ public class CropomatorRecipes
 					if(GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 1) != null)
 						TileEntityCropomator.addItemStackToCatalysts(GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 1));
 					else
-						CrissCross.printErr("[CrissCross] Item " + ConfigHandler.cropomatorInputs[i] +
+						CCLog.warn("Item " + ConfigHandler.cropomatorInputs[i] +
 								" could not be added to the Cropomator's catalyst list. Please confirm you have the name and formatting correct.");
 				}
 				
@@ -69,13 +70,13 @@ public class CropomatorRecipes
 						TileEntityCropomator.addItemStackToCatalysts(newStack);
 					}
 					else
-						CrissCross.printErr("[CrissCross] Item " + ConfigHandler.cropomatorInputs[i] +
+						CCLog.warn("Item " + ConfigHandler.cropomatorInputs[i] +
 								" could not be added to the Cropomator's catalyst list. Please confirm you have the name and formatting correct.");
 				}
 			}
 			catch(Exception e)
 			{
-				CrissCross.printErr("[CrissCross]: Error reading itemstack for catalysts from input file at item: " + (i + 1));				
+				CCLog.warn("[CrissCross]: Error reading itemstack for catalysts from input file at item: " + (i + 1));				
 			}
 		}
 	}

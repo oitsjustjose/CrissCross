@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.oitsjustjose.criss_cross.CrissCross;
 import com.oitsjustjose.criss_cross.TileEntity.TileEntityWoodchipper;
+import com.oitsjustjose.criss_cross.Util.CCLog;
 import com.oitsjustjose.criss_cross.Util.ConfigHandler;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -62,7 +63,7 @@ public class WoodchipperRecipes
 					if(GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 1) != null)
 						TileEntityWoodchipper.addFuel(GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 0));
 					else
-						CrissCross.printErr("[CrissCross] Item " + ConfigHandler.woodchipperFuels[i] +
+						CCLog.warn("Item " + ConfigHandler.woodchipperFuels[i] +
 								" could not be added to the Woodchipper's fuel list. Please confirm you have the name and formatting correct.");
 				}
 				
@@ -74,13 +75,13 @@ public class WoodchipperRecipes
 						TileEntityWoodchipper.addFuel(newStack);
 					}
 					else
-						CrissCross.printErr("[CrissCross] Item " + ConfigHandler.woodchipperFuels[i] +
+						CCLog.warn("Item " + ConfigHandler.woodchipperFuels[i] +
 								" could not be added to the Woodchipper's fuel list. Please confirm you have the name and formatting correct.");
 				}
 			}
 			catch(Exception e)
 			{
-				CrissCross.printErr("[CrissCross]: Error reading itemstack for Woodchipper's energy sources at item: " + (i + 1));
+				CCLog.warn("[CrissCross]: Error reading itemstack for Woodchipper's energy sources at item: " + (i + 1));
 			}
 		}
 	}

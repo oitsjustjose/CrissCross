@@ -19,8 +19,8 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class ItemDust extends Item
 {
-	private static ArrayList<String> dustNames = new ArrayList<String>();
-	private static ArrayList<Integer> colors = new ArrayList<Integer>();
+	public static ArrayList<String> dustNames = new ArrayList<String>();
+	public static ArrayList<Integer> colors = new ArrayList<Integer>();
 	public static IIcon overlay;
 	public static IIcon base;
 	
@@ -84,30 +84,5 @@ public class ItemDust extends Item
 	{
 		for(int i = 0; i < dustNames.size(); i++)
 			list.add(new ItemStack(item, 1, i));
-	}
-	
-	public static void oreDictionaryInit()
-	{
-		for(int i = 0; i < ConfigHandler.electroextractorOreDictInputs.length; i++)
-		{
-			String[] entry = ConfigHandler.electroextractorOreDictInputs[i].split(":");
-			if(OreDictionary.doesOreNameExist("ore" + entry[0]))
-			{
-				ArrayList<ItemStack> ores = OreDictionary.getOres("ore" + entry[0]);
-				ItemDust.addDustType(entry[0], Integer.parseInt(entry[1]));
-				for(int j = 0; j < ores.size(); j++)
-					TileEntityElectroextractor.addRecipe(ores.get(j), new ItemStack(CCItems.dusts, 1, i));
-			}
-		}
-		
-		for(int i = 0; i < dustNames.size(); i++)
-		{
-			ItemStack ingot = null;
-			if(OreDictionary.doesOreNameExist("ingot" + dustNames.get(i)))
-				ingot = OreDictionary.getOres("ingot" + dustNames.get(i)).get(0);
-			if(ingot != null)
-				GameRegistry.addSmelting(new ItemStack(CCItems.dusts, 1, i), ingot, 0.0F);
-			OreDictionary.registerOre("dust" + dustNames.get(i), new ItemStack(CCItems.dusts, 1, i));
-		}
 	}
 }

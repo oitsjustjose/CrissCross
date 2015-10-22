@@ -42,15 +42,4 @@ public class CrissCross
 		CRecipes.init();
 		proxy.init();
 	}
-	
-	@EventHandler
-	public static void postInit(FMLPostInitializationEvent event)
-	{
-		ItemDust.oreDictionaryInit();
-	}
-	
-	public static void printErr(String string)
-	{
-		System.out.println(string);
-	}
 }
