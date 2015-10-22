@@ -27,6 +27,7 @@ public class ElectroextractorRecipes
 	
 	public static void oreDictionaryInit()
 	{		
+		ArrayList<String> dustNames = ItemDust.getDusts();
 		for(int i = 0; i < ConfigHandler.electroextractorOreDictInputs.length; i++)
 		{
 			String[] entry = ConfigHandler.electroextractorOreDictInputs[i].split(":");
@@ -37,16 +38,24 @@ public class ElectroextractorRecipes
 				for(int j = 0; j < ores.size(); j++)
 					TileEntityElectroextractor.addRecipe(ores.get(j), new ItemStack(CCItems.dusts, 1, i));
 			}
+			else
+			{
+				CCLog.warn("Your oreDictionary Entry " + ConfigHandler.electroextractorOreDictInputs[i] + " could not be registered.");
+				if(!OreDictionary.doesOreNameExist("ore" + entry[0]))
+					CCLog.warn("This is because your oreDictionary Entry was not valid or registered as " + entry[0] + ".");
+				else if(!OreDictionary.doesOreNameExist("ingot" + entry[0]))
+					CCLog.warn("This is because your oreDictionary Entry does not have an ingot for " + entry[0] + ".");
+			}
 		}
 		
-		for(int i = 0; i < ItemDust.dustNames.size(); i++)
+		for(int i = 0; i < dustNames.size(); i++)
 		{
 			ItemStack ingot = null;
-			if(OreDictionary.doesOreNameExist("ingot" + ItemDust.dustNames.get(i)))
-				ingot = OreDictionary.getOres("ingot" + ItemDust.dustNames.get(i)).get(0);
+			if(OreDictionary.doesOreNameExist("ingot" + dustNames.get(i)))
+				ingot = OreDictionary.getOres("ingot" + dustNames.get(i)).get(0);
 			if(ingot != null)
 				GameRegistry.addSmelting(new ItemStack(CCItems.dusts, 1, i), ingot, 0.0F);
-			OreDictionary.registerOre("dust" + ItemDust.dustNames.get(i), new ItemStack(CCItems.dusts, 1, i));
+			OreDictionary.registerOre("dust" + dustNames.get(i), new ItemStack(CCItems.dusts, 1, i));
 		}
 	}
 	
@@ -62,8 +71,10 @@ public class ElectroextractorRecipes
 					if(GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 1) != null)
 						TileEntityElectroextractor.addFuel(GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 0));
 					else
-						CCLog.warn("Item " + ConfigHandler.electroextractorEnergySources[i] +
-								" could not be added to the Electroextractor's fuel list. Please confirm you have the name and formatting correct.");
+					{
+						CCLog.warn("Item " + ConfigHandler.electroextractorEnergySources[i] + " could not be added to the Electroextractor's fuel list.");
+						CCLog.warn("Please confirm you have the name and formatting correct.");
+					}
 				}
 				
 				if(unlocStack.length == 3)
@@ -74,13 +85,15 @@ public class ElectroextractorRecipes
 						TileEntityElectroextractor.addFuel(newStack);
 					}
 					else
-						CCLog.warn("Item " + ConfigHandler.electroextractorEnergySources[i] +
-								" could not be added to the Electroextractor's fuel list. Please confirm you have the name and formatting correct.");
+					{
+						CCLog.warn("Item " + ConfigHandler.electroextractorEnergySources[i] + " could not be added to the Electroextractor's fuel list.");
+						CCLog.warn("Please confirm you have the name and formatting correct.");
+					}
 				}
 			}
 			catch(Exception e)
 			{
-				CCLog.warn("[CrissCross]: Error reading itemstack for electroextractor's energy sources at item: " + (i + 1));
+				CCLog.warn("Error reading itemstack for electroextractor's energy sources at item: " + (i + 1));
 			}
 		}
 	}

@@ -19,8 +19,8 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class ItemDust extends Item
 {
-	public static ArrayList<String> dustNames = new ArrayList<String>();
-	public static ArrayList<Integer> colors = new ArrayList<Integer>();
+	private static ArrayList<String> dustNames = new ArrayList<String>();
+	private static ArrayList<Integer> colors = new ArrayList<Integer>();
 	public static IIcon overlay;
 	public static IIcon base;
 	
@@ -29,6 +29,11 @@ public class ItemDust extends Item
 		this.setHasSubtypes(true);
 		this.setCreativeTab(CreativeTabs.tabMaterials);
 		GameRegistry.registerItem(this, this.getUnlocalizedName());
+	}
+	
+	public static ArrayList<String> getDusts()
+	{
+		return dustNames;
 	}
 	
 	public static void addDustType(String name, int color)

@@ -22,8 +22,11 @@ public class CropomatorRecipes
 					if(GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 1) != null)
 						TileEntityCropomator.addItemStackToOutputs(GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 1));
 					else
-						CCLog.warn("Item " + ConfigHandler.cropomatorInputs[i] +
-								" could not be added to the Cropomator's recipe list. Please confirm you have the name and formatting correct.");
+					{
+						CCLog.warn("Item " + ConfigHandler.cropomatorInputs[i] + " could not be added to the Cropomator's recipe list.");
+						CCLog.warn("Please confirm you have the name and formatting correct.");
+
+					}
 				}
 				if(unlocStack.length == 3)
 				{
@@ -33,8 +36,10 @@ public class CropomatorRecipes
 						TileEntityCropomator.addItemStackToOutputs(newStack);
 					}
 					else
-						CCLog.warn("Item " + ConfigHandler.cropomatorInputs[i] +
-								" could not be added to the Cropomator's recipe list. Please confirm you have the name and formatting correct.");
+					{
+						CCLog.warn("Item " + ConfigHandler.cropomatorInputs[i] + " could not be added to the Cropomator's recipe list.");
+						CCLog.warn("Please confirm you have the name and formatting correct.");
+					}
 				}
 
 			}
@@ -58,8 +63,10 @@ public class CropomatorRecipes
 					if(GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 1) != null)
 						TileEntityCropomator.addItemStackToCatalysts(GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 1));
 					else
-						CCLog.warn("Item " + ConfigHandler.cropomatorInputs[i] +
-								" could not be added to the Cropomator's catalyst list. Please confirm you have the name and formatting correct.");
+					{
+						CCLog.warn("Item " + ConfigHandler.cropomatorInputs[i] + " could not be added to the Cropomator's catalyst list.");	
+						CCLog.warn("Please confirm you have the name and formatting correct.");
+					}
 				}
 				
 				if(unlocStack.length == 3)
@@ -70,13 +77,15 @@ public class CropomatorRecipes
 						TileEntityCropomator.addItemStackToCatalysts(newStack);
 					}
 					else
-						CCLog.warn("Item " + ConfigHandler.cropomatorInputs[i] +
-								" could not be added to the Cropomator's catalyst list. Please confirm you have the name and formatting correct.");
+					{
+						CCLog.warn("Item " + ConfigHandler.cropomatorInputs[i] + " could not be added to the Cropomator's catalyst list.");
+						CCLog.warn("Please confirm you have the name and formatting correct.");
+					}
 				}
 			}
 			catch(Exception e)
 			{
-				CCLog.warn("[CrissCross]: Error reading itemstack for catalysts from input file at item: " + (i + 1));				
+				CCLog.warn("Error reading itemstack for catalysts from input file at item: " + (i + 1));				
 			}
 		}
 	}

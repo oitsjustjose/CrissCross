@@ -63,8 +63,10 @@ public class WoodchipperRecipes
 					if(GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 1) != null)
 						TileEntityWoodchipper.addFuel(GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 0));
 					else
-						CCLog.warn("Item " + ConfigHandler.woodchipperFuels[i] +
-								" could not be added to the Woodchipper's fuel list. Please confirm you have the name and formatting correct.");
+					{
+						CCLog.warn("Item " + ConfigHandler.woodchipperFuels[i] + " could not be added to the Woodchipper's fuel list.");
+						CCLog.warn("Please confirm you have the name and formatting correct.");
+					}
 				}
 				
 				if(unlocStack.length == 3)
@@ -75,13 +77,15 @@ public class WoodchipperRecipes
 						TileEntityWoodchipper.addFuel(newStack);
 					}
 					else
-						CCLog.warn("Item " + ConfigHandler.woodchipperFuels[i] +
-								" could not be added to the Woodchipper's fuel list. Please confirm you have the name and formatting correct.");
+					{
+						CCLog.warn("Item " + ConfigHandler.woodchipperFuels[i] + " could not be added to the Woodchipper's fuel list.");
+						CCLog.warn("Please confirm you have the name and formatting correct.");
+					}
 				}
 			}
 			catch(Exception e)
 			{
-				CCLog.warn("[CrissCross]: Error reading itemstack for Woodchipper's energy sources at item: " + (i + 1));
+				CCLog.warn("Error reading itemstack for Woodchipper's energy sources at item: " + (i + 1));
 			}
 		}
 	}

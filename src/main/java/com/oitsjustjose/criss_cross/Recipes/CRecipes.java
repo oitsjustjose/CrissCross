@@ -37,8 +37,8 @@ public class CRecipes
 		}
 		else
 		{
-			CCLog.warn("Item " + ConfigHandler.woodchipperRecipeItem + 
-					"could not be added as part of the recipe of the Woodchipper. Please confirm you have the name and formatting correct.");
+			CCLog.warn("Item " + ConfigHandler.woodchipperRecipeItem + "could not be added as part of the recipe of the Woodchipper.");
+			CCLog.warn("Please confirm you have the name and formatting correct.");
 		}
 		
 		GameRegistry.addRecipe(new ItemStack(CCBlocks.woodchipper), new Object[]
@@ -65,8 +65,9 @@ public class CRecipes
 		}
 		else
 		{
-			CCLog.warn("Item " + ConfigHandler.electroextractorRecipeItem +
-					" could not be added as part of the recipe of the electroextractor. Please confirm you have the name and formatting correct.");
+			CCLog.warn("Item " + ConfigHandler.electroextractorRecipeItem +	" could not be added as part of the recipe of the electroextractor.");
+			CCLog.warn("Please confirm you have the name and formatting correct.");
+
 		}
 		
 		GameRegistry.addRecipe(new ItemStack(CCBlocks.electroextractor), new Object[]
@@ -93,8 +94,8 @@ public class CRecipes
 		}
 		else
 		{
-			CCLog.warn("Item " + ConfigHandler.cropomatorRecipeItem +
-					" could not be added as part of the recipe of the cropomator. Please confirm you have the name and formatting correct.");
+			CCLog.warn("Item " + ConfigHandler.cropomatorRecipeItem + " could not be added as part of the recipe of the cropomator.");
+			CCLog.warn("Please confirm you have the name and formatting correct.");
 		}
 		
 		GameRegistry.addRecipe(new ItemStack(CCBlocks.cropomator), new Object[]
