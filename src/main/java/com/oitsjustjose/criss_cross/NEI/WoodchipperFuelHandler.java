@@ -56,8 +56,8 @@ public class WoodchipperFuelHandler extends WoodchipperRecipeHandler
 	private void loadAllRecipes()
 	{
 		Map<ItemStack, ItemStack> recipes = WoodchipperRecipes.getInstance().getRecipeList();
-		
-		for(Entry<ItemStack, ItemStack> recipe : recipes.entrySet())
+
+		for (Entry<ItemStack, ItemStack> recipe : recipes.entrySet())
 			this.mWoodchipper.add(new WoodchipperPair(recipe.getKey(), recipe.getValue()));
 	}
 

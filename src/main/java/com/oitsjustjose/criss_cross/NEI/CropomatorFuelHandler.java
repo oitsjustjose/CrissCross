@@ -56,8 +56,8 @@ public class CropomatorFuelHandler extends CropomatorRecipeHandler
 	private void loadAllRecipes()
 	{
 		Map<ItemStack, ItemStack> recipes = CropomatorRecipes.getInstance().getRecipeList();
-		
-		for(Entry<ItemStack, ItemStack> recipe : recipes.entrySet())
+
+		for (Entry<ItemStack, ItemStack> recipe : recipes.entrySet())
 			this.mCropomator.add(new CropomatorPair(recipe.getKey(), recipe.getValue()));
 	}
 

@@ -111,7 +111,8 @@ public class WoodchipperRecipeHandler extends TemplateRecipeHandler
 	@Override
 	public void loadCraftingRecipes(ItemStack result)
 	{
-		Map<ItemStack, ItemStack> recipes = (Map<ItemStack, ItemStack>) WoodchipperRecipes.getInstance().getRecipeList();
+		Map<ItemStack, ItemStack> recipes = (Map<ItemStack, ItemStack>) WoodchipperRecipes.getInstance()
+				.getRecipeList();
 		for (Entry<ItemStack, ItemStack> recipe : recipes.entrySet())
 			if (NEIServerUtils.areStacksSameType(recipe.getValue(), result))
 				arecipes.add(new WoodchipperPair(recipe.getKey(), recipe.getValue()));
@@ -129,7 +130,8 @@ public class WoodchipperRecipeHandler extends TemplateRecipeHandler
 	@Override
 	public void loadUsageRecipes(ItemStack ingredient)
 	{
-		Map<ItemStack, ItemStack> recipes = (Map<ItemStack, ItemStack>) WoodchipperRecipes.getInstance().getRecipeList();
+		Map<ItemStack, ItemStack> recipes = (Map<ItemStack, ItemStack>) WoodchipperRecipes.getInstance()
+				.getRecipeList();
 		for (Entry<ItemStack, ItemStack> recipe : recipes.entrySet())
 		{
 			if (NEIServerUtils.areStacksSameTypeCrafting(recipe.getKey(), ingredient))
@@ -159,7 +161,7 @@ public class WoodchipperRecipeHandler extends TemplateRecipeHandler
 		afuels = new ArrayList<FuelPair>();
 		for (ItemStack item : ItemList.items)
 		{
-			if(TileEntityWoodchipper.isItemFuel(item))
+			if (TileEntityWoodchipper.isItemFuel(item))
 				afuels.add(new FuelPair(item));
 		}
 	}

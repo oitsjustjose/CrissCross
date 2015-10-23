@@ -159,7 +159,7 @@ public class CropomatorRecipeHandler extends TemplateRecipeHandler
 		afuels = new ArrayList<FuelPair>();
 		for (ItemStack item : ItemList.items)
 		{
-			if(TileEntityCropomator.isItemCatalyst(item))
+			if (TileEntityCropomator.isItemCatalyst(item))
 				afuels.add(new FuelPair(item));
 		}
 	}

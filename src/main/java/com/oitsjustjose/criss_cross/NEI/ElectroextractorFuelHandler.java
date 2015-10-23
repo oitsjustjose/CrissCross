@@ -56,8 +56,8 @@ public class ElectroextractorFuelHandler extends ElectroextractorRecipeHandler
 	private void loadAllRecipes()
 	{
 		Map<ItemStack, ItemStack> recipes = ElectroextractorRecipes.getInstance().getRecipeList();
-		
-		for(Entry<ItemStack, ItemStack> recipe : recipes.entrySet())
+
+		for (Entry<ItemStack, ItemStack> recipe : recipes.entrySet())
 			this.mElectroextractor.add(new ElectroextractorPair(recipe.getKey(), recipe.getValue()));
 	}
 
