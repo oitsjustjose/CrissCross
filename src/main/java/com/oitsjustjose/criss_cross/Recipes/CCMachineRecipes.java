@@ -146,7 +146,8 @@ public class CCMachineRecipes
 			{
 				ItemStack log = new ItemStack(logs.get(i).getItem(), 1, logMeta);
 				logName = log.getDisplayName();
-				logName = logName.replace("Wood", "");
+				logName = logName.toLowerCase();
+				logName = logName.replace("wood", "");
 				logName = logName.trim();
 
 				for (int j = 0; j < planks.size(); j++)
@@ -155,25 +156,31 @@ public class CCMachineRecipes
 					{
 						ItemStack plank = new ItemStack(planks.get(j).getItem(), 1, plankMeta);
 						plankName = plank.getDisplayName();
-						plankName = plankName.replace("Wood", "");
-						plankName = plankName.replace("Planks", "");
+						plankName = plankName.toLowerCase();
+						plankName = plankName.replace("wood", "");
+						plankName = plankName.replace("planks", "");
 						plankName = plankName.trim();
 						plank.stackSize = woodchipperQTY;
 						if (plankName.contains(logName))
 						{
-							if(Block.getBlockFromItem(log.getItem()) instanceof BlockLog)
+							//Prevents Weird Metadata Being Initialized
+							if(log.getItemDamage() >= 4)
+								break;
+							//Prevents Natura Metadata Breakage
+							if(Block.getBlockFromItem(log.getItem()).getClass().toString().contains("mods.natura.blocks.trees.DarkTreeBlock"))
+								if(log.getItemDamage() >= 2)
+									break;
+							//Prevents ExtraUtils from breaking stuff too
+							if(plank.getDisplayName().toLowerCase().contains("colored"))
+								break;
+							//Prevents Weird MINECRAFT metadata (thanks Jeb >_> )
+							if(log.getDisplayName().contains("Acacia"))
 							{
-								if(log.getDisplayName().contains("Acacia"))
-								{
-									if(log.getItemDamage() == 0)
-										WoodchipperRecipes.getInstance().addRecipe(log, plank);
-								}
-									
-								else if(log.getItemDamage() < 4)
+								if(log.getItemDamage() == 0)
 									WoodchipperRecipes.getInstance().addRecipe(log, plank);
-							}	
+							}
 							else
-								WoodchipperRecipes.getInstance().addRecipe(log, plank);	
+								WoodchipperRecipes.getInstance().addRecipe(log, plank);
 						}
 					}
 				}
