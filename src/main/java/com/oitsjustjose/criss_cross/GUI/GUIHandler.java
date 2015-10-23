@@ -22,23 +22,23 @@ public class GUIHandler implements IGuiHandler
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
 	{
 		TileEntity tile = world.getTileEntity(x, y, z);
-		
-		if(tile instanceof TileEntityCropomator)
+
+		if (tile instanceof TileEntityCropomator)
 		{
-			TileEntityCropomator TE = (TileEntityCropomator)tile;
-			
+			TileEntityCropomator TE = (TileEntityCropomator) tile;
+
 			return new ContainerCropomator(player, TE);
 		}
-		if(tile instanceof TileEntityElectroextractor)
+		if (tile instanceof TileEntityElectroextractor)
 		{
-			TileEntityElectroextractor TE = (TileEntityElectroextractor)tile;
-			
+			TileEntityElectroextractor TE = (TileEntityElectroextractor) tile;
+
 			return new ContainerElectroextractor(player, TE);
 		}
-		if(tile instanceof TileEntityWoodchipper)
+		if (tile instanceof TileEntityWoodchipper)
 		{
-			TileEntityWoodchipper TE = (TileEntityWoodchipper)tile;
-			
+			TileEntityWoodchipper TE = (TileEntityWoodchipper) tile;
+
 			return new ContainerWoodchipper(player, TE);
 		}
 		return null;
@@ -48,24 +48,24 @@ public class GUIHandler implements IGuiHandler
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
 	{
 		TileEntity tile = world.getTileEntity(x, y, z);
-		
-		if(tile instanceof TileEntityCropomator)
+
+		if (tile instanceof TileEntityCropomator)
 		{
-			TileEntityCropomator TE = (TileEntityCropomator)tile;
-			
+			TileEntityCropomator TE = (TileEntityCropomator) tile;
+
 			return new GUICropomator(player, TE);
 		}
-		
-		if(tile instanceof TileEntityElectroextractor)
+
+		if (tile instanceof TileEntityElectroextractor)
 		{
-			TileEntityElectroextractor TE = (TileEntityElectroextractor)tile;
-			
+			TileEntityElectroextractor TE = (TileEntityElectroextractor) tile;
+
 			return new GUIElectroextractor(player, TE);
 		}
-		if(tile instanceof TileEntityWoodchipper)
+		if (tile instanceof TileEntityWoodchipper)
 		{
-			TileEntityWoodchipper TE = (TileEntityWoodchipper)tile;
-			
+			TileEntityWoodchipper TE = (TileEntityWoodchipper) tile;
+
 			return new GUIWoodchipper(player, TE);
 		}
 		return null;

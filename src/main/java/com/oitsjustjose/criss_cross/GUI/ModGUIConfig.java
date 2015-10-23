@@ -10,13 +10,10 @@ import net.minecraftforge.common.config.Configuration;
 
 public class ModGUIConfig extends GuiConfig
 {
-    public ModGUIConfig(GuiScreen guiScreen)
-    {
-        super(guiScreen,
-                new ConfigElement(ConfigHandler.config.getCategory(Configuration.CATEGORY_GENERAL)).getChildElements(),
-                Reference.modid,
-                false,
-                true,
-                GuiConfig.getAbridgedConfigPath(ConfigHandler.config.toString()));
-    }
+	public ModGUIConfig(GuiScreen guiScreen)
+	{
+		super(guiScreen,
+				new ConfigElement(ConfigHandler.config.getCategory(Configuration.CATEGORY_GENERAL)).getChildElements(),
+				Reference.modid, false, true, GuiConfig.getAbridgedConfigPath(ConfigHandler.config.toString()));
+	}
 }

@@ -24,53 +24,53 @@ public class ItemDust extends Item
 	private static ArrayList<Integer> colors = new ArrayList<Integer>();
 	public static IIcon overlay;
 	public static IIcon base;
-	
+
 	public ItemDust()
 	{
 		this.setHasSubtypes(true);
 		this.setCreativeTab(CrissCross.CCTab);
 		GameRegistry.registerItem(this, this.getUnlocalizedName());
 	}
-	
+
 	public static ArrayList<String> getDusts()
 	{
 		return dustNames;
 	}
-	
+
 	public static void addDustType(String name, int color)
 	{
 		dustNames.add(name);
 		colors.add(color);
 	}
-	
+
 	public static String getName(int meta)
 	{
 		return dustNames.get(meta);
 	}
-	
+
 	@Override
 	public boolean requiresMultipleRenderPasses()
 	{
 		return true;
 	}
-	
+
 	@Override
 	public IIcon getIconFromDamageForRenderPass(int meta, int pass)
 	{
 		return pass == 0 ? base : overlay;
 	}
-	
+
 	@Override
 	public String getUnlocalizedName(ItemStack itemStack)
 	{
-		if(itemStack.getItemDamage() >= colors.size() || itemStack.getItemDamage() >= dustNames.size())
+		if (itemStack.getItemDamage() >= colors.size() || itemStack.getItemDamage() >= dustNames.size())
 		{
 			itemStack.setStackDisplayName("This is a bad item, please trash it.");
 			return ("item." + Reference.modid + ".trash");
 		}
 		return "item." + Reference.modid + "." + dustNames.get(itemStack.getItemDamage());
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister register)
@@ -78,26 +78,25 @@ public class ItemDust extends Item
 		overlay = register.registerIcon(Reference.modid + ":dust_overlay");
 		base = register.registerIcon(Reference.modid + ":dust_base");
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getColorFromItemStack(ItemStack stack, int pass)
 	{
-		if(pass == 1)
+		if (pass == 1)
 		{
-			if(stack.getItemDamage() >= colors.size())
+			if (stack.getItemDamage() >= colors.size())
 				return 0;
 			return colors.get(stack.getItemDamage());
-		}
-		else
+		} else
 			return 16777215;
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item item, CreativeTabs tab, List list)
 	{
-		for(int i = 0; i < dustNames.size(); i++)
+		for (int i = 0; i < dustNames.size(); i++)
 			list.add(new ItemStack(item, 1, i));
 	}
 }

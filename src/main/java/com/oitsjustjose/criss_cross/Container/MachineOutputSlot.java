@@ -13,51 +13,51 @@ import net.minecraft.util.MathHelper;
 
 public class MachineOutputSlot extends Slot
 {
-    /** The player that is using the GUI where this slot resides. */
-    private EntityPlayer thePlayer;
-    private int temp;
+	/** The player that is using the GUI where this slot resides. */
+	private EntityPlayer thePlayer;
+	private int temp;
 
-    public MachineOutputSlot(EntityPlayer player, IInventory inventory, int x, int y, int z)
-    {
-        super(inventory, x, y, z);
-        this.thePlayer = player;
-    }
+	public MachineOutputSlot(EntityPlayer player, IInventory inventory, int x, int y, int z)
+	{
+		super(inventory, x, y, z);
+		this.thePlayer = player;
+	}
 
-    @Override
-    public boolean isItemValid(ItemStack stack)
-    {
-        return false;
-    }
-    
-    @Override
-    public ItemStack decrStackSize(int slot)
-    {
-        if (this.getHasStack())
-        {
-            this.temp += Math.min(slot, this.getStack().stackSize);
-        }
+	@Override
+	public boolean isItemValid(ItemStack stack)
+	{
+		return false;
+	}
 
-        return super.decrStackSize(slot);
-    }
+	@Override
+	public ItemStack decrStackSize(int slot)
+	{
+		if (this.getHasStack())
+		{
+			this.temp += Math.min(slot, this.getStack().stackSize);
+		}
 
-    @Override
-    public void onPickupFromSlot(EntityPlayer player, ItemStack itemstack)
-    {
-        this.onCrafting(itemstack);
-        super.onPickupFromSlot(player, itemstack);
-    }
+		return super.decrStackSize(slot);
+	}
 
-    @Override
-    protected void onCrafting(ItemStack itemstack, int slot)
-    {
-        this.temp += slot;
-        this.onCrafting(itemstack);
-    }
+	@Override
+	public void onPickupFromSlot(EntityPlayer player, ItemStack itemstack)
+	{
+		this.onCrafting(itemstack);
+		super.onPickupFromSlot(player, itemstack);
+	}
 
-    @Override
-    protected void onCrafting(ItemStack stack)
-    {
-        stack.onCrafting(this.thePlayer.worldObj, this.thePlayer, this.temp);
-        this.temp = 0;
-    }
+	@Override
+	protected void onCrafting(ItemStack itemstack, int slot)
+	{
+		this.temp += slot;
+		this.onCrafting(itemstack);
+	}
+
+	@Override
+	protected void onCrafting(ItemStack stack)
+	{
+		stack.onCrafting(this.thePlayer.worldObj, this.thePlayer, this.temp);
+		this.temp = 0;
+	}
 }
