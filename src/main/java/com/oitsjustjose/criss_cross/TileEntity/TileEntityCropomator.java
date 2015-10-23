@@ -31,6 +31,11 @@ public class TileEntityCropomator extends TileEntity implements ISidedInventory
 	public int processTime;
 	public int catalystInUseTime;
 
+	public static ArrayList<ItemStack> getFuels()
+	{
+		return fuelItems;
+	}
+
 	@Override
 	public int getSizeInventory()
 	{
@@ -289,7 +294,7 @@ public class TileEntityCropomator extends TileEntity implements ISidedInventory
 
 	public static boolean isValid(ItemStack itemstack)
 	{
-		if(CropomatorRecipes.getInstance().getResult(itemstack) !=  null)
+		if (CropomatorRecipes.getInstance().getResult(itemstack) != null)
 			return true;
 		return false;
 	}
@@ -298,7 +303,7 @@ public class TileEntityCropomator extends TileEntity implements ISidedInventory
 	{
 		if (this.canProcess())
 		{
-			
+
 			ItemStack input = ItemStacks[0];
 			ItemStack output = CropomatorRecipes.getInstance().getResult(input);
 			ItemStack outputSlot = ItemStacks[2];
@@ -306,11 +311,12 @@ public class TileEntityCropomator extends TileEntity implements ISidedInventory
 			{
 				ItemStacks[2] = output.copy();
 			}
-			else if (outputSlot.isItemEqual(output))
-			{
-				outputSlot.stackSize += output.stackSize;
-			}
-			
+			else
+				if (outputSlot.isItemEqual(output))
+				{
+					outputSlot.stackSize += output.stackSize;
+				}
+
 			--input.stackSize;
 			if (input.stackSize <= 0)
 			{

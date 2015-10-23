@@ -11,6 +11,8 @@ import com.oitsjustjose.criss_cross.Util.CCLog;
 import com.oitsjustjose.criss_cross.Util.ConfigHandler;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockLog;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -21,6 +23,7 @@ public class CCMachineRecipes
 	public static int cropomatorQTY = ConfigHandler.cropomatorOutput;
 	public static int electroQTY = ConfigHandler.electroextractorOutput;
 	public static int woodchipperQTY = ConfigHandler.woodchipperOutput;
+
 	public static void init()
 	{
 		initCropomatorRecipes();
@@ -30,11 +33,14 @@ public class CCMachineRecipes
 		initWoodchipperFuels();
 		initWoodchipperOreDictionary();
 
-		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.diamond_ore), new ItemStack(Items.diamond, electroQTY));
-		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.emerald_ore), new ItemStack(Items.emerald, electroQTY));
-		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.coal_ore), new ItemStack(Items.coal, electroQTY));
+		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.diamond_ore),
+				new ItemStack(Items.diamond, electroQTY));
+		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.emerald_ore),
+				new ItemStack(Items.emerald, electroQTY));
+		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.coal_ore),
+				new ItemStack(Items.coal, electroQTY));
 	}
-	
+
 	public static void initCropomatorRecipes()
 	{
 		for (int i = 0; i < ConfigHandler.cropomatorInputs.length; i++)
@@ -47,12 +53,12 @@ public class CCMachineRecipes
 					if (GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 1) != null)
 					{
 						ItemStack newStack = GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 1);
-						newStack.stackSize = cropomatorQTY;
-						CropomatorRecipes.getInstance().addRecipe(newStack, newStack);
+						CropomatorRecipes.getInstance().addRecipe(newStack, new ItemStack(newStack.getItem(), cropomatorQTY, newStack.getItemDamage()));
 					}
 					else
 					{
-						CCLog.warn("Item " + ConfigHandler.cropomatorInputs[i] + " could not be added to the Cropomator's recipe list.");
+						CCLog.warn("Item " + ConfigHandler.cropomatorInputs[i]
+								+ " could not be added to the Cropomator's recipe list.");
 						CCLog.warn("Please confirm you have the name and formatting correct.");
 
 					}
@@ -61,13 +67,16 @@ public class CCMachineRecipes
 				{
 					if (GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 1) != null)
 					{
-						ItemStack newStack = new ItemStack(GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 1).getItem(), 1, Integer.parseInt(unlocStack[2]));
+						ItemStack newStack = new ItemStack(
+								GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 1).getItem(), 1,
+								Integer.parseInt(unlocStack[2]));
 						newStack.stackSize = cropomatorQTY;
-						CropomatorRecipes.getInstance().addRecipe(newStack, newStack);
+						CropomatorRecipes.getInstance().addRecipe(newStack, new ItemStack(newStack.getItem(), cropomatorQTY, newStack.getItemDamage()));
 					}
 					else
 					{
-						CCLog.warn("Item " + ConfigHandler.cropomatorInputs[i] + " could not be added to the Cropomator's recipe list.");
+						CCLog.warn("Item " + ConfigHandler.cropomatorInputs[i]
+								+ " could not be added to the Cropomator's recipe list.");
 						CCLog.warn("Please confirm you have the name and formatting correct.");
 					}
 				}
@@ -90,8 +99,7 @@ public class CCMachineRecipes
 				if (unlocStack.length == 2)
 				{
 					if (GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 1) != null)
-						TileEntityCropomator
-								.addFuel(GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 1));
+						TileEntityCropomator.addFuel(GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 1));
 					else
 					{
 						CCLog.warn("Item " + ConfigHandler.cropomatorInputs[i]
@@ -123,7 +131,7 @@ public class CCMachineRecipes
 			}
 		}
 	}
-	
+
 	public static void initWoodchipperOreDictionary()
 	{
 		ArrayList<ItemStack> logs = OreDictionary.getOres("logWood");
@@ -153,8 +161,19 @@ public class CCMachineRecipes
 						plank.stackSize = woodchipperQTY;
 						if (plankName.contains(logName))
 						{
-							WoodchipperRecipes.getInstance().addRecipe(log, plank);
-							break;
+							if(Block.getBlockFromItem(log.getItem()) instanceof BlockLog)
+							{
+								if(log.getDisplayName().contains("Acacia"))
+								{
+									if(log.getItemDamage() == 0)
+										WoodchipperRecipes.getInstance().addRecipe(log, plank);
+								}
+									
+								else if(log.getItemDamage() < 4)
+									WoodchipperRecipes.getInstance().addRecipe(log, plank);
+							}	
+							else
+								WoodchipperRecipes.getInstance().addRecipe(log, plank);	
 						}
 					}
 				}
@@ -204,7 +223,7 @@ public class CCMachineRecipes
 			}
 		}
 	}
-	
+
 	static void initElectroextractorFuels()
 	{
 		for (int i = 0; i < ConfigHandler.electroextractorEnergySources.length; i++)
@@ -247,7 +266,7 @@ public class CCMachineRecipes
 			}
 		}
 	}
-	
+
 	static void initElectroextractorOreDictionary()
 	{
 		ArrayList<String> dustNames = ItemDust.getDusts();
@@ -259,7 +278,8 @@ public class CCMachineRecipes
 				ArrayList<ItemStack> ores = OreDictionary.getOres("ore" + entry[0]);
 				ItemDust.addDustType(entry[0], Integer.parseInt(entry[1]));
 				for (int j = 0; j < ores.size(); j++)
-					ElectroextractorRecipes.getInstance().addRecipe(ores.get(j), new ItemStack(CCItems.dusts, electroQTY, dustNames.size() - 1));
+					ElectroextractorRecipes.getInstance().addRecipe(ores.get(j),
+							new ItemStack(CCItems.dusts, electroQTY, dustNames.size() - 1));
 			}
 			else
 			{

@@ -291,7 +291,7 @@ public class TileEntityElectroextractor extends TileEntity implements ISidedInve
 
 	public static boolean isValid(ItemStack itemstack)
 	{
-		if(ElectroextractorRecipes.getInstance().getResult(itemstack) !=  null)
+		if (ElectroextractorRecipes.getInstance().getResult(itemstack) != null)
 			return true;
 		return false;
 	}
@@ -300,7 +300,7 @@ public class TileEntityElectroextractor extends TileEntity implements ISidedInve
 	{
 		if (this.canProcess())
 		{
-			
+
 			ItemStack input = ItemStacks[0];
 			ItemStack output = ElectroextractorRecipes.getInstance().getResult(input);
 			ItemStack outputSlot = ItemStacks[2];
@@ -308,11 +308,12 @@ public class TileEntityElectroextractor extends TileEntity implements ISidedInve
 			{
 				ItemStacks[2] = output.copy();
 			}
-			else if (outputSlot.isItemEqual(output))
-			{
-				outputSlot.stackSize += output.stackSize;
-			}
-			
+			else
+				if (outputSlot.isItemEqual(output))
+				{
+					outputSlot.stackSize += output.stackSize;
+				}
+
 			--input.stackSize;
 			if (input.stackSize <= 0)
 			{

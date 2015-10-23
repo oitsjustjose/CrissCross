@@ -23,5 +23,13 @@ container.cropomator=Cropomator
 container.electroextractor=ElectroExtractor
 container.woodchipper=Wood Chipper
 
+#NEI Integration
+recipe.cropomatorfuel=Cropomator Fuels
+recipe.cropomator=Cropomator
+recipe.electroextractor=ElectroExtractor
+recipe.electroextractorfuel=ElectorExtractor Fuels
+recipe.woodchipper=Wood Chipper
+recipe.woodchipperfuel=Wood Chipper Fuels
+
 #Tab
 itemGroup.tabCrissCross=Criss Cross

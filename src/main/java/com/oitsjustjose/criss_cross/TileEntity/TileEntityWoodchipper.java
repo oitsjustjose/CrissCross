@@ -293,7 +293,7 @@ public class TileEntityWoodchipper extends TileEntity implements ISidedInventory
 
 	public static boolean isValidForWoodchipper(ItemStack itemstack)
 	{
-		if(WoodchipperRecipes.getInstance().getResult(itemstack) !=  null)
+		if (WoodchipperRecipes.getInstance().getResult(itemstack) != null)
 			return true;
 		return false;
 	}
@@ -302,7 +302,7 @@ public class TileEntityWoodchipper extends TileEntity implements ISidedInventory
 	{
 		if (this.canProcess())
 		{
-			
+
 			ItemStack input = ItemStacks[0];
 			ItemStack output = WoodchipperRecipes.getInstance().getResult(input);
 			ItemStack outputSlot = ItemStacks[2];
@@ -310,11 +310,12 @@ public class TileEntityWoodchipper extends TileEntity implements ISidedInventory
 			{
 				ItemStacks[2] = output.copy();
 			}
-			else if (outputSlot.isItemEqual(output))
-			{
-				outputSlot.stackSize += output.stackSize;
-			}
-			
+			else
+				if (outputSlot.isItemEqual(output))
+				{
+					outputSlot.stackSize += output.stackSize;
+				}
+
 			--input.stackSize;
 			if (input.stackSize <= 0)
 			{
