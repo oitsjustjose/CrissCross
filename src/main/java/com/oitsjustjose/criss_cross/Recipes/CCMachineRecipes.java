@@ -9,12 +9,14 @@ import com.oitsjustjose.criss_cross.TileEntity.TileEntityElectroextractor;
 import com.oitsjustjose.criss_cross.TileEntity.TileEntityWoodchipper;
 import com.oitsjustjose.criss_cross.Util.CCLog;
 import com.oitsjustjose.criss_cross.Util.ConfigHandler;
+import com.oitsjustjose.criss_cross.Util.ItemHelper;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockLog;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -53,7 +55,8 @@ public class CCMachineRecipes
 					if (GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 1) != null)
 					{
 						ItemStack newStack = GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 1);
-						CropomatorRecipes.getInstance().addRecipe(newStack, new ItemStack(newStack.getItem(), cropomatorQTY, newStack.getItemDamage()));
+						CropomatorRecipes.getInstance().addRecipe(newStack,
+								new ItemStack(newStack.getItem(), cropomatorQTY, newStack.getItemDamage()));
 					}
 					else
 					{
@@ -71,7 +74,8 @@ public class CCMachineRecipes
 								GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 1).getItem(), 1,
 								Integer.parseInt(unlocStack[2]));
 						newStack.stackSize = cropomatorQTY;
-						CropomatorRecipes.getInstance().addRecipe(newStack, new ItemStack(newStack.getItem(), cropomatorQTY, newStack.getItemDamage()));
+						CropomatorRecipes.getInstance().addRecipe(newStack,
+								new ItemStack(newStack.getItem(), cropomatorQTY, newStack.getItemDamage()));
 					}
 					else
 					{
@@ -131,58 +135,57 @@ public class CCMachineRecipes
 			}
 		}
 	}
+	
+	//All Credit goes to TeamCoFH for the code. After so many algorithms attempted, I gave up and used one that worked:
 
 	public static void initWoodchipperOreDictionary()
 	{
-		ArrayList<ItemStack> logs = OreDictionary.getOres("logWood");
-		ArrayList<ItemStack> planks = OreDictionary.getOres("plankWood");
-
-		String logName;
-		String plankName;
-
-		for (int i = 0; i < logs.size(); i++)
+		Container local1 = new Container()
 		{
-			for (int logMeta = 0; logMeta < 16; logMeta++)
+			public boolean canInteractWith(EntityPlayer paramAnonymousEntityPlayer)
 			{
-				ItemStack log = new ItemStack(logs.get(i).getItem(), 1, logMeta);
-				logName = log.getDisplayName();
-				logName = logName.toLowerCase();
-				logName = logName.replace("wood", "");
-				logName = logName.trim();
-
-				for (int j = 0; j < planks.size(); j++)
+				return false;
+			}
+		};
+		InventoryCrafting localInventoryCrafting = new InventoryCrafting(local1, 3, 3);
+		for (int i = 0; i < 9; i++)
+		{
+			localInventoryCrafting.setInventorySlotContents(i, null);
+		}
+		ArrayList localArrayList = OreDictionary.getOres("logWood");
+		for (int j = 0; j < localArrayList.size(); j++)
+		{
+			ItemStack localItemStack1 = (ItemStack) localArrayList.get(j);
+			ItemStack localItemStack3;
+			ItemStack localItemStack4;
+			if (ItemHelper.getItemDamage(localItemStack1) == 32767)
+			{
+				for (int k = 0; k < 16; k++)
 				{
-					for (int plankMeta = 0; plankMeta < 16; plankMeta++)
+					localItemStack3 = ItemHelper.cloneStack(localItemStack1, 1);
+					localItemStack3.setItemDamage(k);
+					localInventoryCrafting.setInventorySlotContents(0, localItemStack3);
+					localItemStack4 = ItemHelper.findMatchingRecipe(localInventoryCrafting, null);
+					if (localItemStack4 != null)
 					{
-						ItemStack plank = new ItemStack(planks.get(j).getItem(), 1, plankMeta);
-						plankName = plank.getDisplayName();
-						plankName = plankName.toLowerCase();
-						plankName = plankName.replace("wood", "");
-						plankName = plankName.replace("planks", "");
-						plankName = plankName.trim();
-						plank.stackSize = woodchipperQTY;
-						if (plankName.contains(logName))
-						{
-							//Prevents Weird Metadata Being Initialized
-							if(log.getItemDamage() >= 4)
-								break;
-							//Prevents Natura Metadata Breakage
-							if(Block.getBlockFromItem(log.getItem()).getClass().toString().contains("mods.natura.blocks.trees.DarkTreeBlock"))
-								if(log.getItemDamage() >= 2)
-									break;
-							//Prevents ExtraUtils from breaking stuff too
-							if(plank.getDisplayName().toLowerCase().contains("colored"))
-								break;
-							//Prevents Weird MINECRAFT metadata (thanks Jeb >_> )
-							if(log.getDisplayName().contains("Acacia"))
-							{
-								if(log.getItemDamage() == 0)
-									WoodchipperRecipes.getInstance().addRecipe(log, plank);
-							}
-							else
-								WoodchipperRecipes.getInstance().addRecipe(log, plank);
-						}
+						ItemStack localItemStack5 = localItemStack4.copy();
+						ItemStack tmp129_127 = localItemStack5;
+						tmp129_127.stackSize = woodchipperQTY;
+						WoodchipperRecipes.getInstance().addRecipe(localItemStack3, localItemStack5);
 					}
+				}
+			}
+			else
+			{
+				ItemStack localItemStack2 = localItemStack1.copy();
+				localInventoryCrafting.setInventorySlotContents(0, localItemStack2);
+				localItemStack3 = ItemHelper.findMatchingRecipe(localInventoryCrafting, null);
+				if (localItemStack3 != null)
+				{
+					localItemStack4 = localItemStack3.copy();
+					ItemStack tmp201_199 = localItemStack4;
+					tmp201_199.stackSize = woodchipperQTY;
+					WoodchipperRecipes.getInstance().addRecipe(localItemStack2, localItemStack4);
 				}
 			}
 		}
