@@ -107,7 +107,8 @@ public class BlockWoodchipper extends BlockMachineBase
 		if (world.isRemote)
 		{
 			return true;
-		} else
+		}
+		else
 		{
 			TileEntityWoodchipper tileext = (TileEntityWoodchipper) world.getTileEntity(x, y, z);
 			if (tileext != null)

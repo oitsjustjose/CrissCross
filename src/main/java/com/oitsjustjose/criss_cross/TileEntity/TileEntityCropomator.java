@@ -3,14 +3,14 @@ package com.oitsjustjose.criss_cross.TileEntity;
 import java.util.ArrayList;
 
 import com.oitsjustjose.criss_cross.Blocks.BlockCropomator;
+import com.oitsjustjose.criss_cross.Recipes.CropomatorRecipes;
+import com.oitsjustjose.criss_cross.Recipes.ElectroextractorRecipes;
 import com.oitsjustjose.criss_cross.Util.ConfigHandler;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -20,31 +20,16 @@ public class TileEntityCropomator extends TileEntity implements ISidedInventory
 {
 	private static int proTicks = ConfigHandler.cropomatorProcessTime;
 	private static int qty = ConfigHandler.cropomatorOutput;
-	private static final int[] slotsTop = new int[]
-	{ 0 };
-	private static final int[] slotsBottom = new int[]
-	{ 2, 1 };
-	private static final int[] slotsSides = new int[]
-	{ 1 };
-	private static ArrayList<ItemStack> recipeItems = new ArrayList<ItemStack>();
-	private static ArrayList<ItemStack> catalystItems = new ArrayList<ItemStack>();
+	private static final int[] slotsTop = new int[] { 0 };
+	private static final int[] slotsBottom = new int[] { 2, 1 };
+	private static final int[] slotsSides = new int[] { 1 };
+	private static ArrayList<ItemStack> fuelItems = new ArrayList<ItemStack>();
 
 	private ItemStack[] ItemStacks = new ItemStack[3];
 
 	public int catalystTime;
 	public int processTime;
 	public int catalystInUseTime;
-
-	public static ItemStack getResult(ItemStack input)
-	{
-		for (int i = 0; i < recipeItems.size(); i++)
-		{
-			ItemStack temp = recipeItems.get(i);
-			if (ItemStack.areItemStacksEqual(temp, input))
-				return new ItemStack(temp.getItem(), qty, temp.getItemDamage());
-		}
-		return null;
-	}
 
 	@Override
 	public int getSizeInventory()
@@ -70,7 +55,8 @@ public class TileEntityCropomator extends TileEntity implements ISidedInventory
 				itemstack = this.ItemStacks[slot];
 				this.ItemStacks[slot] = null;
 				return itemstack;
-			} else
+			}
+			else
 			{
 				itemstack = this.ItemStacks[slot].splitStack(qtyToDecr);
 
@@ -81,7 +67,8 @@ public class TileEntityCropomator extends TileEntity implements ISidedInventory
 
 				return itemstack;
 			}
-		} else
+		}
+		else
 		{
 			return null;
 		}
@@ -95,7 +82,8 @@ public class TileEntityCropomator extends TileEntity implements ISidedInventory
 			ItemStack itemstack = this.ItemStacks[slot];
 			this.ItemStacks[slot] = null;
 			return itemstack;
-		} else
+		}
+		else
 		{
 			return null;
 		}
@@ -238,10 +226,11 @@ public class TileEntityCropomator extends TileEntity implements ISidedInventory
 					if (this.processTime == proTicks)
 					{
 						this.processTime = 0;
-						this.fertilizeItem();
+						this.processItem();
 						flag1 = true;
 					}
-				} else
+				}
+				else
 				{
 					this.processTime = 0;
 				}
@@ -263,100 +252,69 @@ public class TileEntityCropomator extends TileEntity implements ISidedInventory
 
 	private boolean canProcess()
 	{
-		if (this.ItemStacks[0] == null)
+		ItemStack input = this.ItemStacks[0];
+		if (input != null)
 		{
-			return false;
-		} else
-		{
-			ItemStack itemstack = new ItemStack(this.ItemStacks[0].getItem(), qty, this.ItemStacks[0].getItemDamage());
-
-			if (this.ItemStacks[2] == null)
-				return true;
-			if (!this.ItemStacks[2].isItemEqual(itemstack))
+			ItemStack output = CropomatorRecipes.getInstance().getResult(input);
+			if (output == null)
 				return false;
-			int result = ItemStacks[2].stackSize + itemstack.stackSize;
-
-			return result <= getInventoryStackLimit() && result <= this.ItemStacks[2].getMaxStackSize();
+			ItemStack outputSlot = this.ItemStacks[2];
+			if (outputSlot == null)
+				return true;
+			if (!outputSlot.isItemEqual(output))
+				return false;
+			int result = outputSlot.stackSize + output.stackSize;
+			return result <= output.getMaxStackSize();
 		}
+		return false;
 	}
 
-	public static boolean removeItemStackFromOutputs(ItemStack itemstack)
+	public static void addFuel(ItemStack itemstack)
 	{
-		for (int i = 0; i < recipeItems.size(); i++)
+		fuelItems.add(itemstack);
+	}
+
+	public static boolean removeFuel(ItemStack itemstack)
+	{
+		for (int i = 0; i < fuelItems.size(); i++)
 		{
-			if (recipeItems.get(i) == itemstack)
+			if (fuelItems.get(i) == itemstack)
 			{
-				recipeItems.remove(i);
+				fuelItems.remove(i);
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public static void addItemStackToOutputs(ItemStack itemstack)
+	public static boolean isValid(ItemStack itemstack)
 	{
-		recipeItems.add(itemstack);
-	}
-
-	public static void addItemToOutputs(Item item)
-	{
-		recipeItems.add(new ItemStack(item));
-	}
-
-	public static void addBlockToOutputs(Block block)
-	{
-		recipeItems.add(new ItemStack(block));
-	}
-
-	public static void addItemStackToCatalysts(ItemStack itemstack)
-	{
-		catalystItems.add(itemstack);
-	}
-
-	public static boolean removeItemStackFromCatalysts(ItemStack itemstack)
-	{
-		for (int i = 0; i < catalystItems.size(); i++)
-		{
-			if (catalystItems.get(i) == itemstack)
-			{
-				catalystItems.remove(i);
-				return true;
-			}
-		}
+		if(CropomatorRecipes.getInstance().getResult(itemstack) !=  null)
+			return true;
 		return false;
 	}
 
-	public static boolean isValidForCropomator(ItemStack itemstack)
-	{
-		for (int i = 0; i < recipeItems.size(); i++)
-		{
-			ItemStack temp = recipeItems.get(i);
-			if (temp.getItem() == itemstack.getItem() && temp.getItemDamage() == itemstack.getItemDamage())
-				return true;
-		}
-
-		return false;
-	}
-
-	public void fertilizeItem()
+	public void processItem()
 	{
 		if (this.canProcess())
 		{
-			ItemStack output = new ItemStack(this.ItemStacks[0].getItem(), qty, this.ItemStacks[0].getItemDamage());
-
-			if (this.ItemStacks[2] == null)
+			
+			ItemStack input = ItemStacks[0];
+			ItemStack output = CropomatorRecipes.getInstance().getResult(input);
+			ItemStack outputSlot = ItemStacks[2];
+			if (outputSlot == null)
 			{
-				this.ItemStacks[2] = output.copy();
-			} else if (this.ItemStacks[2].getItem() == output.getItem())
-			{
-				this.ItemStacks[2].stackSize += output.stackSize;
+				ItemStacks[2] = output.copy();
 			}
-
-			--this.ItemStacks[0].stackSize;
-
-			if (this.ItemStacks[0].stackSize <= 0)
+			else if (outputSlot.isItemEqual(output))
 			{
-				this.ItemStacks[0] = null;
+				outputSlot.stackSize += output.stackSize;
+			}
+			
+			--input.stackSize;
+			if (input.stackSize <= 0)
+			{
+				ItemStacks[0] = null;
 			}
 		}
 	}
@@ -368,9 +326,9 @@ public class TileEntityCropomator extends TileEntity implements ISidedInventory
 
 	public static boolean isItemCatalyst(ItemStack itemstack)
 	{
-		for (int i = 0; i < catalystItems.size(); i++)
+		for (int i = 0; i < fuelItems.size(); i++)
 		{
-			ItemStack temp = catalystItems.get(i);
+			ItemStack temp = fuelItems.get(i);
 			if (temp.getItem() == itemstack.getItem() && temp.getItemDamage() == itemstack.getItemDamage())
 				return true;
 		}

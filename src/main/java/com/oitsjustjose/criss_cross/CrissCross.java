@@ -2,20 +2,22 @@ package com.oitsjustjose.criss_cross;
 
 import com.oitsjustjose.criss_cross.Blocks.CCBlocks;
 import com.oitsjustjose.criss_cross.Items.CCItems;
-import com.oitsjustjose.criss_cross.Recipes.CCRecipes;
+import com.oitsjustjose.criss_cross.Recipes.CCCraftingRecipes;
+import com.oitsjustjose.criss_cross.Recipes.CCMachineRecipes;
+import com.oitsjustjose.criss_cross.Util.CCTab;
 import com.oitsjustjose.criss_cross.Util.CommonProxy;
 import com.oitsjustjose.criss_cross.Util.ConfigHandler;
 import com.oitsjustjose.criss_cross.Util.OreDictionaryAdder;
 import com.oitsjustjose.criss_cross.Util.Reference;
 
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import com.oitsjustjose.criss_cross.Util.CCTab;
 import net.minecraft.creativetab.CreativeTabs;
 
 @Mod(modid = Reference.modid, version = Reference.version, guiFactory = Reference.guifactory)
@@ -43,8 +45,9 @@ public class CrissCross
 	{
 		CCBlocks.init();
 		CCItems.init();
-		CCRecipes.init();
+		CCCraftingRecipes.init();
 		OreDictionaryAdder.init();
+		CCMachineRecipes.init();
 		proxy.init();
 	}
 }

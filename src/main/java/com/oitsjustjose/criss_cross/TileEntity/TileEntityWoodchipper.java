@@ -3,14 +3,13 @@ package com.oitsjustjose.criss_cross.TileEntity;
 import java.util.ArrayList;
 
 import com.oitsjustjose.criss_cross.Blocks.BlockWoodchipper;
+import com.oitsjustjose.criss_cross.Recipes.WoodchipperRecipes;
 import com.oitsjustjose.criss_cross.Util.ConfigHandler;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -20,14 +19,9 @@ public class TileEntityWoodchipper extends TileEntity implements ISidedInventory
 {
 	private static int proTicks = ConfigHandler.woodchipperProcessTime;
 	private static int qty = ConfigHandler.woodchipperOutput;
-	private static final int[] slotsTop = new int[]
-	{ 0 };
-	private static final int[] slotsBottom = new int[]
-	{ 2, 1 };
-	private static final int[] slotsSides = new int[]
-	{ 1 };
-	private static ArrayList<ItemStack> inputItems = new ArrayList<ItemStack>();
-	private static ArrayList<ItemStack> outputItems = new ArrayList<ItemStack>();
+	private static final int[] slotsTop = new int[] { 0 };
+	private static final int[] slotsBottom = new int[] { 2, 1 };
+	private static final int[] slotsSides = new int[] { 1 };
 	private static ArrayList<ItemStack> fuelItems = new ArrayList<ItemStack>();
 
 	private ItemStack[] ItemStacks = new ItemStack[3];
@@ -35,38 +29,6 @@ public class TileEntityWoodchipper extends TileEntity implements ISidedInventory
 	public int fuelTime;
 	public int processTime;
 	public int fuelUsetime;
-
-	public static ItemStack getItemFromResult(ItemStack output)
-	{
-		for (int i = 0; i < outputItems.size(); i++)
-		{
-			ItemStack temp = outputItems.get(i);
-			if (ItemStack.areItemStacksEqual(temp, output))
-				return new ItemStack(inputItems.get(i).getItem(), qty, inputItems.get(i).getItemDamage());
-		}
-		return null;
-	}
-
-	public static ItemStack getResult(ItemStack input)
-	{
-		for (int i = 0; i < inputItems.size(); i++)
-		{
-			ItemStack temp = inputItems.get(i);
-			if (ItemStack.areItemStacksEqual(temp, input))
-				return new ItemStack(outputItems.get(i).getItem(), qty, outputItems.get(i).getItemDamage());
-		}
-		return null;
-	}
-
-	public static ArrayList<ItemStack> getInputs()
-	{
-		return inputItems;
-	}
-
-	public static ArrayList<ItemStack> getOutputs()
-	{
-		return outputItems;
-	}
 
 	public static ArrayList<ItemStack> getFuels()
 	{
@@ -97,7 +59,8 @@ public class TileEntityWoodchipper extends TileEntity implements ISidedInventory
 				itemstack = this.ItemStacks[slot];
 				this.ItemStacks[slot] = null;
 				return itemstack;
-			} else
+			}
+			else
 			{
 				itemstack = this.ItemStacks[slot].splitStack(qtyToDecr);
 
@@ -108,7 +71,8 @@ public class TileEntityWoodchipper extends TileEntity implements ISidedInventory
 
 				return itemstack;
 			}
-		} else
+		}
+		else
 		{
 			return null;
 		}
@@ -122,7 +86,8 @@ public class TileEntityWoodchipper extends TileEntity implements ISidedInventory
 			ItemStack itemstack = this.ItemStacks[slot];
 			this.ItemStacks[slot] = null;
 			return itemstack;
-		} else
+		}
+		else
 		{
 			return null;
 		}
@@ -268,7 +233,8 @@ public class TileEntityWoodchipper extends TileEntity implements ISidedInventory
 						this.processItem();
 						flag1 = true;
 					}
-				} else
+				}
+				else
 				{
 					this.processTime = 0;
 				}
@@ -290,64 +256,21 @@ public class TileEntityWoodchipper extends TileEntity implements ISidedInventory
 
 	private boolean canProcess()
 	{
-		if (this.ItemStacks[0] == null)
+		ItemStack input = this.ItemStacks[0];
+		if (input != null)
 		{
-			return false;
-		} else
-		{
-			ItemStack output = null;
-			for (int i = 0; i < inputItems.size(); i++)
-			{
-				if (inputItems.get(i).getItem() == ItemStacks[0].getItem()
-						&& inputItems.get(i).getItemDamage() == ItemStacks[0].getItemDamage())
-				{
-					output = new ItemStack(outputItems.get(i).getItem(), qty, outputItems.get(i).getItemDamage());
-				}
-			}
-
+			ItemStack output = WoodchipperRecipes.getInstance().getResult(input);
 			if (output == null)
 				return false;
-
-			if (this.ItemStacks[2] == null)
+			ItemStack outputSlot = this.ItemStacks[2];
+			if (outputSlot == null)
 				return true;
-			if (!this.ItemStacks[2].isItemEqual(output))
+			if (!outputSlot.isItemEqual(output))
 				return false;
-			int result = ItemStacks[2].stackSize + output.stackSize;
-
-			return result <= getInventoryStackLimit() && result <= this.ItemStacks[2].getMaxStackSize();
-		}
-	}
-
-	public static boolean removeRecipe(ItemStack itemstack)
-	{
-		for (int i = 0; i < inputItems.size(); i++)
-		{
-			if (inputItems.get(i) == itemstack)
-			{
-				inputItems.remove(i);
-				outputItems.remove(i);
-				return true;
-			}
+			int result = outputSlot.stackSize + output.stackSize;
+			return result <= output.getMaxStackSize();
 		}
 		return false;
-	}
-
-	public static void addRecipe(ItemStack input, ItemStack output)
-	{
-		inputItems.add(input);
-		outputItems.add(output);
-	}
-
-	public static void addRecipe(Item item, ItemStack output)
-	{
-		inputItems.add(new ItemStack(item));
-		outputItems.add(output);
-	}
-
-	public static void addRecipe(Block block, ItemStack output)
-	{
-		inputItems.add(new ItemStack(block));
-		outputItems.add(output);
 	}
 
 	public static void addFuel(ItemStack itemstack)
@@ -370,13 +293,8 @@ public class TileEntityWoodchipper extends TileEntity implements ISidedInventory
 
 	public static boolean isValidForWoodchipper(ItemStack itemstack)
 	{
-		for (int i = 0; i < inputItems.size(); i++)
-		{
-			ItemStack temp = inputItems.get(i);
-			if (temp.getItem() == itemstack.getItem() && temp.getItemDamage() == itemstack.getItemDamage())
-				return true;
-		}
-
+		if(WoodchipperRecipes.getInstance().getResult(itemstack) !=  null)
+			return true;
 		return false;
 	}
 
@@ -384,32 +302,23 @@ public class TileEntityWoodchipper extends TileEntity implements ISidedInventory
 	{
 		if (this.canProcess())
 		{
-			ItemStack output = null;
-			for (int i = 0; i < inputItems.size(); i++)
+			
+			ItemStack input = ItemStacks[0];
+			ItemStack output = WoodchipperRecipes.getInstance().getResult(input);
+			ItemStack outputSlot = ItemStacks[2];
+			if (outputSlot == null)
 			{
-				if (inputItems.get(i).getItem() == ItemStacks[0].getItem()
-						&& inputItems.get(i).getItemDamage() == ItemStacks[0].getItemDamage())
-				{
-					output = new ItemStack(outputItems.get(i).getItem(), qty, outputItems.get(i).getItemDamage());
-				}
+				ItemStacks[2] = output.copy();
 			}
-
-			if (output == null)
-				return;
-
-			if (this.ItemStacks[2] == null)
+			else if (outputSlot.isItemEqual(output))
 			{
-				this.ItemStacks[2] = output.copy();
-			} else if (this.ItemStacks[2].getItem() == output.getItem())
-			{
-				this.ItemStacks[2].stackSize += output.stackSize;
+				outputSlot.stackSize += output.stackSize;
 			}
-
-			--this.ItemStacks[0].stackSize;
-
-			if (this.ItemStacks[0].stackSize <= 0)
+			
+			--input.stackSize;
+			if (input.stackSize <= 0)
 			{
-				this.ItemStacks[0] = null;
+				ItemStacks[0] = null;
 			}
 		}
 	}

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.oitsjustjose.criss_cross.Blocks.BlockElectroextractor;
 import com.oitsjustjose.criss_cross.Items.ItemDust;
+import com.oitsjustjose.criss_cross.Recipes.ElectroextractorRecipes;
 import com.oitsjustjose.criss_cross.Util.ConfigHandler;
 
 import cpw.mods.fml.relauncher.Side;
@@ -21,14 +22,9 @@ public class TileEntityElectroextractor extends TileEntity implements ISidedInve
 {
 	private static int proTicks = ConfigHandler.electroextractorProcessTime;
 	private static int qty = ConfigHandler.electroextractorOutput;
-	private static final int[] slotsTop = new int[]
-	{ 0 };
-	private static final int[] slotsBottom = new int[]
-	{ 2, 1 };
-	private static final int[] slotsSides = new int[]
-	{ 1 };
-	private static ArrayList<ItemStack> inputItems = new ArrayList<ItemStack>();
-	private static ArrayList<ItemStack> outputItems = new ArrayList<ItemStack>();
+	private static final int[] slotsTop = new int[] { 0 };
+	private static final int[] slotsBottom = new int[] { 2, 1 };
+	private static final int[] slotsSides = new int[] { 1 };
 	private static ArrayList<ItemStack> fuelItems = new ArrayList<ItemStack>();
 
 	private ItemStack[] ItemStacks = new ItemStack[3];
@@ -36,17 +32,6 @@ public class TileEntityElectroextractor extends TileEntity implements ISidedInve
 	public int fuelTime;
 	public int crushTime;
 	public int fuelInUseTime;
-
-	public static ItemStack getResult(ItemStack input)
-	{
-		for (int i = 0; i < inputItems.size(); i++)
-		{
-			ItemStack temp = inputItems.get(i);
-			if (ItemStack.areItemStacksEqual(temp, input))
-				return new ItemStack(outputItems.get(i).getItem(), qty, outputItems.get(i).getItemDamage());
-		}
-		return null;
-	}
 
 	@Override
 	public int getSizeInventory()
@@ -72,7 +57,8 @@ public class TileEntityElectroextractor extends TileEntity implements ISidedInve
 				itemstack = this.ItemStacks[slot];
 				this.ItemStacks[slot] = null;
 				return itemstack;
-			} else
+			}
+			else
 			{
 				itemstack = this.ItemStacks[slot].splitStack(qtyToDecr);
 
@@ -83,7 +69,8 @@ public class TileEntityElectroextractor extends TileEntity implements ISidedInve
 
 				return itemstack;
 			}
-		} else
+		}
+		else
 		{
 			return null;
 		}
@@ -97,7 +84,8 @@ public class TileEntityElectroextractor extends TileEntity implements ISidedInve
 			ItemStack itemstack = this.ItemStacks[slot];
 			this.ItemStacks[slot] = null;
 			return itemstack;
-		} else
+		}
+		else
 		{
 			return null;
 		}
@@ -240,10 +228,11 @@ public class TileEntityElectroextractor extends TileEntity implements ISidedInve
 					if (this.crushTime == proTicks)
 					{
 						this.crushTime = 0;
-						this.crushItem();
+						this.processItem();
 						flag1 = true;
 					}
-				} else
+				}
+				else
 				{
 					this.crushTime = 0;
 				}
@@ -265,64 +254,21 @@ public class TileEntityElectroextractor extends TileEntity implements ISidedInve
 
 	private boolean canProcess()
 	{
-		if (this.ItemStacks[0] == null)
+		ItemStack input = this.ItemStacks[0];
+		if (input != null)
 		{
-			return false;
-		} else
-		{
-			ItemStack output = null;
-			for (int i = 0; i < inputItems.size(); i++)
-			{
-				if (inputItems.get(i).getItem() == ItemStacks[0].getItem()
-						&& inputItems.get(i).getItemDamage() == ItemStacks[0].getItemDamage())
-				{
-					output = new ItemStack(outputItems.get(i).getItem(), qty, outputItems.get(i).getItemDamage());
-				}
-			}
-
+			ItemStack output = ElectroextractorRecipes.getInstance().getResult(input);
 			if (output == null)
 				return false;
-
-			if (this.ItemStacks[2] == null)
+			ItemStack outputSlot = this.ItemStacks[2];
+			if (outputSlot == null)
 				return true;
-			if (!this.ItemStacks[2].isItemEqual(output))
+			if (!outputSlot.isItemEqual(output))
 				return false;
-			int result = ItemStacks[2].stackSize + output.stackSize;
-
-			return result <= getInventoryStackLimit() && result <= this.ItemStacks[2].getMaxStackSize();
-		}
-	}
-
-	public static boolean removeRecipe(ItemStack itemstack)
-	{
-		for (int i = 0; i < inputItems.size(); i++)
-		{
-			if (inputItems.get(i) == itemstack)
-			{
-				inputItems.remove(i);
-				outputItems.remove(i);
-				return true;
-			}
+			int result = outputSlot.stackSize + output.stackSize;
+			return result <= output.getMaxStackSize();
 		}
 		return false;
-	}
-
-	public static void addRecipe(ItemStack input, ItemStack output)
-	{
-		inputItems.add(input);
-		outputItems.add(output);
-	}
-
-	public static void addRecipe(Item item, ItemStack output)
-	{
-		inputItems.add(new ItemStack(item));
-		outputItems.add(output);
-	}
-
-	public static void addRecipe(Block block, ItemStack output)
-	{
-		inputItems.add(new ItemStack(block));
-		outputItems.add(output);
 	}
 
 	public static void addFuel(ItemStack itemstack)
@@ -343,52 +289,34 @@ public class TileEntityElectroextractor extends TileEntity implements ISidedInve
 		return false;
 	}
 
-	public static boolean isValidForElectroextractor(ItemStack itemstack)
+	public static boolean isValid(ItemStack itemstack)
 	{
-		for (int i = 0; i < inputItems.size(); i++)
-		{
-			ItemStack temp = inputItems.get(i);
-			if (temp.getItem() == itemstack.getItem() && temp.getItemDamage() == itemstack.getItemDamage())
-				return true;
-		}
-
+		if(ElectroextractorRecipes.getInstance().getResult(itemstack) !=  null)
+			return true;
 		return false;
 	}
 
-	public void crushItem()
+	public void processItem()
 	{
 		if (this.canProcess())
 		{
-			ItemStack output = null;
-
-			for (int i = 0; i < inputItems.size(); i++)
+			
+			ItemStack input = ItemStacks[0];
+			ItemStack output = ElectroextractorRecipes.getInstance().getResult(input);
+			ItemStack outputSlot = ItemStacks[2];
+			if (outputSlot == null)
 			{
-				if (inputItems.get(i).getItem() == ItemStacks[0].getItem()
-						&& inputItems.get(i).getItemDamage() == ItemStacks[0].getItemDamage())
-				{
-					output = new ItemStack(outputItems.get(i).getItem(), qty, outputItems.get(i).getItemDamage());
-					if (output.getItem() instanceof ItemDust)
-						output.setStackDisplayName(
-								"Electrolytic " + ItemDust.getName(outputItems.get(i).getItemDamage()) + " Dust");
-				}
+				ItemStacks[2] = output.copy();
 			}
-
-			if (output == null)
-				return;
-
-			if (this.ItemStacks[2] == null)
+			else if (outputSlot.isItemEqual(output))
 			{
-				this.ItemStacks[2] = output.copy();
-			} else if (this.ItemStacks[2].getItem() == output.getItem())
-			{
-				this.ItemStacks[2].stackSize += output.stackSize;
+				outputSlot.stackSize += output.stackSize;
 			}
-
-			--this.ItemStacks[0].stackSize;
-
-			if (this.ItemStacks[0].stackSize <= 0)
+			
+			--input.stackSize;
+			if (input.stackSize <= 0)
 			{
-				this.ItemStacks[0] = null;
+				ItemStacks[0] = null;
 			}
 		}
 	}

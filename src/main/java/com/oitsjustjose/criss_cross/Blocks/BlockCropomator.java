@@ -108,7 +108,8 @@ public class BlockCropomator extends BlockMachineBase
 		if (world.isRemote)
 		{
 			return true;
-		} else
+		}
+		else
 		{
 			TileEntityCropomator tilecropomator = (TileEntityCropomator) world.getTileEntity(x, y, z);
 			if (tilecropomator != null)

@@ -88,7 +88,8 @@ public class ItemDust extends Item
 			if (stack.getItemDamage() >= colors.size())
 				return 0;
 			return colors.get(stack.getItemDamage());
-		} else
+		}
+		else
 			return 16777215;
 	}
 

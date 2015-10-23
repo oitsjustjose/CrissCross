@@ -108,7 +108,8 @@ public class BlockElectroextractor extends BlockMachineBase
 		if (world.isRemote)
 		{
 			return true;
-		} else
+		}
+		else
 		{
 			TileEntityElectroextractor tileext = (TileEntityElectroextractor) world.getTileEntity(x, y, z);
 			if (tileext != null)

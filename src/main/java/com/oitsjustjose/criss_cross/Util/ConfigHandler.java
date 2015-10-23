@@ -15,33 +15,28 @@ public class ConfigHandler
 	public static String cropomatorRecipeItem;
 	public static String[] cropomatorInputs;
 	public static String[] cropomatorCatalysts;
-	public static String[] defaultCropomatorInputs = new String[]
-	{ "minecraft:apple", "minecraft:reeds", "minecraft:nether_wart", "minecraft:carrot", "minecraft:cactus",
-			"minecraft:potato", "minecraft:sapling:0", "minecraft:sapling:1", "minecraft:sapling:2",
-			"minecraft:sapling:3", "minecraft:sapling:4", "minecraft:sapling:5", "minecraft:melon",
-			"minecraft:brown_mushroom", "minecraft:red_mushroom", "minecraft:cocoa", "minecraft:pumpkin",
-			"minecraft:wheat", "minecraft:wheat_seeds" };
-	public static String[] defaultCropomatorCatalystItems = new String[]
-	{ "minecraft:dye:15" };
+	public static String[] defaultCropomatorInputs = new String[] { "minecraft:apple", "minecraft:reeds",
+			"minecraft:nether_wart", "minecraft:carrot", "minecraft:cactus", "minecraft:potato", "minecraft:sapling:0",
+			"minecraft:sapling:1", "minecraft:sapling:2", "minecraft:sapling:3", "minecraft:sapling:4",
+			"minecraft:sapling:5", "minecraft:melon", "minecraft:brown_mushroom", "minecraft:red_mushroom",
+			"minecraft:cocoa", "minecraft:pumpkin", "minecraft:wheat", "minecraft:wheat_seeds" };
+	public static String[] defaultCropomatorCatalystItems = new String[] { "minecraft:dye:15" };
 
 	public static int electroextractorProcessTime;
 	public static int electroextractorOutput;
 	public static String electroextractorRecipeItem;
 	public static String[] electroextractorEnergySources;
 	public static String[] electroextractorOreDictInputs;
-	public static String[] defaultElectroextractorOreDictInputs = new String[]
-	{ "Iron:12428902", "Gold:15400704", "Aluminum:15987699", "Cobalt:17663", "Ardite:13938485", "Copper:16751872",
-			"Tin:15132390", "Silver:13297640", "Lead:5722979", "Platinum:11067903", "Mithril:4433113",
-			"Nickel:16580553" };
-	public static String[] defaultElectroextractorEnergySources = new String[]
-	{ "minecraft:redstone_block" };
+	public static String[] defaultElectroextractorOreDictInputs = new String[] { "Iron:12428902", "Gold:15400704",
+			"Aluminum:15987699", "Cobalt:17663", "Ardite:13938485", "Copper:16751872", "Tin:15132390",
+			"Silver:13297640", "Lead:5722979", "Platinum:11067903", "Mithril:4433113", "Nickel:16580553" };
+	public static String[] defaultElectroextractorEnergySources = new String[] { "minecraft:redstone_block" };
 
 	public static int woodchipperProcessTime;
 	public static int woodchipperOutput;
 	public static String woodchipperRecipeItem;
 	public static String[] woodchipperFuels;
-	public static String[] defaultWoodchipperFuels = new String[]
-	{ "minecraft:water_bucket", "minecraft:potion:0" };
+	public static String[] defaultWoodchipperFuels = new String[] { "minecraft:water_bucket", "minecraft:potion:0" };
 
 	public static void init(File configFile)
 	{
