@@ -14,22 +14,22 @@ public class GUIElectroextractor extends GuiContainer
 {
 	public static final ResourceLocation texture = new ResourceLocation("crisscross",
 			"textures/gui/electroextractor.png");
-
+			
 	private TileEntityElectroextractor electroextractor;
-
+	
 	public GUIElectroextractor(EntityPlayer player, TileEntityElectroextractor electroextractor)
 	{
 		super(new ContainerElectroextractor(player, electroextractor));
 		this.electroextractor = electroextractor;
 	}
-
+	
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
 	{
 		this.fontRendererObj.drawString(StatCollector.translateToLocal("container.electroextractor"), 50, 7, 4210752);
 		this.fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 7, this.ySize - 92,
 				4210752);
 	}
-
+	
 	protected void drawGuiContainerBackgroundLayer(float partialTickTime, int mouseX, int mouseY)
 	{
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -37,8 +37,8 @@ public class GUIElectroextractor extends GuiContainer
 		int k = (this.width - this.xSize) / 2;
 		int l = (this.height - this.ySize) / 2;
 		this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
-
-		if (this.electroextractor.isUsingFuel())
+		
+		if(this.electroextractor.isUsingFuel())
 		{
 			int i1 = this.electroextractor.getBurnTimeRemainingScaled(13);
 			this.drawTexturedModalRect(k + 56, l + 36 + 12 - i1, 176, 12 - i1, 14, i1 + 1);

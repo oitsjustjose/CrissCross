@@ -25,7 +25,7 @@ public class CCMachineRecipes
 	public static int cropomatorQTY = ConfigHandler.cropomatorOutput;
 	public static int electroQTY = ConfigHandler.electroextractorOutput;
 	public static int woodchipperQTY = ConfigHandler.woodchipperOutput;
-
+	
 	public static void init()
 	{
 		initCropomatorRecipes();
@@ -34,7 +34,7 @@ public class CCMachineRecipes
 		initElectroextractorOreDictionary();
 		initWoodchipperFuels();
 		initWoodchipperOreDictionary();
-
+		
 		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.diamond_ore),
 				new ItemStack(Items.diamond, electroQTY));
 		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.emerald_ore),
@@ -42,17 +42,17 @@ public class CCMachineRecipes
 		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.coal_ore),
 				new ItemStack(Items.coal, electroQTY));
 	}
-
+	
 	public static void initCropomatorRecipes()
 	{
-		for (int i = 0; i < ConfigHandler.cropomatorInputs.length; i++)
+		for(int i = 0; i < ConfigHandler.cropomatorInputs.length; i++)
 		{
 			try
 			{
 				String[] unlocStack = ConfigHandler.cropomatorInputs[i].split(":");
-				if (unlocStack.length == 2)
+				if(unlocStack.length == 2)
 				{
-					if (GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 1) != null)
+					if(GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 1) != null)
 					{
 						ItemStack newStack = GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 1);
 						CropomatorRecipes.getInstance().addRecipe(newStack,
@@ -63,12 +63,12 @@ public class CCMachineRecipes
 						CCLog.warn("Item " + ConfigHandler.cropomatorInputs[i]
 								+ " could not be added to the Cropomator's recipe list.");
 						CCLog.warn("Please confirm you have the name and formatting correct.");
-
+						
 					}
 				}
-				if (unlocStack.length == 3)
+				if(unlocStack.length == 3)
 				{
-					if (GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 1) != null)
+					if(GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 1) != null)
 					{
 						ItemStack newStack = new ItemStack(
 								GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 1).getItem(), 1,
@@ -85,24 +85,24 @@ public class CCMachineRecipes
 					}
 				}
 			}
-			catch (Exception e)
+			catch(Exception e)
 			{
 				CCLog.warn("[CrissCross]: Error reading itemstack for inputs from input file at item: " + (i + 1));
 			}
-
+			
 		}
 	}
-
+	
 	public static void initCropomatorFuels()
 	{
-		for (int i = 0; i < ConfigHandler.cropomatorCatalysts.length; i++)
+		for(int i = 0; i < ConfigHandler.cropomatorCatalysts.length; i++)
 		{
 			try
 			{
 				String[] unlocStack = ConfigHandler.cropomatorCatalysts[i].split(":");
-				if (unlocStack.length == 2)
+				if(unlocStack.length == 2)
 				{
-					if (GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 1) != null)
+					if(GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 1) != null)
 						TileEntityCropomator.addFuel(GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 1));
 					else
 					{
@@ -111,10 +111,10 @@ public class CCMachineRecipes
 						CCLog.warn("Please confirm you have the name and formatting correct.");
 					}
 				}
-
-				if (unlocStack.length == 3)
+				
+				if(unlocStack.length == 3)
 				{
-					if (GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 1) != null)
+					if(GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 1) != null)
 					{
 						ItemStack newStack = new ItemStack(
 								GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 1).getItem(), 1,
@@ -129,15 +129,16 @@ public class CCMachineRecipes
 					}
 				}
 			}
-			catch (Exception e)
+			catch(Exception e)
 			{
 				CCLog.warn("Error reading itemstack for catalysts from input file at item: " + (i + 1));
 			}
 		}
 	}
 	
-	//All Credit goes to TeamCoFH for the code. After so many algorithms attempted, I gave up and used one that worked:
-
+	// All Credit goes to TeamCoFH for the code. After so many algorithms
+	// attempted, I gave up and used one that worked:
+	
 	public static void initWoodchipperOreDictionary()
 	{
 		Container local1 = new Container()
@@ -148,25 +149,25 @@ public class CCMachineRecipes
 			}
 		};
 		InventoryCrafting localInventoryCrafting = new InventoryCrafting(local1, 3, 3);
-		for (int i = 0; i < 9; i++)
+		for(int i = 0; i < 9; i++)
 		{
 			localInventoryCrafting.setInventorySlotContents(i, null);
 		}
 		ArrayList localArrayList = OreDictionary.getOres("logWood");
-		for (int j = 0; j < localArrayList.size(); j++)
+		for(int j = 0; j < localArrayList.size(); j++)
 		{
 			ItemStack localItemStack1 = (ItemStack) localArrayList.get(j);
 			ItemStack localItemStack3;
 			ItemStack localItemStack4;
-			if (ItemHelper.getItemDamage(localItemStack1) == 32767)
+			if(ItemHelper.getItemDamage(localItemStack1) == 32767)
 			{
-				for (int k = 0; k < 16; k++)
+				for(int k = 0; k < 16; k++)
 				{
 					localItemStack3 = ItemHelper.cloneStack(localItemStack1, 1);
 					localItemStack3.setItemDamage(k);
 					localInventoryCrafting.setInventorySlotContents(0, localItemStack3);
 					localItemStack4 = ItemHelper.findMatchingRecipe(localInventoryCrafting, null);
-					if (localItemStack4 != null)
+					if(localItemStack4 != null)
 					{
 						ItemStack localItemStack5 = localItemStack4.copy();
 						ItemStack tmp129_127 = localItemStack5;
@@ -180,7 +181,7 @@ public class CCMachineRecipes
 				ItemStack localItemStack2 = localItemStack1.copy();
 				localInventoryCrafting.setInventorySlotContents(0, localItemStack2);
 				localItemStack3 = ItemHelper.findMatchingRecipe(localInventoryCrafting, null);
-				if (localItemStack3 != null)
+				if(localItemStack3 != null)
 				{
 					localItemStack4 = localItemStack3.copy();
 					ItemStack tmp201_199 = localItemStack4;
@@ -190,17 +191,17 @@ public class CCMachineRecipes
 			}
 		}
 	}
-
+	
 	public static void initWoodchipperFuels()
 	{
-		for (int i = 0; i < ConfigHandler.woodchipperFuels.length; i++)
+		for(int i = 0; i < ConfigHandler.woodchipperFuels.length; i++)
 		{
 			try
 			{
 				String[] unlocStack = ConfigHandler.woodchipperFuels[i].split(":");
-				if (unlocStack.length == 2)
+				if(unlocStack.length == 2)
 				{
-					if (GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 1) != null)
+					if(GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 1) != null)
 						TileEntityWoodchipper.addFuel(GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 0));
 					else
 					{
@@ -209,10 +210,10 @@ public class CCMachineRecipes
 						CCLog.warn("Please confirm you have the name and formatting correct.");
 					}
 				}
-
-				if (unlocStack.length == 3)
+				
+				if(unlocStack.length == 3)
 				{
-					if (GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 1) != null)
+					if(GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 1) != null)
 					{
 						ItemStack newStack = new ItemStack(
 								GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 1).getItem(), 1,
@@ -227,23 +228,23 @@ public class CCMachineRecipes
 					}
 				}
 			}
-			catch (Exception e)
+			catch(Exception e)
 			{
 				CCLog.warn("Error reading itemstack for Woodchipper's energy sources at item: " + (i + 1));
 			}
 		}
 	}
-
+	
 	static void initElectroextractorFuels()
 	{
-		for (int i = 0; i < ConfigHandler.electroextractorEnergySources.length; i++)
+		for(int i = 0; i < ConfigHandler.electroextractorEnergySources.length; i++)
 		{
 			try
 			{
 				String[] unlocStack = ConfigHandler.electroextractorEnergySources[i].split(":");
-				if (unlocStack.length == 2)
+				if(unlocStack.length == 2)
 				{
-					if (GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 1) != null)
+					if(GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 1) != null)
 						TileEntityElectroextractor.addFuel(GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 0));
 					else
 					{
@@ -252,10 +253,10 @@ public class CCMachineRecipes
 						CCLog.warn("Please confirm you have the name and formatting correct.");
 					}
 				}
-
-				if (unlocStack.length == 3)
+				
+				if(unlocStack.length == 3)
 				{
-					if (GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 1) != null)
+					if(GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 1) != null)
 					{
 						ItemStack newStack = new ItemStack(
 								GameRegistry.findItemStack(unlocStack[0], unlocStack[1], 1).getItem(), 1,
@@ -270,24 +271,24 @@ public class CCMachineRecipes
 					}
 				}
 			}
-			catch (Exception e)
+			catch(Exception e)
 			{
 				CCLog.warn("Error reading itemstack for electroextractor's energy sources at item: " + (i + 1));
 			}
 		}
 	}
-
+	
 	static void initElectroextractorOreDictionary()
 	{
 		ArrayList<String> dustNames = ItemDust.getDusts();
-		for (int i = 0; i < ConfigHandler.electroextractorOreDictInputs.length; i++)
+		for(int i = 0; i < ConfigHandler.electroextractorOreDictInputs.length; i++)
 		{
 			String[] entry = ConfigHandler.electroextractorOreDictInputs[i].split(":");
-			if (OreDictionary.doesOreNameExist("ore" + entry[0]) && OreDictionary.doesOreNameExist("ingot" + entry[0]))
+			if(OreDictionary.doesOreNameExist("ore" + entry[0]) && OreDictionary.doesOreNameExist("ingot" + entry[0]))
 			{
 				ArrayList<ItemStack> ores = OreDictionary.getOres("ore" + entry[0]);
 				ItemDust.addDustType(entry[0], Integer.parseInt(entry[1]));
-				for (int j = 0; j < ores.size(); j++)
+				for(int j = 0; j < ores.size(); j++)
 					ElectroextractorRecipes.getInstance().addRecipe(ores.get(j),
 							new ItemStack(CCItems.dusts, electroQTY, dustNames.size() - 1));
 			}
@@ -295,22 +296,20 @@ public class CCMachineRecipes
 			{
 				CCLog.warn("Your oreDictionary Entry " + ConfigHandler.electroextractorOreDictInputs[i]
 						+ " could not be registered.");
-				if (!OreDictionary.doesOreNameExist("ore" + entry[0]))
+				if(!OreDictionary.doesOreNameExist("ore" + entry[0]))
 					CCLog.warn("This is because your oreDictionary Entry was not valid or registered as " + entry[0]
 							+ ".");
-				else
-					if (!OreDictionary.doesOreNameExist("ingot" + entry[0]))
-						CCLog.warn("This is because your oreDictionary Entry does not have an ingot for " + entry[0]
-								+ ".");
+				else if(!OreDictionary.doesOreNameExist("ingot" + entry[0]))
+					CCLog.warn("This is because your oreDictionary Entry does not have an ingot for " + entry[0] + ".");
 			}
 		}
-
-		for (int i = 0; i < dustNames.size(); i++)
+		
+		for(int i = 0; i < dustNames.size(); i++)
 		{
 			ItemStack ingot = null;
-			if (OreDictionary.doesOreNameExist("ingot" + dustNames.get(i)))
+			if(OreDictionary.doesOreNameExist("ingot" + dustNames.get(i)))
 				ingot = OreDictionary.getOres("ingot" + dustNames.get(i)).get(0);
-			if (ingot != null)
+			if(ingot != null)
 				GameRegistry.addSmelting(new ItemStack(CCItems.dusts, 1, i), ingot, 0.0F);
 		}
 	}

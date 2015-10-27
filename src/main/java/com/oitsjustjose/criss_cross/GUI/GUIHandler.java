@@ -17,55 +17,55 @@ public class GUIHandler implements IGuiHandler
 	public static final int Cropomator = 1;
 	public static final int Electroextractor = 2;
 	public static final int Woodchipper = 3;
-
+	
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
 	{
 		TileEntity tile = world.getTileEntity(x, y, z);
-
-		if (tile instanceof TileEntityCropomator)
+		
+		if(tile instanceof TileEntityCropomator)
 		{
 			TileEntityCropomator TE = (TileEntityCropomator) tile;
-
+			
 			return new ContainerCropomator(player, TE);
 		}
-		if (tile instanceof TileEntityElectroextractor)
+		if(tile instanceof TileEntityElectroextractor)
 		{
 			TileEntityElectroextractor TE = (TileEntityElectroextractor) tile;
-
+			
 			return new ContainerElectroextractor(player, TE);
 		}
-		if (tile instanceof TileEntityWoodchipper)
+		if(tile instanceof TileEntityWoodchipper)
 		{
 			TileEntityWoodchipper TE = (TileEntityWoodchipper) tile;
-
+			
 			return new ContainerWoodchipper(player, TE);
 		}
 		return null;
 	}
-
+	
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
 	{
 		TileEntity tile = world.getTileEntity(x, y, z);
-
-		if (tile instanceof TileEntityCropomator)
+		
+		if(tile instanceof TileEntityCropomator)
 		{
 			TileEntityCropomator TE = (TileEntityCropomator) tile;
-
+			
 			return new GUICropomator(player, TE);
 		}
-
-		if (tile instanceof TileEntityElectroextractor)
+		
+		if(tile instanceof TileEntityElectroextractor)
 		{
 			TileEntityElectroextractor TE = (TileEntityElectroextractor) tile;
-
+			
 			return new GUIElectroextractor(player, TE);
 		}
-		if (tile instanceof TileEntityWoodchipper)
+		if(tile instanceof TileEntityWoodchipper)
 		{
 			TileEntityWoodchipper TE = (TileEntityWoodchipper) tile;
-
+			
 			return new GUIWoodchipper(player, TE);
 		}
 		return null;

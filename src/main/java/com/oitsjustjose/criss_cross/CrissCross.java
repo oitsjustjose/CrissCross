@@ -24,13 +24,13 @@ import net.minecraft.creativetab.CreativeTabs;
 public class CrissCross
 {
 	public static CreativeTabs CCTab;
-
+	
 	@Instance(Reference.modid)
 	public static CrissCross instance;
-
+	
 	@SidedProxy(clientSide = "com.oitsjustjose.criss_cross.Util.ClientProxy", serverSide = "com.oitsjustjose.criss_cross.Util.CommonProxy")
 	public static CommonProxy proxy;
-
+	
 	@EventHandler
 	public static void preInit(FMLPreInitializationEvent event)
 	{
@@ -39,7 +39,7 @@ public class CrissCross
 		CCTab = new CCTab();
 		proxy.preInit();
 	}
-
+	
 	@EventHandler
 	public static void init(FMLInitializationEvent event)
 	{

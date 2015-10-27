@@ -24,19 +24,19 @@ public class NEICrissCrossConfig implements IConfigureNEI
 		API.registerGuiOverlay(GUIElectroextractor.class, "electroextractor");
 		API.registerGuiOverlay(GUIWoodchipper.class, "woodchipper");
 	}
-
+	
 	@Override
 	public String getName()
 	{
 		return Reference.modid;
 	}
-
+	
 	@Override
 	public String getVersion()
 	{
 		return Reference.version;
 	}
-
+	
 	private static void registerHandler(TemplateRecipeHandler handler)
 	{
 		API.registerRecipeHandler(handler);

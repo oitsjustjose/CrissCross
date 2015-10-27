@@ -22,14 +22,14 @@ import net.minecraft.world.World;
 public class BlockWoodchipper extends BlockMachineBase
 {
 	private static String unlocName = "WoodChipper";
-
+	
 	public BlockWoodchipper()
 	{
 		super(unlocName);
 		GameRegistry.registerTileEntity(TileEntityWoodchipper.class, unlocName);
 		GameRegistry.registerBlock(this, unlocName);
 	}
-
+	
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister register)
@@ -39,51 +39,51 @@ public class BlockWoodchipper extends BlockMachineBase
 		blockTextures[2] = register.registerIcon(Reference.modid + ":" + this.unlocName + "/" + unlocName + "_Front");
 		blockTextures[3] = register.registerIcon(Reference.modid + ":" + this.unlocName + "/" + unlocName + "_Sides");
 	}
-
+	
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta)
 	{
 		return new TileEntityWoodchipper();
 	}
-
+	
 	@Override
 	public void breakBlock(World world, int x, int y, int z, Block block, int meta)
 	{
 		Random random = new Random();
 		TileEntityWoodchipper tile = (TileEntityWoodchipper) world.getTileEntity(x, y, z);
-
-		if (tile != null)
+		
+		if(tile != null)
 		{
-			for (int i = 0; i < tile.getSizeInventory(); ++i)
+			for(int i = 0; i < tile.getSizeInventory(); ++i)
 			{
 				ItemStack itemstack = tile.getStackInSlot(i);
-
-				if (itemstack != null)
+				
+				if(itemstack != null)
 				{
 					float f = random.nextFloat() * 0.8F + 0.1F;
 					float f1 = random.nextFloat() * 0.8F + 0.1F;
 					float f2 = random.nextFloat() * 0.8F + 0.1F;
-
-					while (itemstack.stackSize > 0)
+					
+					while(itemstack.stackSize > 0)
 					{
 						int j = random.nextInt(21) + 10;
-
-						if (j > itemstack.stackSize)
+						
+						if(j > itemstack.stackSize)
 						{
 							j = itemstack.stackSize;
 						}
-
+						
 						itemstack.stackSize -= j;
 						EntityItem entityitem = new EntityItem(world, (double) ((float) x + f),
 								(double) ((float) y + f1), (double) ((float) z + f2),
 								new ItemStack(itemstack.getItem(), j, itemstack.getItemDamage()));
-
-						if (itemstack.hasTagCompound())
+								
+						if(itemstack.hasTagCompound())
 						{
 							entityitem.getEntityItem()
 									.setTagCompound((NBTTagCompound) itemstack.getTagCompound().copy());
 						}
-
+						
 						float f3 = 0.05F;
 						entityitem.motionX = (double) ((float) random.nextGaussian() * f3);
 						entityitem.motionY = (double) ((float) random.nextGaussian() * f3 + 0.2F);
@@ -92,26 +92,26 @@ public class BlockWoodchipper extends BlockMachineBase
 					}
 				}
 			}
-
+			
 			world.func_147453_f(x, y, z, block);
-
+			
 		}
-
+		
 		super.breakBlock(world, x, y, z, block, meta);
 	}
-
+	
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX,
 			float hitY, float hitZ)
 	{
-		if (world.isRemote)
+		if(world.isRemote)
 		{
 			return true;
 		}
 		else
 		{
 			TileEntityWoodchipper tileext = (TileEntityWoodchipper) world.getTileEntity(x, y, z);
-			if (tileext != null)
+			if(tileext != null)
 				player.openGui(CrissCross.instance, GUIHandler.Woodchipper, world, x, y, z);
 			return true;
 		}

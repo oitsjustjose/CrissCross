@@ -15,43 +15,43 @@ public class ContainerWoodchipper extends Container
 {
 	TileEntityWoodchipper woodchipper;
 	EntityPlayer player;
-
+	
 	private int lastUseTime;
 	private int lastChopTime;
 	private int lastFuelTime;
-
+	
 	public ContainerWoodchipper(EntityPlayer player, TileEntityWoodchipper woodchipper)
 	{
 		this.player = player;
 		this.woodchipper = woodchipper;
-
+		
 		lastUseTime = 0;
 		lastChopTime = 0;
 		lastFuelTime = 0;
-
+		
 		this.addSlotToContainer(new Slot(woodchipper, 0, 56, 17)); // input
 		this.addSlotToContainer(new Slot(woodchipper, 1, 56, 53)); // catalyst
 		this.addSlotToContainer(new MachineOutputSlot(player, woodchipper, 2, 116, 35));
 		this.addInventorySlots();
 	}
-
+	
 	@SideOnly(Side.CLIENT)
 	public void updateProgressBar(int timeType1, int timeType2)
 	{
-		switch (timeType1)
+		switch(timeType1)
 		{
 		case 0:
-			this.woodchipper.processTime = timeType2;
+		this.woodchipper.processTime = timeType2;
 			break;
 		case 1:
-			this.woodchipper.fuelTime = timeType2;
+		this.woodchipper.fuelTime = timeType2;
 			break;
 		case 2:
-			this.woodchipper.fuelUsetime = timeType2;
+		this.woodchipper.fuelUsetime = timeType2;
 			break;
 		}
 	}
-
+	
 	@Override
 	public void addCraftingToCrafters(ICrafting crafting)
 	{
@@ -60,86 +60,81 @@ public class ContainerWoodchipper extends Container
 		crafting.sendProgressBarUpdate(this, 1, this.woodchipper.fuelTime);
 		crafting.sendProgressBarUpdate(this, 2, this.woodchipper.fuelUsetime);
 	}
-
+	
 	@Override
 	public void detectAndSendChanges()
 	{
 		super.detectAndSendChanges();
-		for (int i = 0; i < this.crafters.size(); ++i)
+		for(int i = 0; i < this.crafters.size(); ++i)
 		{
 			ICrafting crafting = (ICrafting) this.crafters.get(i);
-
-			if (this.lastUseTime != this.woodchipper.processTime)
+			
+			if(this.lastUseTime != this.woodchipper.processTime)
 				crafting.sendProgressBarUpdate(this, 0, this.woodchipper.processTime);
-			if (this.lastChopTime != this.woodchipper.fuelTime)
+			if(this.lastChopTime != this.woodchipper.fuelTime)
 				crafting.sendProgressBarUpdate(this, 1, this.woodchipper.fuelTime);
-			if (this.lastFuelTime != this.woodchipper.fuelUsetime)
+			if(this.lastFuelTime != this.woodchipper.fuelUsetime)
 				crafting.sendProgressBarUpdate(this, 2, this.woodchipper.fuelUsetime);
 		}
 		this.lastUseTime = this.woodchipper.processTime;
 		this.lastChopTime = this.woodchipper.fuelTime;
 		this.lastFuelTime = this.woodchipper.fuelUsetime;
 	}
-
+	
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int slotID)
 	{
 		ItemStack itemstack = null;
 		Slot slot = (Slot) this.inventorySlots.get(slotID);
-
-		if (slot != null && slot.getHasStack())
+		
+		if(slot != null && slot.getHasStack())
 		{
 			ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
-
-			if (slotID == 2)
+			
+			if(slotID == 2)
 			{
-				if (!this.mergeItemStack(itemstack1, 3, 39, true))
+				if(!this.mergeItemStack(itemstack1, 3, 39, true))
 				{
 					return null;
 				}
-
+				
 				slot.onSlotChange(itemstack1, itemstack);
 			}
-			else
-				if (slotID != 1 && slotID != 0)
+			else if(slotID != 1 && slotID != 0)
+			{
+				if(TileEntityWoodchipper.isValidForWoodchipper(itemstack1))
 				{
-					if (TileEntityWoodchipper.isValidForWoodchipper(itemstack1))
-					{
-						if (!this.mergeItemStack(itemstack1, 0, 1, false))
-						{
-							return null;
-						}
-					}
-					else
-						if (TileEntityWoodchipper.isItemFuel(itemstack1))
-						{
-							if (!this.mergeItemStack(itemstack1, 1, 2, false))
-							{
-								return null;
-							}
-						}
-						else
-							if (slotID >= 3 && slotID < 30)
-							{
-								if (!this.mergeItemStack(itemstack1, 30, 39, false))
-								{
-									return null;
-								}
-							}
-							else
-								if (slotID >= 30 && slotID < 39 && !this.mergeItemStack(itemstack1, 3, 30, false))
-								{
-									return null;
-								}
-				}
-				else
-					if (!this.mergeItemStack(itemstack1, 3, 39, false))
+					if(!this.mergeItemStack(itemstack1, 0, 1, false))
 					{
 						return null;
 					}
-
-			if (itemstack1.stackSize == 0)
+				}
+				else if(TileEntityWoodchipper.isItemFuel(itemstack1))
+				{
+					if(!this.mergeItemStack(itemstack1, 1, 2, false))
+					{
+						return null;
+					}
+				}
+				else if(slotID >= 3 && slotID < 30)
+				{
+					if(!this.mergeItemStack(itemstack1, 30, 39, false))
+					{
+						return null;
+					}
+				}
+				else if(slotID >= 30 && slotID < 39 && !this.mergeItemStack(itemstack1, 3, 30, false))
+				{
+					return null;
+				}
+			}
+			else if(!this.mergeItemStack(itemstack1, 3, 39, false))
+			{
+				return null;
+			}
+			
+			if(itemstack1.stackSize == 0)
 			{
 				slot.putStack((ItemStack) null);
 			}
@@ -147,38 +142,38 @@ public class ContainerWoodchipper extends Container
 			{
 				slot.onSlotChanged();
 			}
-
-			if (itemstack1.stackSize == itemstack.stackSize)
+			
+			if(itemstack1.stackSize == itemstack.stackSize)
 			{
 				return null;
 			}
-
+			
 			slot.onPickupFromSlot(player, itemstack1);
 		}
-
+		
 		return itemstack;
 	}
-
+	
 	@Override
 	public boolean canInteractWith(EntityPlayer player)
 	{
 		return this.woodchipper.isUseableByPlayer(this.player);
 	}
-
+	
 	public final void addInventorySlots()
 	{
 		this.addInventorySlots(8, 84, 142);
 	}
-
+	
 	public final void addInventorySlots(int xOffset, int yOffset, int yHotbar)
 	{
 		InventoryPlayer inventory = this.player.inventory;
-
-		for (int i = 0; i < 3; ++i)
-			for (int j = 0; j < 9; ++j)
+		
+		for(int i = 0; i < 3; ++i)
+			for(int j = 0; j < 9; ++j)
 				this.addSlotToContainer(new Slot(inventory, 9 + j + i * 9, xOffset + j * 18, yOffset + i * 18));
-
-		for (int i = 0; i < 9; ++i)
+				
+		for(int i = 0; i < 9; ++i)
 			this.addSlotToContainer(new Slot(inventory, i, xOffset + i * 18, yHotbar));
 	}
 }

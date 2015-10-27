@@ -18,6 +18,9 @@ item.CrissCross.Mithril.name=Electrolytic Mithril Dust
 item.CrissCross.Nickel.name=Electrolytic Nickel Dust
 item.CrissCross.trash.name=This is a bad item, please trash it.
 
+item.CrissCross.everfulBucket.name=Everful Bucket
+item.CrissCross.voidBucket.name=Insatiable Bucket
+
 #Containers
 container.cropomator=Cropomator
 container.electroextractor=ElectroExtractor
