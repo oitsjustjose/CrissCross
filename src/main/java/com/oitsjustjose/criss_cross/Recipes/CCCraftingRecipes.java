@@ -43,7 +43,10 @@ public class CCCraftingRecipes
 		}
 		
 		GameRegistry.addRecipe(new ItemStack(CCBlocks.woodchipper), new Object[]
-		{ "I#I", "SCS", "I#I", '#', Items.diamond_axe, 'I', Blocks.iron_bars, 'S', Items.golden_axe, 'C', centerItem });
+		{
+				"I#I", "SCS", "I#I", '#', Items.diamond_axe, 'I', Blocks.iron_bars, 'S', Items.golden_axe, 'C',
+				centerItem
+		});
 	}
 	
 	static void electroextractorRecipe()
@@ -68,7 +71,10 @@ public class CCCraftingRecipes
 		}
 		
 		GameRegistry.addRecipe(new ItemStack(CCBlocks.electroextractor), new Object[]
-		{ "I#I", "SCS", "I#I", '#', Blocks.piston, 'I', Blocks.iron_bars, 'S', Items.golden_pickaxe, 'C', centerItem });
+		{
+				"I#I", "SCS", "I#I", '#', Blocks.piston, 'I', Blocks.iron_bars, 'S', Items.golden_pickaxe, 'C',
+				centerItem
+		});
 	}
 	
 	static void cropomatorRecipe()
@@ -92,6 +98,9 @@ public class CCCraftingRecipes
 		}
 		
 		GameRegistry.addRecipe(new ItemStack(CCBlocks.cropomator), new Object[]
-		{ "I#I", "SCS", "I#I", '#', Blocks.hay_block, 'I', Items.iron_ingot, 'S', Items.golden_hoe, 'C', centerItem });
+		{
+				"I#I", "SCS", "I#I", '#', Blocks.hay_block, 'I', Items.iron_ingot, 'S', Items.golden_hoe, 'C',
+				centerItem
+		});
 	}
 }

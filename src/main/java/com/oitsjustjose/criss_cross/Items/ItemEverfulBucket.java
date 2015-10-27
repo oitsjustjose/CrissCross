@@ -23,7 +23,9 @@ import net.minecraft.world.World;
 public class ItemEverfulBucket extends Item
 {
 	String[] types = new String[]
-	{ "everfulBucket", "voidBucket" };
+	{
+			"everfulBucket", "voidBucket"
+	};
 	@SideOnly(Side.CLIENT)
 	IIcon[] icons = new IIcon[types.length];
 	
@@ -33,6 +35,7 @@ public class ItemEverfulBucket extends Item
 		this.maxStackSize = 1;
 		this.setCreativeTab(CrissCross.CCTab);
 		GameRegistry.registerItem(this, "magicBucket");
+		this.setContainerItem(this);
 	}
 	
 	@SideOnly(Side.CLIENT)
@@ -77,35 +80,36 @@ public class ItemEverfulBucket extends Item
 					Material material = world.getBlock(x, y, z).getMaterial();
 					int meta = world.getBlockMetadata(x, y, z);
 					
-					if(material == Material.water && meta == 0)						
+					if(material == Material.water && meta == 0)
 						world.setBlockToAir(x, y, z);
-
+						
 					if(material == Material.lava && meta == 0)
 						world.setBlockToAir(x, y, z);
 				}
 				else
 				{
-					if(world.getBlock(x, y, z).getMaterial() == Material.lava || world.getBlock(x, y, z).getMaterial() == Material.water)
+					if(world.getBlock(x, y, z).getMaterial() == Material.lava
+							|| world.getBlock(x, y, z).getMaterial() == Material.water)
 						return itemstack;
-					
+						
 					if(movingobjectposition.sideHit == 0)
 						--y;
-					
+						
 					if(movingobjectposition.sideHit == 1)
 						++y;
-					
+						
 					if(movingobjectposition.sideHit == 2)
 						--z;
-					
+						
 					if(movingobjectposition.sideHit == 3)
 						++z;
-					
+						
 					if(movingobjectposition.sideHit == 4)
 						--x;
-					
+						
 					if(movingobjectposition.sideHit == 5)
 						++x;
-					
+						
 					if(!player.canPlayerEdit(x, y, z, movingobjectposition.sideHit, itemstack))
 						return itemstack;
 						

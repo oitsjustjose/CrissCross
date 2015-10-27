@@ -21,11 +21,17 @@ public class TileEntityCropomator extends TileEntity implements ISidedInventory
 	private static int proTicks = ConfigHandler.cropomatorProcessTime;
 	private static int qty = ConfigHandler.cropomatorOutput;
 	private static final int[] slotsTop = new int[]
-	{ 0 };
+	{
+			0
+	};
 	private static final int[] slotsBottom = new int[]
-	{ 2, 1 };
+	{
+			2, 1
+	};
 	private static final int[] slotsSides = new int[]
-	{ 1 };
+	{
+			1
+	};
 	private static ArrayList<ItemStack> fuelItems = new ArrayList<ItemStack>();
 	
 	private ItemStack[] ItemStacks = new ItemStack[3];
