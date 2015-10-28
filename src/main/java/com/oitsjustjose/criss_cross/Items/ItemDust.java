@@ -63,16 +63,16 @@ public class ItemDust extends Item
 		return pass == 0 ? base : overlay;
 	}
 	
-	@Override
-	public String getUnlocalizedName(ItemStack itemStack)
-	{
-		if(itemStack.getItemDamage() >= colors.size() || itemStack.getItemDamage() >= dustNames.size())
-		{
-			itemStack.setStackDisplayName(StatCollector.translateToLocal("item.CrissCross.trash.name"));
-			return("item." + Reference.modid + ".trash");
-		}
-		return "item." + Reference.modid + "." + dustNames.get(itemStack.getItemDamage());
-	}
+//	@Override
+//	public String getUnlocalizedName(ItemStack itemStack)
+//	{
+//		if(itemStack.getItemDamage() >= colors.size() || itemStack.getItemDamage() >= dustNames.size())
+//		{
+//			itemStack.setStackDisplayName(StatCollector.translateToLocal("item.CrissCross.trash.name"));
+//			return("item." + Reference.modid + ".trash");
+//		}
+//		return "item." + Reference.modid + "." + dustNames.get(itemStack.getItemDamage());
+//	}
 	
 	@Override
 	@SideOnly(Side.CLIENT)
@@ -97,10 +97,26 @@ public class ItemDust extends Item
 	}
 	
 	@Override
+    public String getUnlocalizedNameInefficiently(ItemStack itemstack)
+    {
+		int meta = itemstack.getItemDamage();		
+		return (StatCollector.translateToLocal("item.CrissCross.dustPrefix") + " " + ItemDust.getName(meta) + " " + StatCollector.translateToLocal("item.CrissCross.dustPostfix"));
+    }
+	
+	@Override
+    public String getItemStackDisplayName(ItemStack itemstack)
+    {
+        return this.getUnlocalizedNameInefficiently(itemstack);
+    }
+	
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item item, CreativeTabs tab, List list)
 	{
 		for(int i = 0; i < dustNames.size(); i++)
-			list.add(new ItemStack(item, 1, i));
+		{
+			ItemStack stack = new ItemStack(item, 1, i);
+			list.add(stack);
+		}
 	}
 }

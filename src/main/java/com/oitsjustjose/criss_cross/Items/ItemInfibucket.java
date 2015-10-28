@@ -20,7 +20,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
-public class ItemEverfulBucket extends Item
+public class ItemInfibucket extends Item
 {
 	String[] types = new String[]
 	{
@@ -29,7 +29,7 @@ public class ItemEverfulBucket extends Item
 	@SideOnly(Side.CLIENT)
 	IIcon[] icons = new IIcon[types.length];
 	
-	public ItemEverfulBucket()
+	public ItemInfibucket()
 	{
 		this.setHasSubtypes(true);
 		this.maxStackSize = 1;
@@ -80,10 +80,7 @@ public class ItemEverfulBucket extends Item
 					Material material = world.getBlock(x, y, z).getMaterial();
 					int meta = world.getBlockMetadata(x, y, z);
 					
-					if(material == Material.water && meta == 0)
-						world.setBlockToAir(x, y, z);
-						
-					if(material == Material.lava && meta == 0)
+					if(material.isLiquid() && meta == 0)
 						world.setBlockToAir(x, y, z);
 				}
 				else

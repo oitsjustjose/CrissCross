@@ -20,7 +20,7 @@ public class ConfigHandler
 			"minecraft:apple", "minecraft:reeds", "minecraft:nether_wart", "minecraft:carrot", "minecraft:cactus",
 			"minecraft:potato", "minecraft:sapling:0", "minecraft:sapling:1", "minecraft:sapling:2",
 			"minecraft:sapling:3", "minecraft:sapling:4", "minecraft:sapling:5", "minecraft:melon",
-			"minecraft:brown_mushroom", "minecraft:red_mushroom", "minecraft:cocoa", "minecraft:pumpkin",
+			"minecraft:brown_mushroom", "minecraft:red_mushroom", "minecraft:dye:3", "minecraft:pumpkin",
 			"minecraft:wheat", "minecraft:wheat_seeds"
 	};
 	public static String[] defaultCropomatorCatalystItems = new String[]

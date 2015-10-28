@@ -5,18 +5,10 @@ tile.CrissCross.WoodChipper.name=Wood Chipper
 
 #Items
 item.CrissCross.Iron.name=Electrolytic Iron Dust
-item.CrissCross.Gold.name=Electrolytic Gold Dust
-item.CrissCross.Aluminum.name=Electrolytic Aluminum Dust
-item.CrissCross.Cobalt.name=Electrolytic Cobalt Dust
-item.CrissCross.Ardite.name=Electrolytic Ardite Dust
-item.CrissCross.Copper.name=Electrolytic Copper Dust
-item.CrissCross.Tin.name=Electrolytic Tin Dust
-item.CrissCross.Silver.name=Electrolytic Silver Dust
-item.CrissCross.Lead.name=Electrolytic Lead Dust
-item.CrissCross.Platinum.name=Electrolytic Platinum Dust
-item.CrissCross.Mithril.name=Electrolytic Mithril Dust
-item.CrissCross.Nickel.name=Electrolytic Nickel Dust
+
 item.CrissCross.trash.name=This is a bad item, please trash it.
+item.CrissCross.dustPrefix=Electrolytic
+item.CrissCross.dustPostfix=Dust
 
 item.CrissCross.everfulBucket.name=Everful Bucket
 item.CrissCross.voidBucket.name=Insatiable Bucket

@@ -46,8 +46,8 @@ public class CrissCross
 		CCBlocks.init();
 		CCItems.init();
 		CCCraftingRecipes.init();
-		OreDictionaryAdder.init();
 		CCMachineRecipes.init();
+		OreDictionaryAdder.init();
 		proxy.init();
 	}
 }
