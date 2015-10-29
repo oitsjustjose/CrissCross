@@ -22,12 +22,14 @@ public class CCBlocks
 	public static Block cropomator;
 	public static Block electroextractor;
 	public static Block woodchipper;
+	public static Block autosmith;
 	
 	public static void init()
 	{
 		cropomator = new BlockCropomator();
 		electroextractor = new BlockElectroextractor();
 		woodchipper = new BlockWoodchipper();
+		autosmith = new BlockAutosmith();
 		
 		NetworkRegistry.INSTANCE.registerGuiHandler(CrissCross.instance, new GUIHandler());
 	}

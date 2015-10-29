@@ -23,11 +23,11 @@ public class CCCraftingRecipes
 	
 	static void initBucketRecipes()
 	{
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CCItems.infiniBucket, 1, 0),
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CCItems.magicBucket, 1, 0),
 			"DFD", "WBW", "DFD", 'W', Items.water_bucket, 'B', Items.bucket, 'D', "gemDiamond", 'F', "blockDiamond"
 		));
 		
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CCItems.infiniBucket, 1, 1),
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CCItems.magicBucket, 1, 1),
 				"OGO",
 				"GBG",
 				"OGO",

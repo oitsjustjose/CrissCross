@@ -1,8 +1,10 @@
 package com.oitsjustjose.criss_cross.GUI;
 
+import com.oitsjustjose.criss_cross.Container.ContainerAutosmith;
 import com.oitsjustjose.criss_cross.Container.ContainerCropomator;
 import com.oitsjustjose.criss_cross.Container.ContainerElectroextractor;
 import com.oitsjustjose.criss_cross.Container.ContainerWoodchipper;
+import com.oitsjustjose.criss_cross.TileEntity.TileEntityAutosmith;
 import com.oitsjustjose.criss_cross.TileEntity.TileEntityCropomator;
 import com.oitsjustjose.criss_cross.TileEntity.TileEntityElectroextractor;
 import com.oitsjustjose.criss_cross.TileEntity.TileEntityWoodchipper;
@@ -17,6 +19,7 @@ public class GUIHandler implements IGuiHandler
 	public static final int Cropomator = 1;
 	public static final int Electroextractor = 2;
 	public static final int Woodchipper = 3;
+	public static final int Autosmith = 4;
 	
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
@@ -40,6 +43,12 @@ public class GUIHandler implements IGuiHandler
 			TileEntityWoodchipper TE = (TileEntityWoodchipper) tile;
 			
 			return new ContainerWoodchipper(player, TE);
+		}
+		if(tile instanceof TileEntityAutosmith)
+		{
+			TileEntityAutosmith TE = (TileEntityAutosmith) tile;
+			
+			return new ContainerAutosmith(player, TE);
 		}
 		return null;
 	}
@@ -67,6 +76,12 @@ public class GUIHandler implements IGuiHandler
 			TileEntityWoodchipper TE = (TileEntityWoodchipper) tile;
 			
 			return new GUIWoodchipper(player, TE);
+		}
+		if(tile instanceof TileEntityAutosmith)
+		{
+			TileEntityAutosmith TE = (TileEntityAutosmith) tile;
+			
+			return new GUIAutosmith(player, TE);
 		}
 		return null;
 	}

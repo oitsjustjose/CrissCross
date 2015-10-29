@@ -2,12 +2,12 @@ package com.oitsjustjose.criss_cross.TileEntity;
 
 import java.util.ArrayList;
 
-import com.oitsjustjose.criss_cross.Blocks.BlockWoodchipper;
-import com.oitsjustjose.criss_cross.Recipes.WoodchipperRecipes;
 import com.oitsjustjose.criss_cross.Util.ConfigHandler;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import com.oitsjustjose.criss_cross.Blocks.BlockAutosmith;
+import com.oitsjustjose.criss_cross.Recipes.AutosmithRecipes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -15,25 +15,28 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityWoodchipper extends TileEntity implements ISidedInventory
+public class TileEntityAutosmith extends TileEntity implements ISidedInventory
 {
-	private static int proTicks = ConfigHandler.woodchipperProcessTime;
-	private static int qty = ConfigHandler.woodchipperOutput;
+	private static int proTicks = ConfigHandler.autosmithProcessTime;
 	private static final int[] slotsTop = new int[]
 	{
 			0
 	};
 	private static final int[] slotsBottom = new int[]
 	{
-			2, 1
+			3
 	};
 	private static final int[] slotsSides = new int[]
 	{
-			1
+			2, 1
 	};
 	private static ArrayList<ItemStack> fuelItems = new ArrayList<ItemStack>();
 	
-	private ItemStack[] ItemStacks = new ItemStack[3];
+	private ItemStack[] ItemStacks = new ItemStack[4];
+	//Slot [0] is the tool Item
+	//Slot [1] is the tool repair Item
+	//Slot [2] is the output
+	//Slot [3] is the fuel
 	
 	public int fuelTime;
 	public int processTime;
@@ -116,7 +119,7 @@ public class TileEntityWoodchipper extends TileEntity implements ISidedInventory
 	@Override
 	public String getInventoryName()
 	{
-		return "container.woodchipper";
+		return "container.autosmith";
 	}
 	
 	@Override
@@ -145,7 +148,7 @@ public class TileEntityWoodchipper extends TileEntity implements ISidedInventory
 		
 		this.fuelTime = tag.getShort("FuelTime");
 		this.processTime = tag.getShort("WorkTime");
-		this.fuelUsetime = getItemBurnTime(this.ItemStacks[1]);
+		this.fuelUsetime = getItemBurnTime(this.ItemStacks[3]);
 	}
 	
 	@Override
@@ -210,23 +213,23 @@ public class TileEntityWoodchipper extends TileEntity implements ISidedInventory
 		
 		if(!this.worldObj.isRemote)
 		{
-			if(this.fuelTime != 0 || this.ItemStacks[1] != null && this.ItemStacks[0] != null)
+			if(this.fuelTime != 0 || this.ItemStacks[3] != null && this.ItemStacks[0] != null)
 			{
 				if(this.fuelTime == 0 && this.canProcess())
 				{
-					this.fuelUsetime = this.fuelTime = getItemBurnTime(this.ItemStacks[1]);
+					this.fuelUsetime = this.fuelTime = getItemBurnTime(this.ItemStacks[3]);
 					
 					if(this.fuelTime > 0)
 					{
 						flag1 = true;
 						
-						if(this.ItemStacks[1] != null)
+						if(this.ItemStacks[3] != null)
 						{
-							--this.ItemStacks[1].stackSize;
+							--this.ItemStacks[3].stackSize;
 							
-							if(this.ItemStacks[1].stackSize == 0)
+							if(this.ItemStacks[3].stackSize == 0)
 							{
-								this.ItemStacks[1] = ItemStacks[1].getItem().getContainerItem(ItemStacks[1]);
+								this.ItemStacks[3] = ItemStacks[3].getItem().getContainerItem(ItemStacks[3]);
 							}
 						}
 					}
@@ -252,7 +255,7 @@ public class TileEntityWoodchipper extends TileEntity implements ISidedInventory
 			if(flag != this.fuelTime > 0)
 			{
 				flag1 = true;
-				BlockWoodchipper.updateBlockState(this.fuelTime > 0, this.worldObj, this.xCoord, this.yCoord,
+				BlockAutosmith.updateBlockState(this.fuelTime > 0, this.worldObj, this.xCoord, this.yCoord,
 						this.zCoord);
 			}
 		}
@@ -265,10 +268,11 @@ public class TileEntityWoodchipper extends TileEntity implements ISidedInventory
 	
 	private boolean canProcess()
 	{
-		ItemStack input = this.ItemStacks[0];
-		if(input != null)
+		ItemStack tool = this.ItemStacks[0];
+		ItemStack repair = this.ItemStacks[1];
+		if(tool != null && repair != null)
 		{
-			ItemStack output = WoodchipperRecipes.getInstance().getResult(input);
+			ItemStack output = AutosmithRecipes.getInstance().getResult(tool, repair);
 			if(output == null)
 				return false;
 			ItemStack outputSlot = this.ItemStacks[2];
@@ -300,9 +304,9 @@ public class TileEntityWoodchipper extends TileEntity implements ISidedInventory
 		return false;
 	}
 	
-	public static boolean isValidForWoodchipper(ItemStack itemstack)
+	public static boolean isValidForRepair(ItemStack tool, ItemStack item)
 	{
-		if(WoodchipperRecipes.getInstance().getResult(itemstack) != null)
+		if(AutosmithRecipes.getInstance().getResult(tool, item) != null)
 			return true;
 		return false;
 	}
@@ -312,8 +316,9 @@ public class TileEntityWoodchipper extends TileEntity implements ISidedInventory
 		if(this.canProcess())
 		{
 			
-			ItemStack input = ItemStacks[0];
-			ItemStack output = WoodchipperRecipes.getInstance().getResult(input);
+			ItemStack tool = ItemStacks[0];
+			ItemStack item = ItemStacks[1];
+			ItemStack output = AutosmithRecipes.getInstance().getResult(tool, item);
 			ItemStack outputSlot = ItemStacks[2];
 			if(outputSlot == null)
 			{
@@ -324,8 +329,8 @@ public class TileEntityWoodchipper extends TileEntity implements ISidedInventory
 				outputSlot.stackSize += output.stackSize;
 			}
 			
-			--input.stackSize;
-			if(input.stackSize <= 0)
+			--tool.stackSize;
+			if(tool.stackSize <= 0)
 			{
 				ItemStacks[0] = null;
 			}

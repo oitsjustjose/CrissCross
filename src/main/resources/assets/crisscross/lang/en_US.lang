@@ -1,15 +1,14 @@
-#Tiles
+#Blocks
 tile.CrissCross.Cropomator.name=Cropomator
 tile.CrissCross.ElectroExtractor.name=ElectroExtractor
 tile.CrissCross.WoodChipper.name=Wood Chipper
 
 #Items
-item.CrissCross.Iron.name=Electrolytic Iron Dust
-
+#Dust Name Components
 item.CrissCross.trash.name=This is a bad item, please trash it.
 item.CrissCross.dustPrefix=Electrolytic
 item.CrissCross.dustPostfix=Dust
-
+#Buckets
 item.CrissCross.everfulBucket.name=Everful Bucket
 item.CrissCross.voidBucket.name=Insatiable Bucket
 

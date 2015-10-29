@@ -20,7 +20,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
-public class ItemInfibucket extends Item
+public class ItemMagicBuckets extends Item
 {
 	String[] types = new String[]
 	{
@@ -29,7 +29,7 @@ public class ItemInfibucket extends Item
 	@SideOnly(Side.CLIENT)
 	IIcon[] icons = new IIcon[types.length];
 	
-	public ItemInfibucket()
+	public ItemMagicBuckets()
 	{
 		this.setHasSubtypes(true);
 		this.maxStackSize = 1;

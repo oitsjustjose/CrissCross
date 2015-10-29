@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.oitsjustjose.criss_cross.Items.CCItems;
 import com.oitsjustjose.criss_cross.Items.ItemDust;
+import com.oitsjustjose.criss_cross.TileEntity.TileEntityAutosmith;
 import com.oitsjustjose.criss_cross.TileEntity.TileEntityCropomator;
 import com.oitsjustjose.criss_cross.TileEntity.TileEntityElectroextractor;
 import com.oitsjustjose.criss_cross.TileEntity.TileEntityWoodchipper;
@@ -17,6 +18,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.InventoryCrafting;
+import net.minecraft.item.Item;
+import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -35,12 +38,33 @@ public class CCMachineRecipes
 		initWoodchipperFuels();
 		initWoodchipperOreDictionary();
 		
+		AutosmithRecipes.getInstance().addRecipe(new ItemStack(Items.iron_pickaxe, 1, Short.MAX_VALUE), new ItemStack(Items.iron_ingot));
+		TileEntityAutosmith.addFuel(new ItemStack(Items.redstone));
+		
 		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.diamond_ore),
 				new ItemStack(Items.diamond, electroQTY));
 		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.emerald_ore),
 				new ItemStack(Items.emerald, electroQTY));
 		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.coal_ore),
 				new ItemStack(Items.coal, electroQTY));
+	}
+	
+	//TODO: Finish this, it's pretty important
+	
+	public static void initAutosmithRecipes()
+	{
+		for(int i = 0; i < Item.itemRegistry.getKeys().size(); i++)
+		{
+			Item item = Item.getItemById(i);
+			if(item != null && item.isItemTool(new ItemStack(item, 1, Short.MAX_VALUE)) && item.isRepairable())
+			{
+				for(int j = 0; j < Item.ToolMaterial.values().length; j++)
+				{
+					ItemStack repairItem = Item.ToolMaterial.values()[j].getRepairItemStack();
+					if(repairItem.getDisplayName().contains(""));
+				}
+			}
+		}
 	}
 	
 	public static void initCropomatorRecipes()

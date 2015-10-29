@@ -52,6 +52,9 @@ public class ConfigHandler
 			"minecraft:water_bucket", "minecraft:potion:0", "CrissCross:magicBucket:0"
 	};
 	
+	public static int autosmithProcessTime;
+	public static String autosmithRecipeItem;
+	
 	public static void init(File configFile)
 	{
 		// Create the configuration object from the given configuration file
@@ -129,6 +132,15 @@ public class ConfigHandler
 				"minecraft:diamond_block",
 				"This is the item located in the center of the crafting recipe for the Woodchipper. Formatted as: <modid>:<item>:<meta> or <modid>:<item>.");
 				
+		
+		//Autosmith's Configs
+		autosmithProcessTime = config.getInt("Autosmith Process Time", config.CATEGORY_GENERAL, 200, 0, Short.MAX_VALUE,
+				"Control how many ticks it takes the Autosmith to process an item. Default is 200; furnaces are also 200.");
+		
+		autosmithRecipeItem = config.getString("Autosmith Crafting Item", config.CATEGORY_GENERAL,
+				"minecraft:diamond_block",
+				"This is the item located in the center of the crafting recipe for the Autosmith. Formatted as: <modid>:<item>:<meta> or <modid>:<item>.");
+		
 		if(config.hasChanged())
 			config.save();
 	}

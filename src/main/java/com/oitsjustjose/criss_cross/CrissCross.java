@@ -11,7 +11,6 @@ import com.oitsjustjose.criss_cross.Util.OreDictionaryAdder;
 import com.oitsjustjose.criss_cross.Util.Reference;
 
 import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
