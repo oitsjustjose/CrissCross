@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import com.oitsjustjose.criss_cross.Items.CCItems;
 import com.oitsjustjose.criss_cross.Items.ItemDust;
-import com.oitsjustjose.criss_cross.TileEntity.TileEntityAutosmith;
 import com.oitsjustjose.criss_cross.TileEntity.TileEntityCropomator;
 import com.oitsjustjose.criss_cross.TileEntity.TileEntityElectroextractor;
 import com.oitsjustjose.criss_cross.TileEntity.TileEntityWoodchipper;
@@ -19,7 +18,6 @@ import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
-import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -37,9 +35,6 @@ public class CCMachineRecipes
 		initElectroextractorOreDictionary();
 		initWoodchipperFuels();
 		initWoodchipperOreDictionary();
-		
-		AutosmithRecipes.getInstance().addRecipe(new ItemStack(Items.iron_pickaxe, 1, Short.MAX_VALUE), new ItemStack(Items.iron_ingot));
-		TileEntityAutosmith.addFuel(new ItemStack(Items.redstone));
 		
 		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.diamond_ore),
 				new ItemStack(Items.diamond, electroQTY));
