@@ -110,8 +110,8 @@ public class BlockStonegen extends BlockMachineBase
 		}
 		else
 		{
-			TileEntityStonegen tileext = (TileEntityStonegen) world.getTileEntity(x, y, z);
-			if(tileext != null)
+			TileEntityStonegen tile = (TileEntityStonegen) world.getTileEntity(x, y, z);
+			if(tile != null)
 				player.openGui(CrissCross.instance, GUIHandler.Stonegen, world, x, y, z);
 			return true;
 		}

@@ -110,8 +110,8 @@ public class BlockCobblegen extends BlockMachineBase
 		}
 		else
 		{
-			TileEntityCobblegen tileext = (TileEntityCobblegen) world.getTileEntity(x, y, z);
-			if(tileext != null)
+			TileEntityCobblegen tile = (TileEntityCobblegen) world.getTileEntity(x, y, z);
+			if(tile != null)
 				player.openGui(CrissCross.instance, GUIHandler.Cobblegen, world, x, y, z);
 			return true;
 		}

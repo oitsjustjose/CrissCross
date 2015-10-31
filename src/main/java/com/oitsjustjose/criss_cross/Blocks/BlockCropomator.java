@@ -111,8 +111,8 @@ public class BlockCropomator extends BlockMachineBase
 		}
 		else
 		{
-			TileEntityCropomator tilecropomator = (TileEntityCropomator) world.getTileEntity(x, y, z);
-			if(tilecropomator != null)
+			TileEntityCropomator tile = (TileEntityCropomator) world.getTileEntity(x, y, z);
+			if(tile != null)
 				player.openGui(CrissCross.instance, GUIHandler.Cropomator, world, x, y, z);
 			return true;
 		}
