@@ -2,6 +2,9 @@
 tile.CrissCross.Cropomator.name=Cropomator
 tile.CrissCross.ElectroExtractor.name=ElectroExtractor
 tile.CrissCross.WoodChipper.name=Wood Chipper
+tile.CrissCross.CobblestoneGenerator.name=Cobblestone Generator
+tile.CrissCross.StoneGenerator.name=Smooth Stone Generator
+
 
 #Items
 #Dust Name Components
@@ -16,6 +19,8 @@ item.CrissCross.voidBucket.name=Insatiable Bucket
 container.cropomator=Cropomator
 container.electroextractor=ElectroExtractor
 container.woodchipper=Wood Chipper
+container.stonegen=Smooth Stone Generator
+container.cobblegen=Cobblestone Generator
 
 #NEI Integration
 recipe.cropomatorfuel=Cropomator Fuels
@@ -24,6 +29,8 @@ recipe.electroextractor=ElectroExtractor
 recipe.electroextractorfuel=ElectorExtractor Fuels
 recipe.woodchipper=Wood Chipper
 recipe.woodchipperfuel=Wood Chipper Fuels
+recipe.stonegen=Smooth Stone Generator
+recipe.cobblegen=Cobblestone Generator
 
 #Tab
 itemGroup.tabCrissCross=Criss Cross

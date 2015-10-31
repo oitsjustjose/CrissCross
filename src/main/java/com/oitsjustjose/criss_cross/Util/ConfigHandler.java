@@ -52,8 +52,7 @@ public class ConfigHandler
 			"minecraft:water_bucket", "minecraft:potion:0", "CrissCross:magicBucket:0"
 	};
 	
-	public static int autosmithProcessTime;
-	public static String autosmithRecipeItem;
+	public static int blockGeneratorProcessTimes;
 	
 	public static void init(File configFile)
 	{
@@ -134,12 +133,8 @@ public class ConfigHandler
 				
 		
 		//Autosmith's Configs
-		autosmithProcessTime = config.getInt("Autosmith Process Time", config.CATEGORY_GENERAL, 200, 0, Short.MAX_VALUE,
-				"Control how many ticks it takes the Autosmith to process an item. Default is 200; furnaces are also 200.");
-		
-		autosmithRecipeItem = config.getString("Autosmith Crafting Item", config.CATEGORY_GENERAL,
-				"minecraft:diamond_block",
-				"This is the item located in the center of the crafting recipe for the Autosmith. Formatted as: <modid>:<item>:<meta> or <modid>:<item>.");
+		blockGeneratorProcessTimes = config.getInt("Stone Generators' Process Times", config.CATEGORY_GENERAL, 20, 0, Short.MAX_VALUE,
+				"Control how many ticks it takes a stone generator to process an item. Default is 20; furnaces are 200.");
 		
 		if(config.hasChanged())
 			config.save();

@@ -11,12 +11,16 @@ public class CCBlocks
 	public static Block cropomator;
 	public static Block electroextractor;
 	public static Block woodchipper;
+	public static Block cobblegen;
+	public static Block stonegen;
 	
 	public static void init()
 	{
 		cropomator = new BlockCropomator();
 		electroextractor = new BlockElectroextractor();
 		woodchipper = new BlockWoodchipper();
+		cobblegen = new BlockCobblegen();
+		stonegen = new BlockStonegen();
 		
 		NetworkRegistry.INSTANCE.registerGuiHandler(CrissCross.instance, new GUIHandler());
 	}

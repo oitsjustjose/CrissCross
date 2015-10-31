@@ -19,6 +19,24 @@ public class CCCraftingRecipes
 		electroextractorRecipe();
 		woodChipperRecipe();
 		initBucketRecipes();
+		initBlockGeneratorRecipes();
+	}
+	
+	static void initBlockGeneratorRecipes()
+	{
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CCBlocks.cobblegen),
+				"CPC",
+				"#$#",
+				"CPC",
+				'$', "blockIron", 'C', "cobblestone", 'P', Blocks.piston, '#', Items.stone_pickaxe
+				));
+		
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CCBlocks.stonegen),
+				"CPC",
+				"#$#",
+				"CPC",
+				'$', "blockIron", 'C', "stone", 'P', Blocks.piston, '#', Items.stone_pickaxe
+				));
 	}
 	
 	static void initBucketRecipes()
