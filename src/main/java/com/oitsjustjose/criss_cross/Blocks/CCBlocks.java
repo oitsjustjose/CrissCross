@@ -2,9 +2,10 @@ package com.oitsjustjose.criss_cross.Blocks;
 
 import com.oitsjustjose.criss_cross.CrissCross;
 import com.oitsjustjose.criss_cross.GUI.GUIHandler;
+import com.oitsjustjose.criss_cross.Util.Reference;
 
-import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.block.Block;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 public class CCBlocks
 {
@@ -21,7 +22,6 @@ public class CCBlocks
 		woodchipper = new BlockWoodchipper();
 		cobblegen = new BlockCobblegen();
 		stonegen = new BlockStonegen();
-		
 		NetworkRegistry.INSTANCE.registerGuiHandler(CrissCross.instance, new GUIHandler());
 	}
 }

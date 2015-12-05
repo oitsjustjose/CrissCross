@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "crisscross:woodchipper" },
+        "facing=south": { "model": "crisscross:woodchipper", "y": 180 },
+        "facing=west":  { "model": "crisscross:woodchipper", "y": 270 },
+        "facing=east":  { "model": "crisscross:woodchipper", "y": 90 }
+    }
+}

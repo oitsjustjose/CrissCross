@@ -11,11 +11,11 @@ public class CCTab extends CreativeTabs
 	{
 		super(CreativeTabs.getNextID(), "tab" + Reference.modid);
 	}
-	
+
 	@Override
 	public Item getTabIconItem()
 	{
 		return Item.getItemFromBlock(CCBlocks.electroextractor);
 	}
-	
+
 }

@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "crisscross:electroextractor" },
+        "facing=south": { "model": "crisscross:electroextractor", "y": 180 },
+        "facing=west":  { "model": "crisscross:electroextractor", "y": 270 },
+        "facing=east":  { "model": "crisscross:electroextractor", "y": 90 }
+    }
+}

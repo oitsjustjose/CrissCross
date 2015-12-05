@@ -1,12 +1,12 @@
 package com.oitsjustjose.criss_cross.Util;
 
-public class CommonProxy
+public abstract class CommonProxy
 {
-	public void preInit()
+	public static void preInit()
 	{
 	};
-	
-	public void init()
+
+	public static void init()
 	{
 	};
 }

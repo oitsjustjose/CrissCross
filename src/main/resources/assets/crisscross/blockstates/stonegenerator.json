@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "crisscross:stonegenerator" },
+        "facing=south": { "model": "crisscross:stonegenerator", "y": 180 },
+        "facing=west":  { "model": "crisscross:stonegenerator", "y": 270 },
+        "facing=east":  { "model": "crisscross:stonegenerator", "y": 90 }
+    }
+}

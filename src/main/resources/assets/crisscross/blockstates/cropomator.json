@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "crisscross:cropomator" },
+        "facing=south": { "model": "crisscross:cropomator", "y": 180 },
+        "facing=west":  { "model": "crisscross:cropomator", "y": 270 },
+        "facing=east":  { "model": "crisscross:cropomator", "y": 90 }
+    }
+}

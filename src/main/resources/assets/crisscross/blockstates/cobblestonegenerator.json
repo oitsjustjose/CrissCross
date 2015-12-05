@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "crisscross:cobblestonegenerator" },
+        "facing=south": { "model": "crisscross:cobblestonegenerator", "y": 180 },
+        "facing=west":  { "model": "crisscross:cobblestonegenerator", "y": 270 },
+        "facing=east":  { "model": "crisscross:cobblestonegenerator", "y": 90 }
+    }
+}

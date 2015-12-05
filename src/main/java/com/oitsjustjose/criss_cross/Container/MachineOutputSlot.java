@@ -1,59 +1,53 @@
 package com.oitsjustjose.criss_cross.Container;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
-import net.minecraft.stats.AchievementList;
-import net.minecraft.util.MathHelper;
 
 public class MachineOutputSlot extends Slot
 {
 	/** The player that is using the GUI where this slot resides. */
 	private EntityPlayer thePlayer;
 	private int temp;
-	
+
 	public MachineOutputSlot(EntityPlayer player, IInventory inventory, int x, int y, int z)
 	{
 		super(inventory, x, y, z);
 		this.thePlayer = player;
 	}
-	
+
 	@Override
 	public boolean isItemValid(ItemStack stack)
 	{
 		return false;
 	}
-	
+
 	@Override
 	public ItemStack decrStackSize(int slot)
 	{
-		if(this.getHasStack())
+		if (this.getHasStack())
 		{
 			this.temp += Math.min(slot, this.getStack().stackSize);
 		}
-		
+
 		return super.decrStackSize(slot);
 	}
-	
+
 	@Override
 	public void onPickupFromSlot(EntityPlayer player, ItemStack itemstack)
 	{
 		this.onCrafting(itemstack);
 		super.onPickupFromSlot(player, itemstack);
 	}
-	
+
 	@Override
 	protected void onCrafting(ItemStack itemstack, int slot)
 	{
 		this.temp += slot;
 		this.onCrafting(itemstack);
 	}
-	
+
 	@Override
 	protected void onCrafting(ItemStack stack)
 	{
