@@ -1,9 +1,9 @@
 {
     "parent": "block/orientable",
     "textures": {
-        "top": "crisscross:blocks/stone_generator/stone_generator_top",
-        "front": "crisscross:blocks/stone_generator/stone_generator_front",
-        "side": "crisscross:blocks/stone_generator/stone_generator_sides",
-        "bottom": "crisscross:blocks/stone_generator/stone_generator_bottom"
+			"top": "#top",
+			"front": "#front",
+			"side": "#side",
+			"bottom": "#bottom"
     }
 }

@@ -34,6 +34,15 @@ public class ItemModBuckets extends Item
 		GameRegistry.registerItem(this, "magicBucket");
 		Lib.add(this);
 	}
+	
+	@Override
+    @SideOnly(Side.CLIENT)
+    public boolean hasEffect(ItemStack stack)
+    {
+		if(stack.getItemDamage() == 0)
+			return true;
+		return false;
+    }
 
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer player)
@@ -99,7 +108,7 @@ public class ItemModBuckets extends Item
 						return itemstack;
 
 					if (itemstack.getItemDamage() == 0)
-						world.setBlockState(blockpos, Blocks.flowing_water.getDefaultState(), 2);
+						world.setBlockState(blockpos, Blocks.flowing_water.getDefaultState(), 3);
 				}
 			}
 		}

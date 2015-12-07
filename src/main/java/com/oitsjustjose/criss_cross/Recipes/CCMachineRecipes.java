@@ -42,6 +42,7 @@ public class CCMachineRecipes
 		TileStonegen.addFuel(new ItemStack(CCItems.buckets));
 		TileCobblegen.addFuel(new ItemStack(Items.water_bucket));
 		TileCobblegen.addFuel(new ItemStack(CCItems.buckets));
+		
 		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.diamond_ore), new ItemStack(Items.diamond, electroQTY));
 		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.emerald_ore), new ItemStack(Items.emerald, electroQTY));
 		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.coal_ore), new ItemStack(Items.coal, electroQTY));

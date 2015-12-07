@@ -1,8 +1,30 @@
 {
-    "variants": {
-        "facing=north": { "model": "crisscross:stonegenerator" },
-        "facing=south": { "model": "crisscross:stonegenerator", "y": 180 },
-        "facing=west":  { "model": "crisscross:stonegenerator", "y": 270 },
-        "facing=east":  { "model": "crisscross:stonegenerator", "y": 90 }
-    }
+	"forge_marker": 1,
+	"defaults": {
+		"textures": {
+			"top": "crisscross:blocks/stone_generator/stone_generator_top",
+			"front": "crisscross:blocks/stone_generator/stone_generator_front",
+			"side": "crisscross:blocks/stone_generator/stone_generator_sides",
+			"bottom": "crisscross:blocks/stone_generator/stone_generator_bottom"
+		},
+		"model": "crisscross:stonegenerator",
+		"uvlock": false
+	},
+	"variants": {
+		"normal": [{}],
+		"inventory": [{}],
+		"facing": {
+			"north": {
+			},
+			"east": {
+				"y": 90
+			},
+			"south": {
+				"y": 180
+			},
+			"west": {
+				"y": 270
+			}
+		}
+	}
 }

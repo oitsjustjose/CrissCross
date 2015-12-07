@@ -1,9 +1,9 @@
 {
     "parent": "block/orientable",
     "textures": {
-        "top": "crisscross:blocks/electroextractor/electroextractor_top",
-        "front": "crisscross:blocks/electroextractor/electroextractor_front",
-        "side": "crisscross:blocks/electroextractor/electroextractor_sides",
-        "bottom": "crisscross:blocks/electroextractor/electroextractor_bottom"
+			"top": "#top",
+			"front": "#front",
+			"side": "#side",
+			"bottom": "#bottom"
     }
 }

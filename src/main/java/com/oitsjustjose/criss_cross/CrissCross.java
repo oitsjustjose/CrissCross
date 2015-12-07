@@ -3,7 +3,7 @@ package com.oitsjustjose.criss_cross;
 import com.oitsjustjose.criss_cross.blocks.CCBlocks;
 import com.oitsjustjose.criss_cross.items.CCItems;
 import com.oitsjustjose.criss_cross.items.ItemDust;
-import com.oitsjustjose.criss_cross.recipes.CCCraftingRecipes;
+import com.oitsjustjose.criss_cross.recipes.VanillaRecipes;
 import com.oitsjustjose.criss_cross.recipes.CCMachineRecipes;
 import com.oitsjustjose.criss_cross.util.CCTab;
 import com.oitsjustjose.criss_cross.util.ClientProxy;
@@ -24,7 +24,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid = Lib.modid, version = Lib.version, guiFactory = Lib.guifactory)
+@Mod(modid = Lib.modid, name = Lib.name, version = Lib.version, guiFactory = Lib.guifactory)
 public class CrissCross
 {
 	public static CreativeTabs CCTab;
@@ -45,7 +45,7 @@ public class CrissCross
 		
 		CCBlocks.init();
 		CCItems.init();
-		CCCraftingRecipes.init();
+		VanillaRecipes.init();
 		CCMachineRecipes.init();
 		OreDictionaryAdder.init();
 	}

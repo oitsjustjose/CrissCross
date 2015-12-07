@@ -2,7 +2,6 @@ package com.oitsjustjose.criss_cross.blocks;
 
 import com.oitsjustjose.criss_cross.CrissCross;
 import com.oitsjustjose.criss_cross.gui.GUIHandler;
-import com.oitsjustjose.criss_cross.util.Lib;
 
 import net.minecraft.block.Block;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
@@ -14,7 +13,7 @@ public class CCBlocks
 	public static Block woodchipper;
 	public static Block cobblegen;
 	public static Block stonegen;
-	public static Block smartLamp;
+	public static Block mobGrinder;
 	
 	public static void init()
 	{
@@ -23,7 +22,7 @@ public class CCBlocks
 		woodchipper = new BlockWoodchipper();
 		cobblegen = new BlockCobblegen();
 		stonegen = new BlockStonegen();
-		smartLamp = new BlockLamp();
+//		mobGrinder = new BlockMobGrinder();
 		NetworkRegistry.INSTANCE.registerGuiHandler(CrissCross.instance, new GUIHandler());
 	}
 }

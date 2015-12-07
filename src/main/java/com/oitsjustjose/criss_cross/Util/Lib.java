@@ -8,6 +8,7 @@ import net.minecraft.item.Item;
 public class Lib
 {
 	public static final String modid = "CrissCross";
+	public static final String name = "Criss Cross";
 	public static final String version = "1.3";
 	public static final String guifactory = "com.oitsjustjose.criss_cross.gui.GUIFactory";
 	

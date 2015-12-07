@@ -1,9 +1,9 @@
 {
     "parent": "block/orientable",
     "textures": {
-        "top": "crisscross:blocks/wood_chipper/wood_chipper_top",
-        "front": "crisscross:blocks/wood_chipper/wood_chipper_front",
-        "side": "crisscross:blocks/wood_chipper/wood_chipper_sides",
-        "bottom": "crisscross:blocks/wood_chipper/wood_chipper_bottom"
+			"top": "#top",
+			"front": "#front",
+			"side": "#side",
+			"bottom": "#bottom"
     }
 }

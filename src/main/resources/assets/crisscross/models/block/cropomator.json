@@ -1,9 +1,9 @@
 {
     "parent": "block/orientable",
     "textures": {
-        "top": "crisscross:blocks/cropomator/cropomator_top",
-        "front": "crisscross:blocks/cropomator/cropomator_front",
-        "side": "crisscross:blocks/cropomator/cropomator_sides",
-        "bottom": "crisscross:blocks/cropomator/cropomator_bottom"
+			"top": "#top",
+			"front": "#front",
+			"side": "#side",
+			"bottom": "#bottom"
     }
 }

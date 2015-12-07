@@ -11,34 +11,30 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
-public class CCCraftingRecipes
+public class VanillaRecipes
 {
 	public static void init()
 	{
 		cropomatorRecipe();
 		electroextractorRecipe();
 		woodChipperRecipe();
-		initBucketRecipes();
 		initBlockGeneratorRecipes();
+		initOthers();
 	}
 
 	static void initBlockGeneratorRecipes()
 	{
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CCBlocks.cobblegen), "CPC", "#$#", "CPC", '$', "blockIron", 'C', "cobblestone", 'P',
-				Blocks.piston, '#', Items.stone_pickaxe));
-
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CCBlocks.stonegen), "CPC", "#$#", "CPC", '$', "blockIron", 'C', "stone", 'P',
-				Blocks.piston, '#', Items.stone_pickaxe));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CCBlocks.cobblegen), "CPC", "#$#", "CPC", '$', "blockIron", 'C', "cobblestone", 'P', Blocks.piston, '#', Items.stone_pickaxe));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CCBlocks.stonegen), "CPC", "#$#", "CPC", '$', "blockIron", 'C', "stone", 'P', Blocks.piston, '#', Items.stone_pickaxe));
 	}
 
-	static void initBucketRecipes()
+	static void initOthers()
 	{
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CCItems.buckets, 1, 0), "DFD", "WBW", "DFD", 'W', Items.water_bucket, 'B',
-				Items.bucket, 'D', "gemDiamond", 'F', "blockDiamond"));
-
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CCItems.buckets, 1, 1), "OGO", "GBG", "OGO", 'B', Items.bucket, 'G',
-				"blockGlass", 'O', Blocks.obsidian));
-
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CCItems.buckets, 1, 0), "DFD", "WBW", "DFD", 'W', Items.water_bucket, 'B', Items.bucket, 'D', "gemDiamond", 'F', "blockDiamond"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CCItems.buckets, 1, 1), "OGO", "GBG", "OGO", 'B', Items.bucket, 'G', "blockGlass", 'O', Blocks.obsidian));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CCItems.infiniApple, 1, 0), "###", "#N#", "###", '#', new ItemStack(Items.golden_apple, 1, 1), 'N', Items.nether_star));		
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CCItems.mantleSmasherMkI), "## ", "#PI", " II", '#', "blockEmerald", 'I', "blockIron", 'P', Items.diamond_pickaxe));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CCItems.mantleSmasherMkII), "## ", "#PI", " IN", '#', "blockDiamond", 'I', "blockGold", 'P', CCItems.mantleSmasherMkI, 'N', Items.nether_star));
 	}
 
 	static void woodChipperRecipe()
@@ -60,8 +56,7 @@ public class CCCraftingRecipes
 			CCLog.warn("Please confirm you have the name and formatting correct.");
 		}
 
-		GameRegistry.addRecipe(new ItemStack(CCBlocks.woodchipper), new Object[] { "I#I", "SCS", "I#I", '#', Items.diamond_axe, 'I', Blocks.iron_bars,
-				'S', Items.golden_axe, 'C', centerItem });
+		GameRegistry.addRecipe(new ItemStack(CCBlocks.woodchipper), new Object[] { "I#I", "SCS", "I#I", '#', Items.diamond_axe, 'I', Blocks.iron_bars, 'S', Items.golden_axe, 'C', centerItem });
 	}
 
 	static void electroextractorRecipe()
@@ -84,8 +79,7 @@ public class CCCraftingRecipes
 
 		}
 
-		GameRegistry.addRecipe(new ItemStack(CCBlocks.electroextractor), new Object[] { "I#I", "SCS", "I#I", '#', Blocks.piston, 'I',
-				Blocks.iron_bars, 'S', Items.golden_pickaxe, 'C', centerItem });
+		GameRegistry.addRecipe(new ItemStack(CCBlocks.electroextractor), new Object[] { "I#I", "SCS", "I#I", '#', Blocks.piston, 'I', Blocks.iron_bars, 'S', Items.golden_pickaxe, 'C', centerItem });
 	}
 
 	static void cropomatorRecipe()
@@ -107,8 +101,7 @@ public class CCCraftingRecipes
 			CCLog.warn("Please confirm you have the name and formatting correct.");
 		}
 
-		GameRegistry.addRecipe(new ItemStack(CCBlocks.cropomator), new Object[] { "I#I", "SCS", "I#I", '#', Blocks.hay_block, 'I', Items.iron_ingot,
-				'S', Items.golden_hoe, 'C', centerItem });
+		GameRegistry.addRecipe(new ItemStack(CCBlocks.cropomator), new Object[] { "I#I", "SCS", "I#I", '#', Blocks.hay_block, 'I', Items.iron_ingot, 'S', Items.golden_hoe, 'C', centerItem });
 	}
 
 }
