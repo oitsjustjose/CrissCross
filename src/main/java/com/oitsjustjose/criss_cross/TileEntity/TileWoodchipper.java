@@ -6,7 +6,7 @@ import com.oitsjustjose.criss_cross.blocks.BlockWoodchipper;
 import com.oitsjustjose.criss_cross.container.ContainerWoodchipper;
 import com.oitsjustjose.criss_cross.recipes.WoodchipperRecipes;
 import com.oitsjustjose.criss_cross.util.ConfigHandler;
-import com.oitsjustjose.criss_cross.util.Reference;
+import com.oitsjustjose.criss_cross.util.Lib;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -178,7 +178,7 @@ public class TileWoodchipper extends TileEntityLockable implements ITickable, IS
 	@Override
 	public String getGuiID()
 	{
-		return Reference.modid + ":container.woodchipper";
+		return Lib.modid + ":container.woodchipper";
 	}
 
 	@Override

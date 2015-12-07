@@ -10,7 +10,7 @@ import com.oitsjustjose.criss_cross.util.ClientProxy;
 import com.oitsjustjose.criss_cross.util.CommonProxy;
 import com.oitsjustjose.criss_cross.util.ConfigHandler;
 import com.oitsjustjose.criss_cross.util.OreDictionaryAdder;
-import com.oitsjustjose.criss_cross.util.Reference;
+import com.oitsjustjose.criss_cross.util.Lib;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.model.ModelResourceLocation;
@@ -24,12 +24,12 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid = Reference.modid, version = Reference.version, guiFactory = Reference.guifactory)
+@Mod(modid = Lib.modid, version = Lib.version, guiFactory = Lib.guifactory)
 public class CrissCross
 {
 	public static CreativeTabs CCTab;
 
-	@Instance(Reference.modid)
+	@Instance(Lib.modid)
 	public static CrissCross instance;
 
 	@SidedProxy(clientSide = "com.oitsjustjose.criss_cross.util.ClientProxy", serverSide = "com.oitsjustjose.criss_cross.util.CommonProxy")

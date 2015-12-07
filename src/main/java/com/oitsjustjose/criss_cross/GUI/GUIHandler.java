@@ -25,6 +25,7 @@ public class GUIHandler implements IGuiHandler
 	public static final int Woodchipper = 3;
 	public static final int Cobblegen = 4;
 	public static final int Stonegen = 5;
+	public static final int Lamp = 6;
 
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)

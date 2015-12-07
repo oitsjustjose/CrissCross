@@ -6,7 +6,7 @@ import com.oitsjustjose.criss_cross.blocks.BlockCropomator;
 import com.oitsjustjose.criss_cross.container.ContainerCropomator;
 import com.oitsjustjose.criss_cross.recipes.CropomatorRecipes;
 import com.oitsjustjose.criss_cross.util.ConfigHandler;
-import com.oitsjustjose.criss_cross.util.Reference;
+import com.oitsjustjose.criss_cross.util.Lib;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -179,7 +179,7 @@ public class TileCropomator extends TileEntityLockable implements ITickable, ISi
 	@Override
 	public String getGuiID()
 	{
-		return Reference.modid + ":container.cropomator";
+		return Lib.modid + ":container.cropomator";
 	}
 
 	@Override

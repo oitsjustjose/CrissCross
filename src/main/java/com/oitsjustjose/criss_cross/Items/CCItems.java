@@ -1,6 +1,6 @@
 package com.oitsjustjose.criss_cross.items;
 
-import com.oitsjustjose.criss_cross.util.Reference;
+import com.oitsjustjose.criss_cross.util.Lib;
 
 import net.minecraft.item.Item;
 

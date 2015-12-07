@@ -4,7 +4,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.oitsjustjose.criss_cross.container.ContainerCropomator;
 import com.oitsjustjose.criss_cross.tileentity.TileCropomator;
-import com.oitsjustjose.criss_cross.util.Reference;
+import com.oitsjustjose.criss_cross.util.Lib;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;

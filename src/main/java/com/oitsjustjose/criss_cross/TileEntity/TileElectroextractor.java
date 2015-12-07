@@ -6,7 +6,7 @@ import com.oitsjustjose.criss_cross.blocks.BlockElectroextractor;
 import com.oitsjustjose.criss_cross.container.ContainerElectroextractor;
 import com.oitsjustjose.criss_cross.recipes.ElectroextractorRecipes;
 import com.oitsjustjose.criss_cross.util.ConfigHandler;
-import com.oitsjustjose.criss_cross.util.Reference;
+import com.oitsjustjose.criss_cross.util.Lib;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -416,7 +416,7 @@ public class TileElectroextractor extends TileEntityLockable implements ITickabl
 	@Override
 	public String getGuiID()
 	{
-		return Reference.modid + ":container.electroextractor";
+		return Lib.modid + ":container.electroextractor";
 	}
 
 	@Override

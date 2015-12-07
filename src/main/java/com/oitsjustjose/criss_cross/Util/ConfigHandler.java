@@ -114,7 +114,7 @@ public class ConfigHandler
 	@SubscribeEvent
 	public void onConfigurationChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event)
 	{
-		if (event.modID.equalsIgnoreCase(Reference.modid))
+		if (event.modID.equalsIgnoreCase(Lib.modid))
 			loadConfiguration();
 	}
 

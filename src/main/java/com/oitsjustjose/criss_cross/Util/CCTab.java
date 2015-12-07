@@ -9,7 +9,7 @@ public class CCTab extends CreativeTabs
 {
 	public CCTab()
 	{
-		super(CreativeTabs.getNextID(), "tab" + Reference.modid);
+		super(CreativeTabs.getNextID(), "tab" + Lib.modid);
 	}
 
 	@Override

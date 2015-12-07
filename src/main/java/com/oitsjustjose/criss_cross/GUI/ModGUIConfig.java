@@ -1,7 +1,7 @@
 package com.oitsjustjose.criss_cross.gui;
 
 import com.oitsjustjose.criss_cross.util.ConfigHandler;
-import com.oitsjustjose.criss_cross.util.Reference;
+import com.oitsjustjose.criss_cross.util.Lib;
 
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.common.config.ConfigElement;
@@ -12,7 +12,7 @@ public class ModGUIConfig extends GuiConfig
 {
 	public ModGUIConfig(GuiScreen guiScreen)
 	{
-		super(guiScreen, new ConfigElement(ConfigHandler.config.getCategory(Configuration.CATEGORY_GENERAL)).getChildElements(), Reference.modid,
+		super(guiScreen, new ConfigElement(ConfigHandler.config.getCategory(Configuration.CATEGORY_GENERAL)).getChildElements(), Lib.modid,
 				false, true, GuiConfig.getAbridgedConfigPath(ConfigHandler.config.toString()));
 	}
 }

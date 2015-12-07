@@ -1,7 +1,7 @@
 package com.oitsjustjose.criss_cross.blocks;
 
 import com.oitsjustjose.criss_cross.CrissCross;
-import com.oitsjustjose.criss_cross.util.Reference;
+import com.oitsjustjose.criss_cross.util.Lib;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -34,11 +34,11 @@ public class BlockMachineBase extends BlockContainer
 		this.setHardness(2.0F);
 		this.setResistance(2.0F);
 		this.setStepSound(soundTypeMetal);
-		this.setUnlocalizedName(Reference.modid + "." + unlocName);
+		this.setUnlocalizedName(Lib.modid + "." + unlocName);
 		this.setCreativeTab(CrissCross.CCTab);
 		this.unlocalizedName = unlocName;
-        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
-		Reference.add(this);
+		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+		Lib.add(this);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -53,54 +53,54 @@ public class BlockMachineBase extends BlockContainer
 	{
 		setDefaultFacing(world, pos, state);
 	}
-	
+
 	@Override
-    public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
-    {
-        return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
-    }
-	
+	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+	{
+		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+	}
+
 	@Override
-    public int getRenderType()
-    {
-        return 3;
-    }
-	
-    @SideOnly(Side.CLIENT)
-    public IBlockState getStateForEntityRender(IBlockState state)
-    {
-        return this.getDefaultState().withProperty(FACING, EnumFacing.SOUTH);
-    }
+	public int getRenderType()
+	{
+		return 3;
+	}
 
-    @Override
-    public IBlockState getStateFromMeta(int meta)
-    {
-        EnumFacing enumfacing = EnumFacing.getFront(meta);
+	@SideOnly(Side.CLIENT)
+	public IBlockState getStateForEntityRender(IBlockState state)
+	{
+		return this.getDefaultState().withProperty(FACING, EnumFacing.SOUTH);
+	}
 
-        if (enumfacing.getAxis() == EnumFacing.Axis.Y)
-        {
-            enumfacing = EnumFacing.NORTH;
-        }
+	@Override
+	public IBlockState getStateFromMeta(int meta)
+	{
+		EnumFacing enumfacing = EnumFacing.getFront(meta);
 
-        return this.getDefaultState().withProperty(FACING, enumfacing);
-    }
+		if (enumfacing.getAxis() == EnumFacing.Axis.Y)
+		{
+			enumfacing = EnumFacing.NORTH;
+		}
 
-    @Override
-    public int getMetaFromState(IBlockState state)
-    {
-        return ((EnumFacing)state.getValue(FACING)).getIndex();
-    }
+		return this.getDefaultState().withProperty(FACING, enumfacing);
+	}
 
-    @Override
-    protected BlockState createBlockState()
-    {
-        return new BlockState(this, new IProperty[] {FACING});
-    }
+	@Override
+	public int getMetaFromState(IBlockState state)
+	{
+		return ((EnumFacing) state.getValue(FACING)).getIndex();
+	}
+
+	@Override
+	protected BlockState createBlockState()
+	{
+		return new BlockState(this, new IProperty[] { FACING });
+	}
 
 	@Override
 	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase entity, ItemStack itemstack)
 	{
-        world.setBlockState(pos, state.withProperty(FACING, entity.getHorizontalFacing().getOpposite()), 2);
+		world.setBlockState(pos, state.withProperty(FACING, entity.getHorizontalFacing().getOpposite()), 2);
 
 		int l = MathHelper.floor_double((double) (entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
@@ -124,7 +124,7 @@ public class BlockMachineBase extends BlockContainer
 			world.setBlockState(pos, state.getBlock().getStateFromMeta(4), 2);
 		}
 	}
-	
+
 	private void setDefaultFacing(World world, BlockPos pos, IBlockState state)
 	{
 		if (!world.isRemote)
@@ -138,21 +138,18 @@ public class BlockMachineBase extends BlockContainer
 			{
 				enumfacing = EnumFacing.SOUTH;
 			}
-			else
-				if (enumfacing == EnumFacing.SOUTH && block1.isFullBlock() && !block.isFullBlock())
-				{
-					enumfacing = EnumFacing.NORTH;
-				}
-				else
-					if (enumfacing == EnumFacing.WEST && block2.isFullBlock() && !block3.isFullBlock())
-					{
-						enumfacing = EnumFacing.EAST;
-					}
-					else
-						if (enumfacing == EnumFacing.EAST && block3.isFullBlock() && !block2.isFullBlock())
-						{
-							enumfacing = EnumFacing.WEST;
-						}
+			else if (enumfacing == EnumFacing.SOUTH && block1.isFullBlock() && !block.isFullBlock())
+			{
+				enumfacing = EnumFacing.NORTH;
+			}
+			else if (enumfacing == EnumFacing.WEST && block2.isFullBlock() && !block3.isFullBlock())
+			{
+				enumfacing = EnumFacing.EAST;
+			}
+			else if (enumfacing == EnumFacing.EAST && block3.isFullBlock() && !block2.isFullBlock())
+			{
+				enumfacing = EnumFacing.WEST;
+			}
 
 			world.setBlockState(pos, state.withProperty(FACING, enumfacing), 2);
 		}

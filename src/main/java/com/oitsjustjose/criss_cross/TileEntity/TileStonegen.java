@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.oitsjustjose.criss_cross.blocks.BlockStonegen;
 import com.oitsjustjose.criss_cross.container.ContainerStonegen;
 import com.oitsjustjose.criss_cross.util.ConfigHandler;
-import com.oitsjustjose.criss_cross.util.Reference;
+import com.oitsjustjose.criss_cross.util.Lib;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -178,7 +178,7 @@ public class TileStonegen extends TileEntityLockable implements ITickable, ISide
 	@Override
 	public String getGuiID()
 	{
-		return Reference.modid + ":container.stonegen";
+		return Lib.modid + ":container.stonegen";
 	}
 
 	@Override

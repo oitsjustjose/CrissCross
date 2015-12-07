@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 
-public class Reference
+public class Lib
 {
 	public static final String modid = "CrissCross";
 	public static final String version = "1.3";

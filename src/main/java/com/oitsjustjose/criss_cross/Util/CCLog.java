@@ -5,7 +5,7 @@ import org.apache.logging.log4j.Logger;
 
 public class CCLog
 {
-	private static Logger LOGGER = LogManager.getLogger(Reference.modid);
+	private static Logger LOGGER = LogManager.getLogger(Lib.modid);
 
 	public CCLog()
 	{

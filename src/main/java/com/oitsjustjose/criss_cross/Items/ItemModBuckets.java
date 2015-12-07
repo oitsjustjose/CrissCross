@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.oitsjustjose.criss_cross.CrissCross;
 import com.oitsjustjose.criss_cross.util.ClientProxy;
-import com.oitsjustjose.criss_cross.util.Reference;
+import com.oitsjustjose.criss_cross.util.Lib;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -32,7 +32,7 @@ public class ItemModBuckets extends Item
 		this.setCreativeTab(CrissCross.CCTab);
 		this.setContainerItem(this);
 		GameRegistry.registerItem(this, "magicBucket");
-		Reference.add(this);
+		Lib.add(this);
 	}
 
 	@Override
@@ -110,7 +110,7 @@ public class ItemModBuckets extends Item
 	@Override
 	public String getUnlocalizedName(ItemStack itemStack)
 	{
-		return "item." + Reference.modid + "." + types[itemStack.getItemDamage()];
+		return "item." + Lib.modid + "." + types[itemStack.getItemDamage()];
 	}
 
 	@Override

@@ -6,7 +6,7 @@ import com.oitsjustjose.criss_cross.CrissCross;
 import com.oitsjustjose.criss_cross.gui.GUIHandler;
 import com.oitsjustjose.criss_cross.tileentity.TileCropomator;
 import com.oitsjustjose.criss_cross.util.ClientProxy;
-import com.oitsjustjose.criss_cross.util.Reference;
+import com.oitsjustjose.criss_cross.util.Lib;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

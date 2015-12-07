@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.oitsjustjose.criss_cross.blocks.BlockStonegen;
 import com.oitsjustjose.criss_cross.container.ContainerCobblegen;
 import com.oitsjustjose.criss_cross.util.ConfigHandler;
-import com.oitsjustjose.criss_cross.util.Reference;
+import com.oitsjustjose.criss_cross.util.Lib;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -176,7 +176,7 @@ public class TileCobblegen extends TileEntityLockable implements ITickable, ISid
 	@Override
 	public String getGuiID()
 	{
-		return Reference.modid + ":container.cobblestonegen";
+		return Lib.modid + ":container.cobblestonegen";
 	}
 
 	@Override

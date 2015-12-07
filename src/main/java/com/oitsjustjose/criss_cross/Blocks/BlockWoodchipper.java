@@ -6,7 +6,7 @@ import com.oitsjustjose.criss_cross.CrissCross;
 import com.oitsjustjose.criss_cross.gui.GUIHandler;
 import com.oitsjustjose.criss_cross.tileentity.TileWoodchipper;
 import com.oitsjustjose.criss_cross.util.ClientProxy;
-import com.oitsjustjose.criss_cross.util.Reference;
+import com.oitsjustjose.criss_cross.util.Lib;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -32,7 +32,7 @@ public class BlockWoodchipper extends BlockMachineBase
 		super(unlocName);
 		GameRegistry.registerTileEntity(TileWoodchipper.class, unlocName);
 		GameRegistry.registerBlock(this, unlocName.toLowerCase());
-		Reference.add(this);
+		Lib.add(this);
 	}
 
 	@Override

@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.oitsjustjose.criss_cross.CrissCross;
 import com.oitsjustjose.criss_cross.util.ClientProxy;
-import com.oitsjustjose.criss_cross.util.Reference;
+import com.oitsjustjose.criss_cross.util.Lib;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -25,7 +25,7 @@ public class ItemDust extends Item
 		this.setHasSubtypes(true);
 		this.setCreativeTab(CrissCross.CCTab);
 		GameRegistry.registerItem(this, "dust");
-		Reference.add(this);
+		Lib.add(this);
 	}
 
 	public static ArrayList<String> getDusts()
@@ -75,7 +75,7 @@ public class ItemDust extends Item
 	@Override
 	public String getUnlocalizedName(ItemStack itemStack)
 	{
-		return "item." + Reference.modid + ".dust";
+		return "item." + Lib.modid + ".dust";
 	}
 
 	@Override

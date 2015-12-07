@@ -19,8 +19,8 @@ public class ClientProxy extends CommonProxy
 	@SideOnly(Side.CLIENT)
 	public static void init()
 	{
-		ArrayList<Block> blocks = Reference.getModBlocks();
-		ArrayList<Item> items = Reference.getModItems();
+		ArrayList<Block> blocks = Lib.getModBlocks();
+		ArrayList<Item> items = Lib.getModItems();
 		
 		for(Block b : blocks)
 			register(b, "");
@@ -42,15 +42,15 @@ public class ClientProxy extends CommonProxy
 			for(ItemStack sub : subItems)
 			{
 				String name = item.getUnlocalizedName(sub).substring(16).toLowerCase();
-				ModelBakery.addVariantName(item, Reference.modid.toLowerCase() + ":" + name);
-				Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, meta, new ModelResourceLocation(Reference.modid.toLowerCase() + ":" + name, "inventory"));
+				ModelBakery.addVariantName(item, Lib.modid.toLowerCase() + ":" + name);
+				Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, meta, new ModelResourceLocation(Lib.modid.toLowerCase() + ":" + name, "inventory"));
 				meta++;
 			}
 		}
 		else if(customName == "")
-			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, meta, new ModelResourceLocation(Reference.modid.toLowerCase() + ":" + item.getUnlocalizedName().substring(16).toLowerCase(), "inventory"));
+			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, meta, new ModelResourceLocation(Lib.modid.toLowerCase() + ":" + item.getUnlocalizedName().substring(16).toLowerCase(), "inventory"));
 		else
-			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, meta, new ModelResourceLocation(Reference.modid.toLowerCase() + ":" + customName, "inventory"));
+			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, meta, new ModelResourceLocation(Lib.modid.toLowerCase() + ":" + customName, "inventory"));
 	}
 	
 	@SideOnly(Side.CLIENT)
@@ -65,14 +65,14 @@ public class ClientProxy extends CommonProxy
 			for(ItemStack sub : subItems)
 			{
 				String name = itemBlock.getUnlocalizedName(sub).substring(16).toLowerCase();
-				ModelBakery.addVariantName(itemBlock, Reference.modid.toLowerCase() + ":" + name);
-				Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(itemBlock, meta, new ModelResourceLocation(Reference.modid.toLowerCase() + ":" + name, "inventory"));
+				ModelBakery.addVariantName(itemBlock, Lib.modid.toLowerCase() + ":" + name);
+				Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(itemBlock, meta, new ModelResourceLocation(Lib.modid.toLowerCase() + ":" + name, "inventory"));
 				meta++;
 			}
 		}
 		else if(customName == "")
-			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(itemBlock, meta, new ModelResourceLocation(Reference.modid.toLowerCase() + ":" + block.getUnlocalizedName().substring(16).toLowerCase(), "inventory"));
+			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(itemBlock, meta, new ModelResourceLocation(Lib.modid.toLowerCase() + ":" + block.getUnlocalizedName().substring(16).toLowerCase(), "inventory"));
 		else
-			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(itemBlock, meta, new ModelResourceLocation(Reference.modid.toLowerCase() + ":" + customName, "inventory"));
+			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(itemBlock, meta, new ModelResourceLocation(Lib.modid.toLowerCase() + ":" + customName, "inventory"));
 	}
 }
