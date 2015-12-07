@@ -1,0 +1,30 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"textures": {
+			"top": "crisscross:blocks/wood_chipper/wood_chipper_top",
+			"front": "crisscross:blocks/wood_chipper/wood_chipper_front",
+			"side": "crisscross:blocks/wood_chipper/wood_chipper_sides",
+			"bottom": "crisscross:blocks/wood_chipper/wood_chipper_bottom"
+		},
+		"model": "crisscross:woodchipper",
+		"uvlock": false
+	},
+	"variants": {
+		"normal": [{}],
+		"inventory": [{}],
+		"facing": {
+			"north": {
+			},
+			"east": {
+				"y": 90
+			},
+			"south": {
+				"y": 180
+			},
+			"west": {
+				"y": 270
+			}
+		}
+	}
+}
