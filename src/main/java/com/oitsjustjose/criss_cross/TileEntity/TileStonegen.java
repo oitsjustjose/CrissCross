@@ -1,12 +1,12 @@
-package com.oitsjustjose.criss_cross.TileEntity;
+package com.oitsjustjose.criss_cross.tileentity;
 
 import java.util.ArrayList;
 
-import com.oitsjustjose.criss_cross.Blocks.BlockElectroextractor;
-import com.oitsjustjose.criss_cross.Container.ContainerElectroextractor;
-import com.oitsjustjose.criss_cross.Recipes.ElectroextractorRecipes;
-import com.oitsjustjose.criss_cross.Util.ConfigHandler;
-import com.oitsjustjose.criss_cross.Util.Reference;
+import com.oitsjustjose.criss_cross.blocks.BlockStonegen;
+import com.oitsjustjose.criss_cross.container.ContainerStonegen;
+import com.oitsjustjose.criss_cross.recipes.StonegenRecipes;
+import com.oitsjustjose.criss_cross.util.ConfigHandler;
+import com.oitsjustjose.criss_cross.util.Reference;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -21,10 +21,9 @@ import net.minecraft.util.ITickable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class TileEntityElectroextractor extends TileEntityLockable implements ITickable, ISidedInventory
+public class TileStonegen extends TileEntityLockable implements ITickable, ISidedInventory
 {
-	private static int proTicks = ConfigHandler.electroextractorProcessTime;
-	private static int qty = ConfigHandler.electroextractorOutput;
+	private static int proTicks = ConfigHandler.blockGeneratorProcessTimes;
 	private static final int[] slotsTop = new int[] { 0 };
 	private static final int[] slotsBottom = new int[] { 2, 1 };
 	private static final int[] slotsSides = new int[] { 1 };
@@ -33,8 +32,8 @@ public class TileEntityElectroextractor extends TileEntityLockable implements IT
 	private ItemStack[] ItemStacks = new ItemStack[3];
 
 	public int fuelTime;
-	public int crushTime;
-	public int fuelInUseTime;
+	public int processTime;
+	public int fuelUsetime;
 
 	@Override
 	public void update()
@@ -53,7 +52,7 @@ public class TileEntityElectroextractor extends TileEntityLockable implements IT
 			{
 				if (this.fuelTime == 0 && this.canProcess())
 				{
-					this.fuelInUseTime = this.fuelTime = getItemBurnTime(this.ItemStacks[1]);
+					this.fuelUsetime = this.fuelTime = getItemBurnTime(this.ItemStacks[1]);
 
 					if (this.fuelTime > 0)
 					{
@@ -73,25 +72,25 @@ public class TileEntityElectroextractor extends TileEntityLockable implements IT
 
 				if (this.isUsingFuel() && this.canProcess())
 				{
-					++this.crushTime;
+					++this.processTime;
 
-					if (this.crushTime == proTicks)
+					if (this.processTime == proTicks)
 					{
-						this.crushTime = 0;
+						this.processTime = 0;
 						this.processItem();
 						flag1 = true;
 					}
 				}
 				else
 				{
-					this.crushTime = 0;
+					this.processTime = 0;
 				}
 			}
 
 			if (flag != this.fuelTime > 0)
 			{
 				flag1 = true;
-				BlockElectroextractor.updateBlockState(this.fuelTime > 0, this.worldObj, this.pos);
+				BlockStonegen.updateBlockState(this.fuelTime > 0, this.worldObj, this.pos);
 			}
 		}
 
@@ -99,6 +98,11 @@ public class TileEntityElectroextractor extends TileEntityLockable implements IT
 		{
 			this.markDirty();
 		}
+	}
+
+	public static ArrayList<ItemStack> getFuels()
+	{
+		return fuelItems;
 	}
 
 	@Override
@@ -171,6 +175,23 @@ public class TileEntityElectroextractor extends TileEntityLockable implements IT
 	}
 
 	@Override
+	public String getGuiID()
+	{
+		return Reference.modid + ":container.stonegen";
+	}
+
+	@Override
+	public boolean hasCustomName()
+	{
+		return this.customName != null && this.customName.length() > 0;
+	}
+
+	public void setCustomInventoryName(String newName)
+	{
+		this.customName = newName;
+	}
+
+	@Override
 	public void readFromNBT(NBTTagCompound tag)
 	{
 		super.readFromNBT(tag);
@@ -188,20 +209,20 @@ public class TileEntityElectroextractor extends TileEntityLockable implements IT
 			}
 		}
 
-		this.fuelTime = tag.getShort("Energy");
-		this.crushTime = tag.getShort("CrushTime");
+		this.fuelTime = tag.getShort("FuelTime");
+		this.processTime = tag.getShort("WorkTime");
 		if(this.ItemStacks[1] != null)
-			this.fuelInUseTime = getItemBurnTime(this.ItemStacks[1]);
+			this.fuelUsetime = getItemBurnTime(this.ItemStacks[1]);
 		else
-			this.fuelInUseTime = 0;
+			this.fuelUsetime = 0;
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound tag)
 	{
 		super.writeToNBT(tag);
-		tag.setShort("Energy", (short) this.fuelTime);
-		tag.setShort("CrushTime", (short) this.crushTime);
+		tag.setShort("FuelTime", (short) this.fuelTime);
+		tag.setShort("WorkTime", (short) this.processTime);
 		NBTTagList nbttaglist = new NBTTagList();
 
 		for (int i = 0; i < this.ItemStacks.length; ++i)
@@ -227,18 +248,18 @@ public class TileEntityElectroextractor extends TileEntityLockable implements IT
 	@SideOnly(Side.CLIENT)
 	public int getProgressScaled(int par1)
 	{
-		return this.crushTime * par1 / proTicks;
+		return this.processTime * par1 / proTicks;
 	}
 
 	@SideOnly(Side.CLIENT)
 	public int getBurnTimeRemainingScaled(int par1)
 	{
-		if (this.fuelInUseTime == 0)
+		if (this.fuelUsetime == 0)
 		{
-			this.fuelInUseTime = proTicks;
+			this.fuelUsetime = proTicks;
 		}
 
-		return this.fuelTime * par1 / this.fuelInUseTime;
+		return this.fuelTime * par1 / this.fuelUsetime;
 	}
 
 	public boolean isUsingFuel()
@@ -251,7 +272,7 @@ public class TileEntityElectroextractor extends TileEntityLockable implements IT
 		ItemStack input = this.ItemStacks[0];
 		if (input != null)
 		{
-			ItemStack output = ElectroextractorRecipes.getInstance().getResult(input);
+			ItemStack output = StonegenRecipes.getInstance().getResult(input);
 			if (output == null)
 				return false;
 			ItemStack outputSlot = this.ItemStacks[2];
@@ -285,7 +306,7 @@ public class TileEntityElectroextractor extends TileEntityLockable implements IT
 
 	public static boolean isValid(ItemStack itemstack)
 	{
-		if (ElectroextractorRecipes.getInstance().getResult(itemstack) != null)
+		if (StonegenRecipes.getInstance().getResult(itemstack) != null)
 			return true;
 		return false;
 	}
@@ -296,7 +317,7 @@ public class TileEntityElectroextractor extends TileEntityLockable implements IT
 		{
 
 			ItemStack input = ItemStacks[0];
-			ItemStack output = ElectroextractorRecipes.getInstance().getResult(input);
+			ItemStack output = StonegenRecipes.getInstance().getResult(input);
 			ItemStack outputSlot = ItemStacks[2];
 			if (outputSlot == null)
 			{
@@ -308,7 +329,6 @@ public class TileEntityElectroextractor extends TileEntityLockable implements IT
 					outputSlot.stackSize += output.stackSize;
 				}
 
-			--input.stackSize;
 			if (input.stackSize <= 0)
 			{
 				ItemStacks[0] = null;
@@ -318,13 +338,11 @@ public class TileEntityElectroextractor extends TileEntityLockable implements IT
 
 	public static int getItemBurnTime(ItemStack itemstack)
 	{
-		return isItemEnergetic(itemstack) ? proTicks : 0;
+		return isItemFuel(itemstack) ? proTicks : 0;
 	}
 
-	public static boolean isItemEnergetic(ItemStack itemstack)
+	public static boolean isItemFuel(ItemStack itemstack)
 	{
-		if(fuelItems == null || fuelItems.size() <= 0)
-			return false;
 		for (int i = 0; i < fuelItems.size(); i++)
 		{
 			ItemStack temp = fuelItems.get(i);
@@ -363,9 +381,9 @@ public class TileEntityElectroextractor extends TileEntityLockable implements IT
 		case 0:
 			return this.fuelTime;
 		case 1:
-			return this.fuelInUseTime;
+			return this.fuelUsetime;
 		case 2:
-			return this.crushTime;
+			return this.processTime;
 		default:
 			return 0;
 		}
@@ -380,10 +398,10 @@ public class TileEntityElectroextractor extends TileEntityLockable implements IT
 			this.fuelTime = value;
 			break;
 		case 1:
-			this.fuelInUseTime = value;
+			this.fuelUsetime = value;
 			break;
 		case 2:
-			this.crushTime = value;
+			this.processTime = value;
 			break;
 		}
 	}
@@ -410,30 +428,13 @@ public class TileEntityElectroextractor extends TileEntityLockable implements IT
 	@Override
 	public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
 	{
-		return new ContainerElectroextractor(playerInventory.player, this);
-	}
-
-	@Override
-	public String getGuiID()
-	{
-		return Reference.modid + ":container.electroextractor";
-	}
-
-	@Override
-	public boolean hasCustomName()
-	{
-		return this.customName != null && this.customName.length() > 0;
-	}
-
-	public void setCustomInventoryName(String newName)
-	{
-		this.customName = newName;
+		return new ContainerStonegen(playerInventory.player, this);
 	}
 
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack itemstack)
 	{
-		return slot == 2 ? false : (slot == 1 ? isItemEnergetic(itemstack) : true);
+		return slot == 2 ? false : (slot == 1 ? isItemFuel(itemstack) : true);
 	}
 
 	@Override

@@ -1,7 +1,7 @@
-package com.oitsjustjose.criss_cross.GUI;
+package com.oitsjustjose.criss_cross.gui;
 
-import com.oitsjustjose.criss_cross.Util.ConfigHandler;
-import com.oitsjustjose.criss_cross.Util.Reference;
+import com.oitsjustjose.criss_cross.util.ConfigHandler;
+import com.oitsjustjose.criss_cross.util.Reference;
 
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.common.config.ConfigElement;

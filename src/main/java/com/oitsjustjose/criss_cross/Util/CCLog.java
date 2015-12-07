@@ -1,4 +1,4 @@
-package com.oitsjustjose.criss_cross.Util;
+package com.oitsjustjose.criss_cross.util;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

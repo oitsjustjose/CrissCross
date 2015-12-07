@@ -1,6 +1,6 @@
-package com.oitsjustjose.criss_cross.Container;
+package com.oitsjustjose.criss_cross.container;
 
-import com.oitsjustjose.criss_cross.TileEntity.TileEntityElectroextractor;
+import com.oitsjustjose.criss_cross.tileentity.TileElectroextractor;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -13,14 +13,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ContainerElectroextractor extends Container
 {
-	TileEntityElectroextractor electroextractor;
+	TileElectroextractor electroextractor;
 	EntityPlayer player;
 
 	private int lastUseTime;
 	private int lastCrushTime;
 	private int lastFuelTime;
 
-	public ContainerElectroextractor(EntityPlayer player, TileEntityElectroextractor electroextractor)
+	public ContainerElectroextractor(EntityPlayer player, TileElectroextractor electroextractor)
 	{
 		this.player = player;
 		this.electroextractor = electroextractor;
@@ -106,7 +106,7 @@ public class ContainerElectroextractor extends Container
 			else
 				if (slotID != 1 && slotID != 0)
 				{
-					if (TileEntityElectroextractor.isValid(itemstack1))
+					if (TileElectroextractor.isValid(itemstack1))
 					{
 						if (!this.mergeItemStack(itemstack1, 0, 1, false))
 						{
@@ -114,7 +114,7 @@ public class ContainerElectroextractor extends Container
 						}
 					}
 					else
-						if (TileEntityElectroextractor.isItemEnergetic(itemstack1))
+						if (TileElectroextractor.isItemEnergetic(itemstack1))
 						{
 							if (!this.mergeItemStack(itemstack1, 1, 2, false))
 							{

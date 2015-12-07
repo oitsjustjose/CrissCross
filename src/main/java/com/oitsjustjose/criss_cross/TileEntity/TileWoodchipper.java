@@ -1,8 +1,12 @@
-package com.oitsjustjose.criss_cross.TileEntity;
+package com.oitsjustjose.criss_cross.tileentity;
 
 import java.util.ArrayList;
 
-import com.oitsjustjose.criss_cross.Util.Reference;
+import com.oitsjustjose.criss_cross.blocks.BlockWoodchipper;
+import com.oitsjustjose.criss_cross.container.ContainerWoodchipper;
+import com.oitsjustjose.criss_cross.recipes.WoodchipperRecipes;
+import com.oitsjustjose.criss_cross.util.ConfigHandler;
+import com.oitsjustjose.criss_cross.util.Reference;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -17,32 +21,86 @@ import net.minecraft.util.ITickable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public abstract class TileEntityGeneric extends TileEntityLockable implements ITickable, ISidedInventory
+public class TileWoodchipper extends TileEntityLockable implements ITickable, ISidedInventory
 {
-	private static int proTicks = 0;
+	private static int proTicks = ConfigHandler.woodchipperProcessTime;
+	private static int qty = ConfigHandler.woodchipperOutput;
 	private static final int[] slotsTop = new int[] { 0 };
 	private static final int[] slotsBottom = new int[] { 2, 1 };
 	private static final int[] slotsSides = new int[] { 1 };
-	private static String defaultName;
+	private static ArrayList<ItemStack> fuelItems = new ArrayList<ItemStack>();
 	private static String customName;
 	private ItemStack[] ItemStacks = new ItemStack[3];
-	private static ArrayList<ItemStack> fuelItems = new ArrayList<ItemStack>();
 
 	public int fuelTime;
 	public int processTime;
 	public int fuelUsetime;
 
-	public TileEntityGeneric(String tileName, int processTicks)
+	@Override
+	public void update()
 	{
-		this.defaultName = tileName;
-		this.proTicks = processTicks;
-		
-		/*
-		 * Any Tile Entity extending this TE must implement its own update(),
-		 * canProcess(), isValid(), processItem(), and createContainer()
-		 */
+		boolean flag = this.fuelTime > 0;
+		boolean flag1 = false;
+
+		if (this.fuelTime > 0)
+		{
+			--this.fuelTime;
+		}
+
+		if (!this.worldObj.isRemote)
+		{
+			if (this.fuelTime != 0 || this.ItemStacks[1] != null && this.ItemStacks[0] != null)
+			{
+				if (this.fuelTime == 0 && this.canProcess())
+				{
+					this.fuelUsetime = this.fuelTime = getItemBurnTime(this.ItemStacks[1]);
+
+					if (this.fuelTime > 0)
+					{
+						flag1 = true;
+
+						if (this.ItemStacks[1] != null)
+						{
+							--this.ItemStacks[1].stackSize;
+
+							if (this.ItemStacks[1].stackSize == 0)
+							{
+								this.ItemStacks[1] = ItemStacks[1].getItem().getContainerItem(ItemStacks[1]);
+							}
+						}
+					}
+				}
+
+				if (this.isUsingFuel() && this.canProcess())
+				{
+					++this.processTime;
+
+					if (this.processTime == proTicks)
+					{
+						this.processTime = 0;
+						this.processItem();
+						flag1 = true;
+					}
+				}
+				else
+				{
+					this.processTime = 0;
+				}
+			}
+
+			if (flag != this.fuelTime > 0)
+			{
+				flag1 = true;
+				BlockWoodchipper.updateBlockState(this.fuelTime > 0, this.worldObj, this.pos);
+			}
+		}
+
+		if (flag1)
+		{
+			this.markDirty();
+		}
 	}
-	
+
 	public static ArrayList<ItemStack> getFuels()
 	{
 		return fuelItems;
@@ -120,18 +178,13 @@ public abstract class TileEntityGeneric extends TileEntityLockable implements IT
 	@Override
 	public String getGuiID()
 	{
-		return Reference.modid + ":container." + this.defaultName.toLowerCase();
+		return Reference.modid + ":container.woodchipper";
 	}
 
 	@Override
 	public boolean hasCustomName()
 	{
 		return this.customName != null && this.customName.length() > 0;
-	}
-
-	public void setCustomInventoryName(String newName)
-	{
-		this.customName = newName;
 	}
 
 	@Override
@@ -154,7 +207,7 @@ public abstract class TileEntityGeneric extends TileEntityLockable implements IT
 
 		this.fuelTime = tag.getShort("FuelTime");
 		this.processTime = tag.getShort("WorkTime");
-		if (this.ItemStacks[1] != null)
+		if(this.ItemStacks[1] != null)
 			this.fuelUsetime = getItemBurnTime(this.ItemStacks[1]);
 		else
 			this.fuelUsetime = 0;
@@ -210,6 +263,25 @@ public abstract class TileEntityGeneric extends TileEntityLockable implements IT
 		return this.fuelTime > 0;
 	}
 
+	private boolean canProcess()
+	{
+		ItemStack input = this.ItemStacks[0];
+		if (input != null)
+		{
+			ItemStack output = WoodchipperRecipes.getInstance().getResult(input);
+			if (output == null)
+				return false;
+			ItemStack outputSlot = this.ItemStacks[2];
+			if (outputSlot == null)
+				return true;
+			if (!outputSlot.isItemEqual(output))
+				return false;
+			int result = outputSlot.stackSize + output.stackSize;
+			return result <= output.getMaxStackSize();
+		}
+		return false;
+	}
+
 	public static void addFuel(ItemStack itemstack)
 	{
 		fuelItems.add(itemstack);
@@ -227,7 +299,40 @@ public abstract class TileEntityGeneric extends TileEntityLockable implements IT
 		}
 		return false;
 	}
-	
+
+	public static boolean isValidForWoodchipper(ItemStack itemstack)
+	{
+		if (WoodchipperRecipes.getInstance().getResult(itemstack) != null)
+			return true;
+		return false;
+	}
+
+	public void processItem()
+	{
+		if (this.canProcess())
+		{
+
+			ItemStack input = ItemStacks[0];
+			ItemStack output = WoodchipperRecipes.getInstance().getResult(input);
+			ItemStack outputSlot = ItemStacks[2];
+			if (outputSlot == null)
+			{
+				ItemStacks[2] = output.copy();
+			}
+			else
+				if (outputSlot.isItemEqual(output))
+				{
+					outputSlot.stackSize += output.stackSize;
+				}
+
+			--input.stackSize;
+			if (input.stackSize <= 0)
+			{
+				ItemStacks[0] = null;
+			}
+		}
+	}
+
 	public static int getItemBurnTime(ItemStack itemstack)
 	{
 		return isItemFuel(itemstack) ? proTicks : 0;
@@ -248,30 +353,6 @@ public abstract class TileEntityGeneric extends TileEntityLockable implements IT
 	{
 		return this.worldObj.getTileEntity(this.pos) != this ? false
 				: player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) <= 64.0D;
-	}
-
-	@Override
-	public boolean isItemValidForSlot(int slot, ItemStack itemstack)
-	{
-		return slot == 2 ? false : (slot == 1 ? isItemFuel(itemstack) : true);
-	}
-
-	@Override
-	public int[] getSlotsForFace(EnumFacing side)
-	{
-		return side == EnumFacing.DOWN ? slotsBottom : (side == EnumFacing.UP ? slotsTop : slotsSides);
-	}
-
-	@Override
-	public boolean canInsertItem(int slot, ItemStack itemstack, EnumFacing direction)
-	{
-		return this.isItemValidForSlot(slot, itemstack);
-	}
-
-	@Override
-	public boolean canExtractItem(int slot, ItemStack itemstack, EnumFacing direction)
-	{
-		return direction != EnumFacing.DOWN || slot != 1;
 	}
 
 	@Override
@@ -338,6 +419,36 @@ public abstract class TileEntityGeneric extends TileEntityLockable implements IT
 	@Override
 	public String getCommandSenderName()
 	{
-		return this.hasCustomName() ? this.customName : "container." + this.defaultName.toLowerCase();
+		return this.hasCustomName() ? this.customName : "container.woodchipper";
+	}
+
+	@Override
+	public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
+	{
+		return new ContainerWoodchipper(playerInventory.player, this);
+	}
+
+	@Override
+	public boolean isItemValidForSlot(int slot, ItemStack itemstack)
+	{
+		return slot == 2 ? false : (slot == 1 ? isItemFuel(itemstack) : true);
+	}
+
+	@Override
+	public int[] getSlotsForFace(EnumFacing side)
+	{
+		return side == EnumFacing.DOWN ? slotsBottom : (side == EnumFacing.UP ? slotsTop : slotsSides);
+	}
+
+	@Override
+	public boolean canInsertItem(int slot, ItemStack itemstack, EnumFacing direction)
+	{
+		return this.isItemValidForSlot(slot, itemstack);
+	}
+
+	@Override
+	public boolean canExtractItem(int slot, ItemStack itemstack, EnumFacing direction)
+	{
+		return direction != EnumFacing.DOWN || slot != 1;
 	}
 }

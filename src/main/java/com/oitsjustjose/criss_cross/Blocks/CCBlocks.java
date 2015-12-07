@@ -1,8 +1,8 @@
-package com.oitsjustjose.criss_cross.Blocks;
+package com.oitsjustjose.criss_cross.blocks;
 
 import com.oitsjustjose.criss_cross.CrissCross;
-import com.oitsjustjose.criss_cross.GUI.GUIHandler;
-import com.oitsjustjose.criss_cross.Util.Reference;
+import com.oitsjustjose.criss_cross.gui.GUIHandler;
+import com.oitsjustjose.criss_cross.util.Reference;
 
 import net.minecraft.block.Block;
 import net.minecraftforge.fml.common.network.NetworkRegistry;

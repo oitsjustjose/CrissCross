@@ -1,9 +1,9 @@
-package com.oitsjustjose.criss_cross.Recipes;
+package com.oitsjustjose.criss_cross.recipes;
 
-import com.oitsjustjose.criss_cross.Blocks.CCBlocks;
-import com.oitsjustjose.criss_cross.Items.CCItems;
-import com.oitsjustjose.criss_cross.Util.CCLog;
-import com.oitsjustjose.criss_cross.Util.ConfigHandler;
+import com.oitsjustjose.criss_cross.blocks.CCBlocks;
+import com.oitsjustjose.criss_cross.items.CCItems;
+import com.oitsjustjose.criss_cross.util.CCLog;
+import com.oitsjustjose.criss_cross.util.ConfigHandler;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;

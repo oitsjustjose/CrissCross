@@ -1,13 +1,12 @@
-package com.oitsjustjose.criss_cross.Blocks;
+package com.oitsjustjose.criss_cross.blocks;
 
 import java.util.Random;
 
 import com.oitsjustjose.criss_cross.CrissCross;
-import com.oitsjustjose.criss_cross.GUI.GUIHandler;
-import com.oitsjustjose.criss_cross.TileEntity.TileEntityElectroextractor;
-import com.oitsjustjose.criss_cross.TileEntity.TileEntityElectroextractor;
-import com.oitsjustjose.criss_cross.Util.ClientProxy;
-import com.oitsjustjose.criss_cross.Util.Reference;
+import com.oitsjustjose.criss_cross.gui.GUIHandler;
+import com.oitsjustjose.criss_cross.tileentity.TileElectroextractor;
+import com.oitsjustjose.criss_cross.util.ClientProxy;
+import com.oitsjustjose.criss_cross.util.Reference;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -31,14 +30,14 @@ public class BlockElectroextractor extends BlockMachineBase
 	public BlockElectroextractor()
 	{
 		super(unlocName);
-		GameRegistry.registerTileEntity(TileEntityElectroextractor.class, unlocName);
+		GameRegistry.registerTileEntity(TileElectroextractor.class, unlocName);
 		GameRegistry.registerBlock(this, unlocName.toLowerCase());
 	}
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta)
 	{
-		return new TileEntityElectroextractor();
+		return new TileElectroextractor();
 	}
 
 	@Override
@@ -47,9 +46,9 @@ public class BlockElectroextractor extends BlockMachineBase
 
 		TileEntity tileentity = world.getTileEntity(pos);
 
-		if (tileentity instanceof TileEntityElectroextractor)
+		if (tileentity instanceof TileElectroextractor)
 		{
-			InventoryHelper.dropInventoryItems(world, pos, (TileEntityElectroextractor) tileentity);
+			InventoryHelper.dropInventoryItems(world, pos, (TileElectroextractor) tileentity);
 			world.updateComparatorOutputLevel(pos, this);
 		}
 
@@ -66,7 +65,7 @@ public class BlockElectroextractor extends BlockMachineBase
 		}
 		else
 		{
-			TileEntityElectroextractor tile = (TileEntityElectroextractor) world.getTileEntity(pos);
+			TileElectroextractor tile = (TileElectroextractor) world.getTileEntity(pos);
 			if (tile != null)
 				player.openGui(CrissCross.instance, GUIHandler.Stonegen, world, pos.getX(), pos.getY(), pos.getZ());
 			return true;

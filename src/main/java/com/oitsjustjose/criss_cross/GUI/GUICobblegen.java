@@ -1,10 +1,10 @@
-package com.oitsjustjose.criss_cross.GUI;
+package com.oitsjustjose.criss_cross.gui;
 
 import org.lwjgl.opengl.GL11;
 
-import com.oitsjustjose.criss_cross.TileEntity.TileEntityCobblegen;
+import com.oitsjustjose.criss_cross.container.ContainerCobblegen;
+import com.oitsjustjose.criss_cross.tileentity.TileCobblegen;
 
-import com.oitsjustjose.criss_cross.Container.ContainerCobblegen;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
@@ -14,9 +14,9 @@ public class GUICobblegen extends GuiContainer
 {
 	public static final ResourceLocation texture = new ResourceLocation("crisscross", "textures/gui/cobblegen.png");
 
-	private TileEntityCobblegen cobblegen;
+	private TileCobblegen cobblegen;
 
-	public GUICobblegen(EntityPlayer player, TileEntityCobblegen cobblegen)
+	public GUICobblegen(EntityPlayer player, TileCobblegen cobblegen)
 	{
 		super(new ContainerCobblegen(player, cobblegen));
 		this.cobblegen = cobblegen;

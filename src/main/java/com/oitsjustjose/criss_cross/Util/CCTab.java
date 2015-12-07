@@ -1,6 +1,6 @@
-package com.oitsjustjose.criss_cross.Util;
+package com.oitsjustjose.criss_cross.util;
 
-import com.oitsjustjose.criss_cross.Blocks.CCBlocks;
+import com.oitsjustjose.criss_cross.blocks.CCBlocks;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;

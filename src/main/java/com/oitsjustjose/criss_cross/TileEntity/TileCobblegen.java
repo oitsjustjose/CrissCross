@@ -1,18 +1,18 @@
-package com.oitsjustjose.criss_cross.TileEntity;
+package com.oitsjustjose.criss_cross.tileentity;
 
 import java.util.ArrayList;
 
-import com.oitsjustjose.criss_cross.Blocks.BlockCobblegen;
-import com.oitsjustjose.criss_cross.Container.ContainerCobblegen;
-import com.oitsjustjose.criss_cross.Recipes.CobblegenRecipes;
-import com.oitsjustjose.criss_cross.Util.ConfigHandler;
+import com.oitsjustjose.criss_cross.blocks.BlockCobblegen;
+import com.oitsjustjose.criss_cross.container.ContainerCobblegen;
+import com.oitsjustjose.criss_cross.recipes.CobblegenRecipes;
+import com.oitsjustjose.criss_cross.util.ConfigHandler;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
 
-public class TileEntityCobblegen extends TileEntityGeneric
+public class TileCobblegen extends TileGeneric
 {
 	private static int proTicks = ConfigHandler.blockGeneratorProcessTimes;
 	private static final int[] slotsTop = new int[] { 0 };
@@ -26,7 +26,7 @@ public class TileEntityCobblegen extends TileEntityGeneric
 	public int processTime;
 	public int fuelUsetime;
 	
-	public TileEntityCobblegen()
+	public TileCobblegen()
 	{
 		super("Cobblegen", proTicks);
 	}

@@ -1,13 +1,12 @@
-package com.oitsjustjose.criss_cross.Blocks;
+package com.oitsjustjose.criss_cross.blocks;
 
 import java.util.Random;
 
 import com.oitsjustjose.criss_cross.CrissCross;
-import com.oitsjustjose.criss_cross.GUI.GUIHandler;
-import com.oitsjustjose.criss_cross.TileEntity.TileEntityCobblegen;
-import com.oitsjustjose.criss_cross.TileEntity.TileEntityCobblegen;
-import com.oitsjustjose.criss_cross.Util.ClientProxy;
-import com.oitsjustjose.criss_cross.Util.Reference;
+import com.oitsjustjose.criss_cross.gui.GUIHandler;
+import com.oitsjustjose.criss_cross.tileentity.TileCobblegen;
+import com.oitsjustjose.criss_cross.util.ClientProxy;
+import com.oitsjustjose.criss_cross.util.Reference;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -31,14 +30,14 @@ public class BlockCobblegen extends BlockMachineBase
 	public BlockCobblegen()
 	{
 		super(unlocName);
-		GameRegistry.registerTileEntity(TileEntityCobblegen.class, unlocName);
+		GameRegistry.registerTileEntity(TileCobblegen.class, unlocName);
 		GameRegistry.registerBlock(this, unlocName.toLowerCase());
 	}
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta)
 	{
-		return new TileEntityCobblegen();
+		return new TileCobblegen();
 	}
 
 	@Override
@@ -47,9 +46,9 @@ public class BlockCobblegen extends BlockMachineBase
 
 		TileEntity tileentity = world.getTileEntity(pos);
 
-		if (tileentity instanceof TileEntityCobblegen)
+		if (tileentity instanceof TileCobblegen)
 		{
-			InventoryHelper.dropInventoryItems(world, pos, (TileEntityCobblegen) tileentity);
+			InventoryHelper.dropInventoryItems(world, pos, (TileCobblegen) tileentity);
 			world.updateComparatorOutputLevel(pos, this);
 		}
 
@@ -66,7 +65,7 @@ public class BlockCobblegen extends BlockMachineBase
 		}
 		else
 		{
-			TileEntityCobblegen tile = (TileEntityCobblegen) world.getTileEntity(pos);
+			TileCobblegen tile = (TileCobblegen) world.getTileEntity(pos);
 			if (tile != null)
 				player.openGui(CrissCross.instance, GUIHandler.Cobblegen, world, pos.getX(), pos.getY(), pos.getZ());
 			return true;

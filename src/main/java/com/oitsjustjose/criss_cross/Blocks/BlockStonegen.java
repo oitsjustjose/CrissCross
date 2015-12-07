@@ -1,9 +1,9 @@
-package com.oitsjustjose.criss_cross.Blocks;
+package com.oitsjustjose.criss_cross.blocks;
 
 import com.oitsjustjose.criss_cross.CrissCross;
-import com.oitsjustjose.criss_cross.GUI.GUIHandler;
-import com.oitsjustjose.criss_cross.TileEntity.TileEntityStonegen;
-import com.oitsjustjose.criss_cross.Util.ClientProxy;
+import com.oitsjustjose.criss_cross.gui.GUIHandler;
+import com.oitsjustjose.criss_cross.tileentity.TileStonegen;
+import com.oitsjustjose.criss_cross.util.ClientProxy;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,14 +21,14 @@ public class BlockStonegen extends BlockMachineBase
 	public BlockStonegen()
 	{
 		super(unlocName);
-		GameRegistry.registerTileEntity(TileEntityStonegen.class, unlocName);
+		GameRegistry.registerTileEntity(TileStonegen.class, unlocName);
 		GameRegistry.registerBlock(this, unlocName.toLowerCase());
 	}
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta)
 	{
-		return new TileEntityStonegen();
+		return new TileStonegen();
 	}
 
 	@Override
@@ -37,9 +37,9 @@ public class BlockStonegen extends BlockMachineBase
 
 		TileEntity tileentity = world.getTileEntity(pos);
 
-		if (tileentity instanceof TileEntityStonegen)
+		if (tileentity instanceof TileStonegen)
 		{
-			InventoryHelper.dropInventoryItems(world, pos, (TileEntityStonegen) tileentity);
+			InventoryHelper.dropInventoryItems(world, pos, (TileStonegen) tileentity);
 			world.updateComparatorOutputLevel(pos, this);
 		}
 
@@ -56,7 +56,7 @@ public class BlockStonegen extends BlockMachineBase
 		}
 		else
 		{
-			TileEntityStonegen tile = (TileEntityStonegen) world.getTileEntity(pos);
+			TileStonegen tile = (TileStonegen) world.getTileEntity(pos);
 			if (tile != null)
 				player.openGui(CrissCross.instance, GUIHandler.Stonegen, world, pos.getX(), pos.getY(), pos.getZ());
 			return true;

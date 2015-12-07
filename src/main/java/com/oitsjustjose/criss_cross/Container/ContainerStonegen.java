@@ -1,6 +1,6 @@
-package com.oitsjustjose.criss_cross.Container;
+package com.oitsjustjose.criss_cross.container;
 
-import com.oitsjustjose.criss_cross.TileEntity.TileEntityStonegen;
+import com.oitsjustjose.criss_cross.tileentity.TileStonegen;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -13,14 +13,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ContainerStonegen extends Container
 {
-	TileEntityStonegen Stonegen;
+	TileStonegen Stonegen;
 	EntityPlayer player;
 
 	private int lastUseTime;
 	private int lastChopTime;
 	private int lastFuelTime;
 
-	public ContainerStonegen(EntityPlayer player, TileEntityStonegen Stonegen)
+	public ContainerStonegen(EntityPlayer player, TileStonegen Stonegen)
 	{
 		this.player = player;
 		this.Stonegen = Stonegen;
@@ -104,7 +104,7 @@ public class ContainerStonegen extends Container
 			else
 				if (slotID != 1 && slotID != 0)
 				{
-					if (TileEntityStonegen.isValid(itemstack1))
+					if (TileStonegen.isValid(itemstack1))
 					{
 						if (!this.mergeItemStack(itemstack1, 0, 1, false))
 						{
@@ -112,7 +112,7 @@ public class ContainerStonegen extends Container
 						}
 					}
 					else
-						if (TileEntityStonegen.isItemFuel(itemstack1))
+						if (TileStonegen.isItemFuel(itemstack1))
 						{
 							if (!this.mergeItemStack(itemstack1, 1, 2, false))
 							{

@@ -1,9 +1,9 @@
-package com.oitsjustjose.criss_cross.GUI;
+package com.oitsjustjose.criss_cross.gui;
 
 import org.lwjgl.opengl.GL11;
 
-import com.oitsjustjose.criss_cross.Container.ContainerElectroextractor;
-import com.oitsjustjose.criss_cross.TileEntity.TileEntityElectroextractor;
+import com.oitsjustjose.criss_cross.container.ContainerElectroextractor;
+import com.oitsjustjose.criss_cross.tileentity.TileElectroextractor;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,9 +14,9 @@ public class GUIElectroextractor extends GuiContainer
 {
 	public static final ResourceLocation texture = new ResourceLocation("crisscross", "textures/gui/electroextractor.png");
 
-	private TileEntityElectroextractor electroextractor;
+	private TileElectroextractor electroextractor;
 
-	public GUIElectroextractor(EntityPlayer player, TileEntityElectroextractor electroextractor)
+	public GUIElectroextractor(EntityPlayer player, TileElectroextractor electroextractor)
 	{
 		super(new ContainerElectroextractor(player, electroextractor));
 		this.electroextractor = electroextractor;

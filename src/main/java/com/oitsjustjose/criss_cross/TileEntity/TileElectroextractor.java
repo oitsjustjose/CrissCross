@@ -1,12 +1,12 @@
-package com.oitsjustjose.criss_cross.TileEntity;
+package com.oitsjustjose.criss_cross.tileentity;
 
 import java.util.ArrayList;
 
-import com.oitsjustjose.criss_cross.Blocks.BlockWoodchipper;
-import com.oitsjustjose.criss_cross.Container.ContainerWoodchipper;
-import com.oitsjustjose.criss_cross.Recipes.WoodchipperRecipes;
-import com.oitsjustjose.criss_cross.Util.ConfigHandler;
-import com.oitsjustjose.criss_cross.Util.Reference;
+import com.oitsjustjose.criss_cross.blocks.BlockElectroextractor;
+import com.oitsjustjose.criss_cross.container.ContainerElectroextractor;
+import com.oitsjustjose.criss_cross.recipes.ElectroextractorRecipes;
+import com.oitsjustjose.criss_cross.util.ConfigHandler;
+import com.oitsjustjose.criss_cross.util.Reference;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -21,10 +21,10 @@ import net.minecraft.util.ITickable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class TileEntityWoodchipper extends TileEntityLockable implements ITickable, ISidedInventory
+public class TileElectroextractor extends TileEntityLockable implements ITickable, ISidedInventory
 {
-	private static int proTicks = ConfigHandler.woodchipperProcessTime;
-	private static int qty = ConfigHandler.woodchipperOutput;
+	private static int proTicks = ConfigHandler.electroextractorProcessTime;
+	private static int qty = ConfigHandler.electroextractorOutput;
 	private static final int[] slotsTop = new int[] { 0 };
 	private static final int[] slotsBottom = new int[] { 2, 1 };
 	private static final int[] slotsSides = new int[] { 1 };
@@ -33,8 +33,8 @@ public class TileEntityWoodchipper extends TileEntityLockable implements ITickab
 	private ItemStack[] ItemStacks = new ItemStack[3];
 
 	public int fuelTime;
-	public int processTime;
-	public int fuelUsetime;
+	public int crushTime;
+	public int fuelInUseTime;
 
 	@Override
 	public void update()
@@ -53,7 +53,7 @@ public class TileEntityWoodchipper extends TileEntityLockable implements ITickab
 			{
 				if (this.fuelTime == 0 && this.canProcess())
 				{
-					this.fuelUsetime = this.fuelTime = getItemBurnTime(this.ItemStacks[1]);
+					this.fuelInUseTime = this.fuelTime = getItemBurnTime(this.ItemStacks[1]);
 
 					if (this.fuelTime > 0)
 					{
@@ -73,25 +73,25 @@ public class TileEntityWoodchipper extends TileEntityLockable implements ITickab
 
 				if (this.isUsingFuel() && this.canProcess())
 				{
-					++this.processTime;
+					++this.crushTime;
 
-					if (this.processTime == proTicks)
+					if (this.crushTime == proTicks)
 					{
-						this.processTime = 0;
+						this.crushTime = 0;
 						this.processItem();
 						flag1 = true;
 					}
 				}
 				else
 				{
-					this.processTime = 0;
+					this.crushTime = 0;
 				}
 			}
 
 			if (flag != this.fuelTime > 0)
 			{
 				flag1 = true;
-				BlockWoodchipper.updateBlockState(this.fuelTime > 0, this.worldObj, this.pos);
+				BlockElectroextractor.updateBlockState(this.fuelTime > 0, this.worldObj, this.pos);
 			}
 		}
 
@@ -99,11 +99,6 @@ public class TileEntityWoodchipper extends TileEntityLockable implements ITickab
 		{
 			this.markDirty();
 		}
-	}
-
-	public static ArrayList<ItemStack> getFuels()
-	{
-		return fuelItems;
 	}
 
 	@Override
@@ -176,18 +171,6 @@ public class TileEntityWoodchipper extends TileEntityLockable implements ITickab
 	}
 
 	@Override
-	public String getGuiID()
-	{
-		return Reference.modid + ":container.woodchipper";
-	}
-
-	@Override
-	public boolean hasCustomName()
-	{
-		return this.customName != null && this.customName.length() > 0;
-	}
-
-	@Override
 	public void readFromNBT(NBTTagCompound tag)
 	{
 		super.readFromNBT(tag);
@@ -205,20 +188,20 @@ public class TileEntityWoodchipper extends TileEntityLockable implements ITickab
 			}
 		}
 
-		this.fuelTime = tag.getShort("FuelTime");
-		this.processTime = tag.getShort("WorkTime");
+		this.fuelTime = tag.getShort("Energy");
+		this.crushTime = tag.getShort("CrushTime");
 		if(this.ItemStacks[1] != null)
-			this.fuelUsetime = getItemBurnTime(this.ItemStacks[1]);
+			this.fuelInUseTime = getItemBurnTime(this.ItemStacks[1]);
 		else
-			this.fuelUsetime = 0;
+			this.fuelInUseTime = 0;
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound tag)
 	{
 		super.writeToNBT(tag);
-		tag.setShort("FuelTime", (short) this.fuelTime);
-		tag.setShort("WorkTime", (short) this.processTime);
+		tag.setShort("Energy", (short) this.fuelTime);
+		tag.setShort("CrushTime", (short) this.crushTime);
 		NBTTagList nbttaglist = new NBTTagList();
 
 		for (int i = 0; i < this.ItemStacks.length; ++i)
@@ -244,18 +227,18 @@ public class TileEntityWoodchipper extends TileEntityLockable implements ITickab
 	@SideOnly(Side.CLIENT)
 	public int getProgressScaled(int par1)
 	{
-		return this.processTime * par1 / proTicks;
+		return this.crushTime * par1 / proTicks;
 	}
 
 	@SideOnly(Side.CLIENT)
 	public int getBurnTimeRemainingScaled(int par1)
 	{
-		if (this.fuelUsetime == 0)
+		if (this.fuelInUseTime == 0)
 		{
-			this.fuelUsetime = proTicks;
+			this.fuelInUseTime = proTicks;
 		}
 
-		return this.fuelTime * par1 / this.fuelUsetime;
+		return this.fuelTime * par1 / this.fuelInUseTime;
 	}
 
 	public boolean isUsingFuel()
@@ -268,7 +251,7 @@ public class TileEntityWoodchipper extends TileEntityLockable implements ITickab
 		ItemStack input = this.ItemStacks[0];
 		if (input != null)
 		{
-			ItemStack output = WoodchipperRecipes.getInstance().getResult(input);
+			ItemStack output = ElectroextractorRecipes.getInstance().getResult(input);
 			if (output == null)
 				return false;
 			ItemStack outputSlot = this.ItemStacks[2];
@@ -300,9 +283,9 @@ public class TileEntityWoodchipper extends TileEntityLockable implements ITickab
 		return false;
 	}
 
-	public static boolean isValidForWoodchipper(ItemStack itemstack)
+	public static boolean isValid(ItemStack itemstack)
 	{
-		if (WoodchipperRecipes.getInstance().getResult(itemstack) != null)
+		if (ElectroextractorRecipes.getInstance().getResult(itemstack) != null)
 			return true;
 		return false;
 	}
@@ -313,7 +296,7 @@ public class TileEntityWoodchipper extends TileEntityLockable implements ITickab
 		{
 
 			ItemStack input = ItemStacks[0];
-			ItemStack output = WoodchipperRecipes.getInstance().getResult(input);
+			ItemStack output = ElectroextractorRecipes.getInstance().getResult(input);
 			ItemStack outputSlot = ItemStacks[2];
 			if (outputSlot == null)
 			{
@@ -335,11 +318,13 @@ public class TileEntityWoodchipper extends TileEntityLockable implements ITickab
 
 	public static int getItemBurnTime(ItemStack itemstack)
 	{
-		return isItemFuel(itemstack) ? proTicks : 0;
+		return isItemEnergetic(itemstack) ? proTicks : 0;
 	}
 
-	public static boolean isItemFuel(ItemStack itemstack)
+	public static boolean isItemEnergetic(ItemStack itemstack)
 	{
+		if(fuelItems == null || fuelItems.size() <= 0)
+			return false;
 		for (int i = 0; i < fuelItems.size(); i++)
 		{
 			ItemStack temp = fuelItems.get(i);
@@ -378,9 +363,9 @@ public class TileEntityWoodchipper extends TileEntityLockable implements ITickab
 		case 0:
 			return this.fuelTime;
 		case 1:
-			return this.fuelUsetime;
+			return this.fuelInUseTime;
 		case 2:
-			return this.processTime;
+			return this.crushTime;
 		default:
 			return 0;
 		}
@@ -395,10 +380,10 @@ public class TileEntityWoodchipper extends TileEntityLockable implements ITickab
 			this.fuelTime = value;
 			break;
 		case 1:
-			this.fuelUsetime = value;
+			this.fuelInUseTime = value;
 			break;
 		case 2:
-			this.processTime = value;
+			this.crushTime = value;
 			break;
 		}
 	}
@@ -419,19 +404,36 @@ public class TileEntityWoodchipper extends TileEntityLockable implements ITickab
 	@Override
 	public String getCommandSenderName()
 	{
-		return this.hasCustomName() ? this.customName : "container.woodchipper";
+		return this.hasCustomName() ? this.customName : "container.cobblegen";
 	}
 
 	@Override
 	public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
 	{
-		return new ContainerWoodchipper(playerInventory.player, this);
+		return new ContainerElectroextractor(playerInventory.player, this);
+	}
+
+	@Override
+	public String getGuiID()
+	{
+		return Reference.modid + ":container.electroextractor";
+	}
+
+	@Override
+	public boolean hasCustomName()
+	{
+		return this.customName != null && this.customName.length() > 0;
+	}
+
+	public void setCustomInventoryName(String newName)
+	{
+		this.customName = newName;
 	}
 
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack itemstack)
 	{
-		return slot == 2 ? false : (slot == 1 ? isItemFuel(itemstack) : true);
+		return slot == 2 ? false : (slot == 1 ? isItemEnergetic(itemstack) : true);
 	}
 
 	@Override

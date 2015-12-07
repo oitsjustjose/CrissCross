@@ -1,6 +1,6 @@
-package com.oitsjustjose.criss_cross.Container;
+package com.oitsjustjose.criss_cross.container;
 
-import com.oitsjustjose.criss_cross.TileEntity.TileEntityWoodchipper;
+import com.oitsjustjose.criss_cross.tileentity.TileWoodchipper;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -13,14 +13,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ContainerWoodchipper extends Container
 {
-	TileEntityWoodchipper woodchipper;
+	TileWoodchipper woodchipper;
 	EntityPlayer player;
 
 	private int lastUseTime;
 	private int lastChopTime;
 	private int lastFuelTime;
 
-	public ContainerWoodchipper(EntityPlayer player, TileEntityWoodchipper woodchipper)
+	public ContainerWoodchipper(EntityPlayer player, TileWoodchipper woodchipper)
 	{
 		this.player = player;
 		this.woodchipper = woodchipper;
@@ -104,7 +104,7 @@ public class ContainerWoodchipper extends Container
 			else
 				if (slotID != 1 && slotID != 0)
 				{
-					if (TileEntityWoodchipper.isValidForWoodchipper(itemstack1))
+					if (TileWoodchipper.isValidForWoodchipper(itemstack1))
 					{
 						if (!this.mergeItemStack(itemstack1, 0, 1, false))
 						{
@@ -112,7 +112,7 @@ public class ContainerWoodchipper extends Container
 						}
 					}
 					else
-						if (TileEntityWoodchipper.isItemFuel(itemstack1))
+						if (TileWoodchipper.isItemFuel(itemstack1))
 						{
 							if (!this.mergeItemStack(itemstack1, 1, 2, false))
 							{

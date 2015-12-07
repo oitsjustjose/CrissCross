@@ -1,4 +1,4 @@
-package com.oitsjustjose.criss_cross.Recipes;
+package com.oitsjustjose.criss_cross.recipes;
 
 import java.util.HashMap;
 import java.util.Iterator;

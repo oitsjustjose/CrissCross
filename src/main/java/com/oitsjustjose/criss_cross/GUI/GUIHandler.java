@@ -1,15 +1,15 @@
-package com.oitsjustjose.criss_cross.GUI;
+package com.oitsjustjose.criss_cross.gui;
 
-import com.oitsjustjose.criss_cross.Container.ContainerCobblegen;
-import com.oitsjustjose.criss_cross.Container.ContainerCropomator;
-import com.oitsjustjose.criss_cross.Container.ContainerElectroextractor;
-import com.oitsjustjose.criss_cross.Container.ContainerStonegen;
-import com.oitsjustjose.criss_cross.Container.ContainerWoodchipper;
-import com.oitsjustjose.criss_cross.TileEntity.TileEntityCobblegen;
-import com.oitsjustjose.criss_cross.TileEntity.TileEntityCropomator;
-import com.oitsjustjose.criss_cross.TileEntity.TileEntityElectroextractor;
-import com.oitsjustjose.criss_cross.TileEntity.TileEntityStonegen;
-import com.oitsjustjose.criss_cross.TileEntity.TileEntityWoodchipper;
+import com.oitsjustjose.criss_cross.container.ContainerCobblegen;
+import com.oitsjustjose.criss_cross.container.ContainerCropomator;
+import com.oitsjustjose.criss_cross.container.ContainerElectroextractor;
+import com.oitsjustjose.criss_cross.container.ContainerStonegen;
+import com.oitsjustjose.criss_cross.container.ContainerWoodchipper;
+import com.oitsjustjose.criss_cross.tileentity.TileCobblegen;
+import com.oitsjustjose.criss_cross.tileentity.TileCropomator;
+import com.oitsjustjose.criss_cross.tileentity.TileElectroextractor;
+import com.oitsjustjose.criss_cross.tileentity.TileStonegen;
+import com.oitsjustjose.criss_cross.tileentity.TileWoodchipper;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -31,33 +31,33 @@ public class GUIHandler implements IGuiHandler
 	{
 		TileEntity tile = world.getTileEntity(new BlockPos(x, y, z));
 
-		if (tile instanceof TileEntityCropomator)
+		if (tile instanceof TileCropomator)
 		{
-			TileEntityCropomator TE = (TileEntityCropomator) tile;
+			TileCropomator TE = (TileCropomator) tile;
 
 			return new ContainerCropomator(player, TE);
 		}
-		if (tile instanceof TileEntityElectroextractor)
+		if (tile instanceof TileElectroextractor)
 		{
-			TileEntityElectroextractor TE = (TileEntityElectroextractor) tile;
+			TileElectroextractor TE = (TileElectroextractor) tile;
 
 			return new ContainerElectroextractor(player, TE);
 		}
-		if (tile instanceof TileEntityWoodchipper)
+		if (tile instanceof TileWoodchipper)
 		{
-			TileEntityWoodchipper TE = (TileEntityWoodchipper) tile;
+			TileWoodchipper TE = (TileWoodchipper) tile;
 
 			return new ContainerWoodchipper(player, TE);
 		}
-		if (tile instanceof TileEntityCobblegen)
+		if (tile instanceof TileCobblegen)
 		{
-			TileEntityCobblegen TE = (TileEntityCobblegen) tile;
+			TileCobblegen TE = (TileCobblegen) tile;
 
 			return new ContainerCobblegen(player, TE);
 		}
-		if (tile instanceof TileEntityStonegen)
+		if (tile instanceof TileStonegen)
 		{
-			TileEntityStonegen TE = (TileEntityStonegen) tile;
+			TileStonegen TE = (TileStonegen) tile;
 
 			return new ContainerStonegen(player, TE);
 		}
@@ -70,34 +70,34 @@ public class GUIHandler implements IGuiHandler
 	{
 		TileEntity tile = world.getTileEntity(new BlockPos(x, y, z));
 
-		if (tile instanceof TileEntityCropomator)
+		if (tile instanceof TileCropomator)
 		{
-			TileEntityCropomator TE = (TileEntityCropomator) tile;
+			TileCropomator TE = (TileCropomator) tile;
 
 			return new GUICropomator(player, TE);
 		}
 
-		if (tile instanceof TileEntityElectroextractor)
+		if (tile instanceof TileElectroextractor)
 		{
-			TileEntityElectroextractor TE = (TileEntityElectroextractor) tile;
+			TileElectroextractor TE = (TileElectroextractor) tile;
 
 			return new GUIElectroextractor(player, TE);
 		}
-		if (tile instanceof TileEntityWoodchipper)
+		if (tile instanceof TileWoodchipper)
 		{
-			TileEntityWoodchipper TE = (TileEntityWoodchipper) tile;
+			TileWoodchipper TE = (TileWoodchipper) tile;
 
 			return new GUIWoodchipper(player, TE);
 		}
-		if (tile instanceof TileEntityCobblegen)
+		if (tile instanceof TileCobblegen)
 		{
-			TileEntityCobblegen TE = (TileEntityCobblegen) tile;
+			TileCobblegen TE = (TileCobblegen) tile;
 
 			return new GUICobblegen(player, TE);
 		}
-		if (tile instanceof TileEntityStonegen)
+		if (tile instanceof TileStonegen)
 		{
-			TileEntityStonegen TE = (TileEntityStonegen) tile;
+			TileStonegen TE = (TileStonegen) tile;
 
 			return new GUIStonegen(player, TE);
 		}

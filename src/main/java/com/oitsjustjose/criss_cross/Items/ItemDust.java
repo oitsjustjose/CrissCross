@@ -1,11 +1,11 @@
-package com.oitsjustjose.criss_cross.Items;
+package com.oitsjustjose.criss_cross.items;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.oitsjustjose.criss_cross.CrissCross;
-import com.oitsjustjose.criss_cross.Util.ClientProxy;
-import com.oitsjustjose.criss_cross.Util.Reference;
+import com.oitsjustjose.criss_cross.util.ClientProxy;
+import com.oitsjustjose.criss_cross.util.Reference;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;

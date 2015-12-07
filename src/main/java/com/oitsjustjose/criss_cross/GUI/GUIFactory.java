@@ -1,4 +1,4 @@
-package com.oitsjustjose.criss_cross.GUI;
+package com.oitsjustjose.criss_cross.gui;
 
 import java.util.Set;
 

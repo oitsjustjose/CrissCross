@@ -1,10 +1,10 @@
-package com.oitsjustjose.criss_cross.GUI;
+package com.oitsjustjose.criss_cross.gui;
 
 import org.lwjgl.opengl.GL11;
 
-import com.oitsjustjose.criss_cross.Container.ContainerCropomator;
-import com.oitsjustjose.criss_cross.TileEntity.TileEntityCropomator;
-import com.oitsjustjose.criss_cross.Util.Reference;
+import com.oitsjustjose.criss_cross.container.ContainerCropomator;
+import com.oitsjustjose.criss_cross.tileentity.TileCropomator;
+import com.oitsjustjose.criss_cross.util.Reference;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
@@ -16,9 +16,9 @@ public class GUICropomator extends GuiContainer
 {
 	public static final ResourceLocation texture = new ResourceLocation("crisscross", "textures/gui/cropomator.png");
 
-	private TileEntityCropomator cropomator;
+	private TileCropomator cropomator;
 
-	public GUICropomator(EntityPlayer player, TileEntityCropomator cropomator)
+	public GUICropomator(EntityPlayer player, TileCropomator cropomator)
 	{
 		super(new ContainerCropomator(player, cropomator));
 		this.cropomator = cropomator;

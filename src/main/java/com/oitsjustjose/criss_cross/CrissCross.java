@@ -1,16 +1,16 @@
 package com.oitsjustjose.criss_cross;
 
-import com.oitsjustjose.criss_cross.Blocks.CCBlocks;
-import com.oitsjustjose.criss_cross.Items.CCItems;
-import com.oitsjustjose.criss_cross.Items.ItemDust;
-import com.oitsjustjose.criss_cross.Recipes.CCCraftingRecipes;
-import com.oitsjustjose.criss_cross.Recipes.CCMachineRecipes;
-import com.oitsjustjose.criss_cross.Util.CCTab;
-import com.oitsjustjose.criss_cross.Util.ClientProxy;
-import com.oitsjustjose.criss_cross.Util.CommonProxy;
-import com.oitsjustjose.criss_cross.Util.ConfigHandler;
-import com.oitsjustjose.criss_cross.Util.OreDictionaryAdder;
-import com.oitsjustjose.criss_cross.Util.Reference;
+import com.oitsjustjose.criss_cross.blocks.CCBlocks;
+import com.oitsjustjose.criss_cross.items.CCItems;
+import com.oitsjustjose.criss_cross.items.ItemDust;
+import com.oitsjustjose.criss_cross.recipes.CCCraftingRecipes;
+import com.oitsjustjose.criss_cross.recipes.CCMachineRecipes;
+import com.oitsjustjose.criss_cross.util.CCTab;
+import com.oitsjustjose.criss_cross.util.ClientProxy;
+import com.oitsjustjose.criss_cross.util.CommonProxy;
+import com.oitsjustjose.criss_cross.util.ConfigHandler;
+import com.oitsjustjose.criss_cross.util.OreDictionaryAdder;
+import com.oitsjustjose.criss_cross.util.Reference;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.model.ModelResourceLocation;

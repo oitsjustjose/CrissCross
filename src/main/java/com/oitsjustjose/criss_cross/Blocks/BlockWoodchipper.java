@@ -1,13 +1,12 @@
-package com.oitsjustjose.criss_cross.Blocks;
+package com.oitsjustjose.criss_cross.blocks;
 
 import java.util.Random;
 
 import com.oitsjustjose.criss_cross.CrissCross;
-import com.oitsjustjose.criss_cross.GUI.GUIHandler;
-import com.oitsjustjose.criss_cross.TileEntity.TileEntityWoodchipper;
-import com.oitsjustjose.criss_cross.TileEntity.TileEntityWoodchipper;
-import com.oitsjustjose.criss_cross.Util.ClientProxy;
-import com.oitsjustjose.criss_cross.Util.Reference;
+import com.oitsjustjose.criss_cross.gui.GUIHandler;
+import com.oitsjustjose.criss_cross.tileentity.TileWoodchipper;
+import com.oitsjustjose.criss_cross.util.ClientProxy;
+import com.oitsjustjose.criss_cross.util.Reference;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -31,7 +30,7 @@ public class BlockWoodchipper extends BlockMachineBase
 	public BlockWoodchipper()
 	{
 		super(unlocName);
-		GameRegistry.registerTileEntity(TileEntityWoodchipper.class, unlocName);
+		GameRegistry.registerTileEntity(TileWoodchipper.class, unlocName);
 		GameRegistry.registerBlock(this, unlocName.toLowerCase());
 		Reference.add(this);
 	}
@@ -39,7 +38,7 @@ public class BlockWoodchipper extends BlockMachineBase
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta)
 	{
-		return new TileEntityWoodchipper();
+		return new TileWoodchipper();
 	}
 
 	@Override
@@ -48,9 +47,9 @@ public class BlockWoodchipper extends BlockMachineBase
 
 		TileEntity tileentity = world.getTileEntity(pos);
 
-		if (tileentity instanceof TileEntityWoodchipper)
+		if (tileentity instanceof TileWoodchipper)
 		{
-			InventoryHelper.dropInventoryItems(world, pos, (TileEntityWoodchipper) tileentity);
+			InventoryHelper.dropInventoryItems(world, pos, (TileWoodchipper) tileentity);
 			world.updateComparatorOutputLevel(pos, this);
 		}
 
@@ -67,7 +66,7 @@ public class BlockWoodchipper extends BlockMachineBase
 		}
 		else
 		{
-			TileEntityWoodchipper tile = (TileEntityWoodchipper) world.getTileEntity(pos);
+			TileWoodchipper tile = (TileWoodchipper) world.getTileEntity(pos);
 			if (tile != null)
 				player.openGui(CrissCross.instance, GUIHandler.Stonegen, world, pos.getX(), pos.getY(), pos.getZ());
 			return true;

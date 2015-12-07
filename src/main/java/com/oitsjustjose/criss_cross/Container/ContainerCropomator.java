@@ -1,6 +1,6 @@
-package com.oitsjustjose.criss_cross.Container;
+package com.oitsjustjose.criss_cross.container;
 
-import com.oitsjustjose.criss_cross.TileEntity.TileEntityCropomator;
+import com.oitsjustjose.criss_cross.tileentity.TileCropomator;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -13,14 +13,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ContainerCropomator extends Container
 {
-	TileEntityCropomator cropomator;
+	TileCropomator cropomator;
 	EntityPlayer player;
 
 	private int lastUseTime;
 	private int lastProcessTime;
 	private int lastCatalystInUseTime;
 
-	public ContainerCropomator(EntityPlayer player, TileEntityCropomator cropomator)
+	public ContainerCropomator(EntityPlayer player, TileCropomator cropomator)
 	{
 		this.player = player;
 		this.cropomator = cropomator;
@@ -106,7 +106,7 @@ public class ContainerCropomator extends Container
 			else
 				if (slotID != 1 && slotID != 0)
 				{
-					if (TileEntityCropomator.isValid(itemstack1))
+					if (TileCropomator.isValid(itemstack1))
 					{
 						if (!this.mergeItemStack(itemstack1, 0, 1, false))
 						{
@@ -114,7 +114,7 @@ public class ContainerCropomator extends Container
 						}
 					}
 					else
-						if (TileEntityCropomator.isItemCatalyst(itemstack1))
+						if (TileCropomator.isItemCatalyst(itemstack1))
 						{
 							if (!this.mergeItemStack(itemstack1, 1, 2, false))
 							{

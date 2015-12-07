@@ -1,17 +1,17 @@
-package com.oitsjustjose.criss_cross.Recipes;
+package com.oitsjustjose.criss_cross.recipes;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.oitsjustjose.criss_cross.Items.CCItems;
-import com.oitsjustjose.criss_cross.Items.ItemDust;
-import com.oitsjustjose.criss_cross.TileEntity.TileEntityCropomator;
-import com.oitsjustjose.criss_cross.TileEntity.TileEntityElectroextractor;
-import com.oitsjustjose.criss_cross.TileEntity.TileEntityWoodchipper;
-import com.oitsjustjose.criss_cross.Util.CCLog;
-import com.oitsjustjose.criss_cross.Util.ClientProxy;
-import com.oitsjustjose.criss_cross.Util.ConfigHandler;
-import com.oitsjustjose.criss_cross.Util.ItemHelper;
+import com.oitsjustjose.criss_cross.items.CCItems;
+import com.oitsjustjose.criss_cross.items.ItemDust;
+import com.oitsjustjose.criss_cross.tileentity.TileCropomator;
+import com.oitsjustjose.criss_cross.tileentity.TileElectroextractor;
+import com.oitsjustjose.criss_cross.tileentity.TileWoodchipper;
+import com.oitsjustjose.criss_cross.util.CCLog;
+import com.oitsjustjose.criss_cross.util.ClientProxy;
+import com.oitsjustjose.criss_cross.util.ConfigHandler;
+import com.oitsjustjose.criss_cross.util.ItemHelper;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -100,7 +100,7 @@ public class CCMachineRecipes
 				if (unlocStack.length == 2)
 				{
 					if (ConfigHandler.findItemStack(unlocStack[0], unlocStack[1]) != null)
-						TileEntityCropomator.addFuel(ConfigHandler.findItemStack(unlocStack[0], unlocStack[1]));
+						TileCropomator.addFuel(ConfigHandler.findItemStack(unlocStack[0], unlocStack[1]));
 					else
 					{
 						CCLog.warn("Item " + ConfigHandler.cropomatorInputs[i] + " could not be added to the Cropomator's catalyst list.");
@@ -114,7 +114,7 @@ public class CCMachineRecipes
 					{
 						ItemStack newStack = new ItemStack(ConfigHandler.findItemStack(unlocStack[0], unlocStack[1]).getItem(), 1, Integer.parseInt(
 								unlocStack[2]));
-						TileEntityCropomator.addFuel(newStack);
+						TileCropomator.addFuel(newStack);
 					}
 					else
 					{
@@ -196,7 +196,7 @@ public class CCMachineRecipes
 				if (unlocStack.length == 2)
 				{
 					if (ConfigHandler.findItemStack(unlocStack[0], unlocStack[1]) != null)
-						TileEntityWoodchipper.addFuel(ConfigHandler.findItemStack(unlocStack[0], unlocStack[1]));
+						TileWoodchipper.addFuel(ConfigHandler.findItemStack(unlocStack[0], unlocStack[1]));
 					else
 					{
 						CCLog.warn("Item " + ConfigHandler.woodchipperFuels[i] + " could not be added to the Woodchipper's fuel list.");
@@ -210,7 +210,7 @@ public class CCMachineRecipes
 					{
 						ItemStack newStack = new ItemStack(ConfigHandler.findItemStack(unlocStack[0], unlocStack[1]).getItem(), 1, Integer.parseInt(
 								unlocStack[2]));
-						TileEntityWoodchipper.addFuel(newStack);
+						TileWoodchipper.addFuel(newStack);
 					}
 					else
 					{
@@ -236,7 +236,7 @@ public class CCMachineRecipes
 				if (unlocStack.length == 2)
 				{
 					if (ConfigHandler.findItemStack(unlocStack[0], unlocStack[1]) != null)
-						TileEntityElectroextractor.addFuel(ConfigHandler.findItemStack(unlocStack[0], unlocStack[1]));
+						TileElectroextractor.addFuel(ConfigHandler.findItemStack(unlocStack[0], unlocStack[1]));
 					else
 					{
 						CCLog.warn("Item " + ConfigHandler.electroextractorEnergySources[i]
@@ -251,7 +251,7 @@ public class CCMachineRecipes
 					{
 						ItemStack newStack = new ItemStack(ConfigHandler.findItemStack(unlocStack[0], unlocStack[1]).getItem(), 1, Integer.parseInt(
 								unlocStack[2]));
-						TileEntityElectroextractor.addFuel(newStack);
+						TileElectroextractor.addFuel(newStack);
 					}
 					else
 					{

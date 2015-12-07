@@ -1,9 +1,9 @@
-package com.oitsjustjose.criss_cross.GUI;
+package com.oitsjustjose.criss_cross.gui;
 
 import org.lwjgl.opengl.GL11;
 
-import com.oitsjustjose.criss_cross.Container.ContainerWoodchipper;
-import com.oitsjustjose.criss_cross.TileEntity.TileEntityWoodchipper;
+import com.oitsjustjose.criss_cross.container.ContainerWoodchipper;
+import com.oitsjustjose.criss_cross.tileentity.TileWoodchipper;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,9 +14,9 @@ public class GUIWoodchipper extends GuiContainer
 {
 	public static final ResourceLocation texture = new ResourceLocation("crisscross", "textures/gui/woodchipper.png");
 
-	private TileEntityWoodchipper woodchipper;
+	private TileWoodchipper woodchipper;
 
-	public GUIWoodchipper(EntityPlayer player, TileEntityWoodchipper woodchipper)
+	public GUIWoodchipper(EntityPlayer player, TileWoodchipper woodchipper)
 	{
 		super(new ContainerWoodchipper(player, woodchipper));
 		this.woodchipper = woodchipper;

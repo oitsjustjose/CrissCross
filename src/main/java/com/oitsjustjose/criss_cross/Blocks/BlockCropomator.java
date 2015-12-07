@@ -1,13 +1,12 @@
-package com.oitsjustjose.criss_cross.Blocks;
+package com.oitsjustjose.criss_cross.blocks;
 
 import java.util.Random;
 
 import com.oitsjustjose.criss_cross.CrissCross;
-import com.oitsjustjose.criss_cross.GUI.GUIHandler;
-import com.oitsjustjose.criss_cross.TileEntity.TileEntityCropomator;
-import com.oitsjustjose.criss_cross.TileEntity.TileEntityCropomator;
-import com.oitsjustjose.criss_cross.Util.ClientProxy;
-import com.oitsjustjose.criss_cross.Util.Reference;
+import com.oitsjustjose.criss_cross.gui.GUIHandler;
+import com.oitsjustjose.criss_cross.tileentity.TileCropomator;
+import com.oitsjustjose.criss_cross.util.ClientProxy;
+import com.oitsjustjose.criss_cross.util.Reference;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -32,14 +31,14 @@ public class BlockCropomator extends BlockMachineBase
 	public BlockCropomator()
 	{
 		super(unlocName);
-		GameRegistry.registerTileEntity(TileEntityCropomator.class, unlocName);
+		GameRegistry.registerTileEntity(TileCropomator.class, unlocName);
 		GameRegistry.registerBlock(this, unlocName.toLowerCase());
 	}
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta)
 	{
-		return new TileEntityCropomator();
+		return new TileCropomator();
 	}
 
 	@Override
@@ -48,9 +47,9 @@ public class BlockCropomator extends BlockMachineBase
 
 		TileEntity tileentity = world.getTileEntity(pos);
 
-		if (tileentity instanceof TileEntityCropomator)
+		if (tileentity instanceof TileCropomator)
 		{
-			InventoryHelper.dropInventoryItems(world, pos, (TileEntityCropomator) tileentity);
+			InventoryHelper.dropInventoryItems(world, pos, (TileCropomator) tileentity);
 			world.updateComparatorOutputLevel(pos, this);
 		}
 
@@ -67,7 +66,7 @@ public class BlockCropomator extends BlockMachineBase
 		}
 		else
 		{
-			TileEntityCropomator tile = (TileEntityCropomator) world.getTileEntity(pos);
+			TileCropomator tile = (TileCropomator) world.getTileEntity(pos);
 			if (tile != null)
 				player.openGui(CrissCross.instance, GUIHandler.Stonegen, world, pos.getX(), pos.getY(), pos.getZ());
 			return true;

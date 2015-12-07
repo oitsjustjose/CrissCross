@@ -1,6 +1,6 @@
-package com.oitsjustjose.criss_cross.Container;
+package com.oitsjustjose.criss_cross.container;
 
-import com.oitsjustjose.criss_cross.TileEntity.TileEntityCobblegen;
+import com.oitsjustjose.criss_cross.tileentity.TileCobblegen;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -13,14 +13,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ContainerCobblegen extends Container
 {
-	TileEntityCobblegen cobblegen;
+	TileCobblegen cobblegen;
 	EntityPlayer player;
 
 	private int lastUseTime;
 	private int lastChopTime;
 	private int lastFuelTime;
 
-	public ContainerCobblegen(EntityPlayer player, TileEntityCobblegen cobblegen)
+	public ContainerCobblegen(EntityPlayer player, TileCobblegen cobblegen)
 	{
 		this.player = player;
 		this.cobblegen = cobblegen;
@@ -104,7 +104,7 @@ public class ContainerCobblegen extends Container
 			else
 				if (slotID != 1 && slotID != 0)
 				{
-					if (TileEntityCobblegen.isValid(itemstack1))
+					if (TileCobblegen.isValid(itemstack1))
 					{
 						if (!this.mergeItemStack(itemstack1, 0, 1, false))
 						{
@@ -112,7 +112,7 @@ public class ContainerCobblegen extends Container
 						}
 					}
 					else
-						if (TileEntityCobblegen.isItemFuel(itemstack1))
+						if (TileCobblegen.isItemFuel(itemstack1))
 						{
 							if (!this.mergeItemStack(itemstack1, 1, 2, false))
 							{

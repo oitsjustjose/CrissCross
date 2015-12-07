@@ -1,12 +1,12 @@
-package com.oitsjustjose.criss_cross.TileEntity;
+package com.oitsjustjose.criss_cross.tileentity;
 
 import java.util.ArrayList;
 
-import com.oitsjustjose.criss_cross.Blocks.BlockCropomator;
-import com.oitsjustjose.criss_cross.Container.ContainerCropomator;
-import com.oitsjustjose.criss_cross.Recipes.CropomatorRecipes;
-import com.oitsjustjose.criss_cross.Util.ConfigHandler;
-import com.oitsjustjose.criss_cross.Util.Reference;
+import com.oitsjustjose.criss_cross.blocks.BlockCropomator;
+import com.oitsjustjose.criss_cross.container.ContainerCropomator;
+import com.oitsjustjose.criss_cross.recipes.CropomatorRecipes;
+import com.oitsjustjose.criss_cross.util.ConfigHandler;
+import com.oitsjustjose.criss_cross.util.Reference;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -21,7 +21,7 @@ import net.minecraft.util.ITickable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class TileEntityCropomator extends TileEntityLockable implements ITickable, ISidedInventory
+public class TileCropomator extends TileEntityLockable implements ITickable, ISidedInventory
 {
 	private static int proTicks = ConfigHandler.cropomatorProcessTime;
 	private static int qty = ConfigHandler.cropomatorOutput;

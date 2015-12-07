@@ -1,10 +1,10 @@
-package com.oitsjustjose.criss_cross.GUI;
+package com.oitsjustjose.criss_cross.gui;
 
 import org.lwjgl.opengl.GL11;
 
-import com.oitsjustjose.criss_cross.TileEntity.TileEntityStonegen;
+import com.oitsjustjose.criss_cross.container.ContainerStonegen;
+import com.oitsjustjose.criss_cross.tileentity.TileStonegen;
 
-import com.oitsjustjose.criss_cross.Container.ContainerStonegen;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
@@ -14,9 +14,9 @@ public class GUIStonegen extends GuiContainer
 {
 	public static final ResourceLocation texture = new ResourceLocation("crisscross", "textures/gui/stonegen.png");
 
-	private TileEntityStonegen stonegen;
+	private TileStonegen stonegen;
 
-	public GUIStonegen(EntityPlayer player, TileEntityStonegen stonegen)
+	public GUIStonegen(EntityPlayer player, TileStonegen stonegen)
 	{
 		super(new ContainerStonegen(player, stonegen));
 		this.stonegen = stonegen;

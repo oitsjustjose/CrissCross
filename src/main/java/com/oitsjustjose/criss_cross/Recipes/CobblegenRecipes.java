@@ -1,13 +1,13 @@
-package com.oitsjustjose.criss_cross.Recipes;
+package com.oitsjustjose.criss_cross.recipes;
 
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import com.google.common.collect.Maps;
-import com.oitsjustjose.criss_cross.Items.CCItems;
-import com.oitsjustjose.criss_cross.TileEntity.TileEntityCobblegen;
-import com.oitsjustjose.criss_cross.TileEntity.TileEntityStonegen;
+import com.oitsjustjose.criss_cross.items.CCItems;
+import com.oitsjustjose.criss_cross.tileentity.TileCobblegen;
+import com.oitsjustjose.criss_cross.tileentity.TileStonegen;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -21,8 +21,8 @@ public class CobblegenRecipes
 	public CobblegenRecipes()
 	{
 		this.addRecipe(new ItemStack(Items.lava_bucket), new ItemStack(Blocks.cobblestone));
-		TileEntityCobblegen.addFuel(new ItemStack(Items.water_bucket));
-		TileEntityCobblegen.addFuel(new ItemStack(CCItems.buckets));
+		TileCobblegen.addFuel(new ItemStack(Items.water_bucket));
+		TileCobblegen.addFuel(new ItemStack(CCItems.buckets));
 	}
 
 	public static CobblegenRecipes getInstance()

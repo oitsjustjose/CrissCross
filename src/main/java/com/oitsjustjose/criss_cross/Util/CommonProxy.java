@@ -1,4 +1,4 @@
-package com.oitsjustjose.criss_cross.Util;
+package com.oitsjustjose.criss_cross.util;
 
 public abstract class CommonProxy
 {

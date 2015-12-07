@@ -1,9 +1,9 @@
-package com.oitsjustjose.criss_cross.Util;
+package com.oitsjustjose.criss_cross.util;
 
 import java.util.ArrayList;
 
-import com.oitsjustjose.criss_cross.Items.CCItems;
-import com.oitsjustjose.criss_cross.Items.ItemDust;
+import com.oitsjustjose.criss_cross.items.CCItems;
+import com.oitsjustjose.criss_cross.items.ItemDust;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
