@@ -9,7 +9,7 @@ public class Reference
 {
 	public static final String modid = "CrissCross";
 	public static final String version = "1.3";
-	public static final String guifactory = "com.oitsjustjose.criss_cross.GUI.GUIFactory";
+	public static final String guifactory = "com.oitsjustjose.criss_cross.gui.GUIFactory";
 	
 	private static final ArrayList<Item> allItems = new ArrayList<Item>();
 	private static final ArrayList<Block> allBlocks = new ArrayList<Block>();

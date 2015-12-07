@@ -5,11 +5,12 @@ import java.util.List;
 
 import com.oitsjustjose.criss_cross.items.CCItems;
 import com.oitsjustjose.criss_cross.items.ItemDust;
+import com.oitsjustjose.criss_cross.tileentity.TileCobblegen;
 import com.oitsjustjose.criss_cross.tileentity.TileCropomator;
 import com.oitsjustjose.criss_cross.tileentity.TileElectroextractor;
+import com.oitsjustjose.criss_cross.tileentity.TileStonegen;
 import com.oitsjustjose.criss_cross.tileentity.TileWoodchipper;
 import com.oitsjustjose.criss_cross.util.CCLog;
-import com.oitsjustjose.criss_cross.util.ClientProxy;
 import com.oitsjustjose.criss_cross.util.ConfigHandler;
 import com.oitsjustjose.criss_cross.util.ItemHelper;
 
@@ -18,7 +19,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.InventoryCrafting;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
@@ -37,7 +37,11 @@ public class CCMachineRecipes
 		initElectroextractorOreDictionary();
 		initWoodchipperFuels();
 		initWoodchipperOreDictionary();
-
+		
+		TileStonegen.addFuel(new ItemStack(Items.water_bucket));
+		TileStonegen.addFuel(new ItemStack(CCItems.buckets));
+		TileCobblegen.addFuel(new ItemStack(Items.water_bucket));
+		TileCobblegen.addFuel(new ItemStack(CCItems.buckets));
 		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.diamond_ore), new ItemStack(Items.diamond, electroQTY));
 		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.emerald_ore), new ItemStack(Items.emerald, electroQTY));
 		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.coal_ore), new ItemStack(Items.coal, electroQTY));

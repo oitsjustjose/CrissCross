@@ -32,7 +32,7 @@ public class CrissCross
 	@Instance(Reference.modid)
 	public static CrissCross instance;
 
-	@SidedProxy(clientSide = "com.oitsjustjose.criss_cross.Util.ClientProxy", serverSide = "com.oitsjustjose.criss_cross.Util.CommonProxy")
+	@SidedProxy(clientSide = "com.oitsjustjose.criss_cross.util.ClientProxy", serverSide = "com.oitsjustjose.criss_cross.util.CommonProxy")
 	public static CommonProxy proxy;
 
 	@EventHandler

@@ -4,12 +4,13 @@ import java.util.ArrayList;
 
 import com.oitsjustjose.criss_cross.blocks.BlockStonegen;
 import com.oitsjustjose.criss_cross.container.ContainerStonegen;
-import com.oitsjustjose.criss_cross.recipes.StonegenRecipes;
 import com.oitsjustjose.criss_cross.util.ConfigHandler;
 import com.oitsjustjose.criss_cross.util.Reference;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -272,9 +273,7 @@ public class TileStonegen extends TileEntityLockable implements ITickable, ISide
 		ItemStack input = this.ItemStacks[0];
 		if (input != null)
 		{
-			ItemStack output = StonegenRecipes.getInstance().getResult(input);
-			if (output == null)
-				return false;
+			ItemStack output = new ItemStack(Blocks.stone);				
 			ItemStack outputSlot = this.ItemStacks[2];
 			if (outputSlot == null)
 				return true;
@@ -306,7 +305,7 @@ public class TileStonegen extends TileEntityLockable implements ITickable, ISide
 
 	public static boolean isValid(ItemStack itemstack)
 	{
-		if (StonegenRecipes.getInstance().getResult(itemstack) != null)
+		if (itemstack.getItem() == Items.lava_bucket)
 			return true;
 		return false;
 	}
@@ -317,7 +316,7 @@ public class TileStonegen extends TileEntityLockable implements ITickable, ISide
 		{
 
 			ItemStack input = ItemStacks[0];
-			ItemStack output = StonegenRecipes.getInstance().getResult(input);
+			ItemStack output = new ItemStack(Blocks.stone);
 			ItemStack outputSlot = ItemStacks[2];
 			if (outputSlot == null)
 			{
