@@ -55,7 +55,7 @@ public class ItemDust extends Item
 			return colors.get(stack.getItemDamage());
 		}
 		else
-			return 16777215;
+			return 10724259;
 	}
 
 	@Override
