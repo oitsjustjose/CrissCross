@@ -7,7 +7,7 @@
 			"side": "crisscross:blocks/cropomator/cropomator_sides",
 			"bottom": "crisscross:blocks/cropomator/cropomator_bottom"
 		},
-		"model": "crisscross:cropomator",
+		"model": "crisscross:machine",
 		"uvlock": false
 	},
 	"variants": {

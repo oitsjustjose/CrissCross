@@ -7,7 +7,7 @@
 			"side": "crisscross:blocks/wood_chipper/wood_chipper_sides",
 			"bottom": "crisscross:blocks/wood_chipper/wood_chipper_bottom"
 		},
-		"model": "crisscross:woodchipper",
+		"model": "crisscross:machine",
 		"uvlock": false
 	},
 	"variants": {

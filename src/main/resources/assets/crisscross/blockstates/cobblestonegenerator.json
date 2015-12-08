@@ -7,7 +7,7 @@
 			"side": "crisscross:blocks/cobblestone_generator/cobblestone_generator_sides",
 			"bottom": "crisscross:blocks/cobblestone_generator/cobblestone_generator_bottom"
 		},
-		"model": "crisscross:cobblestonegenerator",
+		"model": "crisscross:machine",
 		"uvlock": false
 	},
 	"variants": {

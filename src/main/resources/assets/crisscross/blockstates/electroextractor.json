@@ -7,7 +7,7 @@
 			"side": "crisscross:blocks/electroextractor/electroextractor_sides",
 			"bottom": "crisscross:blocks/electroextractor/electroextractor_bottom"
 		},
-		"model": "crisscross:electroextractor",
+		"model": "crisscross:machine",
 		"uvlock": false
 	},
 	"variants": {

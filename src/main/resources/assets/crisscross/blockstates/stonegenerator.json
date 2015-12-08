@@ -7,7 +7,7 @@
 			"side": "crisscross:blocks/stone_generator/stone_generator_sides",
 			"bottom": "crisscross:blocks/stone_generator/stone_generator_bottom"
 		},
-		"model": "crisscross:stonegenerator",
+		"model": "crisscross:machine",
 		"uvlock": false
 	},
 	"variants": {
