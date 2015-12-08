@@ -3,6 +3,8 @@ package com.oitsjustjose.criss_cross.util;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.oitsjustjose.criss_cross.lib.Lib;
+
 public class CCLog
 {
 	private static Logger LOGGER = LogManager.getLogger(Lib.modid);

@@ -3,8 +3,8 @@ package com.oitsjustjose.criss_cross.items;
 import java.util.List;
 
 import com.oitsjustjose.criss_cross.CrissCross;
+import com.oitsjustjose.criss_cross.lib.Lib;
 import com.oitsjustjose.criss_cross.util.ClientProxy;
-import com.oitsjustjose.criss_cross.util.Lib;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -34,15 +34,15 @@ public class ItemModBuckets extends Item
 		GameRegistry.registerItem(this, "magicBucket");
 		Lib.add(this);
 	}
-	
+
 	@Override
-    @SideOnly(Side.CLIENT)
-    public boolean hasEffect(ItemStack stack)
-    {
-		if(stack.getItemDamage() == 0)
+	@SideOnly(Side.CLIENT)
+	public boolean hasEffect(ItemStack stack)
+	{
+		if (stack.getItemDamage() == 0)
 			return true;
 		return false;
-    }
+	}
 
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer player)
@@ -77,8 +77,7 @@ public class ItemModBuckets extends Item
 
 				else
 				{
-					if (world.getBlockState(blockpos).getBlock().getMaterial() == Material.lava || world.getBlockState(blockpos).getBlock()
-							.getMaterial() == Material.water)
+					if (world.getBlockState(blockpos).getBlock().getMaterial() == Material.lava || world.getBlockState(blockpos).getBlock().getMaterial() == Material.water)
 						return itemstack;
 
 					int x = blockpos.getX();

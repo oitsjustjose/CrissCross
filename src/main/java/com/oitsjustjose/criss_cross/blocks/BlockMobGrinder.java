@@ -16,6 +16,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class BlockMobGrinder extends BlockMachineBase
 {
 	private static String unlocName = "mobGinder";
+
 	public BlockMobGrinder()
 	{
 		super(unlocName);
@@ -27,5 +28,5 @@ public class BlockMobGrinder extends BlockMachineBase
 	public TileEntity createNewTileEntity(World world, int meta)
 	{
 		return new TileMobGrinder(meta);
-	}	
+	}
 }

@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 import com.oitsjustjose.criss_cross.blocks.BlockCropomator;
 import com.oitsjustjose.criss_cross.container.ContainerCropomator;
+import com.oitsjustjose.criss_cross.lib.ConfigHandler;
+import com.oitsjustjose.criss_cross.lib.Lib;
 import com.oitsjustjose.criss_cross.recipes.CropomatorRecipes;
-import com.oitsjustjose.criss_cross.util.ConfigHandler;
-import com.oitsjustjose.criss_cross.util.Lib;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -208,7 +208,7 @@ public class TileCropomator extends TileEntityLockable implements ITickable, ISi
 
 		this.catalystTime = tag.getShort("BonemealTime");
 		this.processTime = tag.getShort("ProcessTime");
-		if(this.ItemStacks[1] != null)
+		if (this.ItemStacks[1] != null)
 			this.catalystInUseTime = getItemBurnTime(this.ItemStacks[1]);
 		else
 			this.catalystInUseTime = 0;
@@ -320,11 +320,10 @@ public class TileCropomator extends TileEntityLockable implements ITickable, ISi
 			{
 				ItemStacks[2] = output.copy();
 			}
-			else
-				if (outputSlot.isItemEqual(output))
-				{
-					outputSlot.stackSize += output.stackSize;
-				}
+			else if (outputSlot.isItemEqual(output))
+			{
+				outputSlot.stackSize += output.stackSize;
+			}
 
 			--input.stackSize;
 			if (input.stackSize <= 0)
@@ -352,8 +351,7 @@ public class TileCropomator extends TileEntityLockable implements ITickable, ISi
 
 	public boolean isUseableByPlayer(EntityPlayer player)
 	{
-		return this.worldObj.getTileEntity(this.pos) != this ? false
-				: player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) <= 64.0D;
+		return this.worldObj.getTileEntity(this.pos) != this ? false : player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) <= 64.0D;
 	}
 
 	@Override

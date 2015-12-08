@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import com.oitsjustjose.criss_cross.blocks.BlockStonegen;
 import com.oitsjustjose.criss_cross.container.ContainerStonegen;
-import com.oitsjustjose.criss_cross.util.ConfigHandler;
-import com.oitsjustjose.criss_cross.util.Lib;
+import com.oitsjustjose.criss_cross.lib.ConfigHandler;
+import com.oitsjustjose.criss_cross.lib.Lib;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -212,7 +212,7 @@ public class TileStonegen extends TileEntityLockable implements ITickable, ISide
 
 		this.fuelTime = tag.getShort("FuelTime");
 		this.processTime = tag.getShort("WorkTime");
-		if(this.ItemStacks[1] != null)
+		if (this.ItemStacks[1] != null)
 			this.fuelUsetime = getItemBurnTime(this.ItemStacks[1]);
 		else
 			this.fuelUsetime = 0;
@@ -273,7 +273,7 @@ public class TileStonegen extends TileEntityLockable implements ITickable, ISide
 		ItemStack input = this.ItemStacks[0];
 		if (input != null)
 		{
-			ItemStack output = new ItemStack(Blocks.stone);				
+			ItemStack output = new ItemStack(Blocks.stone);
 			ItemStack outputSlot = this.ItemStacks[2];
 			if (outputSlot == null)
 				return true;
@@ -322,11 +322,10 @@ public class TileStonegen extends TileEntityLockable implements ITickable, ISide
 			{
 				ItemStacks[2] = output.copy();
 			}
-			else
-				if (outputSlot.isItemEqual(output))
-				{
-					outputSlot.stackSize += output.stackSize;
-				}
+			else if (outputSlot.isItemEqual(output))
+			{
+				outputSlot.stackSize += output.stackSize;
+			}
 
 			if (input.stackSize <= 0)
 			{
@@ -353,8 +352,7 @@ public class TileStonegen extends TileEntityLockable implements ITickable, ISide
 
 	public boolean isUseableByPlayer(EntityPlayer player)
 	{
-		return this.worldObj.getTileEntity(this.pos) != this ? false
-				: player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) <= 64.0D;
+		return this.worldObj.getTileEntity(this.pos) != this ? false : player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) <= 64.0D;
 	}
 
 	@Override

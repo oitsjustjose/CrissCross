@@ -2,7 +2,7 @@ package com.oitsjustjose.criss_cross.items;
 
 import com.oitsjustjose.criss_cross.CrissCross;
 import com.oitsjustjose.criss_cross.event.InfiniAppleEvent;
-import com.oitsjustjose.criss_cross.util.Lib;
+import com.oitsjustjose.criss_cross.lib.Lib;
 
 import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;

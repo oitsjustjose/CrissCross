@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.oitsjustjose.criss_cross.CrissCross;
+import com.oitsjustjose.criss_cross.lib.Lib;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;

@@ -95,31 +95,29 @@ public class ItemHelper
 		{
 			return null;
 		}
+		else if (dmgItems[1] != null && dmgItems[0].getItem() == dmgItems[1].getItem() && dmgItems[0].stackSize == 1 && dmgItems[1].stackSize == 1 && dmgItems[0].getItem().isRepairable())
+		{
+			Item theItem = dmgItems[0].getItem();
+			int var13 = theItem.getMaxDamage() - dmgItems[0].getItemDamage();
+			int var8 = theItem.getMaxDamage() - dmgItems[1].getItemDamage();
+			int var9 = var13 + var8 + theItem.getMaxDamage() * 5 / 100;
+			int var10 = Math.max(0, theItem.getMaxDamage() - var9);
+
+			return new ItemStack(dmgItems[0].getItem(), 1, var10);
+		}
 		else
-			if (dmgItems[1] != null && dmgItems[0].getItem() == dmgItems[1].getItem() && dmgItems[0].stackSize == 1 && dmgItems[1].stackSize == 1
-					&& dmgItems[0].getItem().isRepairable())
+		{
+			IRecipe recipe;
+			for (int i = 0; i < CraftingManager.getInstance().getRecipeList().size(); i++)
 			{
-				Item theItem = dmgItems[0].getItem();
-				int var13 = theItem.getMaxDamage() - dmgItems[0].getItemDamage();
-				int var8 = theItem.getMaxDamage() - dmgItems[1].getItemDamage();
-				int var9 = var13 + var8 + theItem.getMaxDamage() * 5 / 100;
-				int var10 = Math.max(0, theItem.getMaxDamage() - var9);
+				recipe = (IRecipe) CraftingManager.getInstance().getRecipeList().get(i);
 
-				return new ItemStack(dmgItems[0].getItem(), 1, var10);
-			}
-			else
-			{
-				IRecipe recipe;
-				for (int i = 0; i < CraftingManager.getInstance().getRecipeList().size(); i++)
+				if (recipe.matches(inv, world))
 				{
-					recipe = (IRecipe) CraftingManager.getInstance().getRecipeList().get(i);
-
-					if (recipe.matches(inv, world))
-					{
-						return recipe.getCraftingResult(inv);
-					}
+					return recipe.getCraftingResult(inv);
 				}
-				return null;
 			}
+			return null;
+		}
 	}
 }

@@ -14,33 +14,38 @@ import net.minecraft.world.World;
 public class TileMobGrinder extends TileEntity implements ITickable
 {
 	int facing;
-	
+
 	public TileMobGrinder(int dir)
 	{
 		super();
 		this.facing = dir;
 	}
-	
+
 	@Override
 	public void update()
 	{
 		World world = this.worldObj;
-		
-		if(!world.isRemote)
-		{			
-		
+
+		if (!world.isRemote)
+		{
+
 		}
 	}
-	
+
 	public AxisAlignedBB getAABBForFacing(BlockPos pos, int facing)
 	{
 		switch (facing)
 		{
-		case 2: return new AxisAlignedBB(pos, pos.north(3));
-		case 3: return new AxisAlignedBB(pos, pos.south(3));
-		case 4: return new AxisAlignedBB(pos, pos.west(3));
-		case 5: return new AxisAlignedBB(pos, pos.east(3));
-		default: return new AxisAlignedBB(pos, pos);
+		case 2:
+			return new AxisAlignedBB(pos, pos.north(3));
+		case 3:
+			return new AxisAlignedBB(pos, pos.south(3));
+		case 4:
+			return new AxisAlignedBB(pos, pos.west(3));
+		case 5:
+			return new AxisAlignedBB(pos, pos.east(3));
+		default:
+			return new AxisAlignedBB(pos, pos);
 
 		}
 	}

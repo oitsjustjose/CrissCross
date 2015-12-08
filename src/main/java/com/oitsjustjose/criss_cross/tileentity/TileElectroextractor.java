@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 import com.oitsjustjose.criss_cross.blocks.BlockElectroextractor;
 import com.oitsjustjose.criss_cross.container.ContainerElectroextractor;
+import com.oitsjustjose.criss_cross.lib.ConfigHandler;
+import com.oitsjustjose.criss_cross.lib.Lib;
 import com.oitsjustjose.criss_cross.recipes.ElectroextractorRecipes;
-import com.oitsjustjose.criss_cross.util.ConfigHandler;
-import com.oitsjustjose.criss_cross.util.Lib;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -190,7 +190,7 @@ public class TileElectroextractor extends TileEntityLockable implements ITickabl
 
 		this.fuelTime = tag.getShort("Energy");
 		this.crushTime = tag.getShort("CrushTime");
-		if(this.ItemStacks[1] != null)
+		if (this.ItemStacks[1] != null)
 			this.fuelInUseTime = getItemBurnTime(this.ItemStacks[1]);
 		else
 			this.fuelInUseTime = 0;
@@ -302,11 +302,10 @@ public class TileElectroextractor extends TileEntityLockable implements ITickabl
 			{
 				ItemStacks[2] = output.copy();
 			}
-			else
-				if (outputSlot.isItemEqual(output))
-				{
-					outputSlot.stackSize += output.stackSize;
-				}
+			else if (outputSlot.isItemEqual(output))
+			{
+				outputSlot.stackSize += output.stackSize;
+			}
 
 			--input.stackSize;
 			if (input.stackSize <= 0)
@@ -323,7 +322,7 @@ public class TileElectroextractor extends TileEntityLockable implements ITickabl
 
 	public static boolean isItemEnergetic(ItemStack itemstack)
 	{
-		if(fuelItems == null || fuelItems.size() <= 0)
+		if (fuelItems == null || fuelItems.size() <= 0)
 			return false;
 		for (int i = 0; i < fuelItems.size(); i++)
 		{
@@ -336,8 +335,7 @@ public class TileElectroextractor extends TileEntityLockable implements ITickabl
 
 	public boolean isUseableByPlayer(EntityPlayer player)
 	{
-		return this.worldObj.getTileEntity(this.pos) != this ? false
-				: player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) <= 64.0D;
+		return this.worldObj.getTileEntity(this.pos) != this ? false : player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) <= 64.0D;
 	}
 
 	@Override

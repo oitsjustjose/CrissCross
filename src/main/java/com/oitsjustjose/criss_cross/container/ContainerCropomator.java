@@ -103,43 +103,38 @@ public class ContainerCropomator extends Container
 
 				slot.onSlotChange(itemstack1, itemstack);
 			}
-			else
-				if (slotID != 1 && slotID != 0)
+			else if (slotID != 1 && slotID != 0)
+			{
+				if (TileCropomator.isValid(itemstack1))
 				{
-					if (TileCropomator.isValid(itemstack1))
-					{
-						if (!this.mergeItemStack(itemstack1, 0, 1, false))
-						{
-							return null;
-						}
-					}
-					else
-						if (TileCropomator.isItemCatalyst(itemstack1))
-						{
-							if (!this.mergeItemStack(itemstack1, 1, 2, false))
-							{
-								return null;
-							}
-						}
-						else
-							if (slotID >= 3 && slotID < 30)
-							{
-								if (!this.mergeItemStack(itemstack1, 30, 39, false))
-								{
-									return null;
-								}
-							}
-							else
-								if (slotID >= 30 && slotID < 39 && !this.mergeItemStack(itemstack1, 3, 30, false))
-								{
-									return null;
-								}
-				}
-				else
-					if (!this.mergeItemStack(itemstack1, 3, 39, false))
+					if (!this.mergeItemStack(itemstack1, 0, 1, false))
 					{
 						return null;
 					}
+				}
+				else if (TileCropomator.isItemCatalyst(itemstack1))
+				{
+					if (!this.mergeItemStack(itemstack1, 1, 2, false))
+					{
+						return null;
+					}
+				}
+				else if (slotID >= 3 && slotID < 30)
+				{
+					if (!this.mergeItemStack(itemstack1, 30, 39, false))
+					{
+						return null;
+					}
+				}
+				else if (slotID >= 30 && slotID < 39 && !this.mergeItemStack(itemstack1, 3, 30, false))
+				{
+					return null;
+				}
+			}
+			else if (!this.mergeItemStack(itemstack1, 3, 39, false))
+			{
+				return null;
+			}
 
 			if (itemstack1.stackSize == 0)
 			{

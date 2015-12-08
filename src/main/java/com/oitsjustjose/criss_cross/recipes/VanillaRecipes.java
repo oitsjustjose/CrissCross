@@ -1,9 +1,9 @@
 package com.oitsjustjose.criss_cross.recipes;
 
-import com.oitsjustjose.criss_cross.blocks.CCBlocks;
-import com.oitsjustjose.criss_cross.items.CCItems;
+import com.oitsjustjose.criss_cross.lib.ConfigHandler;
+import com.oitsjustjose.criss_cross.lib.LibBlocks;
+import com.oitsjustjose.criss_cross.lib.LibItems;
 import com.oitsjustjose.criss_cross.util.CCLog;
-import com.oitsjustjose.criss_cross.util.ConfigHandler;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -24,17 +24,18 @@ public class VanillaRecipes
 
 	static void initBlockGeneratorRecipes()
 	{
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CCBlocks.cobblegen), "CPC", "#$#", "CPC", '$', "blockIron", 'C', "cobblestone", 'P', Blocks.piston, '#', Items.stone_pickaxe));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CCBlocks.stonegen), "CPC", "#$#", "CPC", '$', "blockIron", 'C', "stone", 'P', Blocks.piston, '#', Items.stone_pickaxe));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LibBlocks.cobblegen), "CPC", "#$#", "CPC", '$', "blockIron", 'C', "cobblestone", 'P', Blocks.piston, '#', Items.stone_pickaxe));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LibBlocks.stonegen), "CPC", "#$#", "CPC", '$', "blockIron", 'C', "stone", 'P', Blocks.piston, '#', Items.stone_pickaxe));
 	}
 
 	static void initOthers()
 	{
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CCItems.buckets, 1, 0), "DFD", "WBW", "DFD", 'W', Items.water_bucket, 'B', Items.bucket, 'D', "gemDiamond", 'F', "blockDiamond"));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CCItems.buckets, 1, 1), "OGO", "GBG", "OGO", 'B', Items.bucket, 'G', "blockGlass", 'O', Blocks.obsidian));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CCItems.infiniApple, 1, 0), "###", "#N#", "###", '#', new ItemStack(Items.golden_apple, 1, 1), 'N', Items.nether_star));		
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CCItems.mantleSmasherMkI), "## ", "#PI", " II", '#', "blockEmerald", 'I', "blockIron", 'P', Items.diamond_pickaxe));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(CCItems.mantleSmasherMkII), "## ", "#PI", " IN", '#', "blockDiamond", 'I', "blockGold", 'P', CCItems.mantleSmasherMkI, 'N', Items.nether_star));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LibItems.buckets, 1, 0), "DFD", "WBW", "DFD", 'W', Items.water_bucket, 'B', Items.bucket, 'D', "gemDiamond", 'F', "blockDiamond"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LibItems.buckets, 1, 1), "OGO", "GBG", "OGO", 'B', Items.bucket, 'G', "blockGlass", 'O', Blocks.obsidian));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LibItems.infiniApple, 1, 0), "###", "#N#", "###", '#', new ItemStack(Items.golden_apple, 1, 1), 'N', Items.nether_star));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LibItems.mantleSmasherMkI), "## ", "#PI", " II", '#', "blockEmerald", 'I', "blockIron", 'P', Items.diamond_pickaxe));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LibItems.mantleSmasherMkII), "## ", "#PI", " IN", '#', "blockDiamond", 'I', "blockGold", 'P', LibItems.mantleSmasherMkI, 'N',
+				Items.nether_star));
 	}
 
 	static void woodChipperRecipe()
@@ -56,7 +57,7 @@ public class VanillaRecipes
 			CCLog.warn("Please confirm you have the name and formatting correct.");
 		}
 
-		GameRegistry.addRecipe(new ItemStack(CCBlocks.woodchipper), new Object[] { "I#I", "SCS", "I#I", '#', Items.diamond_axe, 'I', Blocks.iron_bars, 'S', Items.golden_axe, 'C', centerItem });
+		GameRegistry.addRecipe(new ItemStack(LibBlocks.woodchipper), new Object[] { "I#I", "SCS", "I#I", '#', Items.diamond_axe, 'I', Blocks.iron_bars, 'S', Items.golden_axe, 'C', centerItem });
 	}
 
 	static void electroextractorRecipe()
@@ -79,7 +80,7 @@ public class VanillaRecipes
 
 		}
 
-		GameRegistry.addRecipe(new ItemStack(CCBlocks.electroextractor), new Object[] { "I#I", "SCS", "I#I", '#', Blocks.piston, 'I', Blocks.iron_bars, 'S', Items.golden_pickaxe, 'C', centerItem });
+		GameRegistry.addRecipe(new ItemStack(LibBlocks.electroextractor), new Object[] { "I#I", "SCS", "I#I", '#', Blocks.piston, 'I', Blocks.iron_bars, 'S', Items.golden_pickaxe, 'C', centerItem });
 	}
 
 	static void cropomatorRecipe()
@@ -101,7 +102,7 @@ public class VanillaRecipes
 			CCLog.warn("Please confirm you have the name and formatting correct.");
 		}
 
-		GameRegistry.addRecipe(new ItemStack(CCBlocks.cropomator), new Object[] { "I#I", "SCS", "I#I", '#', Blocks.hay_block, 'I', Items.iron_ingot, 'S', Items.golden_hoe, 'C', centerItem });
+		GameRegistry.addRecipe(new ItemStack(LibBlocks.cropomator), new Object[] { "I#I", "SCS", "I#I", '#', Blocks.hay_block, 'I', Items.iron_ingot, 'S', Items.golden_hoe, 'C', centerItem });
 	}
 
 }

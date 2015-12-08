@@ -1,7 +1,7 @@
 package com.oitsjustjose.criss_cross.blocks;
 
 import com.oitsjustjose.criss_cross.CrissCross;
-import com.oitsjustjose.criss_cross.util.Lib;
+import com.oitsjustjose.criss_cross.lib.Lib;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;

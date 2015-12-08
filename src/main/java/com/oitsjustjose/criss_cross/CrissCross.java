@@ -1,21 +1,16 @@
 package com.oitsjustjose.criss_cross;
 
-import com.oitsjustjose.criss_cross.blocks.CCBlocks;
-import com.oitsjustjose.criss_cross.items.CCItems;
-import com.oitsjustjose.criss_cross.items.ItemDust;
-import com.oitsjustjose.criss_cross.recipes.VanillaRecipes;
+import com.oitsjustjose.criss_cross.lib.ConfigHandler;
+import com.oitsjustjose.criss_cross.lib.CreativeTab;
+import com.oitsjustjose.criss_cross.lib.Lib;
+import com.oitsjustjose.criss_cross.lib.LibBlocks;
+import com.oitsjustjose.criss_cross.lib.LibItems;
 import com.oitsjustjose.criss_cross.recipes.CCMachineRecipes;
-import com.oitsjustjose.criss_cross.util.CCTab;
+import com.oitsjustjose.criss_cross.recipes.VanillaRecipes;
 import com.oitsjustjose.criss_cross.util.ClientProxy;
 import com.oitsjustjose.criss_cross.util.CommonProxy;
-import com.oitsjustjose.criss_cross.util.ConfigHandler;
-import com.oitsjustjose.criss_cross.util.OreDictionaryAdder;
-import com.oitsjustjose.criss_cross.util.Lib;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -40,20 +35,19 @@ public class CrissCross
 	{
 		ConfigHandler.init(event.getSuggestedConfigurationFile());
 		MinecraftForge.EVENT_BUS.register(new ConfigHandler());
-		CCTab = new CCTab();
+		CCTab = new CreativeTab();
 		proxy.preInit();
-		
-		CCBlocks.init();
-		CCItems.init();
+
+		LibBlocks.init();
+		LibItems.init();
 		VanillaRecipes.init();
 		CCMachineRecipes.init();
-		OreDictionaryAdder.init();
 	}
 
 	@EventHandler
 	public static void init(FMLInitializationEvent event)
 	{
-		if(event.getSide().isClient())
+		if (event.getSide().isClient())
 			ClientProxy.init();
 	}
 }

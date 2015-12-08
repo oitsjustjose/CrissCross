@@ -1,6 +1,6 @@
 package com.oitsjustjose.criss_cross.event;
 
-import com.oitsjustjose.criss_cross.items.CCItems;
+import com.oitsjustjose.criss_cross.lib.LibItems;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -17,7 +17,7 @@ public class InfiniAppleEvent
 			return;
 		EntityPlayer player = event.entityPlayer;
 
-		if (player.inventory.hasItem(CCItems.infiniApple))
+		if (player.inventory.hasItem(LibItems.infiniApple))
 		{
 			if (player.getFoodStats() != null)
 			{

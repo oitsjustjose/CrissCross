@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.oitsjustjose.criss_cross.CrissCross;
+import com.oitsjustjose.criss_cross.lib.Lib;
 import com.oitsjustjose.criss_cross.util.ClientProxy;
-import com.oitsjustjose.criss_cross.util.Lib;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -62,8 +62,7 @@ public class ItemDust extends Item
 	public String getUnlocalizedNameInefficiently(ItemStack itemstack)
 	{
 		int meta = itemstack.getItemDamage();
-		return (StatCollector.translateToLocal("item.CrissCross.dustPrefix") + " " + ItemDust.getName(meta) + " " + StatCollector.translateToLocal(
-				"item.CrissCross.dustPostfix"));
+		return (StatCollector.translateToLocal("item.CrissCross.dustPrefix") + " " + ItemDust.getName(meta) + " " + StatCollector.translateToLocal("item.CrissCross.dustPostfix"));
 	}
 
 	@Override
@@ -71,7 +70,7 @@ public class ItemDust extends Item
 	{
 		return this.getUnlocalizedNameInefficiently(itemstack);
 	}
-	
+
 	@Override
 	public String getUnlocalizedName(ItemStack itemStack)
 	{

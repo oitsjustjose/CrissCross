@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 import com.oitsjustjose.criss_cross.blocks.BlockWoodchipper;
 import com.oitsjustjose.criss_cross.container.ContainerWoodchipper;
+import com.oitsjustjose.criss_cross.lib.ConfigHandler;
+import com.oitsjustjose.criss_cross.lib.Lib;
 import com.oitsjustjose.criss_cross.recipes.WoodchipperRecipes;
-import com.oitsjustjose.criss_cross.util.ConfigHandler;
-import com.oitsjustjose.criss_cross.util.Lib;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -207,7 +207,7 @@ public class TileWoodchipper extends TileEntityLockable implements ITickable, IS
 
 		this.fuelTime = tag.getShort("FuelTime");
 		this.processTime = tag.getShort("WorkTime");
-		if(this.ItemStacks[1] != null)
+		if (this.ItemStacks[1] != null)
 			this.fuelUsetime = getItemBurnTime(this.ItemStacks[1]);
 		else
 			this.fuelUsetime = 0;
@@ -319,11 +319,10 @@ public class TileWoodchipper extends TileEntityLockable implements ITickable, IS
 			{
 				ItemStacks[2] = output.copy();
 			}
-			else
-				if (outputSlot.isItemEqual(output))
-				{
-					outputSlot.stackSize += output.stackSize;
-				}
+			else if (outputSlot.isItemEqual(output))
+			{
+				outputSlot.stackSize += output.stackSize;
+			}
 
 			--input.stackSize;
 			if (input.stackSize <= 0)
@@ -351,8 +350,7 @@ public class TileWoodchipper extends TileEntityLockable implements ITickable, IS
 
 	public boolean isUseableByPlayer(EntityPlayer player)
 	{
-		return this.worldObj.getTileEntity(this.pos) != this ? false
-				: player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) <= 64.0D;
+		return this.worldObj.getTileEntity(this.pos) != this ? false : player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) <= 64.0D;
 	}
 
 	@Override
