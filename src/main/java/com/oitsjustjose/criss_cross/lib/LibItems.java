@@ -4,6 +4,7 @@ import com.oitsjustjose.criss_cross.items.ItemDust;
 import com.oitsjustjose.criss_cross.items.ItemInfiniApple;
 import com.oitsjustjose.criss_cross.items.ItemMantleSmasher;
 import com.oitsjustjose.criss_cross.items.ItemModBuckets;
+import com.oitsjustjose.criss_cross.items.ItemPouch;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -16,6 +17,7 @@ public class LibItems
 	public static Item dusts;
 	public static Item buckets;
 	public static Item infiniApple;
+	public static Item pouch;
 	public static Item mantleSmasherMkI;
 	public static Item mantleSmasherMkII;
 
@@ -31,6 +33,7 @@ public class LibItems
 		dusts = new ItemDust();
 		buckets = new ItemModBuckets();
 		infiniApple = new ItemInfiniApple();
+		pouch = new ItemPouch();
 		mantleSmasherMkI = new ItemMantleSmasher(mkI);
 		mantleSmasherMkII = new ItemMantleSmasher(mkII);
 	}

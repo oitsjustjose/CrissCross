@@ -47,7 +47,7 @@ public class CCMachineRecipes
 		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.emerald_ore), new ItemStack(Items.emerald, electroQTY));
 		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.coal_ore),    new ItemStack(Items.coal, electroQTY));
 		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.gravel),      new ItemStack(Items.flint));
-		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.cobblestone), new ItemStack(Blocks.sand));
+		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.cobblestone, 16), new ItemStack(Blocks.sand, 16));
 		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.sandstone, 1, Short.MAX_VALUE),     new ItemStack(Blocks.sand, 4));
 		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.red_sandstone, 1, Short.MAX_VALUE), new ItemStack(Blocks.sand, 4, 1));
 

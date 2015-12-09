@@ -1,7 +1,7 @@
 {
     "parent": "builtin/generated",
     "textures": {
-        "layer0": "crisscross:items/mantleSmasher_mkI"
+        "layer0": "crisscross:items/mantle_smasher_mkI"
     },
     "display": {
         "thirdperson": {

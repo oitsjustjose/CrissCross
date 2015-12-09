@@ -21,7 +21,7 @@ public class ItemMantleSmasher extends ItemPickaxe
 	public ItemMantleSmasher(ToolMaterial material)
 	{
 		super(material);
-		this.setUnlocalizedName(Lib.modid + ".mantleSmasher_" + material.name());
+		this.setUnlocalizedName(Lib.modid + ".mantle_smasher_" + material.name());
 		this.setCreativeTab(CrissCross.CCTab);
 		MinecraftForge.EVENT_BUS.register(new ToolEfficiencyEvent());
 		GameRegistry.registerItem(this, this.getUnlocalizedName());

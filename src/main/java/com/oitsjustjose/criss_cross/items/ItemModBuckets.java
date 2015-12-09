@@ -23,7 +23,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemModBuckets extends Item
 {
-	String[] types = new String[] { "everfulBucket", "voidBucket" };
+	String[] types = new String[] { "everful_bucket", "void_bucket" };
 
 	public ItemModBuckets()
 	{
@@ -31,7 +31,7 @@ public class ItemModBuckets extends Item
 		this.maxStackSize = 1;
 		this.setCreativeTab(CrissCross.CCTab);
 		this.setContainerItem(this);
-		GameRegistry.registerItem(this, "magicBucket");
+		GameRegistry.registerItem(this, "special_bucket");
 		Lib.add(this);
 	}
 

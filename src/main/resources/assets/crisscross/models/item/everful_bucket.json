@@ -1,7 +1,7 @@
 {
     "parent": "builtin/generated",
     "textures": {
-        "layer0": "crisscross:items/everfulBucket"
+        "layer0": "crisscross:items/everful_bucket"
     },
     "display": {
         "thirdperson": {
