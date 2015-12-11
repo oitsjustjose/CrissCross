@@ -4,6 +4,7 @@ import com.oitsjustjose.criss_cross.lib.ConfigHandler;
 import com.oitsjustjose.criss_cross.lib.LibBlocks;
 import com.oitsjustjose.criss_cross.lib.LibItems;
 import com.oitsjustjose.criss_cross.util.CCLog;
+import com.oitsjustjose.criss_cross.util.ColorUtils;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -34,8 +35,9 @@ public class VanillaRecipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LibItems.buckets, 1, 1), "OGO", "GBG", "OGO", 'B', Items.bucket, 'G', "blockGlass", 'O', Blocks.obsidian));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LibItems.infiniApple, 1, 0), "###", "#N#", "###", '#', new ItemStack(Items.golden_apple, 1, 1), 'N', Items.nether_star));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LibItems.mantleSmasherMkI), "## ", "#PI", " II", '#', "blockEmerald", 'I', "blockIron", 'P', Items.diamond_pickaxe));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LibItems.mantleSmasherMkII), "## ", "#PI", " IN", '#', "blockDiamond", 'I', "blockGold", 'P', LibItems.mantleSmasherMkI, 'N',
-				Items.nether_star));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LibItems.mantleSmasherMkII), "## ", "#PI", " IN", '#', "blockDiamond", 'I', "blockGold", 'P', LibItems.mantleSmasherMkI, 'N', Items.nether_star));
+		for (int i = 0; i < 16; i++)
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LibItems.pouch, 1, i), "SDS", "WCW", "BWB", 'W', new ItemStack(Blocks.wool, 1, Short.MAX_VALUE), 'S', Items.string, 'D', ColorUtils.getOreDictFromMeta(i), 'C', Blocks.chest, 'B', Items.diamond));
 	}
 
 	static void woodChipperRecipe()

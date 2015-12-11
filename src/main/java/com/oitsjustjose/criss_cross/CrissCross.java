@@ -27,7 +27,7 @@ public class CrissCross
 	@Instance(Lib.modid)
 	public static CrissCross instance;
 
-	@SidedProxy(clientSide = "com.oitsjustjose.criss_cross.util.ClientProxy", serverSide = "com.oitsjustjose.criss_cross.util.CommonProxy")
+	@SidedProxy(clientSide = Lib.clientProxy, serverSide = Lib.commonProxy)
 	public static CommonProxy proxy;
 
 	@EventHandler

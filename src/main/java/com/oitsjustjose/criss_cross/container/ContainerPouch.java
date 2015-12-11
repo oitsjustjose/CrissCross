@@ -50,8 +50,6 @@ public class ContainerPouch extends Container
 	{
 	}
 
-
-
 	public ItemStack slotClick(int par1, int par2, int par3, EntityPlayer par4EntityPlayer)
 	{
 		if ((par3 == 2) && (par2 == this.currentFilter))

@@ -14,7 +14,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GUIPouch extends GuiContainer
 {
-    private static final ResourceLocation texture = new ResourceLocation("textures/gui/container/generic_54.png");
+	private static final ResourceLocation texture = new ResourceLocation("textures/gui/container/generic_54.png");
 	private EntityPlayer player;
 	private int currentFilter = -1;
 	private String name;
@@ -31,7 +31,7 @@ public class GUIPouch extends GuiContainer
 
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
-		this.fontRendererObj.drawString(name, 7, 9, 4210752);
+		this.fontRendererObj.drawString(name, 7, 8, 4210752);
 		this.fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 7, this.ySize - 92, 4210752);
 	}
 

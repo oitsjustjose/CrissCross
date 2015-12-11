@@ -11,13 +11,13 @@ public class ToolEfficiencyEvent
 	@SubscribeEvent
 	public void registerEvent(BreakSpeed event)
 	{
-		if(event.entityPlayer == null || event.entityPlayer.getHeldItem() == null)
+		if (event.entityPlayer == null || event.entityPlayer.getHeldItem() == null)
 			return;
-		
+
 		Material m = event.entityPlayer.worldObj.getBlockState(event.pos).getBlock().getMaterial();
-		
-		if(event.entityPlayer.getHeldItem().getItem() instanceof ItemMantleSmasher)
-			if(m == Material.ground || m == Material.grass || m == Material.sand)
+
+		if (event.entityPlayer.getHeldItem().getItem() instanceof ItemMantleSmasher)
+			if (m == Material.ground || m == Material.grass || m == Material.sand)
 				event.newSpeed = event.originalSpeed * 5;
 	}
 }

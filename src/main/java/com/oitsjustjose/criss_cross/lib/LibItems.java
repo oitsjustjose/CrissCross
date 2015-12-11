@@ -5,6 +5,7 @@ import com.oitsjustjose.criss_cross.items.ItemInfiniApple;
 import com.oitsjustjose.criss_cross.items.ItemMantleSmasher;
 import com.oitsjustjose.criss_cross.items.ItemModBuckets;
 import com.oitsjustjose.criss_cross.items.ItemPouch;
+import com.oitsjustjose.criss_cross.items.ItemTimer;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -20,6 +21,7 @@ public class LibItems
 	public static Item pouch;
 	public static Item mantleSmasherMkI;
 	public static Item mantleSmasherMkII;
+	public static Item timer;
 
 	public static ToolMaterial mkI;
 	public static ToolMaterial mkII;
@@ -36,5 +38,6 @@ public class LibItems
 		pouch = new ItemPouch();
 		mantleSmasherMkI = new ItemMantleSmasher(mkI);
 		mantleSmasherMkII = new ItemMantleSmasher(mkII);
+		timer = new ItemTimer();
 	}
 }

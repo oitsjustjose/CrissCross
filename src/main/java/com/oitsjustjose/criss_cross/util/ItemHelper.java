@@ -10,9 +10,7 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.world.World;
 
 /**
- * 
  * @author TeamCoFH All credit goes to TeamCoFH, this was required for proper woodchipper recipes :)
- * 
  */
 
 public class ItemHelper

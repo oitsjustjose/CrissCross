@@ -68,8 +68,7 @@ public class ClientProxy extends CommonProxy
 			}
 		}
 		else if (customName == "")
-			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(itemBlock, 0, new ModelResourceLocation(Lib.modid.toLowerCase() + ":" + block.getUnlocalizedName().substring(16)
-					.toLowerCase(), "inventory"));
+			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(itemBlock, 0, new ModelResourceLocation(Lib.modid.toLowerCase() + ":" + block.getUnlocalizedName().substring(16).toLowerCase(), "inventory"));
 		else
 			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(itemBlock, 0, new ModelResourceLocation(Lib.modid.toLowerCase() + ":" + customName, "inventory"));
 	}

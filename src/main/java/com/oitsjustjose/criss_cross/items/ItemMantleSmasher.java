@@ -36,11 +36,11 @@ public class ItemMantleSmasher extends ItemPickaxe
 		if (!world.isRemote && !player.isSneaking())
 		{
 			Material m = world.getBlockState(pos).getBlock().getMaterial();
-			
+
 			if (m != Material.ground)
-				if(m != Material.grass)
-					if(m != Material.sand)
-						if(m != Material.rock)
+				if (m != Material.grass)
+					if (m != Material.sand)
+						if (m != Material.rock)
 							return super.onBlockStartBreak(itemstack, pos, player);
 
 			EnumFacing side = this.getMovingObjectPositionFromPlayer(world, player, true).sideHit;
@@ -92,7 +92,7 @@ public class ItemMantleSmasher extends ItemPickaxe
 	{
 		Block block = world.getBlockState(pos).getBlock();
 		IBlockState state = world.getBlockState(pos);
-		
+
 		Material m = block.getMaterial();
 
 		if (m == Material.ground || m == Material.grass || m == Material.sand || m == Material.rock)
