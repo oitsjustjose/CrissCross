@@ -5,7 +5,6 @@ import com.oitsjustjose.criss_cross.blocks.BlockCobblegen;
 import com.oitsjustjose.criss_cross.blocks.BlockCropomator;
 import com.oitsjustjose.criss_cross.blocks.BlockElectroextractor;
 import com.oitsjustjose.criss_cross.blocks.BlockStonegen;
-import com.oitsjustjose.criss_cross.blocks.BlockTimer;
 import com.oitsjustjose.criss_cross.blocks.BlockWoodchipper;
 import com.oitsjustjose.criss_cross.gui.GUIHandler;
 
@@ -29,7 +28,6 @@ public class LibBlocks
 		woodchipper = new BlockWoodchipper();
 		cobblegen = new BlockCobblegen();
 		stonegen = new BlockStonegen();
-		timer = new BlockTimer();
 		// mobGrinder = new BlockMobGrinder();
 		NetworkRegistry.INSTANCE.registerGuiHandler(CrissCross.instance, new GUIHandler());
 	}
