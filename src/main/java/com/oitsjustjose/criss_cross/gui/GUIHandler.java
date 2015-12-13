@@ -33,7 +33,6 @@ public class GUIHandler implements IGuiHandler
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
 	{
 		TileEntity tile = world.getTileEntity(new BlockPos(x, y, z));
-		Item item = player.getHeldItem().getItem();
 
 		if (tile instanceof TileCropomator)
 		{
@@ -65,7 +64,7 @@ public class GUIHandler implements IGuiHandler
 
 			return new ContainerStonegen(player, TE);
 		}
-		if (item instanceof ItemPouch)
+		if (player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ItemPouch)
 		{
 			return new ContainerPouch(player, player.inventory.currentItem);
 		}
@@ -77,7 +76,6 @@ public class GUIHandler implements IGuiHandler
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
 	{
 		TileEntity tile = world.getTileEntity(new BlockPos(x, y, z));
-		Item item = player.getHeldItem().getItem();
 
 		if (tile instanceof TileCropomator)
 		{
@@ -110,7 +108,7 @@ public class GUIHandler implements IGuiHandler
 
 			return new GUIStonegen(player, TE);
 		}
-		if (item instanceof ItemPouch)
+		if (player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ItemPouch)
 		{
 			return new GUIPouch(player, player.inventory.currentItem);
 		}

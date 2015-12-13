@@ -19,7 +19,6 @@ public class LibBlocks
 	public static Block cobblegen;
 	public static Block stonegen;
 	public static Block mobGrinder;
-	public static Block timer;
 
 	public static void init()
 	{
