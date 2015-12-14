@@ -14,6 +14,8 @@ import com.oitsjustjose.criss_cross.tileentity.TileWoodchipper;
 import com.oitsjustjose.criss_cross.util.CCLog;
 import com.oitsjustjose.criss_cross.util.ItemHelper;
 
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -37,12 +39,13 @@ public class CCMachineRecipes
 		initElectroextractorOreDictionary();
 		initWoodchipperFuels();
 		initWoodchipperOreDictionary();
+		initScribeRecipes();
 
 		TileStonegen.addFuel(new ItemStack(Items.water_bucket));
 		TileStonegen.addFuel(new ItemStack(LibItems.buckets));
 		TileCobblegen.addFuel(new ItemStack(Items.water_bucket));
 		TileCobblegen.addFuel(new ItemStack(LibItems.buckets));
-
+		
 		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.diamond_ore), new ItemStack(Items.diamond, electroQTY));
 		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.emerald_ore), new ItemStack(Items.emerald, electroQTY));
 		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.coal_ore), new ItemStack(Items.coal, electroQTY));
@@ -62,6 +65,35 @@ public class CCMachineRecipes
 			OreDictionary.registerOre("dust" + dustNames.get(i), new ItemStack(LibItems.dusts, 1, i));
 	}
 
+	public static void initScribeRecipes()
+	{
+		ScribeRecipes.getInstance().addRecipe(new ItemStack(Items.potionitem, 1, 8269), getEnchantedBook(Enchantment.aquaAffinity));
+		ScribeRecipes.getInstance().addRecipe(new ItemStack(Items.spider_eye, 8), getEnchantedBook(Enchantment.baneOfArthropods));
+		ScribeRecipes.getInstance().addRecipe(new ItemStack(Blocks.obsidian, 8), getEnchantedBook(Enchantment.blastProtection));
+		ScribeRecipes.getInstance().addRecipe(new ItemStack(Blocks.waterlily, 8), getEnchantedBook(Enchantment.depthStrider));
+		ScribeRecipes.getInstance().addRecipe(new ItemStack(Blocks.redstone_block, 8), getEnchantedBook(Enchantment.efficiency));
+		ScribeRecipes.getInstance().addRecipe(new ItemStack(Items.feather, 32), getEnchantedBook(Enchantment.featherFalling));
+		ScribeRecipes.getInstance().addRecipe(new ItemStack(Items.blaze_rod, 8), getEnchantedBook(Enchantment.fireAspect));
+		ScribeRecipes.getInstance().addRecipe(new ItemStack(Items.blaze_powder, 16), getEnchantedBook(Enchantment.flame));
+		ScribeRecipes.getInstance().addRecipe(new ItemStack(Blocks.lapis_block, 12), getEnchantedBook(Enchantment.fortune));
+		ScribeRecipes.getInstance().addRecipe(new ItemStack(Items.diamond, 8), getEnchantedBook(Enchantment.infinity));
+		ScribeRecipes.getInstance().addRecipe(new ItemStack(Blocks.piston, 4), getEnchantedBook(Enchantment.knockback));
+		ScribeRecipes.getInstance().addRecipe(new ItemStack(Items.golden_apple, 2, 0), getEnchantedBook(Enchantment.looting));
+		ScribeRecipes.getInstance().addRecipe(new ItemStack(Items.fishing_rod), getEnchantedBook(Enchantment.luckOfTheSea));
+		ScribeRecipes.getInstance().addRecipe(new ItemStack(Items.fish, 16, 0), getEnchantedBook(Enchantment.lure));
+		ScribeRecipes.getInstance().addRecipe(new ItemStack(Items.quartz, 48), getEnchantedBook(Enchantment.power));
+		ScribeRecipes.getInstance().addRecipe(new ItemStack(Blocks.log, 16, Short.MAX_VALUE), getEnchantedBook(Enchantment.projectileProtection));
+		ScribeRecipes.getInstance().addRecipe(new ItemStack(Blocks.log2, 16, Short.MAX_VALUE), getEnchantedBook(Enchantment.projectileProtection));
+		ScribeRecipes.getInstance().addRecipe(new ItemStack(Blocks.iron_block, 4), getEnchantedBook(Enchantment.protection));
+		ScribeRecipes.getInstance().addRecipe(new ItemStack(Blocks.dropper, 4), getEnchantedBook(Enchantment.punch));
+		ScribeRecipes.getInstance().addRecipe(new ItemStack(Items.fish, 16, 3), getEnchantedBook(Enchantment.respiration));
+		ScribeRecipes.getInstance().addRecipe(new ItemStack(Blocks.quartz_block, 16), getEnchantedBook(Enchantment.sharpness));
+		ScribeRecipes.getInstance().addRecipe(new ItemStack(Blocks.slime_block, 8), getEnchantedBook(Enchantment.silkTouch));
+		ScribeRecipes.getInstance().addRecipe(new ItemStack(Items.rotten_flesh, 48), getEnchantedBook(Enchantment.smite));
+		ScribeRecipes.getInstance().addRecipe(new ItemStack(Blocks.vine, 64), getEnchantedBook(Enchantment.thorns));
+		ScribeRecipes.getInstance().addRecipe(new ItemStack(Items.iron_ingot, 24), getEnchantedBook(Enchantment.unbreaking));
+	}
+	
 	public static void initCropomatorRecipes()
 	{
 		for (int i = 0; i < ConfigHandler.cropomatorInputs.length; i++)
@@ -312,6 +344,14 @@ public class CCMachineRecipes
 		}
 	}
 
+	static ItemStack getEnchantedBook(Enchantment enchantment)
+	{
+		ItemStack retBook = new ItemStack(Items.enchanted_book);
+		Items.enchanted_book.addEnchantment(retBook, new EnchantmentData(enchantment, 1));
+		
+		return retBook;
+	}
+	
 	static boolean doesOreNameExist(String oreName)
 	{
 		List<ItemStack> ores = OreDictionary.getOres(oreName);

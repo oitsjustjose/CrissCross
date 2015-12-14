@@ -38,9 +38,7 @@ public class GUICobblegen extends GuiContainer
 
 		if (this.cobblegen.isUsingFuel())
 		{
-			int i1 = this.cobblegen.getBurnTimeRemainingScaled(13);
-			this.drawTexturedModalRect(k + 56, l + 36 + 12 - i1, 176, 12 - i1, 14, i1 + 1);
-			i1 = this.cobblegen.getProgressScaled(24);
+			int i1 = this.cobblegen.getProgressScaled(24);
 			this.drawTexturedModalRect(k + 79, l + 34, 176, 14, i1 + 1, 16);
 		}
 	}

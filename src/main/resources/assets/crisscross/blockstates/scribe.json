@@ -1,0 +1,30 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"textures": {
+			"top": "crisscross:blocks/scribe/scribe_top",
+			"front": "crisscross:blocks/scribe/scribe_front",
+			"side": "crisscross:blocks/scribe/scribe_sides",
+			"bottom": "crisscross:blocks/scribe/scribe_bottom"
+		},
+		"model": "crisscross:machine",
+		"uvlock": false
+	},
+	"variants": {
+		"normal": [{}],
+		"inventory": [{}],
+		"facing": {
+			"north": {
+			},
+			"east": {
+				"y": 90
+			},
+			"south": {
+				"y": 180
+			},
+			"west": {
+				"y": 270
+			}
+		}
+	}
+}

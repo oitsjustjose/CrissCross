@@ -151,7 +151,7 @@ public class TileCropomator extends TileEntityLockable implements ITickable, ISi
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int slot)
+	public ItemStack removeStackFromSlot(int slot)
 	{
 		if (this.ItemStacks[slot] != null)
 		{
@@ -411,7 +411,7 @@ public class TileCropomator extends TileEntityLockable implements ITickable, ISi
 	}
 
 	@Override
-	public String getCommandSenderName()
+	public String getName()
 	{
 		return this.hasCustomName() ? this.customName : "container.cropomator";
 	}
@@ -445,5 +445,4 @@ public class TileCropomator extends TileEntityLockable implements ITickable, ISi
 	{
 		return direction != EnumFacing.DOWN || slot != 1;
 	}
-
 }

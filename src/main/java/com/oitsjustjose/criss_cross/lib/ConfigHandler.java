@@ -25,7 +25,7 @@ public class ConfigHandler
 	public static String electroextractorRecipeItem;
 	public static String[] electroextractorEnergySources;
 	public static String[] electroextractorOreDictInputs;
-	public static String[] defaultElectroextractorOreDictInputs = new String[] { "Iron:12428902", "Gold:15400704", "Aluminum:15987699", "Cobalt:17663", "Ardite:13938485", "Copper:16751872", "Tin:15132390", "Silver:13297640", "Lead:5722979", "Platinum:11067903", "Mithril:4433113", "Nickel:16580553" };
+	public static String[] defaultElectroextractorOreDictInputs = new String[] { "Iron:12428902", "Gold:16772608", "Aluminum:15987699", "Cobalt:17663", "Ardite:13938485", "Copper:16751872", "Tin:15132390", "Silver:13297640", "Lead:5722979", "Platinum:11067903", "Mithril:4433113", "Nickel:16580553" };
 	public static String[] defaultElectroextractorEnergySources = new String[] { "minecraft:redstone_block" };
 
 	public static int woodchipperProcessTime;

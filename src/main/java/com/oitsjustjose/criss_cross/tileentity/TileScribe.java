@@ -2,14 +2,13 @@ package com.oitsjustjose.criss_cross.tileentity;
 
 import java.util.ArrayList;
 
-import com.oitsjustjose.criss_cross.blocks.BlockStonegen;
-import com.oitsjustjose.criss_cross.container.ContainerStonegen;
-import com.oitsjustjose.criss_cross.lib.ConfigHandler;
+import com.oitsjustjose.criss_cross.blocks.BlockScribe;
+import com.oitsjustjose.criss_cross.container.ContainerScribe;
 import com.oitsjustjose.criss_cross.lib.Lib;
+import com.oitsjustjose.criss_cross.recipes.ScribeRecipes;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ISidedInventory;
@@ -22,18 +21,18 @@ import net.minecraft.util.ITickable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class TileStonegen extends TileEntityLockable implements ITickable, ISidedInventory
+public class TileScribe extends TileEntityLockable implements ITickable, ISidedInventory
 {
-	private static int proTicks = ConfigHandler.blockGeneratorProcessTimes;
+	// TODO: change this back to 700.
+	private static int proTicks = 700;
 	private static final int[] slotsTop = new int[] { 0 };
 	private static final int[] slotsBottom = new int[] { 2, 1 };
 	private static final int[] slotsSides = new int[] { 1 };
-	private static ArrayList<ItemStack> fuelItems = new ArrayList<ItemStack>();
 	private static String customName;
 	private ItemStack[] ItemStacks = new ItemStack[3];
 
 	public int fuelTime;
-	public int processTime;
+	public int writingTime;
 	public int fuelUsetime;
 
 	@Override
@@ -53,7 +52,7 @@ public class TileStonegen extends TileEntityLockable implements ITickable, ISide
 			{
 				if (this.fuelTime == 0 && this.canProcess())
 				{
-					this.fuelUsetime = this.fuelTime = getItemBurnTime(this.ItemStacks[1]);
+					this.fuelUsetime = this.fuelTime = getBookUseTime(this.ItemStacks[1]);
 
 					if (this.fuelTime > 0)
 					{
@@ -73,25 +72,26 @@ public class TileStonegen extends TileEntityLockable implements ITickable, ISide
 
 				if (this.isUsingFuel() && this.canProcess())
 				{
-					++this.processTime;
+					++this.writingTime;
 
-					if (this.processTime == proTicks)
+					if (this.writingTime == proTicks)
 					{
-						this.processTime = 0;
+						this.worldObj.playSoundEffect(this.pos.getX(), this.pos.getY(), this.pos.getZ(), "portal.portal", 0.5F, 1.0F);
+						this.writingTime = 0;
 						this.processItem();
 						flag1 = true;
 					}
 				}
 				else
 				{
-					this.processTime = 0;
+					this.writingTime = 0;
 				}
 			}
 
 			if (flag != this.fuelTime > 0)
 			{
 				flag1 = true;
-				BlockStonegen.updateBlockState(this.fuelTime > 0, this.worldObj, this.pos);
+				BlockScribe.updateBlockState(this.fuelTime > 0, this.worldObj, this.pos);
 			}
 		}
 
@@ -99,11 +99,6 @@ public class TileStonegen extends TileEntityLockable implements ITickable, ISide
 		{
 			this.markDirty();
 		}
-	}
-
-	public static ArrayList<ItemStack> getFuels()
-	{
-		return fuelItems;
 	}
 
 	@Override
@@ -178,18 +173,13 @@ public class TileStonegen extends TileEntityLockable implements ITickable, ISide
 	@Override
 	public String getGuiID()
 	{
-		return Lib.modid + ":container.stonegen";
+		return Lib.modid + ":container.scribe";
 	}
 
 	@Override
 	public boolean hasCustomName()
 	{
 		return this.customName != null && this.customName.length() > 0;
-	}
-
-	public void setCustomInventoryName(String newName)
-	{
-		this.customName = newName;
 	}
 
 	@Override
@@ -211,9 +201,9 @@ public class TileStonegen extends TileEntityLockable implements ITickable, ISide
 		}
 
 		this.fuelTime = tag.getShort("FuelTime");
-		this.processTime = tag.getShort("WorkTime");
+		this.writingTime = tag.getShort("WorkTime");
 		if (this.ItemStacks[1] != null)
-			this.fuelUsetime = getItemBurnTime(this.ItemStacks[1]);
+			this.fuelUsetime = getBookUseTime(this.ItemStacks[1]);
 		else
 			this.fuelUsetime = 0;
 	}
@@ -223,7 +213,7 @@ public class TileStonegen extends TileEntityLockable implements ITickable, ISide
 	{
 		super.writeToNBT(tag);
 		tag.setShort("FuelTime", (short) this.fuelTime);
-		tag.setShort("WorkTime", (short) this.processTime);
+		tag.setShort("WorkTime", (short) this.writingTime);
 		NBTTagList nbttaglist = new NBTTagList();
 
 		for (int i = 0; i < this.ItemStacks.length; ++i)
@@ -249,7 +239,7 @@ public class TileStonegen extends TileEntityLockable implements ITickable, ISide
 	@SideOnly(Side.CLIENT)
 	public int getProgressScaled(int par1)
 	{
-		return this.processTime * par1 / proTicks;
+		return this.writingTime * par1 / proTicks;
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -273,7 +263,9 @@ public class TileStonegen extends TileEntityLockable implements ITickable, ISide
 		ItemStack input = this.ItemStacks[0];
 		if (input != null)
 		{
-			ItemStack output = new ItemStack(Blocks.stone);
+			ItemStack output = ScribeRecipes.getInstance().getResult(input);
+			if (output == null)
+				return false;
 			ItemStack outputSlot = this.ItemStacks[2];
 			if (outputSlot == null)
 				return true;
@@ -285,27 +277,9 @@ public class TileStonegen extends TileEntityLockable implements ITickable, ISide
 		return false;
 	}
 
-	public static void addFuel(ItemStack itemstack)
+	public static boolean isValidForScribe(ItemStack itemstack)
 	{
-		fuelItems.add(itemstack);
-	}
-
-	public static boolean removeFuel(ItemStack itemstack)
-	{
-		for (int i = 0; i < fuelItems.size(); i++)
-		{
-			if (fuelItems.get(i) == itemstack)
-			{
-				fuelItems.remove(i);
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public static boolean isValid(ItemStack itemstack)
-	{
-		if (itemstack.getItem() == Items.lava_bucket)
+		if (ScribeRecipes.getInstance().getResult(itemstack) != null)
 			return true;
 		return false;
 	}
@@ -314,9 +288,8 @@ public class TileStonegen extends TileEntityLockable implements ITickable, ISide
 	{
 		if (this.canProcess())
 		{
-
 			ItemStack input = ItemStacks[0];
-			ItemStack output = new ItemStack(Blocks.stone);
+			ItemStack output = ScribeRecipes.getInstance().getResult(input);
 			ItemStack outputSlot = ItemStacks[2];
 			if (outputSlot == null)
 			{
@@ -326,27 +299,20 @@ public class TileStonegen extends TileEntityLockable implements ITickable, ISide
 			{
 				outputSlot.stackSize += output.stackSize;
 			}
-
-			if (input.stackSize <= 0)
-			{
-				ItemStacks[0] = null;
-			}
+			ItemStacks[0] = null;
 		}
 	}
 
-	public static int getItemBurnTime(ItemStack itemstack)
+	public static int getBookUseTime(ItemStack itemstack)
 	{
-		return isItemFuel(itemstack) ? proTicks : 0;
+		return isBook(itemstack) ? proTicks : 0;
 	}
 
-	public static boolean isItemFuel(ItemStack itemstack)
+	public static boolean isBook(ItemStack itemstack)
 	{
-		for (int i = 0; i < fuelItems.size(); i++)
-		{
-			ItemStack temp = fuelItems.get(i);
-			if (temp.getItem() == itemstack.getItem() && temp.getItemDamage() == itemstack.getItemDamage())
-				return true;
-		}
+		ItemStack temp = new ItemStack(Items.writable_book);
+		if (temp.getItem() == itemstack.getItem() && temp.getItemDamage() == itemstack.getItemDamage())
+			return true;
 		return false;
 	}
 
@@ -380,7 +346,7 @@ public class TileStonegen extends TileEntityLockable implements ITickable, ISide
 		case 1:
 			return this.fuelUsetime;
 		case 2:
-			return this.processTime;
+			return this.writingTime;
 		default:
 			return 0;
 		}
@@ -398,7 +364,7 @@ public class TileStonegen extends TileEntityLockable implements ITickable, ISide
 			this.fuelUsetime = value;
 			break;
 		case 2:
-			this.processTime = value;
+			this.writingTime = value;
 			break;
 		}
 	}
@@ -419,19 +385,19 @@ public class TileStonegen extends TileEntityLockable implements ITickable, ISide
 	@Override
 	public String getName()
 	{
-		return this.hasCustomName() ? this.customName : "container.cobblegen";
+		return this.hasCustomName() ? this.customName : "container.scribe";
 	}
 
 	@Override
 	public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
 	{
-		return new ContainerStonegen(playerInventory.player, this);
+		return new ContainerScribe(playerInventory.player, this);
 	}
 
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack itemstack)
 	{
-		return slot == 2 ? false : (slot == 1 ? isItemFuel(itemstack) : true);
+		return slot == 2 ? false : (slot == 1 ? isBook(itemstack) : true);
 	}
 
 	@Override

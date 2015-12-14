@@ -150,7 +150,7 @@ public class TileWoodchipper extends TileEntityLockable implements ITickable, IS
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int slot)
+	public ItemStack removeStackFromSlot(int slot)
 	{
 		if (this.ItemStacks[slot] != null)
 		{
@@ -415,7 +415,7 @@ public class TileWoodchipper extends TileEntityLockable implements ITickable, IS
 	}
 
 	@Override
-	public String getCommandSenderName()
+	public String getName()
 	{
 		return this.hasCustomName() ? this.customName : "container.woodchipper";
 	}

@@ -4,6 +4,7 @@ import com.oitsjustjose.criss_cross.CrissCross;
 import com.oitsjustjose.criss_cross.blocks.BlockCobblegen;
 import com.oitsjustjose.criss_cross.blocks.BlockCropomator;
 import com.oitsjustjose.criss_cross.blocks.BlockElectroextractor;
+import com.oitsjustjose.criss_cross.blocks.BlockScribe;
 import com.oitsjustjose.criss_cross.blocks.BlockStonegen;
 import com.oitsjustjose.criss_cross.blocks.BlockWoodchipper;
 import com.oitsjustjose.criss_cross.gui.GUIHandler;
@@ -18,7 +19,7 @@ public class LibBlocks
 	public static Block woodchipper;
 	public static Block cobblegen;
 	public static Block stonegen;
-	public static Block mobGrinder;
+	public static Block scribe;
 
 	public static void init()
 	{
@@ -27,7 +28,7 @@ public class LibBlocks
 		woodchipper = new BlockWoodchipper();
 		cobblegen = new BlockCobblegen();
 		stonegen = new BlockStonegen();
-		// mobGrinder = new BlockMobGrinder();
+		scribe = new BlockScribe();
 		NetworkRegistry.INSTANCE.registerGuiHandler(CrissCross.instance, new GUIHandler());
 	}
 }

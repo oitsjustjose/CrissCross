@@ -145,7 +145,7 @@ public class TileElectroextractor extends TileEntityLockable implements ITickabl
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int slot)
+	public ItemStack removeStackFromSlot(int slot)
 	{
 		if (this.ItemStacks[slot] != null)
 		{
@@ -400,7 +400,7 @@ public class TileElectroextractor extends TileEntityLockable implements ITickabl
 	}
 
 	@Override
-	public String getCommandSenderName()
+	public String getName()
 	{
 		return this.hasCustomName() ? this.customName : "container.cobblegen";
 	}

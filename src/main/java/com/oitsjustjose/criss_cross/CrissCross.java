@@ -22,7 +22,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 @Mod(modid = Lib.modid, name = Lib.name, version = Lib.version, guiFactory = Lib.guifactory)
 public class CrissCross
 {
-	public static CreativeTabs CCTab;
+	public static CreativeTabs CCTab = new CreativeTab();
 
 	@Instance(Lib.modid)
 	public static CrissCross instance;
@@ -35,7 +35,6 @@ public class CrissCross
 	{
 		ConfigHandler.init(event.getSuggestedConfigurationFile());
 		MinecraftForge.EVENT_BUS.register(new ConfigHandler());
-		CCTab = new CreativeTab();
 		proxy.preInit();
 
 		LibBlocks.init();

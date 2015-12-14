@@ -27,14 +27,16 @@ public class LibItems
 
 	public static void init()
 	{
-		mkI = EnumHelper.addToolMaterial("mkI", 7, 6244, 8.0F, 0.0F, 0);
+		
+		mkI = EnumHelper.addToolMaterial("mkI", 7, 6244, 8.0F, 1.0F, 10);
 		mkI.setRepairItem(new ItemStack(Blocks.emerald_block));
-		mkII = EnumHelper.addToolMaterial("mkII", 10, -1, 12.0F, 0.0F, 0);
+		mkII = EnumHelper.addToolMaterial("mkII", 10, 1, 12.0F, 1.0F, 10);
 
 		dusts = new ItemDust();
 		buckets = new ItemModBuckets();
 		infiniApple = new ItemInfiniApple();
 		pouch = new ItemPouch();
+
 		mantleSmasherMkI = new ItemMantleSmasher(mkI);
 		mantleSmasherMkII = new ItemMantleSmasher(mkII);
 	}
