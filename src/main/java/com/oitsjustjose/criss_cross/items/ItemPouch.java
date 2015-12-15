@@ -1,22 +1,16 @@
 package com.oitsjustjose.criss_cross.items;
 
-import java.util.List;
-
 import com.oitsjustjose.criss_cross.CrissCross;
+import com.oitsjustjose.criss_cross.event.PouchCleanEvent;
 import com.oitsjustjose.criss_cross.gui.GUIHandler;
 import com.oitsjustjose.criss_cross.lib.Lib;
-import com.oitsjustjose.criss_cross.util.ColorUtils;
 
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -29,6 +23,7 @@ public class ItemPouch extends Item
 		this.setUnlocalizedName(Lib.modid + ".pouch");
 		this.setCreativeTab(CrissCross.CCTab);
 		GameRegistry.registerItem(this, this.getUnlocalizedName());
+		MinecraftForge.EVENT_BUS.register(new PouchCleanEvent());
 		Lib.add(this);
 	}
 
@@ -38,7 +33,7 @@ public class ItemPouch extends Item
 		return (!stack.hasTagCompound() ? false : (!stack.getTagCompound().hasKey("display", 10) ? false : stack.getTagCompound().getCompoundTag("display").hasKey("color", 3)));
 	}
 
-	public void setColor(ItemStack stack, int color)
+	public  void setColor(ItemStack stack, int color)
 	{
 		NBTTagCompound nbttagcompound = stack.getTagCompound();
 
