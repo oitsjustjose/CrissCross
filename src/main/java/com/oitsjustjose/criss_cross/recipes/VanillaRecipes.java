@@ -22,11 +22,11 @@ public class VanillaRecipes
 		woodChipperRecipe();
 		initOthers();
 		CraftingManager.getInstance().getRecipeList().add(new PouchColorRecipes());
+		CraftingManager.getInstance().getRecipeList().add(new PouchRollbackRecipes());
 	}
 
 	static void initOthers()
 	{
-
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LibBlocks.cobblegen), "CPC", "#$#", "CPC", '$', "blockIron", 'C', "cobblestone", 'P', Blocks.piston, '#', Items.stone_pickaxe));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LibBlocks.stonegen), "CPC", "#$#", "CPC", '$', "blockIron", 'C', "stone", 'P', Blocks.piston, '#', Items.stone_pickaxe));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LibBlocks.scribe), "BWB", "FES", "BWB", 'B', Items.book, 'W', "plankWood", 'F', Items.feather, 'S', "dyeBlack", 'E', Blocks.enchanting_table));
@@ -35,8 +35,7 @@ public class VanillaRecipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LibItems.infiniApple, 1, 0), "###", "#N#", "###", '#', new ItemStack(Items.golden_apple, 1, 1), 'N', Items.nether_star));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LibItems.mantleSmasherMkI), "## ", "#PI", " II", '#', "blockEmerald", 'I', "blockIron", 'P', Items.diamond_pickaxe));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LibItems.mantleSmasherMkII), "## ", "#PI", " IN", '#', "blockDiamond", 'I', "blockGold", 'P', LibItems.mantleSmasherMkI, 'N', Items.nether_star));
-		for (int i = 0; i < 16; i++)
-			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LibItems.pouch, 1, i), "SDS", "WCW", "BWB", 'W', new ItemStack(Blocks.wool, 1, Short.MAX_VALUE), 'S', Items.string, 'D', ColorUtils.getOreDictFromMeta(i), 'C', Blocks.chest, 'B', Items.diamond));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LibItems.pouch), "SDS", "LCL", "LLL", 'S', Items.string, 'D', "gemDiamond", 'L', Items.leather, 'C', Blocks.chest));
 	}
 
 	static void woodChipperRecipe()

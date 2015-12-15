@@ -2,12 +2,11 @@ package com.oitsjustjose.criss_cross.recipes;
 
 import com.oitsjustjose.criss_cross.items.ItemPouch;
 
-import net.minecraft.init.Items;
+import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.inventory.InventoryCrafting;
-import net.minecraft.item.Item;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -36,26 +35,77 @@ public class PouchColorRecipes implements IRecipe
 	@Override
 	public ItemStack getCraftingResult(InventoryCrafting invCraft)
 	{
-		ItemStack pouch = null;
-		ItemStack dye = null;
-		ItemStack newPouch = null;
-		for (int i = 0; i < invCraft.getSizeInventory(); i++)
+		ItemStack itemstack = null;
+		int[] aint = new int[3];
+		int i = 0;
+		int j = 0;
+		ItemPouch pouch = null;
+
+		for (int k = 0; k < invCraft.getSizeInventory(); ++k)
 		{
-			if (invCraft.getStackInSlot(i) != null)
+			ItemStack itemstack1 = invCraft.getStackInSlot(k);
+
+			if (itemstack1 != null)
 			{
-				if (invCraft.getStackInSlot(i).getItem() instanceof ItemPouch)
-					pouch = invCraft.getStackInSlot(i);
-				else if (isOreDictDye(invCraft.getStackInSlot(i)))
-					dye = invCraft.getStackInSlot(i);
+				if (itemstack1.getItem() instanceof ItemPouch)
+				{
+					pouch = (ItemPouch) itemstack1.getItem();
+
+					if (itemstack != null)
+						return null;
+
+					itemstack = itemstack1.copy();
+					itemstack.stackSize = 1;
+
+					if (pouch.hasColor(itemstack1))
+					{
+						int l = pouch.getColor(itemstack);
+						float f = (float) (l >> 16 & 255) / 255.0F;
+						float f1 = (float) (l >> 8 & 255) / 255.0F;
+						float f2 = (float) (l & 255) / 255.0F;
+						i = (int) ((float) i + Math.max(f, Math.max(f1, f2)) * 255.0F);
+						aint[0] = (int) ((float) aint[0] + f * 255.0F);
+						aint[1] = (int) ((float) aint[1] + f1 * 255.0F);
+						aint[2] = (int) ((float) aint[2] + f2 * 255.0F);
+						++j;
+					}
+				}
+				else
+				{
+					if (!isOreDictDye(itemstack1))
+						return null;
+
+					float[] afloat = EntitySheep.func_175513_a(EnumDyeColor.byDyeDamage(getDyeMetaFromString(getOreDictNameForDye(itemstack1))));
+					int l1 = (int) (afloat[0] * 255.0F);
+					int i2 = (int) (afloat[1] * 255.0F);
+					int j2 = (int) (afloat[2] * 255.0F);
+					i += Math.max(l1, Math.max(i2, j2));
+					aint[0] += l1;
+					aint[1] += i2;
+					aint[2] += j2;
+					++j;
+				}
 			}
 		}
 
-		if (pouch == null || dye == null)
+		if (pouch == null)
 			return null;
 
-		newPouch = pouch.copy();
-		newPouch.setItemDamage(getDyeMetaFromString(getOreDictNameForDye(dye)));
-		return newPouch;
+		else
+		{
+			int i1 = aint[0] / j;
+			int j1 = aint[1] / j;
+			int k1 = aint[2] / j;
+			float f3 = (float) i / (float) j;
+			float f4 = (float) Math.max(i1, Math.max(j1, k1));
+			i1 = (int) ((float) i1 * f3 / f4);
+			j1 = (int) ((float) j1 * f3 / f4);
+			k1 = (int) ((float) k1 * f3 / f4);
+			int lvt_12_3_ = (i1 << 8) + j1;
+			lvt_12_3_ = (lvt_12_3_ << 8) + k1;
+			pouch.setColor(itemstack, lvt_12_3_);
+			return itemstack;
+		}
 	}
 
 	@Override

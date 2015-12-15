@@ -31,6 +31,7 @@ public class ItemModBuckets extends Item
 		this.maxStackSize = 1;
 		this.setCreativeTab(CrissCross.CCTab);
 		this.setContainerItem(this);
+		this.setUnlocalizedName(Lib.modid + ".special_bucket");
 		GameRegistry.registerItem(this, "special_bucket");
 		Lib.add(this);
 	}

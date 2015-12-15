@@ -17,7 +17,6 @@ public class ItemHelper
 {
 	public static ItemStack cloneStack(Item item, int stackSize)
 	{
-
 		if (item == null)
 		{
 			return null;
@@ -66,13 +65,11 @@ public class ItemHelper
 
 	public static int getItemDamage(ItemStack stack)
 	{
-
 		return Items.diamond.getDamage(stack);
 	}
 
 	public static ItemStack findMatchingRecipe(InventoryCrafting inv, World world)
 	{
-
 		ItemStack[] dmgItems = new ItemStack[2];
 		for (int i = 0; i < inv.getSizeInventory(); i++)
 		{
