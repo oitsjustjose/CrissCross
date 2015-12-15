@@ -45,7 +45,7 @@ public class CCMachineRecipes
 		TileStonegen.addFuel(new ItemStack(LibItems.buckets));
 		TileCobblegen.addFuel(new ItemStack(Items.water_bucket));
 		TileCobblegen.addFuel(new ItemStack(LibItems.buckets));
-		
+
 		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.diamond_ore), new ItemStack(Items.diamond, electroQTY));
 		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.emerald_ore), new ItemStack(Items.emerald, electroQTY));
 		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.coal_ore), new ItemStack(Items.coal, electroQTY));
@@ -93,7 +93,7 @@ public class CCMachineRecipes
 		ScribeRecipes.getInstance().addRecipe(new ItemStack(Blocks.vine, 64), getEnchantedBook(Enchantment.thorns));
 		ScribeRecipes.getInstance().addRecipe(new ItemStack(Items.iron_ingot, 24), getEnchantedBook(Enchantment.unbreaking));
 	}
-	
+
 	public static void initCropomatorRecipes()
 	{
 		for (int i = 0; i < ConfigHandler.cropomatorInputs.length; i++)
@@ -348,10 +348,10 @@ public class CCMachineRecipes
 	{
 		ItemStack retBook = new ItemStack(Items.enchanted_book);
 		Items.enchanted_book.addEnchantment(retBook, new EnchantmentData(enchantment, 1));
-		
+
 		return retBook;
 	}
-	
+
 	static boolean doesOreNameExist(String oreName)
 	{
 		List<ItemStack> ores = OreDictionary.getOres(oreName);

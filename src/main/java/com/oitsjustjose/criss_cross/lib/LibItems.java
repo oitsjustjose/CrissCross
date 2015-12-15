@@ -27,7 +27,7 @@ public class LibItems
 
 	public static void init()
 	{
-		
+
 		mkI = EnumHelper.addToolMaterial("mkI", 7, 6244, 8.0F, 1.0F, 10);
 		mkI.setRepairItem(new ItemStack(Blocks.emerald_block));
 		mkII = EnumHelper.addToolMaterial("mkII", 10, 1, 12.0F, 1.0F, 10);

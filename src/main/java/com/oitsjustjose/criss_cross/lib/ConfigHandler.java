@@ -16,8 +16,7 @@ public class ConfigHandler
 	public static String cropomatorRecipeItem;
 	public static String[] cropomatorInputs;
 	public static String[] cropomatorCatalysts;
-	public static String[] defaultCropomatorInputs = new String[] { "minecraft:apple", "minecraft:reeds", "minecraft:nether_wart", "minecraft:carrot", "minecraft:cactus", "minecraft:potato", "minecraft:sapling:0", "minecraft:sapling:1", "minecraft:sapling:2", "minecraft:sapling:3", "minecraft:sapling:4", "minecraft:sapling:5", "minecraft:melon", "minecraft:brown_mushroom",
-			"minecraft:red_mushroom", "minecraft:dye:3", "minecraft:pumpkin", "minecraft:wheat", "minecraft:wheat_seeds" };
+	public static String[] defaultCropomatorInputs = new String[] { "minecraft:apple", "minecraft:reeds", "minecraft:nether_wart", "minecraft:carrot", "minecraft:cactus", "minecraft:potato", "minecraft:sapling:0", "minecraft:sapling:1", "minecraft:sapling:2", "minecraft:sapling:3", "minecraft:sapling:4", "minecraft:sapling:5", "minecraft:melon", "minecraft:brown_mushroom", "minecraft:red_mushroom", "minecraft:dye:3", "minecraft:pumpkin", "minecraft:wheat", "minecraft:wheat_seeds" };
 	public static String[] defaultCropomatorCatalystItems = new String[] { "minecraft:dye:15" };
 
 	public static int electroextractorProcessTime;
@@ -68,8 +67,7 @@ public class ConfigHandler
 
 		electroextractorRecipeItem = config.getString("Electroextractor Crafting Item.", config.CATEGORY_GENERAL, "minecraft:diamond_block", "This is the item located in the center of the crafting recipe for the Electroextractor. Formatted as: <modid>:<item>:<meta> or <modid>:<item>.");
 
-		electroextractorOreDictInputs = config.get(config.CATEGORY_GENERAL, "Electroextractor OreDictionary Entries.", defaultElectroextractorOreDictInputs, "Formatted as <OreDictName>:<DecimalColorYouWant>." + "\n" + " Remove the 'ore' part of the oredict name (i.e. 'oreIron' should be entered as 'Iron')" + "\n"
-				+ "Use http://www.colorpicker.com/ to find a color and http://bit.ly/1RhPhcX to convert it from Hex to Decimal.").getStringList();
+		electroextractorOreDictInputs = config.get(config.CATEGORY_GENERAL, "Electroextractor OreDictionary Entries.", defaultElectroextractorOreDictInputs, "Formatted as <OreDictName>:<DecimalColorYouWant>." + "\n" + " Remove the 'ore' part of the oredict name (i.e. 'oreIron' should be entered as 'Iron')" + "\n" + "Use http://www.colorpicker.com/ to find a color and http://bit.ly/1RhPhcX to convert it from Hex to Decimal.").getStringList();
 
 		// Woodchipper's Configs
 		woodchipperFuels = config.get(config.CATEGORY_GENERAL, "Woodchipper Fuel Items", defaultWoodchipperFuels, "A list of items to be added as the Woodchipper's 'fuels'. Formatted as: <modid>:<item>:<meta> or <modid>:<item>.").getStringList();

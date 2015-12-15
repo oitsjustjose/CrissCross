@@ -72,7 +72,7 @@ public class GUIHandler implements IGuiHandler
 
 			return new ContainerScribe(player, TE);
 		}
-		
+
 		if (player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ItemPouch)
 		{
 			return new ContainerPouch(player, player.inventory.currentItem);

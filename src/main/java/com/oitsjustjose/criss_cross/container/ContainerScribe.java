@@ -1,6 +1,5 @@
 package com.oitsjustjose.criss_cross.container;
 
-
 import com.oitsjustjose.criss_cross.tileentity.TileScribe;
 
 import net.minecraft.entity.player.EntityPlayer;

@@ -14,7 +14,6 @@ public class Lib
 	public static final String clientProxy = "com.oitsjustjose.criss_cross.util.ClientProxy";
 	public static final String commonProxy = "com.oitsjustjose.criss_cross.util.CommonProxy";
 
-
 	private static final ArrayList<Item> allItems = new ArrayList<Item>();
 	private static final ArrayList<Block> allBlocks = new ArrayList<Block>();
 

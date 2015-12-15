@@ -9,6 +9,7 @@ import com.oitsjustjose.criss_cross.util.ColorUtils;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
@@ -20,8 +21,8 @@ public class VanillaRecipes
 		electroextractorRecipe();
 		woodChipperRecipe();
 		initOthers();
+		CraftingManager.getInstance().getRecipeList().add(new PouchColorRecipes());
 	}
-
 
 	static void initOthers()
 	{
