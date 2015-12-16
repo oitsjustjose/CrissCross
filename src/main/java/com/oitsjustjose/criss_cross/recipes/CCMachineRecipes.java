@@ -67,30 +67,54 @@ public class CCMachineRecipes
 
 	public static void initScribeRecipes()
 	{
-		ScribeRecipes.getInstance().addRecipe(new ItemStack(Items.fish, 16, 3), getEnchantedBook(Enchantment.aquaAffinity));
-		ScribeRecipes.getInstance().addRecipe(new ItemStack(Items.spider_eye, 8), getEnchantedBook(Enchantment.baneOfArthropods));
-		ScribeRecipes.getInstance().addRecipe(new ItemStack(Blocks.obsidian, 8), getEnchantedBook(Enchantment.blastProtection));
-		ScribeRecipes.getInstance().addRecipe(new ItemStack(Items.prismarine_shard, 16), getEnchantedBook(Enchantment.depthStrider));
-		ScribeRecipes.getInstance().addRecipe(new ItemStack(Items.feather, 32), getEnchantedBook(Enchantment.featherFalling));
-		ScribeRecipes.getInstance().addRecipe(new ItemStack(Items.blaze_rod, 8), getEnchantedBook(Enchantment.fireAspect));
-		ScribeRecipes.getInstance().addRecipe(new ItemStack(Items.blaze_powder, 16), getEnchantedBook(Enchantment.flame));
-		ScribeRecipes.getInstance().addRecipe(new ItemStack(Blocks.piston, 4), getEnchantedBook(Enchantment.knockback));
-		ScribeRecipes.getInstance().addRecipe(new ItemStack(Items.prismarine_crystals, 16), getEnchantedBook(Enchantment.luckOfTheSea));
-		ScribeRecipes.getInstance().addRecipe(new ItemStack(Items.fish, 16, 0), getEnchantedBook(Enchantment.lure));
-		ScribeRecipes.getInstance().addRecipe(new ItemStack(Items.potionitem, 1, 8269), getEnchantedBook(Enchantment.respiration));
-		ScribeRecipes.getInstance().addRecipe(new ItemStack(Blocks.slime_block, 8), getEnchantedBook(Enchantment.silkTouch));
-		ScribeRecipes.getInstance().addRecipe(new ItemStack(Items.rotten_flesh, 48), getEnchantedBook(Enchantment.smite));
-		ScribeRecipes.getInstance().addRecipe(new ItemStack(Blocks.double_plant, 64, 4), getEnchantedBook(Enchantment.thorns));
-		ScribeRecipes.getInstance().addRecipe("ingotIron", 24, getEnchantedBook(Enchantment.unbreaking));
-		ScribeRecipes.getInstance().addRecipe("ingotGold", 12, getEnchantedBook(Enchantment.punch));
-		ScribeRecipes.getInstance().addRecipe("gemQuartz", 16, getEnchantedBook(Enchantment.power));
-		ScribeRecipes.getInstance().addRecipe("gemDiamond", 8, getEnchantedBook(Enchantment.infinity));
-		ScribeRecipes.getInstance().addRecipe("gemEmerald", 3, getEnchantedBook(Enchantment.looting));
-		ScribeRecipes.getInstance().addRecipe("logWood", 16, getEnchantedBook(Enchantment.projectileProtection));
-		ScribeRecipes.getInstance().addRecipe("blockIron", 4, getEnchantedBook(Enchantment.protection));
-		ScribeRecipes.getInstance().addRecipe("blockQuartz", 16, getEnchantedBook(Enchantment.sharpness));
-		ScribeRecipes.getInstance().addRecipe("blockLapis", 12, getEnchantedBook(Enchantment.fortune));
-		ScribeRecipes.getInstance().addRecipe("blockRedstone", 8, getEnchantedBook(Enchantment.efficiency));
+		for (int i = 0; i < ConfigHandler.scribeRecipes.length; i++)
+		{
+			try
+			{
+				String[] parts = ConfigHandler.scribeRecipes[i].split("[\\W]");
+				if (parts.length == 5)
+				{
+					String modid = parts[0];
+					String object = parts[1];
+					int metadata = Integer.parseInt(parts[2]);
+					int qty = Integer.parseInt(parts[3]);
+					int enchID = Integer.parseInt(parts[4]);
+
+					if (ConfigHandler.findItemStack(modid, object) != null && Enchantment.getEnchantmentById(enchID) != null)
+					{
+						ItemStack newStack = ConfigHandler.findItemStack(modid, object);
+						ScribeRecipes.getInstance().addRecipe(new ItemStack(newStack.getItem(), qty, metadata), getEnchantedBook(enchID));
+					}
+					else
+					{
+						CCLog.warn("Item " + ConfigHandler.scribeRecipes[i] + " could not be added to the Scribe's recipe list.");
+						CCLog.warn("Please confirm you have the name and formatting and ID's correct.");
+					}
+				}
+				else if (parts.length == 3)
+				{
+					String oreDict = parts[0];
+					int qty = Integer.parseInt(parts[1]);
+					int enchID = Integer.parseInt(parts[2]);
+
+					if (OreDictionary.getOres(oreDict).size() > 0)
+					{
+						if (Enchantment.getEnchantmentById(enchID) != null)
+							ScribeRecipes.getInstance().addRecipe(oreDict, qty, getEnchantedBook(enchID));
+						else
+							CCLog.warn("Enchantment ID " + enchID + " does not appear to be valid. Skipping Scribe recipe addition.");
+					}
+					else
+						CCLog.warn("Ore Dictionary Name " + oreDict + " does not appear to be valid. Skipping Scribe recipe addition.");
+				}
+				else
+					CCLog.warn("Your formatting for entry " + (i + 1) + " does not appear to be correct.");
+			}
+			catch (Exception e)
+			{
+				CCLog.warn("Error reading itemstack for Scribe from input file at item: " + (i + 1));
+			}
+		}
 	}
 
 	public static void initCropomatorRecipes()
@@ -131,7 +155,7 @@ public class CCMachineRecipes
 			}
 			catch (Exception e)
 			{
-				CCLog.warn("Error reading itemstack for inputs from input file at item: " + (i + 1));
+				CCLog.warn("Error reading itemstack for Cropomator from input file at item: " + (i + 1));
 			}
 
 		}
@@ -171,7 +195,7 @@ public class CCMachineRecipes
 			}
 			catch (Exception e)
 			{
-				CCLog.warn("Error reading itemstack for catalysts from input file at item: " + (i + 1));
+				CCLog.warn("Error reading itemstack for Cropomator Cataylsts from input file at item: " + (i + 1));
 			}
 		}
 	}
@@ -341,6 +365,14 @@ public class CCMachineRecipes
 			if (ingot != null)
 				GameRegistry.addSmelting(new ItemStack(LibItems.dusts, 1, i), ingot, 0.0F);
 		}
+	}
+
+	static ItemStack getEnchantedBook(int id)
+	{
+		ItemStack retBook = new ItemStack(Items.enchanted_book);
+		Items.enchanted_book.addEnchantment(retBook, new EnchantmentData(Enchantment.getEnchantmentById(id), 1));
+
+		return retBook;
 	}
 
 	static ItemStack getEnchantedBook(Enchantment enchantment)

@@ -17,6 +17,7 @@ import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 @Mod(modid = Lib.modid, name = Lib.name, version = Lib.version, guiFactory = Lib.guifactory)
@@ -40,12 +41,13 @@ public class CrissCross
 		LibBlocks.init();
 		LibItems.init();
 		VanillaRecipes.init();
-		CCMachineRecipes.init();
 	}
-
+	
 	@EventHandler
-	public static void init(FMLInitializationEvent event)
+	public static void postInit(FMLPostInitializationEvent event)
 	{
+		CCMachineRecipes.init();
+		
 		if (event.getSide().isClient())
 			ClientProxy.init();
 	}

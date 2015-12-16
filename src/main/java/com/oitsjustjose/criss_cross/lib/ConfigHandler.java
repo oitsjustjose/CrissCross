@@ -31,7 +31,10 @@ public class ConfigHandler
 	public static int woodchipperOutput;
 	public static String woodchipperRecipeItem;
 	public static String[] woodchipperFuels;
-	public static String[] defaultWoodchipperFuels = new String[] { "minecraft:water_bucket", "minecraft:potion:0", "CrissCross:magicBucket:0" };
+	public static String[] defaultWoodchipperFuels = new String[] { "minecraft:water_bucket", "minecraft:potion:0", "crisscross:special_bucket:0" };
+
+	public static String[] scribeRecipes;
+	public static String[] defaultScribeRecipes = new String[] { "minecraft:fish:3*16=6", "minecraft:spider_eye:0*8=18", "minecraft:obsidian:0*8=3", "minecraft:prismarine_shard:0*16=8", "minecraft:feather:0*32=2", "minecraft:blaze_rod:0*8=20", "minecraft:blaze_powder:0*16=50", "minecraft:piston:0*4=19", "minecraft:prismarine_crystals:0*16=61", "minecraft:fish:0*16=62", "minecraft:potion:8269*1=5", "minecraft:slime:0*8=33", "minecraft:rotten_flesh:0*48=17", "minecraft:double_plant:4*64=7", "ingotIron*24=34", "ingotGold*12=49", "gemQuartz*16=48", "gemDiamond*8=51", "gemEmerald*3=21", "logWood*16=4", "blockIron*4=0", "blockQuartz*16=16", "blockLapis*12=35", "blockRedstone*8=32" };
 
 	public static int blockGeneratorProcessTimes;
 
@@ -77,6 +80,8 @@ public class ConfigHandler
 		woodchipperOutput = config.getInt("Woodchipper Output Quantity", config.CATEGORY_GENERAL, 6, 0, 64, "Control how many planks are yielded from processing a log. Default is 6.");
 
 		woodchipperRecipeItem = config.getString("Woodchipper Crafting Item", config.CATEGORY_GENERAL, "minecraft:diamond_block", "This is the item located in the center of the crafting recipe for the Woodchipper. Formatted as: <modid>:<item>:<meta> or <modid>:<item>.");
+
+		scribeRecipes = config.get(config.CATEGORY_GENERAL, "Custom Scribe Recipes", defaultScribeRecipes, "Formatted as <modid>:<item>:<metadata>*<qty>=<enchantment ID>" + "\n" + "Also can be <oreDict>*qty=<enchantment ID>" + "\n" + "A list of custom additional recipes for the Scribe. Default ones cannot be disabled").getStringList();
 
 		// Autosmith's Configs
 		blockGeneratorProcessTimes = config.getInt("Stone Generators' Process Times", config.CATEGORY_GENERAL, 20, 0, Short.MAX_VALUE, "Control how many ticks it takes a stone generator to process an item. Default is 20; furnaces are 200.");

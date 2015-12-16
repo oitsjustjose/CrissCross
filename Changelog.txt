@@ -2,10 +2,10 @@
 -Changed: Pouches are now made differently; they no longer store color in Metadata, instead they use NBT, and can be any hex color!
 	Note: Pouches can be dyed via Ore Dictionary Dyes! Unlike leather armor and sheep (might make a fix for that in V-Tweaks...)
 
--Added Crafting Handler to address new changes to pouches.
+-Added: Crafting Handler to address new changes to pouches.
 	Take your "broken" pouch and put it in your crafting grid, you'll get a new one back, keeping all stored items
--Added ability to clear pouch of color like vanilla armor; use a cauldron with water
--Added the Scribe: new Tile Entity for crafting enchanted books. Only crafts Level I enchanted books; recipes and process times are non-configurable.
+-Added: ability to clear pouch of color like vanilla armor; use a cauldron with water
+-Added: the Scribe: new Tile Entity for crafting enchanted books. Only crafts Level I enchanted books; recipes and process times are non-configurable.
 
 The Scribe only crafts enchanted books at Level I. This is for balance, since it does not require XP any other ways.
 
