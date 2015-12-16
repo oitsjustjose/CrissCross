@@ -76,7 +76,7 @@ public class TileScribe extends TileEntityLockable implements ITickable, ISidedI
 
 					if (this.writingTime == proTicks)
 					{
-						this.worldObj.playSoundEffect(this.pos.getX(), this.pos.getY(), this.pos.getZ(), "portal.portal", 0.5F, 1.0F);
+						this.worldObj.playSoundEffect(this.pos.getX(), this.pos.getY(), this.pos.getZ(), "random.levelup", 0.5F, 1.0F);
 						this.writingTime = 0;
 						this.processItem();
 						flag1 = true;

@@ -23,6 +23,7 @@ public class LibBlocks
 
 	public static void init()
 	{
+		//TODO : weather controller
 		cropomator = new BlockCropomator();
 		electroextractor = new BlockElectroextractor();
 		woodchipper = new BlockWoodchipper();

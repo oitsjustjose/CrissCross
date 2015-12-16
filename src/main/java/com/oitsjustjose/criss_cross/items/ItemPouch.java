@@ -5,6 +5,8 @@ import com.oitsjustjose.criss_cross.event.PouchCleanEvent;
 import com.oitsjustjose.criss_cross.gui.GUIHandler;
 import com.oitsjustjose.criss_cross.lib.Lib;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -33,7 +35,7 @@ public class ItemPouch extends Item
 		return (!stack.hasTagCompound() ? false : (!stack.getTagCompound().hasKey("display", 10) ? false : stack.getTagCompound().getCompoundTag("display").hasKey("color", 3)));
 	}
 
-	public  void setColor(ItemStack stack, int color)
+	public void setColor(ItemStack stack, int color)
 	{
 		NBTTagCompound nbttagcompound = stack.getTagCompound();
 
@@ -80,21 +82,29 @@ public class ItemPouch extends Item
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public int getColorFromItemStack(ItemStack stack, int renderPass)
+	public int getColorFromItemStack(ItemStack stack, int pass)
 	{
-		int i = this.getColor(stack);
+		if (pass == 0)
+		{
+			int i = this.getColor(stack);
 
-		if (i < 0)
-			i = 16777215;
+			if (i < 0)
+				i = 16777215;
 
-		return i;
+			return i;
+		}
+		else
+			return 16777215;
 	}
 
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer player)
 	{
 		if (!world.isRemote)
+		{
+			world.playSoundEffect(player.posX, player.posY, player.posZ, Block.soundTypeCloth.getPlaceSound(), 1.0F, 1.0F);
 			player.openGui(CrissCross.instance, GUIHandler.Pouch, world, player.inventory.currentItem, 0, 0);
+		}
 		return itemstack;
 	}
 }
