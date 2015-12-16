@@ -1,14 +1,12 @@
 package com.oitsjustjose.criss_cross.recipes;
 
-import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import com.google.common.collect.Maps;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -25,6 +23,14 @@ public class ScribeRecipes
 	public void addRecipe(ItemStack input, ItemStack stack)
 	{
 		this.recipes.put(input, stack);
+	}
+
+	public void addRecipe(String oreDict, int qty, ItemStack stack)
+	{
+		List<ItemStack> itemstacks = OreDictionary.getOres(oreDict);
+		if (itemstacks.size() > 0)
+			for (ItemStack i : itemstacks)
+				this.recipes.put(new ItemStack(i.getItem(), qty, i.getMetadata()), stack);
 	}
 
 	public ItemStack getResult(ItemStack stack)

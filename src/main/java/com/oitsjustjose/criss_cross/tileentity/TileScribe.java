@@ -23,7 +23,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TileScribe extends TileEntityLockable implements ITickable, ISidedInventory
 {
-	// TODO: change this back to 700.
 	private static int proTicks = 700;
 	private static final int[] slotsTop = new int[] { 0 };
 	private static final int[] slotsBottom = new int[] { 2, 1 };
