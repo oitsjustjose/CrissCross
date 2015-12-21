@@ -6,7 +6,7 @@ import com.oitsjustjose.criss_cross.blocks.BlockCropomator;
 import com.oitsjustjose.criss_cross.container.ContainerCropomator;
 import com.oitsjustjose.criss_cross.lib.ConfigHandler;
 import com.oitsjustjose.criss_cross.lib.Lib;
-import com.oitsjustjose.criss_cross.recipes.CropomatorRecipes;
+import com.oitsjustjose.criss_cross.recipes.machine.CropomatorRecipes;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

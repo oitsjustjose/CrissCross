@@ -6,7 +6,7 @@ import com.oitsjustjose.criss_cross.blocks.BlockElectroextractor;
 import com.oitsjustjose.criss_cross.container.ContainerElectroextractor;
 import com.oitsjustjose.criss_cross.lib.ConfigHandler;
 import com.oitsjustjose.criss_cross.lib.Lib;
-import com.oitsjustjose.criss_cross.recipes.ElectroextractorRecipes;
+import com.oitsjustjose.criss_cross.recipes.machine.ElectroextractorRecipes;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

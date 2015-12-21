@@ -6,7 +6,7 @@ import com.oitsjustjose.criss_cross.blocks.BlockWoodchipper;
 import com.oitsjustjose.criss_cross.container.ContainerWoodchipper;
 import com.oitsjustjose.criss_cross.lib.ConfigHandler;
 import com.oitsjustjose.criss_cross.lib.Lib;
-import com.oitsjustjose.criss_cross.recipes.WoodchipperRecipes;
+import com.oitsjustjose.criss_cross.recipes.machine.WoodchipperRecipes;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

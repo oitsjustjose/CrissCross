@@ -1,4 +1,4 @@
-package com.oitsjustjose.criss_cross.recipes;
+package com.oitsjustjose.criss_cross.recipes.machine;
 
 import java.util.ArrayList;
 import java.util.Iterator;

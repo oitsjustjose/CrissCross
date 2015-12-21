@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.oitsjustjose.criss_cross.blocks.BlockScribe;
 import com.oitsjustjose.criss_cross.container.ContainerScribe;
 import com.oitsjustjose.criss_cross.lib.Lib;
-import com.oitsjustjose.criss_cross.recipes.ScribeRecipes;
+import com.oitsjustjose.criss_cross.recipes.machine.ScribeRecipes;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

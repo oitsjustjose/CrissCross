@@ -2,7 +2,7 @@ package com.oitsjustjose.criss_cross.util;
 
 import net.minecraft.util.EnumChatFormatting;
 
-public class ColorUtils
+public class ColorHelper
 {
 	public static String[] dyes = { "Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "LightGray", "Gray", "Pink", "Lime", "Yellow", "LightBlue", "Magenta", "Orange", "White" };
 

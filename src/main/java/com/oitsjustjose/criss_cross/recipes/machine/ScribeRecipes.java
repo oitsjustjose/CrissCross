@@ -1,23 +1,21 @@
-package com.oitsjustjose.criss_cross.recipes;
+package com.oitsjustjose.criss_cross.recipes.machine;
 
-import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import com.google.common.collect.Maps;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class ElectroextractorRecipes
+public class ScribeRecipes
 {
-	private static final ElectroextractorRecipes recipeBase = new ElectroextractorRecipes();
+	private static final ScribeRecipes recipeBase = new ScribeRecipes();
 	private Map recipes = Maps.newHashMap();
 
-	public static ElectroextractorRecipes getInstance()
+	public static ScribeRecipes getInstance()
 	{
 		return recipeBase;
 	}
@@ -25,6 +23,14 @@ public class ElectroextractorRecipes
 	public void addRecipe(ItemStack input, ItemStack stack)
 	{
 		this.recipes.put(input, stack);
+	}
+
+	public void addRecipe(String oreDict, int qty, ItemStack stack)
+	{
+		List<ItemStack> itemstacks = OreDictionary.getOres(oreDict);
+		if (itemstacks.size() > 0)
+			for (ItemStack i : itemstacks)
+				this.recipes.put(new ItemStack(i.getItem(), qty, i.getMetadata()), stack);
 	}
 
 	public ItemStack getResult(ItemStack stack)
@@ -46,7 +52,7 @@ public class ElectroextractorRecipes
 
 	private boolean compareItemStacks(ItemStack stack1, ItemStack stack2)
 	{
-		return stack2.getItem() == stack1.getItem() && (stack2.getItemDamage() == 32767 || stack2.getItemDamage() == stack1.getItemDamage());
+		return stack2.getItem() == stack1.getItem() && (stack2.getItemDamage() == 32767 || stack2.getItemDamage() == stack1.getItemDamage()) && stack1.stackSize == stack2.stackSize;
 	}
 
 	public Map getRecipeList()

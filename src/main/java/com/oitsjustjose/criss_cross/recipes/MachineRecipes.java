@@ -6,12 +6,16 @@ import java.util.List;
 import com.oitsjustjose.criss_cross.items.ItemDust;
 import com.oitsjustjose.criss_cross.lib.ConfigHandler;
 import com.oitsjustjose.criss_cross.lib.LibItems;
+import com.oitsjustjose.criss_cross.recipes.machine.CropomatorRecipes;
+import com.oitsjustjose.criss_cross.recipes.machine.ElectroextractorRecipes;
+import com.oitsjustjose.criss_cross.recipes.machine.ScribeRecipes;
+import com.oitsjustjose.criss_cross.recipes.machine.WoodchipperRecipes;
 import com.oitsjustjose.criss_cross.tileentity.TileCobblegen;
 import com.oitsjustjose.criss_cross.tileentity.TileCropomator;
 import com.oitsjustjose.criss_cross.tileentity.TileElectroextractor;
 import com.oitsjustjose.criss_cross.tileentity.TileStonegen;
 import com.oitsjustjose.criss_cross.tileentity.TileWoodchipper;
-import com.oitsjustjose.criss_cross.util.CCLog;
+import com.oitsjustjose.criss_cross.util.LogHelper;
 import com.oitsjustjose.criss_cross.util.ItemHelper;
 
 import net.minecraft.enchantment.Enchantment;
@@ -26,7 +30,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class CCMachineRecipes
+public class MachineRecipes
 {
 	public static void init()
 	{
@@ -85,11 +89,11 @@ public class CCMachineRecipes
 							ScribeRecipes.getInstance().addRecipe(new ItemStack(newStack.getItem(), qty, metadata), getEnchantedBook(enchID));
 						}
 						else
-							CCLog.warn("Enchantment ID " + enchID + " does not appear to be valid. Skipping Scribe recipe addition.");
+							LogHelper.warn("Enchantment ID " + enchID + " does not appear to be valid. Skipping Scribe recipe addition.");
 					}
 					else
 					{
-						CCLog.warn("Item " + (modid + " " + object) + " does not appear to be valid. Skipping Scribe recipe addition.");
+						LogHelper.warn("Item " + (modid + " " + object) + " does not appear to be valid. Skipping Scribe recipe addition.");
 					}
 				}
 				else if (parts.length == 3)
@@ -103,17 +107,17 @@ public class CCMachineRecipes
 						if (Enchantment.getEnchantmentById(enchID) != null)
 							ScribeRecipes.getInstance().addRecipe(oreDict, qty, getEnchantedBook(enchID));
 						else
-							CCLog.warn("Enchantment ID " + enchID + " does not appear to be valid. Skipping Scribe recipe addition.");
+							LogHelper.warn("Enchantment ID " + enchID + " does not appear to be valid. Skipping Scribe recipe addition.");
 					}
 					else
-						CCLog.warn("Ore Dictionary Name " + oreDict + " does not appear to be valid. Skipping Scribe recipe addition.");
+						LogHelper.warn("Ore Dictionary Name " + oreDict + " does not appear to be valid. Skipping Scribe recipe addition.");
 				}
 				else
-					CCLog.warn("Your formatting for entry " + (i + 1) + " does not appear to be correct.");
+					LogHelper.warn("Your formatting for entry " + (i + 1) + " does not appear to be correct.");
 			}
 			catch (Exception e)
 			{
-				CCLog.warn("Error reading itemstack for Scribe from input file at item: " + (i + 1));
+				LogHelper.warn("Error reading itemstack for Scribe from input file at item: " + (i + 1));
 			}
 		}
 	}
@@ -134,8 +138,8 @@ public class CCMachineRecipes
 					}
 					else
 					{
-						CCLog.warn("Item " + ConfigHandler.cropomatorInputs[i] + " could not be added to the Cropomator's recipe list.");
-						CCLog.warn("Please confirm you have the name and formatting correct.");
+						LogHelper.warn("Item " + ConfigHandler.cropomatorInputs[i] + " could not be added to the Cropomator's recipe list.");
+						LogHelper.warn("Please confirm you have the name and formatting correct.");
 
 					}
 				}
@@ -149,14 +153,14 @@ public class CCMachineRecipes
 					}
 					else
 					{
-						CCLog.warn("Item " + ConfigHandler.cropomatorInputs[i] + " could not be added to the Cropomator's recipe list.");
-						CCLog.warn("Please confirm you have the name and formatting correct.");
+						LogHelper.warn("Item " + ConfigHandler.cropomatorInputs[i] + " could not be added to the Cropomator's recipe list.");
+						LogHelper.warn("Please confirm you have the name and formatting correct.");
 					}
 				}
 			}
 			catch (Exception e)
 			{
-				CCLog.warn("Error reading itemstack for Cropomator from input file at item: " + (i + 1));
+				LogHelper.warn("Error reading itemstack for Cropomator from input file at item: " + (i + 1));
 			}
 
 		}
@@ -175,8 +179,8 @@ public class CCMachineRecipes
 						TileCropomator.addFuel(ConfigHandler.findItemStack(parts[0], parts[1]));
 					else
 					{
-						CCLog.warn("Item " + ConfigHandler.cropomatorInputs[i] + " could not be added to the Cropomator's catalyst list.");
-						CCLog.warn("Please confirm you have the name and formatting correct.");
+						LogHelper.warn("Item " + ConfigHandler.cropomatorInputs[i] + " could not be added to the Cropomator's catalyst list.");
+						LogHelper.warn("Please confirm you have the name and formatting correct.");
 					}
 				}
 
@@ -189,14 +193,14 @@ public class CCMachineRecipes
 					}
 					else
 					{
-						CCLog.warn("Item " + ConfigHandler.cropomatorInputs[i] + " could not be added to the Cropomator's catalyst list.");
-						CCLog.warn("Please confirm you have the name and formatting correct.");
+						LogHelper.warn("Item " + ConfigHandler.cropomatorInputs[i] + " could not be added to the Cropomator's catalyst list.");
+						LogHelper.warn("Please confirm you have the name and formatting correct.");
 					}
 				}
 			}
 			catch (Exception e)
 			{
-				CCLog.warn("Error reading itemstack for Cropomator Cataylsts from input file at item: " + (i + 1));
+				LogHelper.warn("Error reading itemstack for Cropomator Cataylsts from input file at item: " + (i + 1));
 			}
 		}
 	}
@@ -270,8 +274,8 @@ public class CCMachineRecipes
 						TileWoodchipper.addFuel(ConfigHandler.findItemStack(parts[0], parts[1]));
 					else
 					{
-						CCLog.warn("Item " + ConfigHandler.woodchipperFuels[i] + " could not be added to the Woodchipper's fuel list.");
-						CCLog.warn("Please confirm you have the name and formatting correct.");
+						LogHelper.warn("Item " + ConfigHandler.woodchipperFuels[i] + " could not be added to the Woodchipper's fuel list.");
+						LogHelper.warn("Please confirm you have the name and formatting correct.");
 					}
 				}
 
@@ -284,14 +288,14 @@ public class CCMachineRecipes
 					}
 					else
 					{
-						CCLog.warn("Item " + ConfigHandler.woodchipperFuels[i] + " could not be added to the Woodchipper's fuel list.");
-						CCLog.warn("Please confirm you have the name and formatting correct.");
+						LogHelper.warn("Item " + ConfigHandler.woodchipperFuels[i] + " could not be added to the Woodchipper's fuel list.");
+						LogHelper.warn("Please confirm you have the name and formatting correct.");
 					}
 				}
 			}
 			catch (Exception e)
 			{
-				CCLog.warn("Error reading itemstack for Woodchipper's energy sources at item: " + (i + 1));
+				LogHelper.warn("Error reading itemstack for Woodchipper's energy sources at item: " + (i + 1));
 			}
 		}
 	}
@@ -309,8 +313,8 @@ public class CCMachineRecipes
 						TileElectroextractor.addFuel(ConfigHandler.findItemStack(parts[0], parts[1]));
 					else
 					{
-						CCLog.warn("Item " + ConfigHandler.electroextractorEnergySources[i] + " could not be added to the Electroextractor's fuel list.");
-						CCLog.warn("Please confirm you have the name and formatting correct.");
+						LogHelper.warn("Item " + ConfigHandler.electroextractorEnergySources[i] + " could not be added to the Electroextractor's fuel list.");
+						LogHelper.warn("Please confirm you have the name and formatting correct.");
 					}
 				}
 
@@ -323,14 +327,14 @@ public class CCMachineRecipes
 					}
 					else
 					{
-						CCLog.warn("Item " + ConfigHandler.electroextractorEnergySources[i] + " could not be added to the Electroextractor's fuel list.");
-						CCLog.warn("Please confirm you have the name and formatting correct.");
+						LogHelper.warn("Item " + ConfigHandler.electroextractorEnergySources[i] + " could not be added to the Electroextractor's fuel list.");
+						LogHelper.warn("Please confirm you have the name and formatting correct.");
 					}
 				}
 			}
 			catch (Exception e)
 			{
-				CCLog.warn("Error reading itemstack for electroextractor's energy sources at item: " + (i + 1));
+				LogHelper.warn("Error reading itemstack for electroextractor's energy sources at item: " + (i + 1));
 			}
 		}
 	}
@@ -350,11 +354,11 @@ public class CCMachineRecipes
 			}
 			else
 			{
-				CCLog.warn("Your oreDictionary Entry " + ConfigHandler.electroextractorOreDictInputs[i] + " could not be registered.");
+				LogHelper.warn("Your oreDictionary Entry " + ConfigHandler.electroextractorOreDictInputs[i] + " could not be registered.");
 				if (!doesOreNameExist("ore" + entry[0]))
-					CCLog.warn("This is because your oreDictionary Entry was not valid or registered as " + entry[0] + ".");
+					LogHelper.warn("This is because your oreDictionary Entry was not valid or registered as " + entry[0] + ".");
 				else if (!doesOreNameExist("ingot" + entry[0]))
-					CCLog.warn("This is because your oreDictionary Entry does not have an ingot for " + entry[0] + ".");
+					LogHelper.warn("This is because your oreDictionary Entry does not have an ingot for " + entry[0] + ".");
 			}
 		}
 

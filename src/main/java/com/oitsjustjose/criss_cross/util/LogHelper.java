@@ -5,11 +5,11 @@ import org.apache.logging.log4j.Logger;
 
 import com.oitsjustjose.criss_cross.lib.Lib;
 
-public class CCLog
+public class LogHelper
 {
 	private static Logger LOGGER = LogManager.getLogger(Lib.modid);
 
-	public CCLog()
+	public LogHelper()
 	{
 
 	}

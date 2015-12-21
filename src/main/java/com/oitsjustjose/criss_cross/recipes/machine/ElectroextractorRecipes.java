@@ -1,4 +1,4 @@
-package com.oitsjustjose.criss_cross.recipes;
+package com.oitsjustjose.criss_cross.recipes.machine;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -12,12 +12,12 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class WoodchipperRecipes
+public class ElectroextractorRecipes
 {
-	private static final WoodchipperRecipes recipeBase = new WoodchipperRecipes();
+	private static final ElectroextractorRecipes recipeBase = new ElectroextractorRecipes();
 	private Map recipes = Maps.newHashMap();
 
-	public static WoodchipperRecipes getInstance()
+	public static ElectroextractorRecipes getInstance()
 	{
 		return recipeBase;
 	}

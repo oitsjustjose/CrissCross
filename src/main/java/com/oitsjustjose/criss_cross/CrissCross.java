@@ -5,10 +5,11 @@ import com.oitsjustjose.criss_cross.lib.CreativeTab;
 import com.oitsjustjose.criss_cross.lib.Lib;
 import com.oitsjustjose.criss_cross.lib.LibBlocks;
 import com.oitsjustjose.criss_cross.lib.LibItems;
-import com.oitsjustjose.criss_cross.recipes.CCMachineRecipes;
-import com.oitsjustjose.criss_cross.recipes.VanillaRecipes;
+import com.oitsjustjose.criss_cross.recipes.MachineRecipes;
+import com.oitsjustjose.criss_cross.recipes.CraftingRecipes;
 import com.oitsjustjose.criss_cross.util.ClientProxy;
 import com.oitsjustjose.criss_cross.util.CommonProxy;
+import com.oitsjustjose.criss_cross.util.LogHelper;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
@@ -40,15 +41,17 @@ public class CrissCross
 
 		LibBlocks.init();
 		LibItems.init();
-		VanillaRecipes.init();
+		CraftingRecipes.init();
 	}
 	
 	@EventHandler
 	public static void postInit(FMLPostInitializationEvent event)
 	{
-		CCMachineRecipes.init();
+		MachineRecipes.init();
 		
 		if (event.getSide().isClient())
 			ClientProxy.init();
+		
+		LogHelper.info("Successfully loaded!");
 	}
 }

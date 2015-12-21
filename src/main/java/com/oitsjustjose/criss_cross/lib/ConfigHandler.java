@@ -2,6 +2,9 @@ package com.oitsjustjose.criss_cross.lib;
 
 import java.io.File;
 
+import com.oitsjustjose.criss_cross.util.LogHelper;
+
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
@@ -101,9 +104,11 @@ public class ConfigHandler
 	public static ItemStack findItemStack(String modid, String name)
 	{
 		if (GameRegistry.findItem(modid, name) != null)
-			return new ItemStack(GameRegistry.findItem(modid, name));
+			return new ItemStack(GameRegistry.findItem(modid, name), 1);
 		else if (GameRegistry.findBlock(modid, name) != null)
-			return new ItemStack(GameRegistry.findBlock(modid, name));
+			if (Item.getItemFromBlock(GameRegistry.findBlock(modid, name)) != null)
+				return new ItemStack(Item.getItemFromBlock(GameRegistry.findBlock(modid, name)), 1);
+
 		return null;
 	}
 }

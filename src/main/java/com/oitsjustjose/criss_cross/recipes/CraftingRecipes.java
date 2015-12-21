@@ -3,7 +3,7 @@ package com.oitsjustjose.criss_cross.recipes;
 import com.oitsjustjose.criss_cross.lib.ConfigHandler;
 import com.oitsjustjose.criss_cross.lib.LibBlocks;
 import com.oitsjustjose.criss_cross.lib.LibItems;
-import com.oitsjustjose.criss_cross.util.CCLog;
+import com.oitsjustjose.criss_cross.util.LogHelper;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -14,21 +14,19 @@ import net.minecraftforge.oredict.RecipeSorter;
 import net.minecraftforge.oredict.RecipeSorter.Category;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
-public class VanillaRecipes
+public class CraftingRecipes
 {
 	public static void init()
 	{
-		cropomatorRecipe();
-		electroextractorRecipe();
-		woodChipperRecipe();
-		initOthers();
+		initStaticRecipes();
+		intUserRecipes();
 		CraftingManager.getInstance().getRecipeList().add(new PouchColorRecipes());
 		CraftingManager.getInstance().getRecipeList().add(new PouchRollbackRecipes());
 		RecipeSorter.register("CrissCross:PouchColorRecipes", PouchColorRecipes.class, Category.SHAPELESS, "");
 		RecipeSorter.register("CrissCross:PouchRollbackRecipes", PouchRollbackRecipes.class, Category.SHAPELESS, "");
 	}
 
-	static void initOthers()
+	static void initStaticRecipes()
 	{
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LibBlocks.cobblegen), "CPC", "#$#", "CPC", '$', "blockIron", 'C', "cobblestone", 'P', Blocks.piston, '#', Items.stone_pickaxe));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LibBlocks.stonegen), "CPC", "#$#", "CPC", '$', "blockIron", 'C', "stone", 'P', Blocks.piston, '#', Items.stone_pickaxe));
@@ -40,9 +38,10 @@ public class VanillaRecipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LibItems.mantleSmasherMkII), "## ", "#PI", " IN", '#', "blockDiamond", 'I', "blockGold", 'P', LibItems.mantleSmasherMkI, 'N', Items.nether_star));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LibItems.pouch), "SDS", "LCL", "LLL", 'S', Items.string, 'D', "gemDiamond", 'L', Items.leather, 'C', Blocks.chest));
 	}
-
-	static void woodChipperRecipe()
+	
+	static void intUserRecipes()
 	{
+		//Woodchipper Recipe
 		String[] unlocItem = ConfigHandler.woodchipperRecipeItem.split(":");
 		ItemStack centerItem = new ItemStack(Blocks.diamond_block);
 
@@ -56,17 +55,17 @@ public class VanillaRecipes
 		}
 		else
 		{
-			CCLog.warn("Item " + ConfigHandler.woodchipperRecipeItem + "could not be added as part of the recipe of the Woodchipper.");
-			CCLog.warn("Please confirm you have the name and formatting correct.");
+			LogHelper.warn(ConfigHandler.woodchipperRecipeItem + " could not be implemented into the Woodchipper's Crafting Recipe.");
+			LogHelper.warn("The fallback, " + centerItem.getDisplayName() + ", has been used instead");
+			LogHelper.warn("Please confirm you have the name and formatting correct.");
+			System.out.println();
 		}
 
 		GameRegistry.addRecipe(new ItemStack(LibBlocks.woodchipper), new Object[] { "I#I", "SCS", "I#I", '#', Items.diamond_axe, 'I', Blocks.iron_bars, 'S', Items.golden_axe, 'C', centerItem });
-	}
-
-	static void electroextractorRecipe()
-	{
-		String[] unlocItem = ConfigHandler.electroextractorRecipeItem.split(":");
-		ItemStack centerItem = new ItemStack(Blocks.diamond_block);
+		
+		//Electroextractor Recipe
+		unlocItem = ConfigHandler.electroextractorRecipeItem.split(":");
+		centerItem = new ItemStack(Blocks.diamond_block);
 
 		if (ConfigHandler.findItemStack(unlocItem[0], unlocItem[1]) != null)
 		{
@@ -78,18 +77,17 @@ public class VanillaRecipes
 		}
 		else
 		{
-			CCLog.warn("Item " + ConfigHandler.electroextractorRecipeItem + " could not be added as part of the recipe of the electroextractor.");
-			CCLog.warn("Please confirm you have the name and formatting correct.");
-
+			LogHelper.warn(ConfigHandler.electroextractorRecipeItem + " could not be implemented into the Electroextractor's Crafting Recipe.");
+			LogHelper.warn("The fallback, " + centerItem.getDisplayName() + ", has been used instead");
+			LogHelper.warn("Please confirm you have the name and formatting correct.");
+			System.out.println();
 		}
 
 		GameRegistry.addRecipe(new ItemStack(LibBlocks.electroextractor), new Object[] { "I#I", "SCS", "I#I", '#', Blocks.piston, 'I', Blocks.iron_bars, 'S', Items.golden_pickaxe, 'C', centerItem });
-	}
-
-	static void cropomatorRecipe()
-	{
-		String[] unlocItem = ConfigHandler.cropomatorRecipeItem.split(":");
-		ItemStack centerItem = new ItemStack(Blocks.diamond_block);
+		
+		//Cropomator Recipe
+		unlocItem = ConfigHandler.cropomatorRecipeItem.split(":");
+		centerItem = new ItemStack(Blocks.diamond_block);
 
 		if (ConfigHandler.findItemStack(unlocItem[0], unlocItem[1]) != null)
 		{
@@ -101,11 +99,12 @@ public class VanillaRecipes
 		}
 		else
 		{
-			CCLog.warn("Item " + ConfigHandler.cropomatorRecipeItem + " could not be added as part of the recipe of the cropomator.");
-			CCLog.warn("Please confirm you have the name and formatting correct.");
+			LogHelper.warn(ConfigHandler.cropomatorRecipeItem + " could not be implemented into the Cropomator's Crafting Recipe.");
+			LogHelper.warn("The fallback, " + centerItem.getDisplayName() + ", has been used instead");
+			LogHelper.warn("Please confirm you have the name and formatting correct.");
+			System.out.println();
 		}
 
 		GameRegistry.addRecipe(new ItemStack(LibBlocks.cropomator), new Object[] { "I#I", "SCS", "I#I", '#', Blocks.hay_block, 'I', Items.iron_ingot, 'S', Items.golden_hoe, 'C', centerItem });
 	}
-
 }
