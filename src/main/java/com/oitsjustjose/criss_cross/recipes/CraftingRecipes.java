@@ -19,7 +19,7 @@ public class CraftingRecipes
 	public static void init()
 	{
 		initStaticRecipes();
-		intUserRecipes();
+		initUserRecipes();
 		CraftingManager.getInstance().getRecipeList().add(new PouchColorRecipes());
 		CraftingManager.getInstance().getRecipeList().add(new PouchRollbackRecipes());
 		RecipeSorter.register("CrissCross:PouchColorRecipes", PouchColorRecipes.class, Category.SHAPELESS, "");
@@ -39,7 +39,7 @@ public class CraftingRecipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LibItems.pouch), "SDS", "LCL", "LLL", 'S', Items.string, 'D', "gemDiamond", 'L', Items.leather, 'C', Blocks.chest));
 	}
 	
-	static void intUserRecipes()
+	static void initUserRecipes()
 	{
 		//Woodchipper Recipe
 		String[] unlocItem = ConfigHandler.woodchipperRecipeItem.split(":");
