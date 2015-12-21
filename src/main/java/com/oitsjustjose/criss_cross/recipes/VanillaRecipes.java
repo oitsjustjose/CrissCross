@@ -4,13 +4,14 @@ import com.oitsjustjose.criss_cross.lib.ConfigHandler;
 import com.oitsjustjose.criss_cross.lib.LibBlocks;
 import com.oitsjustjose.criss_cross.lib.LibItems;
 import com.oitsjustjose.criss_cross.util.CCLog;
-import com.oitsjustjose.criss_cross.util.ColorUtils;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.RecipeSorter;
+import net.minecraftforge.oredict.RecipeSorter.Category;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class VanillaRecipes
@@ -23,6 +24,8 @@ public class VanillaRecipes
 		initOthers();
 		CraftingManager.getInstance().getRecipeList().add(new PouchColorRecipes());
 		CraftingManager.getInstance().getRecipeList().add(new PouchRollbackRecipes());
+		RecipeSorter.register("CrissCross:PouchColorRecipes", PouchColorRecipes.class, Category.SHAPELESS, "");
+		RecipeSorter.register("CrissCross:PouchRollbackRecipes", PouchRollbackRecipes.class, Category.SHAPELESS, "");
 	}
 
 	static void initOthers()

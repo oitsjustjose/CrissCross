@@ -7,13 +7,18 @@ import com.oitsjustjose.criss_cross.lib.Lib;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldSettings;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemMantleSmasher extends ItemPickaxe
@@ -90,6 +95,9 @@ public class ItemMantleSmasher extends ItemPickaxe
 
 	void breakBlock(World world, EntityPlayer player, BlockPos pos)
 	{
+		if (!(player instanceof EntityPlayerMP))
+			return;
+
 		Block block = world.getBlockState(pos).getBlock();
 		IBlockState state = world.getBlockState(pos);
 
@@ -104,9 +112,11 @@ public class ItemMantleSmasher extends ItemPickaxe
 				{
 					block.onBlockDestroyedByPlayer(world, pos, state);
 					block.harvestBlock(world, player, pos, state, world.getTileEntity(pos));
+					block.dropXpOnBlockBreak(world, pos, block.getExpDrop(world, pos, EnchantmentHelper.getFortuneModifier(player)));
 					player.getHeldItem().attemptDamageItem(1, player.getRNG());
 					world.playAuxSFX(2001, pos, Block.getIdFromBlock(block) + (block.getMetaFromState(state) << 12));
 				}
+				world.setBlockToAir(pos);
 			}
 		}
 
