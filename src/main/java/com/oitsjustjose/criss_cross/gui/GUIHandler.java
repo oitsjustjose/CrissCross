@@ -23,60 +23,41 @@ import net.minecraftforge.fml.common.network.IGuiHandler;
 
 public class GUIHandler implements IGuiHandler
 {
-	public static final int Cropomator = 1;
-	public static final int Electroextractor = 2;
-	public static final int Woodchipper = 3;
-	public static final int Cobblegen = 4;
-	public static final int Stonegen = 5;
-	public static final int Pouch = 6;
-	public static final int Scribe = 7;
+	public static final int Cropomator = 0;
+	public static final int Electroextractor = 1;
+	public static final int Woodchipper = 2;
+	public static final int Cobblegen = 3;
+	public static final int Stonegen = 4;
+	public static final int Pouch = 5;
+	public static final int Scribe = 6;
 
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
 	{
 		TileEntity tile = world.getTileEntity(new BlockPos(x, y, z));
 
-		if (tile instanceof TileCropomator)
+		if (tile != null)
 		{
-			TileCropomator TE = (TileCropomator) tile;
-
-			return new ContainerCropomator(player, TE);
-		}
-		if (tile instanceof TileElectroextractor)
-		{
-			TileElectroextractor TE = (TileElectroextractor) tile;
-
-			return new ContainerElectroextractor(player, TE);
-		}
-		if (tile instanceof TileWoodchipper)
-		{
-			TileWoodchipper TE = (TileWoodchipper) tile;
-
-			return new ContainerWoodchipper(player, TE);
-		}
-		if (tile instanceof TileCobblegen)
-		{
-			TileCobblegen TE = (TileCobblegen) tile;
-
-			return new ContainerCobblegen(player, TE);
-		}
-		if (tile instanceof TileStonegen)
-		{
-			TileStonegen TE = (TileStonegen) tile;
-
-			return new ContainerStonegen(player, TE);
-		}
-		if (tile instanceof TileScribe)
-		{
-			TileScribe TE = (TileScribe) tile;
-
-			return new ContainerScribe(player, TE);
+			System.out.println(ID);
+			switch (ID)
+			{
+			case 0: // Cropomator
+				return new ContainerCropomator(player, ((TileCropomator) tile));
+			case 1: // Electroextractor
+				return new ContainerElectroextractor(player, ((TileElectroextractor) tile));
+			case 2: // Wood Chipper
+				return new ContainerWoodchipper(player, ((TileWoodchipper) tile));
+			case 3: // Cobblestone generator
+				return new ContainerCobblegen(player, ((TileCobblegen) tile));
+			case 4: // Stone generator
+				return new ContainerStonegen(player, ((TileStonegen) tile));
+			case 6: // Scribe
+				return new ContainerScribe(player, ((TileScribe) tile));
+			}
 		}
 
 		if (player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ItemPouch)
-		{
 			return new ContainerPouch(player, player.inventory.currentItem);
-		}
 
 		return null;
 	}
@@ -86,47 +67,27 @@ public class GUIHandler implements IGuiHandler
 	{
 		TileEntity tile = world.getTileEntity(new BlockPos(x, y, z));
 
-		if (tile instanceof TileCropomator)
+		if (tile != null)
 		{
-			TileCropomator TE = (TileCropomator) tile;
-
-			return new GUICropomator(player, TE);
+			switch (ID)
+			{
+			case 0: // Cropomator
+				return new GUICropomator(player, ((TileCropomator) tile));
+			case 1: // Electroextractor
+				return new GUIElectroextractor(player, ((TileElectroextractor) tile));
+			case 2: // Wood Chipper
+				return new GUIWoodchipper(player, ((TileWoodchipper) tile));
+			case 3: // Cobblestone generator
+				return new GUICobblegen(player, ((TileCobblegen) tile));
+			case 4: // Stone generator
+				return new GUIStonegen(player, ((TileStonegen) tile));
+			case 6: // Scribe
+				return new GUIScribe(player, ((TileScribe) tile));
+			}
 		}
 
-		if (tile instanceof TileElectroextractor)
-		{
-			TileElectroextractor TE = (TileElectroextractor) tile;
-
-			return new GUIElectroextractor(player, TE);
-		}
-		if (tile instanceof TileWoodchipper)
-		{
-			TileWoodchipper TE = (TileWoodchipper) tile;
-
-			return new GUIWoodchipper(player, TE);
-		}
-		if (tile instanceof TileCobblegen)
-		{
-			TileCobblegen TE = (TileCobblegen) tile;
-
-			return new GUICobblegen(player, TE);
-		}
-		if (tile instanceof TileStonegen)
-		{
-			TileStonegen TE = (TileStonegen) tile;
-
-			return new GUIStonegen(player, TE);
-		}
-		if (tile instanceof TileScribe)
-		{
-			TileScribe TE = (TileScribe) tile;
-
-			return new GUIScribe(player, TE);
-		}
 		if (player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ItemPouch)
-		{
 			return new GUIPouch(player, player.inventory.currentItem);
-		}
 
 		return null;
 	}

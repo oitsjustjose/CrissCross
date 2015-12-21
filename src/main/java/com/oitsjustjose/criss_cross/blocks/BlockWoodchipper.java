@@ -67,7 +67,7 @@ public class BlockWoodchipper extends BlockMachineBase
 		{
 			TileWoodchipper tile = (TileWoodchipper) world.getTileEntity(pos);
 			if (tile != null)
-				player.openGui(CrissCross.instance, GUIHandler.Stonegen, world, pos.getX(), pos.getY(), pos.getZ());
+				player.openGui(CrissCross.instance, GUIHandler.Woodchipper, world, pos.getX(), pos.getY(), pos.getZ());
 			return true;
 		}
 	}

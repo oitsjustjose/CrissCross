@@ -67,7 +67,7 @@ public class BlockCropomator extends BlockMachineBase
 		{
 			TileCropomator tile = (TileCropomator) world.getTileEntity(pos);
 			if (tile != null)
-				player.openGui(CrissCross.instance, GUIHandler.Stonegen, world, pos.getX(), pos.getY(), pos.getZ());
+				player.openGui(CrissCross.instance, GUIHandler.Cropomator, world, pos.getX(), pos.getY(), pos.getZ());
 			return true;
 		}
 	}

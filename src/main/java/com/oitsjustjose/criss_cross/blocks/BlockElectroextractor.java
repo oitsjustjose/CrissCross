@@ -66,7 +66,7 @@ public class BlockElectroextractor extends BlockMachineBase
 		{
 			TileElectroextractor tile = (TileElectroextractor) world.getTileEntity(pos);
 			if (tile != null)
-				player.openGui(CrissCross.instance, GUIHandler.Stonegen, world, pos.getX(), pos.getY(), pos.getZ());
+				player.openGui(CrissCross.instance, GUIHandler.Electroextractor, world, pos.getX(), pos.getY(), pos.getZ());
 			return true;
 		}
 	}
