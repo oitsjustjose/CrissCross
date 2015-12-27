@@ -15,7 +15,9 @@ import com.oitsjustjose.criss_cross.tileentity.TileScribe;
 import com.oitsjustjose.criss_cross.tileentity.TileStonegen;
 import com.oitsjustjose.criss_cross.tileentity.TileWoodchipper;
 
+import net.minecraft.block.state.BlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
@@ -30,15 +32,14 @@ public class GUIHandler implements IGuiHandler
 	public static final int Stonegen = 4;
 	public static final int Pouch = 5;
 	public static final int Scribe = 6;
+	public static final int AtmosManipulator = 7;
 
-	@Override
-	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
+	@Override public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
 	{
 		TileEntity tile = world.getTileEntity(new BlockPos(x, y, z));
 
 		if (tile != null)
 		{
-			System.out.println(ID);
 			switch (ID)
 			{
 			case 0: // Cropomator
@@ -83,6 +84,8 @@ public class GUIHandler implements IGuiHandler
 				return new GUIStonegen(player, ((TileStonegen) tile));
 			case 6: // Scribe
 				return new GUIScribe(player, ((TileScribe) tile));
+			case 7: // AtmosManipulator
+				return new GUIAtmosManipulator(player, new ItemStack(world.getBlockState(new BlockPos(x, y, z)).getBlock()), false);
 			}
 		}
 

@@ -41,6 +41,18 @@ public class BlockMachineBase extends BlockContainer
 		Lib.add(this);
 	}
 
+	@Override
+	public boolean isFullCube()
+	{
+		return false;
+	}
+	
+	@Override
+    public boolean isOpaqueCube()
+    {
+        return false;
+    }
+
 	@SideOnly(Side.CLIENT)
 	@Override
 	public EnumWorldBlockLayer getBlockLayer()

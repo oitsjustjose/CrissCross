@@ -22,6 +22,7 @@ public class CraftingRecipes
 		initUserRecipes();
 		CraftingManager.getInstance().getRecipeList().add(new PouchColorRecipes());
 		CraftingManager.getInstance().getRecipeList().add(new PouchRollbackRecipes());
+		//Am I doing this correctly? I hope so, hard to tell w/o NEI :|
 		RecipeSorter.register("CrissCross:PouchColorRecipes", PouchColorRecipes.class, Category.SHAPELESS, "");
 		RecipeSorter.register("CrissCross:PouchRollbackRecipes", PouchRollbackRecipes.class, Category.SHAPELESS, "");
 	}
