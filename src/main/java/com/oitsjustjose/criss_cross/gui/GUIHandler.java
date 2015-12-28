@@ -1,5 +1,6 @@
 package com.oitsjustjose.criss_cross.gui;
 
+import com.oitsjustjose.criss_cross.container.ContainerAtmosManipulator;
 import com.oitsjustjose.criss_cross.container.ContainerCobblegen;
 import com.oitsjustjose.criss_cross.container.ContainerCropomator;
 import com.oitsjustjose.criss_cross.container.ContainerElectroextractor;
@@ -8,6 +9,7 @@ import com.oitsjustjose.criss_cross.container.ContainerScribe;
 import com.oitsjustjose.criss_cross.container.ContainerStonegen;
 import com.oitsjustjose.criss_cross.container.ContainerWoodchipper;
 import com.oitsjustjose.criss_cross.items.ItemPouch;
+import com.oitsjustjose.criss_cross.tileentity.TileAtmosManipulator;
 import com.oitsjustjose.criss_cross.tileentity.TileCobblegen;
 import com.oitsjustjose.criss_cross.tileentity.TileCropomator;
 import com.oitsjustjose.criss_cross.tileentity.TileElectroextractor;
@@ -15,9 +17,7 @@ import com.oitsjustjose.criss_cross.tileentity.TileScribe;
 import com.oitsjustjose.criss_cross.tileentity.TileStonegen;
 import com.oitsjustjose.criss_cross.tileentity.TileWoodchipper;
 
-import net.minecraft.block.state.BlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
@@ -54,6 +54,8 @@ public class GUIHandler implements IGuiHandler
 				return new ContainerStonegen(player, ((TileStonegen) tile));
 			case 6: // Scribe
 				return new ContainerScribe(player, ((TileScribe) tile));
+			case 7: // AtmosManipulator
+				return new ContainerAtmosManipulator(player, ((TileAtmosManipulator) tile));
 			}
 		}
 
@@ -85,7 +87,7 @@ public class GUIHandler implements IGuiHandler
 			case 6: // Scribe
 				return new GUIScribe(player, ((TileScribe) tile));
 			case 7: // AtmosManipulator
-				return new GUIAtmosManipulator(player, new ItemStack(world.getBlockState(new BlockPos(x, y, z)).getBlock()), false);
+				return new GUIAtmosManipulator(player, ((TileAtmosManipulator) tile));
 			}
 		}
 

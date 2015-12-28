@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.oitsjustjose.criss_cross.blocks.BlockWoodchipper;
 import com.oitsjustjose.criss_cross.container.ContainerWoodchipper;
-import com.oitsjustjose.criss_cross.lib.ConfigHandler;
+import com.oitsjustjose.criss_cross.lib.Config;
 import com.oitsjustjose.criss_cross.lib.Lib;
 import com.oitsjustjose.criss_cross.recipes.machine.WoodchipperRecipes;
 
@@ -23,8 +23,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TileWoodchipper extends TileEntityLockable implements ITickable, ISidedInventory
 {
-	private static int proTicks = ConfigHandler.woodchipperProcessTime;
-	private static int qty = ConfigHandler.woodchipperOutput;
+	private static int proTicks = Config.woodchipperProcessTime;
+	private static int qty = Config.woodchipperOutput;
 	private static final int[] slotsTop = new int[] { 0 };
 	private static final int[] slotsBottom = new int[] { 2, 1 };
 	private static final int[] slotsSides = new int[] { 1 };

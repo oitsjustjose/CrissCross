@@ -1,6 +1,6 @@
 package com.oitsjustjose.criss_cross.recipes;
 
-import com.oitsjustjose.criss_cross.lib.ConfigHandler;
+import com.oitsjustjose.criss_cross.lib.Config;
 import com.oitsjustjose.criss_cross.lib.LibBlocks;
 import com.oitsjustjose.criss_cross.lib.LibItems;
 import com.oitsjustjose.criss_cross.util.LogHelper;
@@ -43,12 +43,12 @@ public class CraftingRecipes
 	static void initUserRecipes()
 	{
 		//Woodchipper Recipe
-		String[] unlocItem = ConfigHandler.woodchipperRecipeItem.split(":");
+		String[] unlocItem = Config.woodchipperRecipeItem.split(":");
 		ItemStack centerItem = new ItemStack(Blocks.diamond_block);
 
-		if (ConfigHandler.findItemStack(unlocItem[0], unlocItem[1]) != null)
+		if (Config.findItemStack(unlocItem[0], unlocItem[1]) != null)
 		{
-			ItemStack newStack = ConfigHandler.findItemStack(unlocItem[0], unlocItem[1]);
+			ItemStack newStack = Config.findItemStack(unlocItem[0], unlocItem[1]);
 			if (unlocItem.length == 2)
 				centerItem = newStack;
 			if (unlocItem.length == 3)
@@ -56,7 +56,7 @@ public class CraftingRecipes
 		}
 		else
 		{
-			LogHelper.warn(ConfigHandler.woodchipperRecipeItem + " could not be implemented into the Woodchipper's Crafting Recipe.");
+			LogHelper.warn(Config.woodchipperRecipeItem + " could not be implemented into the Woodchipper's Crafting Recipe.");
 			LogHelper.warn("The fallback, " + centerItem.getDisplayName() + ", has been used instead");
 			LogHelper.warn("Please confirm you have the name and formatting correct.");
 			System.out.println();
@@ -65,12 +65,12 @@ public class CraftingRecipes
 		GameRegistry.addRecipe(new ItemStack(LibBlocks.woodchipper), new Object[] { "I#I", "SCS", "I#I", '#', Items.diamond_axe, 'I', Blocks.iron_bars, 'S', Items.golden_axe, 'C', centerItem });
 		
 		//Electroextractor Recipe
-		unlocItem = ConfigHandler.electroextractorRecipeItem.split(":");
+		unlocItem = Config.eeRecipeItem.split(":");
 		centerItem = new ItemStack(Blocks.diamond_block);
 
-		if (ConfigHandler.findItemStack(unlocItem[0], unlocItem[1]) != null)
+		if (Config.findItemStack(unlocItem[0], unlocItem[1]) != null)
 		{
-			ItemStack newStack = ConfigHandler.findItemStack(unlocItem[0], unlocItem[1]);
+			ItemStack newStack = Config.findItemStack(unlocItem[0], unlocItem[1]);
 			if (unlocItem.length == 2)
 				centerItem = newStack;
 			if (unlocItem.length == 3)
@@ -78,7 +78,7 @@ public class CraftingRecipes
 		}
 		else
 		{
-			LogHelper.warn(ConfigHandler.electroextractorRecipeItem + " could not be implemented into the Electroextractor's Crafting Recipe.");
+			LogHelper.warn(Config.eeRecipeItem + " could not be implemented into the Electroextractor's Crafting Recipe.");
 			LogHelper.warn("The fallback, " + centerItem.getDisplayName() + ", has been used instead");
 			LogHelper.warn("Please confirm you have the name and formatting correct.");
 			System.out.println();
@@ -87,12 +87,12 @@ public class CraftingRecipes
 		GameRegistry.addRecipe(new ItemStack(LibBlocks.electroextractor), new Object[] { "I#I", "SCS", "I#I", '#', Blocks.piston, 'I', Blocks.iron_bars, 'S', Items.golden_pickaxe, 'C', centerItem });
 		
 		//Cropomator Recipe
-		unlocItem = ConfigHandler.cropomatorRecipeItem.split(":");
+		unlocItem = Config.cropomatorRecipeItem.split(":");
 		centerItem = new ItemStack(Blocks.diamond_block);
 
-		if (ConfigHandler.findItemStack(unlocItem[0], unlocItem[1]) != null)
+		if (Config.findItemStack(unlocItem[0], unlocItem[1]) != null)
 		{
-			ItemStack newStack = ConfigHandler.findItemStack(unlocItem[0], unlocItem[1]);
+			ItemStack newStack = Config.findItemStack(unlocItem[0], unlocItem[1]);
 			if (unlocItem.length == 2)
 				centerItem = newStack;
 			if (unlocItem.length == 3)
@@ -100,7 +100,7 @@ public class CraftingRecipes
 		}
 		else
 		{
-			LogHelper.warn(ConfigHandler.cropomatorRecipeItem + " could not be implemented into the Cropomator's Crafting Recipe.");
+			LogHelper.warn(Config.cropomatorRecipeItem + " could not be implemented into the Cropomator's Crafting Recipe.");
 			LogHelper.warn("The fallback, " + centerItem.getDisplayName() + ", has been used instead");
 			LogHelper.warn("Please confirm you have the name and formatting correct.");
 			System.out.println();

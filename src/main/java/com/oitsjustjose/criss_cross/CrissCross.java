@@ -1,6 +1,6 @@
 package com.oitsjustjose.criss_cross;
 
-import com.oitsjustjose.criss_cross.lib.ConfigHandler;
+import com.oitsjustjose.criss_cross.lib.Config;
 import com.oitsjustjose.criss_cross.lib.CreativeTab;
 import com.oitsjustjose.criss_cross.lib.Lib;
 import com.oitsjustjose.criss_cross.lib.LibBlocks;
@@ -33,10 +33,10 @@ public class CrissCross
 	public static CommonProxy proxy;
 
 	@EventHandler
-	public static void preInit(FMLPreInitializationEvent event)
+	public void preInit(FMLPreInitializationEvent event)
 	{
-		ConfigHandler.init(event.getSuggestedConfigurationFile());
-		MinecraftForge.EVENT_BUS.register(new ConfigHandler());
+		Config.init(event.getSuggestedConfigurationFile());
+		MinecraftForge.EVENT_BUS.register(new Config());
 		proxy.preInit();
 
 		LibBlocks.init();
@@ -45,7 +45,7 @@ public class CrissCross
 	}
 	
 	@EventHandler
-	public static void postInit(FMLPostInitializationEvent event)
+	public void postInit(FMLPostInitializationEvent event)
 	{
 		MachineRecipes.init();
 		

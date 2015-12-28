@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.oitsjustjose.criss_cross.items.ItemDust;
-import com.oitsjustjose.criss_cross.lib.ConfigHandler;
+import com.oitsjustjose.criss_cross.lib.Config;
 import com.oitsjustjose.criss_cross.lib.LibItems;
 import com.oitsjustjose.criss_cross.recipes.machine.CropomatorRecipes;
 import com.oitsjustjose.criss_cross.recipes.machine.ElectroextractorRecipes;
@@ -47,9 +47,9 @@ public class MachineRecipes
 		TileCobblegen.addFuel(new ItemStack(Items.water_bucket));
 		TileCobblegen.addFuel(new ItemStack(LibItems.buckets));
 
-		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.diamond_ore), new ItemStack(Items.diamond, ConfigHandler.electroextractorOutput));
-		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.emerald_ore), new ItemStack(Items.emerald, ConfigHandler.electroextractorOutput));
-		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.coal_ore), new ItemStack(Items.coal, ConfigHandler.electroextractorOutput));
+		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.diamond_ore), new ItemStack(Items.diamond, Config.eeOutput));
+		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.emerald_ore), new ItemStack(Items.emerald, Config.eeOutput));
+		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.coal_ore), new ItemStack(Items.coal, Config.eeOutput));
 		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.gravel), new ItemStack(Items.flint));
 		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.cobblestone, 16), new ItemStack(Blocks.sand, 16));
 		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.sandstone, 1, Short.MAX_VALUE), new ItemStack(Blocks.sand, 4));
@@ -68,11 +68,11 @@ public class MachineRecipes
 
 	public static void initScribeRecipes()
 	{
-		for (int i = 0; i < ConfigHandler.scribeRecipes.length; i++)
+		for (int i = 0; i < Config.scribeRecipes.length; i++)
 		{
 			try
 			{
-				String[] parts = ConfigHandler.scribeRecipes[i].split("[\\W]");
+				String[] parts = Config.scribeRecipes[i].split("[\\W]");
 				if (parts.length == 5)
 				{
 					String modid = parts[0];
@@ -81,11 +81,11 @@ public class MachineRecipes
 					int qty = Integer.parseInt(parts[3]);
 					int enchID = Integer.parseInt(parts[4]);
 
-					if (ConfigHandler.findItemStack(modid, object) != null)
+					if (Config.findItemStack(modid, object) != null)
 					{
 						if (Enchantment.getEnchantmentById(enchID) != null)
 						{
-							ItemStack newStack = ConfigHandler.findItemStack(modid, object);
+							ItemStack newStack = Config.findItemStack(modid, object);
 							ScribeRecipes.getInstance().addRecipe(new ItemStack(newStack.getItem(), qty, metadata), getEnchantedBook(enchID));
 						}
 						else
@@ -124,36 +124,36 @@ public class MachineRecipes
 
 	public static void initCropomatorRecipes()
 	{
-		for (int i = 0; i < ConfigHandler.cropomatorInputs.length; i++)
+		for (int i = 0; i < Config.cropomatorInputs.length; i++)
 		{
 			try
 			{
-				String[] parts = ConfigHandler.cropomatorInputs[i].split(":");
+				String[] parts = Config.cropomatorInputs[i].split(":");
 				if (parts.length == 2)
 				{
-					if (ConfigHandler.findItemStack(parts[0], parts[1]) != null)
+					if (Config.findItemStack(parts[0], parts[1]) != null)
 					{
-						ItemStack newStack = ConfigHandler.findItemStack(parts[0], parts[1]);
-						CropomatorRecipes.getInstance().addRecipe(newStack, new ItemStack(newStack.getItem(), ConfigHandler.cropomatorOutput, newStack.getItemDamage()));
+						ItemStack newStack = Config.findItemStack(parts[0], parts[1]);
+						CropomatorRecipes.getInstance().addRecipe(newStack, new ItemStack(newStack.getItem(), Config.cropomatorOutput, newStack.getItemDamage()));
 					}
 					else
 					{
-						LogHelper.warn("Item " + ConfigHandler.cropomatorInputs[i] + " could not be added to the Cropomator's recipe list.");
+						LogHelper.warn("Item " + Config.cropomatorInputs[i] + " could not be added to the Cropomator's recipe list.");
 						LogHelper.warn("Please confirm you have the name and formatting correct.");
 
 					}
 				}
 				if (parts.length == 3)
 				{
-					if (ConfigHandler.findItemStack(parts[0], parts[1]) != null)
+					if (Config.findItemStack(parts[0], parts[1]) != null)
 					{
-						ItemStack newStack = new ItemStack(ConfigHandler.findItemStack(parts[0], parts[1]).getItem(), 1, Integer.parseInt(parts[2]));
-						newStack.stackSize = ConfigHandler.cropomatorOutput;
-						CropomatorRecipes.getInstance().addRecipe(newStack, new ItemStack(newStack.getItem(), ConfigHandler.cropomatorOutput, newStack.getItemDamage()));
+						ItemStack newStack = new ItemStack(Config.findItemStack(parts[0], parts[1]).getItem(), 1, Integer.parseInt(parts[2]));
+						newStack.stackSize = Config.cropomatorOutput;
+						CropomatorRecipes.getInstance().addRecipe(newStack, new ItemStack(newStack.getItem(), Config.cropomatorOutput, newStack.getItemDamage()));
 					}
 					else
 					{
-						LogHelper.warn("Item " + ConfigHandler.cropomatorInputs[i] + " could not be added to the Cropomator's recipe list.");
+						LogHelper.warn("Item " + Config.cropomatorInputs[i] + " could not be added to the Cropomator's recipe list.");
 						LogHelper.warn("Please confirm you have the name and formatting correct.");
 					}
 				}
@@ -168,32 +168,32 @@ public class MachineRecipes
 
 	public static void initCropomatorFuels()
 	{
-		for (int i = 0; i < ConfigHandler.cropomatorCatalysts.length; i++)
+		for (int i = 0; i < Config.cropomatorCatalysts.length; i++)
 		{
 			try
 			{
-				String[] parts = ConfigHandler.cropomatorCatalysts[i].split(":");
+				String[] parts = Config.cropomatorCatalysts[i].split(":");
 				if (parts.length == 2)
 				{
-					if (ConfigHandler.findItemStack(parts[0], parts[1]) != null)
-						TileCropomator.addFuel(ConfigHandler.findItemStack(parts[0], parts[1]));
+					if (Config.findItemStack(parts[0], parts[1]) != null)
+						TileCropomator.addFuel(Config.findItemStack(parts[0], parts[1]));
 					else
 					{
-						LogHelper.warn("Item " + ConfigHandler.cropomatorInputs[i] + " could not be added to the Cropomator's catalyst list.");
+						LogHelper.warn("Item " + Config.cropomatorInputs[i] + " could not be added to the Cropomator's catalyst list.");
 						LogHelper.warn("Please confirm you have the name and formatting correct.");
 					}
 				}
 
 				if (parts.length == 3)
 				{
-					if (ConfigHandler.findItemStack(parts[0], parts[1]) != null)
+					if (Config.findItemStack(parts[0], parts[1]) != null)
 					{
-						ItemStack newStack = new ItemStack(ConfigHandler.findItemStack(parts[0], parts[1]).getItem(), 1, Integer.parseInt(parts[2]));
+						ItemStack newStack = new ItemStack(Config.findItemStack(parts[0], parts[1]).getItem(), 1, Integer.parseInt(parts[2]));
 						TileCropomator.addFuel(newStack);
 					}
 					else
 					{
-						LogHelper.warn("Item " + ConfigHandler.cropomatorInputs[i] + " could not be added to the Cropomator's catalyst list.");
+						LogHelper.warn("Item " + Config.cropomatorInputs[i] + " could not be added to the Cropomator's catalyst list.");
 						LogHelper.warn("Please confirm you have the name and formatting correct.");
 					}
 				}
@@ -240,7 +240,7 @@ public class MachineRecipes
 					{
 						ItemStack localItemStack5 = localItemStack4.copy();
 						ItemStack tmp129_127 = localItemStack5;
-						tmp129_127.stackSize = ConfigHandler.woodchipperOutput;
+						tmp129_127.stackSize = Config.woodchipperOutput;
 						WoodchipperRecipes.getInstance().addRecipe(localItemStack3, localItemStack5);
 					}
 				}
@@ -254,7 +254,7 @@ public class MachineRecipes
 				{
 					localItemStack4 = localItemStack3.copy();
 					ItemStack temp = localItemStack4;
-					temp.stackSize = ConfigHandler.woodchipperOutput;
+					temp.stackSize = Config.woodchipperOutput;
 					WoodchipperRecipes.getInstance().addRecipe(localItemStack2, localItemStack4);
 				}
 			}
@@ -263,32 +263,32 @@ public class MachineRecipes
 
 	public static void initWoodchipperFuels()
 	{
-		for (int i = 0; i < ConfigHandler.woodchipperFuels.length; i++)
+		for (int i = 0; i < Config.woodchipperFuels.length; i++)
 		{
 			try
 			{
-				String[] parts = ConfigHandler.woodchipperFuels[i].split(":");
+				String[] parts = Config.woodchipperFuels[i].split(":");
 				if (parts.length == 2)
 				{
-					if (ConfigHandler.findItemStack(parts[0], parts[1]) != null)
-						TileWoodchipper.addFuel(ConfigHandler.findItemStack(parts[0], parts[1]));
+					if (Config.findItemStack(parts[0], parts[1]) != null)
+						TileWoodchipper.addFuel(Config.findItemStack(parts[0], parts[1]));
 					else
 					{
-						LogHelper.warn("Item " + ConfigHandler.woodchipperFuels[i] + " could not be added to the Woodchipper's fuel list.");
+						LogHelper.warn("Item " + Config.woodchipperFuels[i] + " could not be added to the Woodchipper's fuel list.");
 						LogHelper.warn("Please confirm you have the name and formatting correct.");
 					}
 				}
 
 				if (parts.length == 3)
 				{
-					if (ConfigHandler.findItemStack(parts[0], parts[1]) != null)
+					if (Config.findItemStack(parts[0], parts[1]) != null)
 					{
-						ItemStack newStack = new ItemStack(ConfigHandler.findItemStack(parts[0], parts[1]).getItem(), 1, Integer.parseInt(parts[2]));
+						ItemStack newStack = new ItemStack(Config.findItemStack(parts[0], parts[1]).getItem(), 1, Integer.parseInt(parts[2]));
 						TileWoodchipper.addFuel(newStack);
 					}
 					else
 					{
-						LogHelper.warn("Item " + ConfigHandler.woodchipperFuels[i] + " could not be added to the Woodchipper's fuel list.");
+						LogHelper.warn("Item " + Config.woodchipperFuels[i] + " could not be added to the Woodchipper's fuel list.");
 						LogHelper.warn("Please confirm you have the name and formatting correct.");
 					}
 				}
@@ -302,32 +302,32 @@ public class MachineRecipes
 
 	static void initElectroextractorFuels()
 	{
-		for (int i = 0; i < ConfigHandler.electroextractorEnergySources.length; i++)
+		for (int i = 0; i < Config.eeFuels.length; i++)
 		{
 			try
 			{
-				String[] parts = ConfigHandler.electroextractorEnergySources[i].split(":");
+				String[] parts = Config.eeFuels[i].split(":");
 				if (parts.length == 2)
 				{
-					if (ConfigHandler.findItemStack(parts[0], parts[1]) != null)
-						TileElectroextractor.addFuel(ConfigHandler.findItemStack(parts[0], parts[1]));
+					if (Config.findItemStack(parts[0], parts[1]) != null)
+						TileElectroextractor.addFuel(Config.findItemStack(parts[0], parts[1]));
 					else
 					{
-						LogHelper.warn("Item " + ConfigHandler.electroextractorEnergySources[i] + " could not be added to the Electroextractor's fuel list.");
+						LogHelper.warn("Item " + Config.eeFuels[i] + " could not be added to the Electroextractor's fuel list.");
 						LogHelper.warn("Please confirm you have the name and formatting correct.");
 					}
 				}
 
 				if (parts.length == 3)
 				{
-					if (ConfigHandler.findItemStack(parts[0], parts[1]) != null)
+					if (Config.findItemStack(parts[0], parts[1]) != null)
 					{
-						ItemStack newStack = new ItemStack(ConfigHandler.findItemStack(parts[0], parts[1]).getItem(), 1, Integer.parseInt(parts[2]));
+						ItemStack newStack = new ItemStack(Config.findItemStack(parts[0], parts[1]).getItem(), 1, Integer.parseInt(parts[2]));
 						TileElectroextractor.addFuel(newStack);
 					}
 					else
 					{
-						LogHelper.warn("Item " + ConfigHandler.electroextractorEnergySources[i] + " could not be added to the Electroextractor's fuel list.");
+						LogHelper.warn("Item " + Config.eeFuels[i] + " could not be added to the Electroextractor's fuel list.");
 						LogHelper.warn("Please confirm you have the name and formatting correct.");
 					}
 				}
@@ -342,19 +342,19 @@ public class MachineRecipes
 	static void initElectroextractorOreDictionary()
 	{
 		ArrayList<String> dustNames = ItemDust.getDusts();
-		for (int i = 0; i < ConfigHandler.electroextractorOreDictInputs.length; i++)
+		for (int i = 0; i < Config.eeOreDictInputs.length; i++)
 		{
-			String[] entry = ConfigHandler.electroextractorOreDictInputs[i].split(":");
+			String[] entry = Config.eeOreDictInputs[i].split(":");
 			if (doesOreNameExist("ore" + entry[0]) && doesOreNameExist("ingot" + entry[0]))
 			{
 				List<ItemStack> ores = OreDictionary.getOres("ore" + entry[0]);
 				ItemDust.addDustType(entry[0], Integer.parseInt(entry[1]));
 				for (int j = 0; j < ores.size(); j++)
-					ElectroextractorRecipes.getInstance().addRecipe(ores.get(j), new ItemStack(LibItems.dusts, ConfigHandler.electroextractorOutput, dustNames.size() - 1));
+					ElectroextractorRecipes.getInstance().addRecipe(ores.get(j), new ItemStack(LibItems.dusts, Config.eeOutput, dustNames.size() - 1));
 			}
 			else
 			{
-				LogHelper.warn("Your oreDictionary Entry " + ConfigHandler.electroextractorOreDictInputs[i] + " could not be registered.");
+				LogHelper.warn("Your oreDictionary Entry " + Config.eeOreDictInputs[i] + " could not be registered.");
 				if (!doesOreNameExist("ore" + entry[0]))
 					LogHelper.warn("This is because your oreDictionary Entry was not valid or registered as " + entry[0] + ".");
 				else if (!doesOreNameExist("ingot" + entry[0]))

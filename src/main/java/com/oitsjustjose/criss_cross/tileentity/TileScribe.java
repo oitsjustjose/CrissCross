@@ -24,12 +24,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class TileScribe extends TileEntityLockable implements ITickable, ISidedInventory
 {
 	private static int proTicks = 700;
-	private static final int[] slotsTop = new int[] { 0 };
-	private static final int[] slotsBottom = new int[] { 2, 1 };
-	private static final int[] slotsSides = new int[] { 1 };
 	private static String customName;
 	private ItemStack[] ItemStacks = new ItemStack[3];
-
 	public int fuelTime;
 	public int writingTime;
 	public int fuelUsetime;
@@ -402,18 +398,18 @@ public class TileScribe extends TileEntityLockable implements ITickable, ISidedI
 	@Override
 	public int[] getSlotsForFace(EnumFacing side)
 	{
-		return side == EnumFacing.DOWN ? slotsBottom : (side == EnumFacing.UP ? slotsTop : slotsSides);
+		return new int[]{};
 	}
 
 	@Override
 	public boolean canInsertItem(int slot, ItemStack itemstack, EnumFacing direction)
 	{
-		return this.isItemValidForSlot(slot, itemstack);
+		return false;
 	}
 
 	@Override
 	public boolean canExtractItem(int slot, ItemStack itemstack, EnumFacing direction)
 	{
-		return direction != EnumFacing.DOWN || slot != 1;
+		return false;
 	}
 }

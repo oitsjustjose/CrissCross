@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.oitsjustjose.criss_cross.blocks.BlockElectroextractor;
 import com.oitsjustjose.criss_cross.container.ContainerElectroextractor;
-import com.oitsjustjose.criss_cross.lib.ConfigHandler;
+import com.oitsjustjose.criss_cross.lib.Config;
 import com.oitsjustjose.criss_cross.lib.Lib;
 import com.oitsjustjose.criss_cross.recipes.machine.ElectroextractorRecipes;
 
@@ -23,8 +23,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TileElectroextractor extends TileEntityLockable implements ITickable, ISidedInventory
 {
-	private static int proTicks = ConfigHandler.electroextractorProcessTime;
-	private static int qty = ConfigHandler.electroextractorOutput;
+	private static int proTicks = Config.electroextractorProcessTime;
+	private static int qty = Config.eeOutput;
 	private static final int[] slotsTop = new int[] { 0 };
 	private static final int[] slotsBottom = new int[] { 2, 1 };
 	private static final int[] slotsSides = new int[] { 1 };

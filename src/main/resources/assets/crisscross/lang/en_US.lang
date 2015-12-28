@@ -5,6 +5,8 @@ tile.CrissCross.WoodChipper.name=Wood Chipper
 tile.CrissCross.CobblestoneGenerator.name=Cobblestone Generator
 tile.CrissCross.StoneGenerator.name=Smooth Stone Generator
 tile.CrissCross.Scribe.name=Scribe
+tile.CrissCross.AtmosManipulator.name=Atmos Manipulator
+
 
 #Items
 item.CrissCross.trash.name=This is a bad item, please trash it.
@@ -27,6 +29,9 @@ container.woodchipper=Wood Chipper
 container.stonegen=Smooth Stone Generator
 container.cobblegen=Cobblestone Generator
 container.scribe=Scribe
+container.atmosmanipulator=Atmos Manipulator
+button.sun=§eSun Creator§r
+button.rain=§1Rain Creator§r
 
 #NEI Integration
 recipe.cropomatorfuel=Cropomator Fuels
