@@ -1,0 +1,30 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"textures": {
+			"top": "crisscross:blocks/atmos_manipulator/atmos_manipulator_top",
+			"front": "crisscross:blocks/atmos_manipulator/atmos_manipulator_front",
+			"side": "crisscross:blocks/atmos_manipulator/atmos_manipulator_sides",
+			"bottom": "crisscross:blocks/atmos_manipulator/atmos_manipulator_bottom"
+		},
+		"model": "crisscross:machine",
+		"uvlock": false
+	},
+	"variants": {
+		"normal": [{}],
+		"inventory": [{}],
+		"facing": {
+			"north": {
+			},
+			"east": {
+				"y": 90
+			},
+			"south": {
+				"y": 180
+			},
+			"west": {
+				"y": 270
+			}
+		}
+	}
+}
