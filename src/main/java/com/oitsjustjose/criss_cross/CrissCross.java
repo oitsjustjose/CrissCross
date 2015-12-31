@@ -21,7 +21,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid = Lib.modid, name = Lib.name, version = Lib.version, guiFactory = Lib.guifactory, dependencies = "required-after:Forge@[11.14,)")
+@Mod(modid = Lib.modid, name = Lib.name, version = Lib.version, guiFactory = Lib.guifactory, acceptedMinecraftVersions = "1.8.8, 1.8.9")
 public class CrissCross
 {
 	public static CreativeTabs CCTab = new CreativeTab();
