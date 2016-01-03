@@ -2,12 +2,16 @@ package com.oitsjustjose.criss_cross.jei;
 
 import javax.annotation.Nonnull;
 
+import com.oitsjustjose.criss_cross.gui.GUICropomator;
 import com.oitsjustjose.criss_cross.gui.GUIWoodchipper;
+import com.oitsjustjose.criss_cross.lib.Config;
 import com.oitsjustjose.criss_cross.lib.Lib;
 import com.oitsjustjose.criss_cross.tileentity.TileWoodchipper;
 import com.sun.org.apache.bcel.internal.Constants;
 
 import mezz.jei.api.gui.IDrawable;
+import mezz.jei.api.gui.IDrawableAnimated;
+import mezz.jei.api.gui.IDrawableStatic;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
@@ -21,6 +25,13 @@ public class WoodchipperCategory implements IRecipeCategory
 	private static final int OUTPUT_SLOT = 1;
 	private static final int FUEL_SLOT = 2;
 
+	IDrawableStatic fuelDrawable = JEIPluginManager.jeiHelper.getGuiHelper().createDrawable(GUIWoodchipper.backgroundTexture, 176, 0, 14, 14);
+	IDrawableStatic progressDrawable = JEIPluginManager.jeiHelper.getGuiHelper().createDrawable(GUIWoodchipper.backgroundTexture, 176, 15, 24, 16);
+
+	@Nonnull
+	protected final IDrawableAnimated fuel = JEIPluginManager.jeiHelper.getGuiHelper().createAnimatedDrawable(fuelDrawable, Config.woodchipperProcessTime, IDrawableAnimated.StartDirection.TOP, true);
+	@Nonnull
+	protected final IDrawableAnimated progress = JEIPluginManager.jeiHelper.getGuiHelper().createAnimatedDrawable(progressDrawable, Config.woodchipperProcessTime, IDrawableAnimated.StartDirection.LEFT, false);
 	@Nonnull
 	private final IDrawable background = JEIPluginManager.jeiHelper.getGuiHelper().createDrawable(GUIWoodchipper.backgroundTexture, 55, 16, 82, 54);
 	@Nonnull
@@ -56,7 +67,8 @@ public class WoodchipperCategory implements IRecipeCategory
 	@Override
 	public void drawAnimations(Minecraft minecraft)
 	{
-
+		fuel.draw(minecraft, 1, 20);
+		progress.draw(minecraft, 25, 19);
 	}
 
 	@Override
