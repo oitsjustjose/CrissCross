@@ -7,13 +7,18 @@ import net.minecraft.item.Item;
 
 public class Lib
 {
-	public static final String modid = "CrissCross";
-	public static final String name = "CrissCross";
-	public static final String version = "@VERSION@";
-	public static final String guifactory = "com.oitsjustjose.criss_cross.gui.ConfigGUI$GUIFactory";
-	public static final String clientProxy = "com.oitsjustjose.criss_cross.util.ClientProxy";
-	public static final String commonProxy = "com.oitsjustjose.criss_cross.util.CommonProxy";
-
+	public static final String MODID = "CrissCross";
+	public static final String NAME = "CrissCross";
+	public static final String VERSION = "@VERSION@";
+	public static final String GUI_FACTORY = "com.oitsjustjose.criss_cross.gui.ConfigGUI$GUIFactory";
+	public static final String CLIENT_PROXY = "com.oitsjustjose.criss_cross.util.ClientProxy";
+	public static final String COMMON_PROXY = "com.oitsjustjose.criss_cross.util.CommonProxy";
+	
+	public static final String CROPOMATOR_UID = MODID + ":Cropomator";
+	public static final String ELECTROEXTRACTOR_UID = MODID + ":Electroextractor";
+	public static final String WOODCHIPPER_UID = MODID + ":Woodchipper";
+	public static final String SCRIBE_UID = MODID + ":Scribe";
+	
 	private static final ArrayList<Item> allItems = new ArrayList<Item>();
 	private static final ArrayList<Block> allBlocks = new ArrayList<Block>();
 

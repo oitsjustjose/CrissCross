@@ -43,8 +43,8 @@ public class ClientProxy extends CommonProxy
 		for (ItemStack sub : subItems)
 		{
 			String name = item.getUnlocalizedName(sub).substring(16).toLowerCase();
-			ModelBakery.addVariantName(item, Lib.modid.toLowerCase() + ":" + name);
-			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, meta, new ModelResourceLocation(Lib.modid.toLowerCase() + ":" + name, "inventory"));
+			ModelBakery.addVariantName(item, Lib.MODID.toLowerCase() + ":" + name);
+			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, meta, new ModelResourceLocation(Lib.MODID.toLowerCase() + ":" + name, "inventory"));
 			meta++;
 		}
 
@@ -62,14 +62,14 @@ public class ClientProxy extends CommonProxy
 			for (ItemStack sub : subItems)
 			{
 				String name = itemBlock.getUnlocalizedName(sub).toLowerCase().replace("crisscross.", "").replace("tile.", "");
-				ModelBakery.addVariantName(itemBlock, Lib.modid.toLowerCase() + ":" + name);
-				Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(itemBlock, meta, new ModelResourceLocation(Lib.modid.toLowerCase() + ":" + name, "inventory"));
+				ModelBakery.addVariantName(itemBlock, Lib.MODID.toLowerCase() + ":" + name);
+				Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(itemBlock, meta, new ModelResourceLocation(Lib.MODID.toLowerCase() + ":" + name, "inventory"));
 				meta++;
 			}
 		}
 		else if (customName == "")
-			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(itemBlock, 0, new ModelResourceLocation(Lib.modid.toLowerCase() + ":" + block.getUnlocalizedName().substring(16).toLowerCase(), "inventory"));
+			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(itemBlock, 0, new ModelResourceLocation(Lib.MODID.toLowerCase() + ":" + block.getUnlocalizedName().substring(16).toLowerCase(), "inventory"));
 		else
-			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(itemBlock, 0, new ModelResourceLocation(Lib.modid.toLowerCase() + ":" + customName, "inventory"));
+			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(itemBlock, 0, new ModelResourceLocation(Lib.MODID.toLowerCase() + ":" + customName, "inventory"));
 	}
 }

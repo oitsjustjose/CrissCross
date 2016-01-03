@@ -283,6 +283,12 @@ public class TileElectroextractor extends TileEntityLockable implements ITickabl
 		return false;
 	}
 
+	public static ArrayList<ItemStack> getFuels()
+	{
+		return fuelItems;
+		
+	}
+	
 	public static boolean isValid(ItemStack itemstack)
 	{
 		if (ElectroextractorRecipes.getInstance().getResult(itemstack) != null)
@@ -414,7 +420,7 @@ public class TileElectroextractor extends TileEntityLockable implements ITickabl
 	@Override
 	public String getGuiID()
 	{
-		return Lib.modid + ":container.electroextractor";
+		return Lib.MODID + ":container.electroextractor";
 	}
 
 	@Override

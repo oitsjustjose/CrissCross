@@ -168,7 +168,7 @@ public class TileScribe extends TileEntityLockable implements ITickable, ISidedI
 	@Override
 	public String getGuiID()
 	{
-		return Lib.modid + ":container.scribe";
+		return Lib.MODID + ":container.scribe";
 	}
 
 	@Override

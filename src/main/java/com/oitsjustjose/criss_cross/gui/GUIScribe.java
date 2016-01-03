@@ -12,7 +12,7 @@ import net.minecraft.util.StatCollector;
 
 public class GUIScribe extends GuiContainer
 {
-	public static final ResourceLocation texture = new ResourceLocation("crisscross", "textures/gui/scribe.png");
+	public static final ResourceLocation backgroundTexture = new ResourceLocation("crisscross", "textures/gui/scribe.png");
 
 	private TileScribe scribe;
 
@@ -31,7 +31,7 @@ public class GUIScribe extends GuiContainer
 	protected void drawGuiContainerBackgroundLayer(float partialTickTime, int mouseX, int mouseY)
 	{
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.mc.renderEngine.bindTexture(texture);
+		this.mc.renderEngine.bindTexture(backgroundTexture);
 		int k = (this.width - this.xSize) / 2;
 		int l = (this.height - this.ySize) / 2;
 		this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);

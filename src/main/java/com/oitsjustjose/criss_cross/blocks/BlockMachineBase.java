@@ -34,7 +34,7 @@ public class BlockMachineBase extends BlockContainer
 		this.setHardness(2.0F);
 		this.setResistance(2.0F);
 		this.setStepSound(soundTypeMetal);
-		this.setUnlocalizedName(Lib.modid + "." + unlocName);
+		this.setUnlocalizedName(Lib.MODID + "." + unlocName);
 		this.setCreativeTab(CrissCross.CCTab);
 		this.unlocalizedName = unlocName;
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));

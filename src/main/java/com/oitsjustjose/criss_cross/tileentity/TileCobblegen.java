@@ -176,7 +176,7 @@ public class TileCobblegen extends TileEntityLockable implements ITickable, ISid
 	@Override
 	public String getGuiID()
 	{
-		return Lib.modid + ":container.cobblestonegen";
+		return Lib.MODID + ":container.cobblestonegen";
 	}
 
 	@Override

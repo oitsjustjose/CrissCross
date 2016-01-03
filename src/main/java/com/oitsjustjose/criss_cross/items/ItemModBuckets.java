@@ -31,7 +31,7 @@ public class ItemModBuckets extends Item
 		this.maxStackSize = 1;
 		this.setCreativeTab(CrissCross.CCTab);
 		this.setContainerItem(this);
-		this.setUnlocalizedName(Lib.modid + ".special_bucket");
+		this.setUnlocalizedName(Lib.MODID + ".special_bucket");
 		GameRegistry.registerItem(this, "special_bucket");
 		Lib.add(this);
 	}
@@ -119,7 +119,7 @@ public class ItemModBuckets extends Item
 	@Override
 	public String getUnlocalizedName(ItemStack itemStack)
 	{
-		return "item." + Lib.modid + "." + types[itemStack.getItemDamage()];
+		return "item." + Lib.MODID + "." + types[itemStack.getItemDamage()];
 	}
 
 	@Override

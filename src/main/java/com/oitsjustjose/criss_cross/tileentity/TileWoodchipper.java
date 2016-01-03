@@ -178,7 +178,7 @@ public class TileWoodchipper extends TileEntityLockable implements ITickable, IS
 	@Override
 	public String getGuiID()
 	{
-		return Lib.modid + ":container.woodchipper";
+		return Lib.MODID + ":container.woodchipper";
 	}
 
 	@Override

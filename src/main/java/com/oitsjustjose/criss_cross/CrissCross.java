@@ -21,15 +21,15 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid = Lib.modid, name = Lib.name, version = Lib.version, guiFactory = Lib.guifactory, acceptedMinecraftVersions = "1.8.8, 1.8.9")
+@Mod(modid = Lib.MODID, name = Lib.NAME, version = Lib.VERSION, guiFactory = Lib.GUI_FACTORY, acceptedMinecraftVersions = "1.8.8, 1.8.9")
 public class CrissCross
 {
 	public static CreativeTabs CCTab = new CreativeTab();
 
-	@Instance(Lib.modid)
+	@Instance(Lib.MODID)
 	public static CrissCross instance;
 
-	@SidedProxy(clientSide = Lib.clientProxy, serverSide = Lib.commonProxy)
+	@SidedProxy(clientSide = Lib.CLIENT_PROXY, serverSide = Lib.COMMON_PROXY)
 	public static CommonProxy proxy;
 
 	@EventHandler

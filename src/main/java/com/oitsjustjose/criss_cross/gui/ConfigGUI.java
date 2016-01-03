@@ -18,7 +18,7 @@ public class ConfigGUI extends GuiConfig
 {
 	public ConfigGUI(GuiScreen guiScreen)
 	{
-		super(guiScreen, getConfigElements(), Lib.modid, false, true, GuiConfig.getAbridgedConfigPath(Config.config.toString()));
+		super(guiScreen, getConfigElements(), Lib.MODID, false, true, GuiConfig.getAbridgedConfigPath(Config.config.toString()));
 	}
 
 	private static List<IConfigElement> getConfigElements()

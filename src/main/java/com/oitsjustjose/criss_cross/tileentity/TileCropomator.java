@@ -179,7 +179,7 @@ public class TileCropomator extends TileEntityLockable implements ITickable, ISi
 	@Override
 	public String getGuiID()
 	{
-		return Lib.modid + ":container.cropomator";
+		return Lib.MODID + ":container.cropomator";
 	}
 
 	@Override

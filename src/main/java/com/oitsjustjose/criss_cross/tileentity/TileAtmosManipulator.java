@@ -15,8 +15,7 @@ public class TileAtmosManipulator extends TileEntity implements ITickable
 	@Override
 	public void update()
 	{
-		if (worldObj.isRemote)
-			System.out.println(worldObj.isRaining());
+
 	}
 
 	public void setRain()

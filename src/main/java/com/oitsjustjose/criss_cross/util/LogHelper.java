@@ -7,7 +7,7 @@ import com.oitsjustjose.criss_cross.lib.Lib;
 
 public class LogHelper
 {
-	private static Logger LOGGER = LogManager.getLogger(Lib.modid);
+	private static Logger LOGGER = LogManager.getLogger(Lib.MODID);
 
 	public LogHelper()
 	{

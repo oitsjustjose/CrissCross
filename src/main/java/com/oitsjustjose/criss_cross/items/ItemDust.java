@@ -74,7 +74,7 @@ public class ItemDust extends Item
 	@Override
 	public String getUnlocalizedName(ItemStack itemStack)
 	{
-		return "item." + Lib.modid + ".dust";
+		return "item." + Lib.MODID + ".dust";
 	}
 
 	@Override

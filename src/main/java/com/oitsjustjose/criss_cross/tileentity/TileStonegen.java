@@ -178,7 +178,7 @@ public class TileStonegen extends TileEntityLockable implements ITickable, ISide
 	@Override
 	public String getGuiID()
 	{
-		return Lib.modid + ":container.stonegen";
+		return Lib.MODID + ":container.stonegen";
 	}
 
 	@Override

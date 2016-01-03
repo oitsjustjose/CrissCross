@@ -173,7 +173,7 @@ public class Config
 	@SubscribeEvent
 	public void onConfigurationChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event)
 	{
-		if (event.modID.equalsIgnoreCase(Lib.modid))
+		if (event.modID.equalsIgnoreCase(Lib.MODID))
 			loadConfiguration();
 	}
 

@@ -7,7 +7,7 @@ public class CreativeTab extends CreativeTabs
 {
 	public CreativeTab()
 	{
-		super(CreativeTabs.getNextID(), "tab" + Lib.modid);
+		super(CreativeTabs.getNextID(), "tab" + Lib.MODID);
 	}
 
 	@Override

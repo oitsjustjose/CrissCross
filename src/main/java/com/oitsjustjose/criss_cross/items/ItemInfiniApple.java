@@ -14,7 +14,7 @@ public class ItemInfiniApple extends Item
 	{
 		this.setMaxStackSize(1);
 		this.setCreativeTab(CrissCross.CCTab);
-		this.setUnlocalizedName(Lib.modid + ".infini_apple");
+		this.setUnlocalizedName(Lib.MODID + ".infini_apple");
 		GameRegistry.registerItem(this, this.getUnlocalizedName());
 		MinecraftForge.EVENT_BUS.register(new InfiniAppleEvent());
 		Lib.add(this);
