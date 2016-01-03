@@ -65,7 +65,7 @@ public class CropomatorCategory implements IRecipeCategory
 	public void drawAnimations(Minecraft minecraft)
 	{
 		fuel.draw(minecraft, 1, 20);
-		progress.draw(minecraft, 25, 19);
+		progress.draw(minecraft, 24, 20);
 	}
 
 	@Override
