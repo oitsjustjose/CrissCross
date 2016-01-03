@@ -1,3 +1,11 @@
+1.3.3:
+-Added: JEI Integration for machines (except Cobble and Stone generators.. you know what those do)
+-Added (WIP, not functional): Atmos Manipulator - changes weather, need to work on packet handling..
+-Changed: Internal Refactors, shouldn't affect squat
+-Changed: Scribe Recipes are configurable
+-Changed: Configuration GUI - now better organized, but will require you to reconfigure the mod again
+-Changed: Version Numbering. The old one (and I) was dumb.
+
 1.31:
 -Changed: Pouches are now made differently; they no longer store color in Metadata, instead they use NBT, and can be any hex color!
 	Note: Pouches can be dyed via Ore Dictionary Dyes! Unlike leather armor and sheep (might make a fix for that in V-Tweaks...)
