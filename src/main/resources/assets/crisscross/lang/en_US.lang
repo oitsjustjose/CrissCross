@@ -33,13 +33,12 @@ container.atmosmanipulator=Atmos Manipulator
 button.sun=§eSun Creator§r
 button.rain=§1Rain Creator§r
 
-#NEI Integration
-recipe.cropomatorfuel=Cropomator Fuels
+#JEI Compat
 recipe.cropomator=Cropomator
 recipe.electroextractor=ElectroExtractor
-recipe.electroextractorfuel=ElectorExtractor Fuels
+recipe.scribe=Scribe
 recipe.woodchipper=Wood Chipper
-recipe.woodchipperfuel=Wood Chipper Fuels
+
 
 #Tab
 itemGroup.tabCrissCross=Criss Cross
