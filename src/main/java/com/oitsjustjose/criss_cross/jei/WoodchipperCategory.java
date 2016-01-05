@@ -26,7 +26,7 @@ public class WoodchipperCategory implements IRecipeCategory
 	private static final int FUEL_SLOT = 2;
 
 	IDrawableStatic fuelDrawable = JEIPluginManager.jeiHelper.getGuiHelper().createDrawable(GUIWoodchipper.backgroundTexture, 176, 0, 14, 14);
-	IDrawableStatic progressDrawable = JEIPluginManager.jeiHelper.getGuiHelper().createDrawable(GUIWoodchipper.backgroundTexture, 176, 15, 24, 16);
+	IDrawableStatic progressDrawable = JEIPluginManager.jeiHelper.getGuiHelper().createDrawable(GUIWoodchipper.backgroundTexture, 177, 14, 23, 16);
 
 	@Nonnull
 	protected final IDrawableAnimated fuel = JEIPluginManager.jeiHelper.getGuiHelper().createAnimatedDrawable(fuelDrawable, Config.woodchipperProcessTime, IDrawableAnimated.StartDirection.TOP, true);
@@ -68,7 +68,7 @@ public class WoodchipperCategory implements IRecipeCategory
 	public void drawAnimations(Minecraft minecraft)
 	{
 		fuel.draw(minecraft, 1, 20);
-		progress.draw(minecraft, 25, 19);
+		progress.draw(minecraft, 25, 18);
 	}
 
 	@Override

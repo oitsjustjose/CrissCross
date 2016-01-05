@@ -20,8 +20,7 @@ public class LibItems
 	public static Item pouch;
 	public static Item mantleSmasherMkI;
 	public static Item mantleSmasherMkII;
-	public static Item timer;
-
+	
 	public static ToolMaterial mkI;
 	public static ToolMaterial mkII;
 

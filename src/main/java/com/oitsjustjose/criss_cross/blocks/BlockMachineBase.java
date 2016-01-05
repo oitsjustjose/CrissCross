@@ -28,9 +28,9 @@ public class BlockMachineBase extends BlockContainer
 	private static String unlocalizedName;
 	private static boolean isActive = false;
 
-	public BlockMachineBase(String unlocName)
+	public BlockMachineBase(String unlocName, Material material)
 	{
-		super(Material.rock);
+		super(material);
 		this.setHardness(2.0F);
 		this.setResistance(2.0F);
 		this.setStepSound(soundTypeMetal);

@@ -23,7 +23,7 @@ public class CropomatorCategory implements IRecipeCategory
 	private static final int FUEL_SLOT = 2;
 	
 	IDrawableStatic fuelDrawable = JEIPluginManager.jeiHelper.getGuiHelper().createDrawable(GUICropomator.backgroundTexture, 176, 0, 14, 14);
-	IDrawableStatic progressDrawable = JEIPluginManager.jeiHelper.getGuiHelper().createDrawable(GUICropomator.backgroundTexture, 176, 15, 24, 16);
+	IDrawableStatic progressDrawable = JEIPluginManager.jeiHelper.getGuiHelper().createDrawable(GUICropomator.backgroundTexture, 177, 14, 23, 16);
 
 	@Nonnull
 	private final IDrawable background = JEIPluginManager.jeiHelper.getGuiHelper().createDrawable(GUICropomator.backgroundTexture, 55, 16, 82, 54);
@@ -65,7 +65,7 @@ public class CropomatorCategory implements IRecipeCategory
 	public void drawAnimations(Minecraft minecraft)
 	{
 		fuel.draw(minecraft, 1, 20);
-		progress.draw(minecraft, 25, 19);
+		progress.draw(minecraft, 25, 18);
 	}
 
 	@Override

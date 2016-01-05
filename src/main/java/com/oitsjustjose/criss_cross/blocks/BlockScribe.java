@@ -6,6 +6,7 @@ import com.oitsjustjose.criss_cross.CrissCross;
 import com.oitsjustjose.criss_cross.gui.GUIHandler;
 import com.oitsjustjose.criss_cross.tileentity.TileScribe;
 
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -25,7 +26,7 @@ public class BlockScribe extends BlockMachineBase
 
 	public BlockScribe()
 	{
-		super(unlocName);
+		super(unlocName, Material.iron);
 		GameRegistry.registerTileEntity(TileScribe.class, unlocName);
 		GameRegistry.registerBlock(this, unlocName.toLowerCase());
 	}

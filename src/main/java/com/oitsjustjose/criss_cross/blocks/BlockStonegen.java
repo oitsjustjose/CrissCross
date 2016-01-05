@@ -5,6 +5,7 @@ import com.oitsjustjose.criss_cross.gui.GUIHandler;
 import com.oitsjustjose.criss_cross.tileentity.TileStonegen;
 import com.oitsjustjose.criss_cross.util.ClientProxy;
 
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryHelper;
@@ -20,7 +21,7 @@ public class BlockStonegen extends BlockMachineBase
 
 	public BlockStonegen()
 	{
-		super(unlocName);
+		super(unlocName, Material.iron);
 		GameRegistry.registerTileEntity(TileStonegen.class, unlocName);
 		GameRegistry.registerBlock(this, unlocName.toLowerCase());
 	}

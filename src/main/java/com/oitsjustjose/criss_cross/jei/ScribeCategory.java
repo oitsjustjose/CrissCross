@@ -1,13 +1,15 @@
 package com.oitsjustjose.criss_cross.jei;
 
-import java.util.List;
-
 import javax.annotation.Nonnull;
 
+import com.oitsjustjose.criss_cross.gui.GUICropomator;
 import com.oitsjustjose.criss_cross.gui.GUIScribe;
+import com.oitsjustjose.criss_cross.lib.Config;
 import com.oitsjustjose.criss_cross.lib.Lib;
 
 import mezz.jei.api.gui.IDrawable;
+import mezz.jei.api.gui.IDrawableAnimated;
+import mezz.jei.api.gui.IDrawableStatic;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
@@ -22,8 +24,12 @@ public class ScribeCategory implements IRecipeCategory
 	private static final int OUTPUT_SLOT = 1;
 	private static final int FUEL_SLOT = 2;
 
+	IDrawableStatic progressDrawable = JEIPluginManager.jeiHelper.getGuiHelper().createDrawable(GUIScribe.backgroundTexture, 176, 14, 24, 17);
+
 	@Nonnull
 	private final IDrawable background = JEIPluginManager.jeiHelper.getGuiHelper().createDrawable(GUIScribe.backgroundTexture, 33, 30, 110, 34);
+	@Nonnull
+	protected final IDrawableAnimated progress = JEIPluginManager.jeiHelper.getGuiHelper().createAnimatedDrawable(progressDrawable, 200, IDrawableAnimated.StartDirection.LEFT, false);
 	@Nonnull
 	private final String localizedName = StatCollector.translateToLocal("recipe.scribe");
 
@@ -57,7 +63,7 @@ public class ScribeCategory implements IRecipeCategory
 	@Override
 	public void drawAnimations(Minecraft minecraft)
 	{
-
+		progress.draw(minecraft, 56, 5);
 	}
 
 	@Override

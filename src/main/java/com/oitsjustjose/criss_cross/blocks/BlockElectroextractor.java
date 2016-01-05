@@ -9,6 +9,7 @@ import com.oitsjustjose.criss_cross.tileentity.TileElectroextractor;
 import com.oitsjustjose.criss_cross.util.ClientProxy;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -29,7 +30,7 @@ public class BlockElectroextractor extends BlockMachineBase
 
 	public BlockElectroextractor()
 	{
-		super(unlocName);
+		super(unlocName, Material.iron);
 		GameRegistry.registerTileEntity(TileElectroextractor.class, unlocName);
 		GameRegistry.registerBlock(this, unlocName.toLowerCase());
 	}

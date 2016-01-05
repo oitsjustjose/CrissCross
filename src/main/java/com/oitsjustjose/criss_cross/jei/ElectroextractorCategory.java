@@ -2,13 +2,10 @@ package com.oitsjustjose.criss_cross.jei;
 
 import javax.annotation.Nonnull;
 
-import com.oitsjustjose.criss_cross.gui.GUICropomator;
-import com.oitsjustjose.criss_cross.gui.GUIElectroextractor;
 import com.oitsjustjose.criss_cross.gui.GUIElectroextractor;
 import com.oitsjustjose.criss_cross.lib.Config;
 import com.oitsjustjose.criss_cross.lib.Lib;
 import com.oitsjustjose.criss_cross.tileentity.TileElectroextractor;
-import com.sun.org.apache.bcel.internal.Constants;
 
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IDrawableAnimated;
@@ -17,7 +14,6 @@ import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 
 public class ElectroextractorCategory implements IRecipeCategory
@@ -27,7 +23,7 @@ public class ElectroextractorCategory implements IRecipeCategory
 	private static final int FUEL_SLOT = 2;
 	
 	IDrawableStatic fuelDrawable = JEIPluginManager.jeiHelper.getGuiHelper().createDrawable(GUIElectroextractor.backgroundTexture, 176, 0, 14, 14);
-	IDrawableStatic progressDrawable = JEIPluginManager.jeiHelper.getGuiHelper().createDrawable(GUIElectroextractor.backgroundTexture, 176, 15, 24, 16);
+	IDrawableStatic progressDrawable = JEIPluginManager.jeiHelper.getGuiHelper().createDrawable(GUIElectroextractor.backgroundTexture, 177, 14, 23, 16);
 	
 	@Nonnull
 	protected final IDrawableAnimated fuel = JEIPluginManager.jeiHelper.getGuiHelper().createAnimatedDrawable(fuelDrawable, Config.electroextractorProcessTime, IDrawableAnimated.StartDirection.TOP, true);
@@ -69,7 +65,7 @@ public class ElectroextractorCategory implements IRecipeCategory
 	public void drawAnimations(Minecraft minecraft)
 	{
 		fuel.draw(minecraft, 1, 20);
-		progress.draw(minecraft, 25, 19);
+		progress.draw(minecraft, 25, 18);
 	}
 
 	@Override

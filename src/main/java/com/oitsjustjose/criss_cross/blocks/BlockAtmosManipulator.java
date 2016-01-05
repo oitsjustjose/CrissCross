@@ -4,6 +4,7 @@ import com.oitsjustjose.criss_cross.CrissCross;
 import com.oitsjustjose.criss_cross.gui.GUIHandler;
 import com.oitsjustjose.criss_cross.tileentity.TileAtmosManipulator;
 
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -17,7 +18,7 @@ public class BlockAtmosManipulator extends BlockMachineBase
 	private static String unlocName = "AtmosManipulator";
 	public BlockAtmosManipulator()
 	{
-		super(unlocName);
+		super(unlocName, Material.iron);
 		GameRegistry.registerTileEntity(TileAtmosManipulator.class, unlocName);
 		GameRegistry.registerBlock(this, unlocName.toLowerCase());
 	}

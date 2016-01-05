@@ -9,6 +9,7 @@ import com.oitsjustjose.criss_cross.tileentity.TileCropomator;
 import com.oitsjustjose.criss_cross.util.ClientProxy;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -30,7 +31,7 @@ public class BlockCropomator extends BlockMachineBase
 
 	public BlockCropomator()
 	{
-		super(unlocName);
+		super(unlocName, Material.iron);
 		GameRegistry.registerTileEntity(TileCropomator.class, unlocName);
 		GameRegistry.registerBlock(this, unlocName.toLowerCase());
 	}

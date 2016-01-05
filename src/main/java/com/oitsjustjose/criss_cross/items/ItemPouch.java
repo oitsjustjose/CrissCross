@@ -24,7 +24,7 @@ public class ItemPouch extends Item
 		this.setMaxStackSize(1);
 		this.setUnlocalizedName(Lib.MODID + ".pouch");
 		this.setCreativeTab(CrissCross.CCTab);
-		GameRegistry.registerItem(this, this.getUnlocalizedName());
+		GameRegistry.registerItem(this, "pouch");
 		MinecraftForge.EVENT_BUS.register(new PouchCleanEvent());
 		Lib.add(this);
 	}

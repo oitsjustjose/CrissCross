@@ -9,6 +9,7 @@ import com.oitsjustjose.criss_cross.tileentity.TileWoodchipper;
 import com.oitsjustjose.criss_cross.util.ClientProxy;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -29,7 +30,7 @@ public class BlockWoodchipper extends BlockMachineBase
 
 	public BlockWoodchipper()
 	{
-		super(unlocName);
+		super(unlocName, Material.iron);
 		GameRegistry.registerTileEntity(TileWoodchipper.class, unlocName);
 		GameRegistry.registerBlock(this, unlocName.toLowerCase());
 		Lib.add(this);
