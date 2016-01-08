@@ -29,7 +29,7 @@ public class ScribeCategory implements IRecipeCategory
 	IDrawableStatic progressDrawable = JEIPluginManager.jeiHelper.getGuiHelper().createDrawable(GUIWoodchipper.backgroundTexture, 177, 14, 23, 16);
 
 	@Nonnull
-	protected final IDrawableAnimated progress = JEIPluginManager.jeiHelper.getGuiHelper().createAnimatedDrawable(progressDrawable, 200, IDrawableAnimated.StartDirection.LEFT, false);
+	protected final IDrawableAnimated progress = JEIPluginManager.jeiHelper.getGuiHelper().createAnimatedDrawable(progressDrawable, 700, IDrawableAnimated.StartDirection.LEFT, false);
 	@Nonnull
 	private final IDrawable background = JEIPluginManager.jeiHelper.getGuiHelper().createDrawable(GUIScribe.backgroundTexture, 33, 30, 110, 34);
 	@Nonnull
