@@ -29,7 +29,7 @@ public class CrissCross
 	@Instance(Lib.MODID)
 	public static CrissCross instance;
 
-	@SidedProxy(clientSide = Lib.CLIENT_PROXY, serverSide = Lib.COMMON_PROXY)
+	@SidedProxy(clientSide = Lib.CLIENT_PROXY, serverSide = Lib.COMMON_PROXY, modId = Lib.MODID)
 	public static CommonProxy proxy;
 
 	@EventHandler
