@@ -15,8 +15,8 @@ import com.oitsjustjose.criss_cross.tileentity.TileCropomator;
 import com.oitsjustjose.criss_cross.tileentity.TileElectroextractor;
 import com.oitsjustjose.criss_cross.tileentity.TileStonegen;
 import com.oitsjustjose.criss_cross.tileentity.TileWoodchipper;
-import com.oitsjustjose.criss_cross.util.LogHelper;
 import com.oitsjustjose.criss_cross.util.ItemHelper;
+import com.oitsjustjose.criss_cross.util.LogHelper;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentData;
@@ -26,7 +26,6 @@ import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -105,9 +104,11 @@ public class MachineRecipes
 					if (OreDictionary.getOres(oreDict).size() > 0)
 					{
 						if (Enchantment.getEnchantmentById(enchID) != null)
-							ScribeRecipes.getInstance().addRecipe(oreDict, qty, getEnchantedBook(enchID));
-						else
-							LogHelper.warn("Enchantment ID " + enchID + " does not appear to be valid. Skipping Scribe recipe addition.");
+							if (qty > 0)
+								ScribeRecipes.getInstance().addRecipe(oreDict, qty, getEnchantedBook(enchID));
+
+							else
+								LogHelper.warn("Enchantment ID " + enchID + " does not appear to be valid. Skipping Scribe recipe addition.");
 					}
 					else
 						LogHelper.warn("Ore Dictionary Name " + oreDict + " does not appear to be valid. Skipping Scribe recipe addition.");

@@ -8,6 +8,7 @@ import javax.annotation.Nonnull;
 
 import com.oitsjustjose.criss_cross.recipes.machine.ScribeRecipes;
 
+import mezz.jei.util.StackUtil;
 import net.minecraft.item.ItemStack;
 
 public class ScribeRecipeMaker
@@ -15,16 +16,18 @@ public class ScribeRecipeMaker
 	@Nonnull
 	public static List<ScribeRecipeJEI> getRecipes()
 	{
+		ScribeRecipes scribeRecipes = ScribeRecipes.getInstance();
 		Map<ItemStack, ItemStack> scribeMap = ScribeRecipes.getInstance().getRecipeList();
 
-		ArrayList<ScribeRecipeJEI> recipes = new ArrayList<ScribeRecipeJEI>();
+		List<ScribeRecipeJEI> recipes = new ArrayList<>();
 
 		for (Map.Entry<ItemStack, ItemStack> entry : scribeMap.entrySet())
 		{
 			ItemStack input = entry.getKey();
 			ItemStack output = entry.getValue();
 
-			ScribeRecipeJEI recipe = new ScribeRecipeJEI(input, output);
+			List<ItemStack> inputs = StackUtil.getSubtypes(input);
+			ScribeRecipeJEI recipe = new ScribeRecipeJEI(inputs, output);
 			recipes.add(recipe);
 		}
 

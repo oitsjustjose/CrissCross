@@ -11,35 +11,32 @@ import net.minecraft.item.ItemStack;
 
 public class ScribeRecipeJEI extends BlankRecipeWrapper
 {
+	@Nonnull
+	private final List<List<ItemStack>> inputs;
+	@Nonnull
+	private final List<ItemStack> outputs;
 
-    @Nonnull
-    private final ItemStack input;
+	public ScribeRecipeJEI(@Nonnull List<ItemStack> input, @Nonnull ItemStack output)
+	{
+		this.inputs = Collections.singletonList(input);
+		this.outputs = Collections.singletonList(output);
+	}
 
-    @Nonnull
-    private final ItemStack output;
-    
+	@Override
+	public List getInputs()
+	{
+		return inputs;
+	}
 
-    public ScribeRecipeJEI(@Nonnull ItemStack input, @Nonnull ItemStack output)
-    {
-        this.input = input;
-        this.output = output;
-    }
+	@Override
+	public List getOutputs()
+	{
+		return outputs;
+	}
 
-    @Override
-    public List getInputs()
-    {
-        return Collections.singletonList(input);
-    }
+	@Override
+	public void drawInfo(@Nonnull Minecraft minecraft, int recipeWidth, int recipeHeight)
+	{
 
-    @Override
-    public List getOutputs()
-    {
-        return Collections.singletonList(output);
-    }
-    
-    @Override
-    public void drawInfo(@Nonnull Minecraft minecraft, int recipeWidth, int recipeHeight)
-    {
-        
-    }
+	}
 }

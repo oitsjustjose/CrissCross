@@ -2,12 +2,10 @@ package com.oitsjustjose.criss_cross.jei;
 
 import javax.annotation.Nonnull;
 
-import com.oitsjustjose.criss_cross.gui.GUICropomator;
 import com.oitsjustjose.criss_cross.gui.GUIWoodchipper;
 import com.oitsjustjose.criss_cross.lib.Config;
 import com.oitsjustjose.criss_cross.lib.Lib;
 import com.oitsjustjose.criss_cross.tileentity.TileWoodchipper;
-import com.sun.org.apache.bcel.internal.Constants;
 
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IDrawableAnimated;
@@ -16,7 +14,6 @@ import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 
 public class WoodchipperCategory implements IRecipeCategory

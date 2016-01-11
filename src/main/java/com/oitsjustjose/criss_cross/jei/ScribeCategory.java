@@ -12,6 +12,7 @@ import com.oitsjustjose.criss_cross.lib.Lib;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IDrawableAnimated;
 import mezz.jei.api.gui.IDrawableStatic;
+import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
@@ -72,16 +73,17 @@ public class ScribeCategory implements IRecipeCategory
 	@SuppressWarnings("unchecked")
 	public void setRecipe(@Nonnull IRecipeLayout recipeLayout, @Nonnull IRecipeWrapper recipeWrapper)
 	{
+		IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
 
-		recipeLayout.getItemStacks().init(INPUT_SLOT, true, 34, 4);
-		recipeLayout.getItemStacks().init(OUTPUT_SLOT, false, 88, 4);
-		recipeLayout.getItemStacks().init(FUEL_SLOT, true, 0, 4);
+		guiItemStacks.init(INPUT_SLOT, true, 34, 4);
+		guiItemStacks.init(OUTPUT_SLOT, false, 88, 4);
+		guiItemStacks.init(FUEL_SLOT, true, 0, 4);
 
 		if (recipeWrapper instanceof ScribeRecipeJEI)
 		{
 			ScribeRecipeJEI scribeRecipeWrapper = (ScribeRecipeJEI) recipeWrapper;
-			recipeLayout.getItemStacks().set(INPUT_SLOT, scribeRecipeWrapper.getInputs());
-			recipeLayout.getItemStacks().set(OUTPUT_SLOT, scribeRecipeWrapper.getOutputs());
+			guiItemStacks.setFromRecipe(INPUT_SLOT, scribeRecipeWrapper.getInputs());
+			guiItemStacks.setFromRecipe(OUTPUT_SLOT, scribeRecipeWrapper.getOutputs());
 			recipeLayout.getItemStacks().set(FUEL_SLOT, new ItemStack(Items.writable_book));
 		}
 	}

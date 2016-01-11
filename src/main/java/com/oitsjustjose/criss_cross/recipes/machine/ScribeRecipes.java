@@ -30,7 +30,11 @@ public class ScribeRecipes
 		List<ItemStack> itemstacks = OreDictionary.getOres(oreDict);
 		if (itemstacks.size() > 0)
 			for (ItemStack i : itemstacks)
-				this.recipes.put(new ItemStack(i.getItem(), qty, i.getMetadata()), stack);
+			{
+				ItemStack temp = i.copy();
+				temp.stackSize = qty;
+				this.recipes.put(temp, stack);
+			}
 	}
 
 	public ItemStack getResult(ItemStack stack)
