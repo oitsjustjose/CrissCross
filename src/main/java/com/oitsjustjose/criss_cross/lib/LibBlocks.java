@@ -25,14 +25,13 @@ public class LibBlocks
 
 	public static void init()
 	{
-		//TODO : weather controller
 		cropomator = new BlockCropomator();
 		electroextractor = new BlockElectroextractor();
 		woodchipper = new BlockWoodchipper();
 		cobblegen = new BlockCobblegen();
 		stonegen = new BlockStonegen();
 		scribe = new BlockScribe();
-		atmosManipulator = new BlockAtmosManipulator();
+//TODO: atmosManipulator = new BlockAtmosManipulator();
 		NetworkRegistry.INSTANCE.registerGuiHandler(CrissCross.instance, new GUIHandler());
 	}
 }
