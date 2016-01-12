@@ -9,7 +9,6 @@ import mezz.jei.api.recipe.IRecipeWrapper;
 
 public class ScribeRecipeHandler implements IRecipeHandler<ScribeRecipeJEI>
 {
-
     @Nonnull
     @Override
     public Class<ScribeRecipeJEI> getRecipeClass()
@@ -34,6 +33,6 @@ public class ScribeRecipeHandler implements IRecipeHandler<ScribeRecipeJEI>
     @Override
     public boolean isRecipeValid(@Nonnull ScribeRecipeJEI recipe)
     {
-        return recipe.getInputs().size() > 0 && recipe.getOutputs().size() > 0;
+        return recipe.getInputs().size() != 0 && recipe.getOutputs().size() > 0;
     }
 }

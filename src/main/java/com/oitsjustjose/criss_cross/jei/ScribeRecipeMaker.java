@@ -17,7 +17,7 @@ public class ScribeRecipeMaker
 	public static List<ScribeRecipeJEI> getRecipes()
 	{
 		ScribeRecipes scribeRecipes = ScribeRecipes.getInstance();
-		Map<ItemStack, ItemStack> scribeMap = ScribeRecipes.getInstance().getRecipeList();
+		Map<ItemStack, ItemStack> scribeMap = getMap(scribeRecipes);
 
 		List<ScribeRecipeJEI> recipes = new ArrayList<>();
 
@@ -32,5 +32,11 @@ public class ScribeRecipeMaker
 		}
 
 		return recipes;
+	}
+
+	@SuppressWarnings("unchecked")
+	private static Map<ItemStack, ItemStack> getMap(@Nonnull ScribeRecipes recipes)
+	{
+		return recipes.getRecipeList();
 	}
 }

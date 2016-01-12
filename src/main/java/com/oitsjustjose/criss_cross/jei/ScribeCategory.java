@@ -27,14 +27,20 @@ public class ScribeCategory implements IRecipeCategory
 	private static final int OUTPUT_SLOT = 1;
 	private static final int FUEL_SLOT = 2;
 
-	IDrawableStatic progressDrawable = JEIPluginManager.jeiHelper.getGuiHelper().createDrawable(GUIWoodchipper.backgroundTexture, 177, 14, 23, 16);
-
-	@Nonnull
-	protected final IDrawableAnimated progress = JEIPluginManager.jeiHelper.getGuiHelper().createAnimatedDrawable(progressDrawable, 700, IDrawableAnimated.StartDirection.LEFT, false);
-	@Nonnull
-	private final IDrawable background = JEIPluginManager.jeiHelper.getGuiHelper().createDrawable(GUIScribe.backgroundTexture, 33, 30, 110, 34);
-	@Nonnull
-	private final String localizedName = StatCollector.translateToLocal("recipe.scribe");
+	private final IDrawableStatic progressDrawable;
+	
+	private final IDrawableAnimated progress;
+	private final IDrawable background;
+	private final String localizedName;
+	
+	public ScribeCategory()
+	{
+		super();
+		progressDrawable = JEIPluginManager.jeiHelper.getGuiHelper().createDrawable(GUIWoodchipper.backgroundTexture, 177, 14, 23, 16);
+		progress = JEIPluginManager.jeiHelper.getGuiHelper().createAnimatedDrawable(progressDrawable, 700, IDrawableAnimated.StartDirection.LEFT, false);
+		background = JEIPluginManager.jeiHelper.getGuiHelper().createDrawable(GUIScribe.backgroundTexture, 33, 30, 110, 34);
+		localizedName = StatCollector.translateToLocal("recipe.scribe");
+	}
 
 	@Nonnull
 	@Override

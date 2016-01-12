@@ -15,12 +15,6 @@ public class JEIPluginManager implements IModPlugin
     public static IJeiHelpers jeiHelper;
 
     @Override
-    public boolean isModLoaded()
-    {
-        return true;
-    }
-
-    @Override
     public void onJeiHelpersAvailable(IJeiHelpers jeiHelpers)
     {
         jeiHelper = jeiHelpers;
