@@ -2,11 +2,13 @@ package com.oitsjustjose.criss_cross.container;
 
 import com.oitsjustjose.criss_cross.lib.LibItems;
 
+import invtweaks.api.container.ChestContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
+@ChestContainer(isLargeChest = true)
 public class ContainerPouch extends Container
 {
 	private EntityPlayer player = null;

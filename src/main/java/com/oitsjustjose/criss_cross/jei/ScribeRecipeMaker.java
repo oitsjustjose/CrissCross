@@ -19,7 +19,7 @@ public class ScribeRecipeMaker
 		ScribeRecipes scribeRecipes = ScribeRecipes.getInstance();
 		Map<ItemStack, ItemStack> scribeMap = getMap(scribeRecipes);
 
-		List<ScribeRecipeJEI> recipes = new ArrayList<>();
+		List<ScribeRecipeJEI> recipes = new ArrayList<ScribeRecipeJEI>();
 
 		for (Map.Entry<ItemStack, ItemStack> entry : scribeMap.entrySet())
 		{
