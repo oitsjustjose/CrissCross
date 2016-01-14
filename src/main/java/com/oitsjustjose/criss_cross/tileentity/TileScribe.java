@@ -1,8 +1,6 @@
 package com.oitsjustjose.criss_cross.tileentity;
 
-import java.util.ArrayList;
-
-import com.oitsjustjose.criss_cross.blocks.BlockScribe;
+import com.oitsjustjose.criss_cross.blocks.BlockMachineBase;
 import com.oitsjustjose.criss_cross.container.ContainerScribe;
 import com.oitsjustjose.criss_cross.lib.Lib;
 import com.oitsjustjose.criss_cross.recipes.machine.ScribeRecipes;
@@ -37,9 +35,7 @@ public class TileScribe extends TileEntityLockable implements ITickable, ISidedI
 		boolean flag1 = false;
 
 		if (this.fuelTime > 0)
-		{
 			--this.fuelTime;
-		}
 
 		if (!this.worldObj.isRemote)
 		{
@@ -58,9 +54,7 @@ public class TileScribe extends TileEntityLockable implements ITickable, ISidedI
 							--this.ItemStacks[1].stackSize;
 
 							if (this.ItemStacks[1].stackSize == 0)
-							{
 								this.ItemStacks[1] = ItemStacks[1].getItem().getContainerItem(ItemStacks[1]);
-							}
 						}
 					}
 				}
@@ -78,22 +72,18 @@ public class TileScribe extends TileEntityLockable implements ITickable, ISidedI
 					}
 				}
 				else
-				{
 					this.writingTime = 0;
-				}
 			}
 
 			if (flag != this.fuelTime > 0)
 			{
 				flag1 = true;
-				BlockScribe.updateBlockState(this.fuelTime > 0, this.worldObj, this.pos);
+				BlockMachineBase.updateBlockState(this.fuelTime > 0, this.worldObj, this.pos);
 			}
 		}
 
 		if (flag1)
-		{
 			this.markDirty();
-		}
 	}
 
 	@Override
@@ -126,17 +116,13 @@ public class TileScribe extends TileEntityLockable implements ITickable, ISidedI
 				itemstack = this.ItemStacks[slot].splitStack(qtyToDecr);
 
 				if (this.ItemStacks[slot].stackSize == 0)
-				{
 					this.ItemStacks[slot] = null;
-				}
 
 				return itemstack;
 			}
 		}
 		else
-		{
 			return null;
-		}
 	}
 
 	@Override
@@ -149,9 +135,7 @@ public class TileScribe extends TileEntityLockable implements ITickable, ISidedI
 			return itemstack;
 		}
 		else
-		{
 			return null;
-		}
 	}
 
 	@Override
@@ -160,9 +144,7 @@ public class TileScribe extends TileEntityLockable implements ITickable, ISidedI
 		this.ItemStacks[slot] = itemstack;
 
 		if (itemstack != null && itemstack.stackSize > this.getInventoryStackLimit())
-		{
 			itemstack.stackSize = this.getInventoryStackLimit();
-		}
 	}
 
 	@Override
@@ -174,7 +156,7 @@ public class TileScribe extends TileEntityLockable implements ITickable, ISidedI
 	@Override
 	public boolean hasCustomName()
 	{
-		return this.customName != null && this.customName.length() > 0;
+		return TileScribe.customName != null && TileScribe.customName.length() > 0;
 	}
 
 	@Override
@@ -190,9 +172,7 @@ public class TileScribe extends TileEntityLockable implements ITickable, ISidedI
 			byte b0 = nbttagcompound1.getByte("Slot");
 
 			if (b0 >= 0 && b0 < this.ItemStacks.length)
-			{
 				this.ItemStacks[b0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-			}
 		}
 
 		this.fuelTime = tag.getShort("FuelTime");
@@ -212,7 +192,6 @@ public class TileScribe extends TileEntityLockable implements ITickable, ISidedI
 		NBTTagList nbttaglist = new NBTTagList();
 
 		for (int i = 0; i < this.ItemStacks.length; ++i)
-		{
 			if (this.ItemStacks[i] != null)
 			{
 				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
@@ -220,7 +199,6 @@ public class TileScribe extends TileEntityLockable implements ITickable, ISidedI
 				this.ItemStacks[i].writeToNBT(nbttagcompound1);
 				nbttaglist.appendTag(nbttagcompound1);
 			}
-		}
 
 		tag.setTag("Items", nbttaglist);
 	}
@@ -241,9 +219,7 @@ public class TileScribe extends TileEntityLockable implements ITickable, ISidedI
 	public int getBurnTimeRemainingScaled(int par1)
 	{
 		if (this.fuelUsetime == 0)
-		{
 			this.fuelUsetime = proTicks;
-		}
 
 		return this.fuelTime * par1 / this.fuelUsetime;
 	}
@@ -287,13 +263,9 @@ public class TileScribe extends TileEntityLockable implements ITickable, ISidedI
 			ItemStack output = ScribeRecipes.getInstance().getResult(input);
 			ItemStack outputSlot = ItemStacks[2];
 			if (outputSlot == null)
-			{
 				ItemStacks[2] = output.copy();
-			}
 			else if (outputSlot.isItemEqual(output))
-			{
 				outputSlot.stackSize += output.stackSize;
-			}
 			ItemStacks[0] = null;
 		}
 	}
@@ -311,9 +283,10 @@ public class TileScribe extends TileEntityLockable implements ITickable, ISidedI
 		return false;
 	}
 
+	@Override
 	public boolean isUseableByPlayer(EntityPlayer player)
 	{
-		return this.worldObj.getTileEntity(this.pos) != this ? false : player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) <= 64.0D;
+		return this.worldObj.getTileEntity(this.pos) != this ? false : player.getDistanceSq(this.pos.getX() + 0.5D, this.pos.getY() + 0.5D, this.pos.getZ() + 0.5D) <= 64.0D;
 	}
 
 	@Override
@@ -380,7 +353,7 @@ public class TileScribe extends TileEntityLockable implements ITickable, ISidedI
 	@Override
 	public String getName()
 	{
-		return this.hasCustomName() ? this.customName : "container.scribe";
+		return this.hasCustomName() ? TileScribe.customName : "container.scribe";
 	}
 
 	@Override
@@ -398,7 +371,7 @@ public class TileScribe extends TileEntityLockable implements ITickable, ISidedI
 	@Override
 	public int[] getSlotsForFace(EnumFacing side)
 	{
-		return new int[]{};
+		return new int[] {};
 	}
 
 	@Override

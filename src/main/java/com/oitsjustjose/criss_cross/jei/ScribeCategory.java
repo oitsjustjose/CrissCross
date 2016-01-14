@@ -1,12 +1,9 @@
 package com.oitsjustjose.criss_cross.jei;
 
-import java.util.List;
-
 import javax.annotation.Nonnull;
 
 import com.oitsjustjose.criss_cross.gui.GUIScribe;
 import com.oitsjustjose.criss_cross.gui.GUIWoodchipper;
-import com.oitsjustjose.criss_cross.lib.Config;
 import com.oitsjustjose.criss_cross.lib.Lib;
 
 import mezz.jei.api.gui.IDrawable;
@@ -28,11 +25,11 @@ public class ScribeCategory implements IRecipeCategory
 	private static final int FUEL_SLOT = 2;
 
 	private final IDrawableStatic progressDrawable;
-	
+
 	private final IDrawableAnimated progress;
 	private final IDrawable background;
 	private final String localizedName;
-	
+
 	public ScribeCategory()
 	{
 		super();

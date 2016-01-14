@@ -106,28 +106,28 @@ public class Config
 		property = config.get(category, "Electroextractor OreDictionary Entries", defaultEEOreDictInputs, "Formatted as <OreDictName>:<DecimalColorYouWant>." + "\n" + " Remove the 'ore' part of the oredict name (i.e. 'oreIron' should be entered as 'Iron')" + "\n" + "Use http://www.colorpicker.com/ to find a color and http://bit.ly/1RhPhcX to convert it from Hex to Decimal.");
 		eeOreDictInputs = property.getStringList();
 		propertyOrder.add(property.getName());
-		
+
 		property = config.get(category, "Electroextractor's Fuel Items", defaultEEFuels, "Items considered as fuel for the Electroextractor. Formatted as: <modid>:<item>:<meta> or <modid>:<item>.");
 		eeFuels = property.getStringList();
 		propertyOrder.add(property.getName());
-		
+
 		property = config.get(category, "Electroextractor Output Quantity", 2);
 		property.comment = "Quantity output by the Electroextractor";
 		eeOutput = property.getInt();
 		propertyOrder.add(property.getName());
-		
+
 		property = config.get(category, "Electroextractor Crafting Item", "minecraft:diamond_block");
 		property.comment = "Key crafting ingredient in Electroextractor's Recipe. Formatted as: <modid>:<item>:<meta> or <modid>:<item>.";
 		eeRecipeItem = property.getString();
 		propertyOrder.add(property.getName());
-		
+
 		Electroextractor.setPropertyOrder(propertyOrder);
-		
+
 		category = "woodchipper";
 		propertyOrder = Lists.newArrayList();
 		Woodchipper = config.getCategory(category);
 		config.setCategoryRequiresMcRestart(category, true);
-		
+
 		property = config.get(category, "Woodchipper Process Time", 400, "Amount of time for the Woodchipper to complete a process", 20, Short.MAX_VALUE);
 		woodchipperProcessTime = property.getInt();
 		propertyOrder.add(property.getName());
@@ -135,35 +135,33 @@ public class Config
 		property = config.get(category, "Woodchipper Fuel Items", defaultWoodchipperFuels, "Items considered as fuel for the Woodchipper. Formatted as: <modid>:<item>:<meta> or <modid>:<item>.");
 		woodchipperFuels = property.getStringList();
 		propertyOrder.add(property.getName());
-		
+
 		property = config.get(category, "Woodchipper Output Quantity", 6, "Amount of planks yielded from a log", 0, 64);
 		woodchipperOutput = property.getInt();
 		propertyOrder.add(property.getName());
-		
+
 		property = config.get(category, "Woodchipper Crafting Item", "minecraft:diamond_block");
 		property.comment = "Key crafting ingredient in Woodchipper's Recipe. Formatted as: <modid>:<item>:<meta> or <modid>:<item>.";
 		woodchipperRecipeItem = property.getString();
 		propertyOrder.add(property.getName());
-		
+
 		Woodchipper.setPropertyOrder(propertyOrder);
-	
-		//Everything Else
+
+		// Everything Else
 		category = "other machines";
 		propertyOrder = Lists.newArrayList();
 		OtherMachines = config.getCategory(category);
 		config.setCategoryRequiresMcRestart(category, true);
-		
+
 		property = config.get(category, "Scribe Recipes", defaultScribeRecipes, "Formatted as <modid>:<item>:<metadata>*<qty>=<enchantment ID>" + "\n" + "Also can be <oreDict>*qty=<enchantment ID>");
 		scribeRecipes = property.getStringList();
 		propertyOrder.add(property.getName());
-		
+
 		property = config.get(category, "Block Generators' Process Times", 20, "Amount of time for Stone and Cobble Generators to produce a block", 20, Short.MAX_VALUE);
 		blockGeneratorProcessTimes = property.getInt();
 		propertyOrder.add(property.getName());
 
 		OtherMachines.setPropertyOrder(propertyOrder);
-		
-
 
 		if (config.hasChanged())
 			config.save();

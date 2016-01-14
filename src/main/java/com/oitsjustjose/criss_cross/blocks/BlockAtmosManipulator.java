@@ -16,30 +16,29 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class BlockAtmosManipulator extends BlockMachineBase
 {
 	private static String unlocName = "AtmosManipulator";
+
 	public BlockAtmosManipulator()
 	{
 		super(unlocName, Material.iron);
 		GameRegistry.registerTileEntity(TileAtmosManipulator.class, unlocName);
 		GameRegistry.registerBlock(this, unlocName.toLowerCase());
 	}
-	
+
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta)
 	{
 		return new TileAtmosManipulator();
 	}
-	
+
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
-		if(world.isRemote)
-		{
+		if (world.isRemote)
 			return true;
-		}
 		else
 		{
 			TileAtmosManipulator tile = (TileAtmosManipulator) world.getTileEntity(pos);
-			if(tile != null)
+			if (tile != null)
 				player.openGui(CrissCross.instance, GUIHandler.AtmosManipulator, world, pos.getX(), pos.getY(), pos.getZ());
 			return true;
 		}

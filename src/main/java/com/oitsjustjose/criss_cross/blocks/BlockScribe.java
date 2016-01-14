@@ -9,7 +9,6 @@ import com.oitsjustjose.criss_cross.tileentity.TileScribe;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
@@ -31,31 +30,26 @@ public class BlockScribe extends BlockMachineBase
 		GameRegistry.registerBlock(this, unlocName.toLowerCase());
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
 	{
 		super.randomDisplayTick(worldIn, pos, state, rand);
 
 		for (int i = -2; i <= 2; ++i)
-		{
 			for (int j = -2; j <= 2; ++j)
 			{
 				if (i > -2 && i < 2 && j == -1)
 					j = 2;
 
 				if (rand.nextInt(16) == 0)
-				{
 					for (int k = 0; k <= 1; ++k)
 					{
-						BlockPos blockpos = pos.add(i, k, j);
-
 						if (!worldIn.isAirBlock(pos.add(i / 2, 0, j / 2)))
 							break;
-						worldIn.spawnParticle(EnumParticleTypes.ENCHANTMENT_TABLE, (double) pos.getX() + 0.5D, (double) pos.getY() + 2.0D, (double) pos.getZ() + 0.5D, (double) ((float) i + rand.nextFloat()) - 0.5D, (double) ((float) k - rand.nextFloat() - 1.0F), (double) ((float) j + rand.nextFloat()) - 0.5D, new int[0]);
+						worldIn.spawnParticle(EnumParticleTypes.ENCHANTMENT_TABLE, pos.getX() + 0.5D, pos.getY() + 2.0D, pos.getZ() + 0.5D, i + rand.nextFloat() - 0.5D, k - rand.nextFloat() - 1.0F, j + rand.nextFloat() - 0.5D, new int[0]);
 					}
-				}
 			}
-		}
 	}
 
 	@Override
@@ -83,9 +77,7 @@ public class BlockScribe extends BlockMachineBase
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		if (world.isRemote)
-		{
 			return true;
-		}
 		else
 		{
 			TileScribe tile = (TileScribe) world.getTileEntity(pos);

@@ -22,7 +22,7 @@ public class CraftingRecipes
 		initUserRecipes();
 		CraftingManager.getInstance().getRecipeList().add(new PouchColorRecipes());
 		CraftingManager.getInstance().getRecipeList().add(new PouchRollbackRecipes());
-		//Am I doing this correctly? I hope so, hard to tell w/o NEI :|
+		// Am I doing this correctly? I hope so, hard to tell w/o NEI :|
 		RecipeSorter.register("CrissCross:PouchColorRecipes", PouchColorRecipes.class, Category.SHAPELESS, "");
 		RecipeSorter.register("CrissCross:PouchRollbackRecipes", PouchRollbackRecipes.class, Category.SHAPELESS, "");
 	}
@@ -39,10 +39,10 @@ public class CraftingRecipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LibItems.mantleSmasherMkII), "## ", "#PI", " IN", '#', "blockDiamond", 'I', "blockGold", 'P', LibItems.mantleSmasherMkI, 'N', Items.nether_star));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LibItems.pouch), "SDS", "LCL", "LLL", 'S', Items.string, 'D', "gemDiamond", 'L', Items.leather, 'C', Blocks.chest));
 	}
-	
+
 	static void initUserRecipes()
 	{
-		//Woodchipper Recipe
+		// Woodchipper Recipe
 		String[] unlocItem = Config.woodchipperRecipeItem.split(":");
 		ItemStack centerItem = new ItemStack(Blocks.diamond_block);
 
@@ -63,8 +63,8 @@ public class CraftingRecipes
 		}
 
 		GameRegistry.addRecipe(new ItemStack(LibBlocks.woodchipper), new Object[] { "I#I", "SCS", "I#I", '#', Items.diamond_axe, 'I', Blocks.iron_bars, 'S', Items.golden_axe, 'C', centerItem });
-		
-		//Electroextractor Recipe
+
+		// Electroextractor Recipe
 		unlocItem = Config.eeRecipeItem.split(":");
 		centerItem = new ItemStack(Blocks.diamond_block);
 
@@ -85,8 +85,8 @@ public class CraftingRecipes
 		}
 
 		GameRegistry.addRecipe(new ItemStack(LibBlocks.electroextractor), new Object[] { "I#I", "SCS", "I#I", '#', Blocks.piston, 'I', Blocks.iron_bars, 'S', Items.golden_pickaxe, 'C', centerItem });
-		
-		//Cropomator Recipe
+
+		// Cropomator Recipe
 		unlocItem = Config.cropomatorRecipeItem.split(":");
 		centerItem = new ItemStack(Blocks.diamond_block);
 

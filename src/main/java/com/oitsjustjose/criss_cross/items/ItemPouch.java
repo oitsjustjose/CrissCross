@@ -6,7 +6,6 @@ import com.oitsjustjose.criss_cross.gui.GUIHandler;
 import com.oitsjustjose.criss_cross.lib.Lib;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

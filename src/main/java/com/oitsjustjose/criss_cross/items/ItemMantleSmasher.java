@@ -15,10 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldSettings;
-import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemMantleSmasher extends ItemPickaxe
@@ -54,7 +51,6 @@ public class ItemMantleSmasher extends ItemPickaxe
 				return super.onBlockStartBreak(itemstack, pos, player);
 
 			if (itemstack.getItem() instanceof ItemMantleSmasher)
-			{
 				if (side == EnumFacing.NORTH || side == EnumFacing.SOUTH)
 				{
 					breakBlock(world, player, pos.up().west());
@@ -88,7 +84,6 @@ public class ItemMantleSmasher extends ItemPickaxe
 					breakBlock(world, player, pos.south());
 					breakBlock(world, player, pos.south().west());
 				}
-			}
 		}
 		return super.onBlockStartBreak(itemstack, pos, player);
 	}
@@ -104,7 +99,6 @@ public class ItemMantleSmasher extends ItemPickaxe
 		Material m = block.getMaterial();
 
 		if (m == Material.ground || m == Material.grass || m == Material.sand || m == Material.rock)
-		{
 			if (block.getBlockHardness(world, pos) != -1.0F)
 			{
 				block.onBlockHarvested(world, pos, state, player);
@@ -118,7 +112,6 @@ public class ItemMantleSmasher extends ItemPickaxe
 				}
 				world.setBlockToAir(pos);
 			}
-		}
 
 	}
 }

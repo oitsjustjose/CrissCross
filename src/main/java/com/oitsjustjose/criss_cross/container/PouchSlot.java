@@ -22,6 +22,7 @@ public class PouchSlot extends Slot
 		this.filterIndex = filterIndex;
 	}
 
+	@Override
 	public ItemStack getStack()
 	{
 		ItemStack filter = this.filterInv.getStackInSlot(this.filterIndex);
@@ -42,6 +43,7 @@ public class PouchSlot extends Slot
 		return null;
 	}
 
+	@Override
 	public ItemStack decrStackSize(int par1)
 	{
 		ItemStack curItem = getStack();
@@ -55,37 +57,31 @@ public class PouchSlot extends Slot
 			}
 			ItemStack itemstack = curItem.splitStack(par1);
 			if (curItem.stackSize == 0)
-			{
 				putStack(null);
-			}
 			return itemstack;
 		}
 		return null;
 	}
 
+	@Override
 	public boolean getHasStack()
 	{
 		return getStack() != null;
 	}
 
+	@Override
 	public void putStack(ItemStack par1ItemStack)
 	{
 		ItemStack filter = this.filterInv.getStackInSlot(this.filterIndex);
 		if (filter == null)
-		{
 			return;
-		}
 		NBTTagCompound tags = filter.getTagCompound();
 		if (par1ItemStack != null)
 		{
 			if (tags == null)
-			{
 				tags = new NBTTagCompound();
-			}
 			if (tags.hasKey("items_" + getSlotIndex()))
-			{
 				tags.removeTag("items_" + getSlotIndex());
-			}
 			NBTTagCompound itemTags = new NBTTagCompound();
 			par1ItemStack.writeToNBT(itemTags);
 			tags.setTag("items_" + getSlotIndex(), itemTags);
@@ -95,34 +91,24 @@ public class PouchSlot extends Slot
 		{
 			tags.removeTag("items_" + getSlotIndex());
 			if (tags.hasNoTags())
-			{
 				filter.setTagCompound(null);
-			}
 			else
-			{
 				filter.setTagCompound(tags);
-			}
 		}
 		if (par1ItemStack != null)
-		{
 			this.curStack = par1ItemStack;
-		}
 		else
-		{
 			this.curStack = null;
-		}
 		if (!iterating)
-		{
 			onSlotChanged();
-		}
 	}
 
+	@Override
 	public void onSlotChanged()
 	{
 		checking = true;
 		ItemStack oldItem = getStack();
 		checking = false;
-		boolean flag = false;
 		if (!ItemStack.areItemStacksEqual(oldItem, this.curStack))
 		{
 			iterating = true;

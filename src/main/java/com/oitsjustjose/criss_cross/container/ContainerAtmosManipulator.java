@@ -1,14 +1,10 @@
 package com.oitsjustjose.criss_cross.container;
 
 import com.oitsjustjose.criss_cross.tileentity.TileAtmosManipulator;
-import com.oitsjustjose.criss_cross.tileentity.TileCobblegen;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
-import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemStack;
 
 public class ContainerAtmosManipulator extends Container
 {
@@ -22,7 +18,7 @@ public class ContainerAtmosManipulator extends Container
 		this.player = player;
 	}
 
-
+	@Override
 	public void onCraftGuiOpened(ICrafting crafting)
 	{
 		super.onCraftGuiOpened(crafting);

@@ -3,11 +3,9 @@ package com.oitsjustjose.criss_cross.gui;
 import org.lwjgl.opengl.GL11;
 
 import com.oitsjustjose.criss_cross.container.ContainerCropomator;
-import com.oitsjustjose.criss_cross.lib.Lib;
 import com.oitsjustjose.criss_cross.tileentity.TileCropomator;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
@@ -24,12 +22,14 @@ public class GUICropomator extends GuiContainer
 		this.cropomator = cropomator;
 	}
 
+	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
 	{
 		this.fontRendererObj.drawString(StatCollector.translateToLocal("container.cropomator"), 55, 7, 4210752);
 		this.fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 7, this.ySize - 92, 4210752);
 	}
 
+	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTickTime, int mouseX, int mouseY)
 	{
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);

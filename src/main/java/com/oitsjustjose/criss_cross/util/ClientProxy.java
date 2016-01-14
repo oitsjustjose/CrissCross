@@ -12,7 +12,7 @@ import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.client.model.ModelLoader;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -43,7 +43,7 @@ public class ClientProxy extends CommonProxy
 		for (ItemStack sub : subItems)
 		{
 			String name = item.getUnlocalizedName(sub).substring(16).toLowerCase();
-			ModelBakery.addVariantName(item, Lib.MODID.toLowerCase() + ":" + name);
+			ModelBakery.registerItemVariants(item, new ResourceLocation(Lib.MODID.toLowerCase(), name));
 			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, meta, new ModelResourceLocation(Lib.MODID.toLowerCase() + ":" + name, "inventory"));
 			meta++;
 		}
@@ -62,7 +62,7 @@ public class ClientProxy extends CommonProxy
 			for (ItemStack sub : subItems)
 			{
 				String name = itemBlock.getUnlocalizedName(sub).toLowerCase().replace("crisscross.", "").replace("tile.", "");
-				ModelBakery.addVariantName(itemBlock, Lib.MODID.toLowerCase() + ":" + name);
+				ModelBakery.registerItemVariants(itemBlock, new ResourceLocation(Lib.MODID.toLowerCase(), name));
 				Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(itemBlock, meta, new ModelResourceLocation(Lib.MODID.toLowerCase() + ":" + name, "inventory"));
 				meta++;
 			}

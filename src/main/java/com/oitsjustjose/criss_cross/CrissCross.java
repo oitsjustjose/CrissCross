@@ -5,23 +5,20 @@ import com.oitsjustjose.criss_cross.lib.CreativeTab;
 import com.oitsjustjose.criss_cross.lib.Lib;
 import com.oitsjustjose.criss_cross.lib.LibBlocks;
 import com.oitsjustjose.criss_cross.lib.LibItems;
-import com.oitsjustjose.criss_cross.recipes.MachineRecipes;
 import com.oitsjustjose.criss_cross.recipes.CraftingRecipes;
+import com.oitsjustjose.criss_cross.recipes.MachineRecipes;
 import com.oitsjustjose.criss_cross.util.ClientProxy;
 import com.oitsjustjose.criss_cross.util.CommonProxy;
 import com.oitsjustjose.criss_cross.util.LogHelper;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.oredict.OreDictionary;
 
 @Mod(modid = Lib.MODID, name = Lib.NAME, version = Lib.VERSION, guiFactory = Lib.GUI_FACTORY, acceptedMinecraftVersions = "1.8.8, 1.8.9")
 public class CrissCross
@@ -39,21 +36,21 @@ public class CrissCross
 	{
 		Config.init(event.getSuggestedConfigurationFile());
 		MinecraftForge.EVENT_BUS.register(new Config());
-		proxy.preInit();
+		CommonProxy.preInit();
 
 		LibBlocks.init();
 		LibItems.init();
 		CraftingRecipes.init();
 	}
-	
+
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event)
 	{
 		MachineRecipes.init();
-		
+
 		if (event.getSide().isClient())
 			ClientProxy.init();
-		
+
 		LogHelper.info("Successfully loaded!");
 	}
 }

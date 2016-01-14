@@ -1,16 +1,12 @@
 package com.oitsjustjose.criss_cross.recipes.machine;
 
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import com.google.common.collect.Maps;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
 
 public class ElectroextractorRecipes
 {

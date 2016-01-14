@@ -3,7 +3,6 @@ package com.oitsjustjose.criss_cross.blocks;
 import com.oitsjustjose.criss_cross.CrissCross;
 import com.oitsjustjose.criss_cross.gui.GUIHandler;
 import com.oitsjustjose.criss_cross.tileentity.TileStonegen;
-import com.oitsjustjose.criss_cross.util.ClientProxy;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -51,9 +50,7 @@ public class BlockStonegen extends BlockMachineBase
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		if (world.isRemote)
-		{
 			return true;
-		}
 		else
 		{
 			TileStonegen tile = (TileStonegen) world.getTileEntity(pos);

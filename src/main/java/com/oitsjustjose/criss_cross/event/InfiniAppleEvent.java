@@ -3,8 +3,6 @@ package com.oitsjustjose.criss_cross.event;
 import com.oitsjustjose.criss_cross.lib.LibItems;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.util.FoodStats;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -18,12 +16,10 @@ public class InfiniAppleEvent
 		EntityPlayer player = event.entityPlayer;
 
 		if (player.inventory.hasItem(LibItems.infiniApple))
-		{
 			if (player.getFoodStats() != null)
 			{
 				player.getFoodStats().setFoodLevel(20);
 				player.getFoodStats().setFoodSaturationLevel(5.0F);
 			}
-		}
 	}
 }

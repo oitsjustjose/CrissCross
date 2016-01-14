@@ -24,13 +24,12 @@ public class ConfigGUI extends GuiConfig
 	private static List<IConfigElement> getConfigElements()
 	{
 		List<IConfigElement> list = Lists.newArrayList();
-		
 
 		list.add(new ConfigElement(Config.Cropomator));
 		list.add(new ConfigElement(Config.Electroextractor));
 		list.add(new ConfigElement(Config.Woodchipper));
 		list.add(new ConfigElement(Config.OtherMachines));
-		
+
 		return list;
 	}
 

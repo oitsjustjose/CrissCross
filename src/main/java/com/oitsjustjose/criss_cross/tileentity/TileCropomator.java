@@ -2,7 +2,7 @@ package com.oitsjustjose.criss_cross.tileentity;
 
 import java.util.ArrayList;
 
-import com.oitsjustjose.criss_cross.blocks.BlockCropomator;
+import com.oitsjustjose.criss_cross.blocks.BlockMachineBase;
 import com.oitsjustjose.criss_cross.container.ContainerCropomator;
 import com.oitsjustjose.criss_cross.lib.Config;
 import com.oitsjustjose.criss_cross.lib.Lib;
@@ -44,9 +44,7 @@ public class TileCropomator extends TileEntityLockable implements ITickable, ISi
 		boolean flag1 = false;
 
 		if (this.catalystTime > 0)
-		{
 			--this.catalystTime;
-		}
 
 		if (!this.worldObj.isRemote)
 		{
@@ -65,9 +63,7 @@ public class TileCropomator extends TileEntityLockable implements ITickable, ISi
 							--this.ItemStacks[1].stackSize;
 
 							if (this.ItemStacks[1].stackSize == 0)
-							{
 								this.ItemStacks[1] = ItemStacks[1].getItem().getContainerItem(ItemStacks[1]);
-							}
 						}
 					}
 				}
@@ -84,22 +80,18 @@ public class TileCropomator extends TileEntityLockable implements ITickable, ISi
 					}
 				}
 				else
-				{
 					this.processTime = 0;
-				}
 			}
 
 			if (flag != this.catalystTime > 0)
 			{
 				flag1 = true;
-				BlockCropomator.updateBlockState(this.catalystTime > 0, this.worldObj, this.pos);
+				BlockMachineBase.updateBlockState(this.catalystTime > 0, this.worldObj, this.pos);
 			}
 		}
 
 		if (flag1)
-		{
 			this.markDirty();
-		}
 	}
 
 	public static ArrayList<ItemStack> getFuels()
@@ -137,17 +129,13 @@ public class TileCropomator extends TileEntityLockable implements ITickable, ISi
 				itemstack = this.ItemStacks[slot].splitStack(qtyToDecr);
 
 				if (this.ItemStacks[slot].stackSize == 0)
-				{
 					this.ItemStacks[slot] = null;
-				}
 
 				return itemstack;
 			}
 		}
 		else
-		{
 			return null;
-		}
 	}
 
 	@Override
@@ -160,9 +148,7 @@ public class TileCropomator extends TileEntityLockable implements ITickable, ISi
 			return itemstack;
 		}
 		else
-		{
 			return null;
-		}
 	}
 
 	@Override
@@ -171,9 +157,7 @@ public class TileCropomator extends TileEntityLockable implements ITickable, ISi
 		this.ItemStacks[slot] = itemstack;
 
 		if (itemstack != null && itemstack.stackSize > this.getInventoryStackLimit())
-		{
 			itemstack.stackSize = this.getInventoryStackLimit();
-		}
 	}
 
 	@Override
@@ -185,7 +169,7 @@ public class TileCropomator extends TileEntityLockable implements ITickable, ISi
 	@Override
 	public boolean hasCustomName()
 	{
-		return this.customName != null && this.customName.length() > 0;
+		return TileCropomator.customName != null && TileCropomator.customName.length() > 0;
 	}
 
 	@Override
@@ -201,9 +185,7 @@ public class TileCropomator extends TileEntityLockable implements ITickable, ISi
 			byte b0 = nbttagcompound1.getByte("Slot");
 
 			if (b0 >= 0 && b0 < this.ItemStacks.length)
-			{
 				this.ItemStacks[b0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-			}
 		}
 
 		this.catalystTime = tag.getShort("BonemealTime");
@@ -223,7 +205,6 @@ public class TileCropomator extends TileEntityLockable implements ITickable, ISi
 		NBTTagList nbttaglist = new NBTTagList();
 
 		for (int i = 0; i < this.ItemStacks.length; ++i)
-		{
 			if (this.ItemStacks[i] != null)
 			{
 				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
@@ -231,7 +212,6 @@ public class TileCropomator extends TileEntityLockable implements ITickable, ISi
 				this.ItemStacks[i].writeToNBT(nbttagcompound1);
 				nbttaglist.appendTag(nbttagcompound1);
 			}
-		}
 
 		tag.setTag("Items", nbttaglist);
 	}
@@ -252,9 +232,7 @@ public class TileCropomator extends TileEntityLockable implements ITickable, ISi
 	public int getBurnTimeRemainingScaled(int par1)
 	{
 		if (this.catalystInUseTime == 0)
-		{
 			this.catalystInUseTime = proTicks;
-		}
 
 		return this.catalystTime * par1 / this.catalystInUseTime;
 	}
@@ -291,13 +269,11 @@ public class TileCropomator extends TileEntityLockable implements ITickable, ISi
 	public static boolean removeFuel(ItemStack itemstack)
 	{
 		for (int i = 0; i < fuelItems.size(); i++)
-		{
 			if (fuelItems.get(i) == itemstack)
 			{
 				fuelItems.remove(i);
 				return true;
 			}
-		}
 		return false;
 	}
 
@@ -317,19 +293,13 @@ public class TileCropomator extends TileEntityLockable implements ITickable, ISi
 			ItemStack output = CropomatorRecipes.getInstance().getResult(input);
 			ItemStack outputSlot = ItemStacks[2];
 			if (outputSlot == null)
-			{
 				ItemStacks[2] = output.copy();
-			}
 			else if (outputSlot.isItemEqual(output))
-			{
 				outputSlot.stackSize += output.stackSize;
-			}
 
 			--input.stackSize;
 			if (input.stackSize <= 0)
-			{
 				ItemStacks[0] = null;
-			}
 		}
 	}
 
@@ -349,9 +319,10 @@ public class TileCropomator extends TileEntityLockable implements ITickable, ISi
 		return false;
 	}
 
+	@Override
 	public boolean isUseableByPlayer(EntityPlayer player)
 	{
-		return this.worldObj.getTileEntity(this.pos) != this ? false : player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) <= 64.0D;
+		return this.worldObj.getTileEntity(this.pos) != this ? false : player.getDistanceSq(this.pos.getX() + 0.5D, this.pos.getY() + 0.5D, this.pos.getZ() + 0.5D) <= 64.0D;
 	}
 
 	@Override
@@ -413,7 +384,7 @@ public class TileCropomator extends TileEntityLockable implements ITickable, ISi
 	@Override
 	public String getName()
 	{
-		return this.hasCustomName() ? this.customName : "container.cropomator";
+		return this.hasCustomName() ? TileCropomator.customName : "container.cropomator";
 	}
 
 	@Override

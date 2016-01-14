@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.oitsjustjose.criss_cross.CrissCross;
 import com.oitsjustjose.criss_cross.lib.Lib;
-import com.oitsjustjose.criss_cross.util.ClientProxy;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -51,65 +50,60 @@ public class ItemModBuckets extends Item
 		MovingObjectPosition movingobjectposition = this.getMovingObjectPositionFromPlayer(world, player, true);
 
 		if (movingobjectposition == null)
-		{
 			return itemstack;
-		}
-		else
+		else if (movingobjectposition.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK)
 		{
-			if (movingobjectposition.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK)
-			{
-				BlockPos blockpos = movingobjectposition.getBlockPos();
-				IBlockState state = world.getBlockState(blockpos);
+			BlockPos blockpos = movingobjectposition.getBlockPos();
+			IBlockState state = world.getBlockState(blockpos);
 
-				if (!world.isBlockModifiable(player, blockpos))
+			if (!world.isBlockModifiable(player, blockpos))
+				return itemstack;
+
+			if (!player.canPlayerEdit(blockpos, movingobjectposition.sideHit, itemstack))
+				return itemstack;
+
+			if (itemstack.getItemDamage() == 1)
+			{
+				Material material = state.getBlock().getMaterial();
+				int meta = state.getBlock().getMetaFromState(state);
+
+				if (material.isLiquid() && meta == 0)
+					world.setBlockToAir(blockpos);
+			}
+
+			else
+			{
+				if (world.getBlockState(blockpos).getBlock().getMaterial() == Material.lava || world.getBlockState(blockpos).getBlock().getMaterial() == Material.water)
 					return itemstack;
 
+				int x = blockpos.getX();
+				int y = blockpos.getY();
+				int z = blockpos.getZ();
+
+				if (movingobjectposition.sideHit == EnumFacing.DOWN)
+					--y;
+
+				if (movingobjectposition.sideHit == EnumFacing.UP)
+					++y;
+
+				if (movingobjectposition.sideHit == EnumFacing.WEST)
+					--x;
+
+				if (movingobjectposition.sideHit == EnumFacing.EAST)
+					++x;
+
+				if (movingobjectposition.sideHit == EnumFacing.NORTH)
+					--z;
+
+				if (movingobjectposition.sideHit == EnumFacing.SOUTH)
+					++z;
+
+				blockpos = new BlockPos(x, y, z);
 				if (!player.canPlayerEdit(blockpos, movingobjectposition.sideHit, itemstack))
 					return itemstack;
 
-				if (itemstack.getItemDamage() == 1)
-				{
-					Material material = state.getBlock().getMaterial();
-					int meta = state.getBlock().getMetaFromState(state);
-
-					if (material.isLiquid() && meta == 0)
-						world.setBlockToAir(blockpos);
-				}
-
-				else
-				{
-					if (world.getBlockState(blockpos).getBlock().getMaterial() == Material.lava || world.getBlockState(blockpos).getBlock().getMaterial() == Material.water)
-						return itemstack;
-
-					int x = blockpos.getX();
-					int y = blockpos.getY();
-					int z = blockpos.getZ();
-
-					if (movingobjectposition.sideHit == EnumFacing.DOWN)
-						--y;
-
-					if (movingobjectposition.sideHit == EnumFacing.UP)
-						++y;
-
-					if (movingobjectposition.sideHit == EnumFacing.WEST)
-						--x;
-
-					if (movingobjectposition.sideHit == EnumFacing.EAST)
-						++x;
-
-					if (movingobjectposition.sideHit == EnumFacing.NORTH)
-						--z;
-
-					if (movingobjectposition.sideHit == EnumFacing.SOUTH)
-						++z;
-
-					blockpos = new BlockPos(x, y, z);
-					if (!player.canPlayerEdit(blockpos, movingobjectposition.sideHit, itemstack))
-						return itemstack;
-
-					if (itemstack.getItemDamage() == 0)
-						world.setBlockState(blockpos, Blocks.flowing_water.getDefaultState(), 3);
-				}
+				if (itemstack.getItemDamage() == 0)
+					world.setBlockState(blockpos, Blocks.flowing_water.getDefaultState(), 3);
 			}
 		}
 

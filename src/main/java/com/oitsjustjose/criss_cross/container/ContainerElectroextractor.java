@@ -35,23 +35,18 @@ public class ContainerElectroextractor extends Container
 		this.addInventorySlots();
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void updateProgressBar(int timeType1, int timeType2)
 	{
 		if (timeType1 == 0)
-		{
 			this.electroextractor.crushTime = timeType2;
-		}
 
 		if (timeType1 == 1)
-		{
 			this.electroextractor.fuelTime = timeType2;
-		}
 
 		if (timeType1 == 2)
-		{
 			this.electroextractor.fuelInUseTime = timeType2;
-		}
 	}
 
 	@Override
@@ -69,7 +64,7 @@ public class ContainerElectroextractor extends Container
 		super.detectAndSendChanges();
 		for (int i = 0; i < this.crafters.size(); ++i)
 		{
-			ICrafting crafting = (ICrafting) this.crafters.get(i);
+			ICrafting crafting = this.crafters.get(i);
 
 			if (this.lastUseTime != this.electroextractor.crushTime)
 				crafting.sendProgressBarUpdate(this, 0, this.electroextractor.crushTime);
@@ -87,7 +82,7 @@ public class ContainerElectroextractor extends Container
 	public ItemStack transferStackInSlot(EntityPlayer player, int slotID)
 	{
 		ItemStack itemstack = null;
-		Slot slot = (Slot) this.inventorySlots.get(slotID);
+		Slot slot = this.inventorySlots.get(slotID);
 
 		if (slot != null && slot.getHasStack())
 		{
@@ -97,9 +92,7 @@ public class ContainerElectroextractor extends Container
 			if (slotID == 2)
 			{
 				if (!this.mergeItemStack(itemstack1, 3, 39, true))
-				{
 					return null;
-				}
 
 				slot.onSlotChange(itemstack1, itemstack);
 			}
@@ -108,47 +101,31 @@ public class ContainerElectroextractor extends Container
 				if (TileElectroextractor.isValid(itemstack1))
 				{
 					if (!this.mergeItemStack(itemstack1, 0, 1, false))
-					{
 						return null;
-					}
 				}
 				else if (TileElectroextractor.isItemEnergetic(itemstack1))
 				{
 					if (!this.mergeItemStack(itemstack1, 1, 2, false))
-					{
 						return null;
-					}
 				}
 				else if (slotID >= 3 && slotID < 30)
 				{
 					if (!this.mergeItemStack(itemstack1, 30, 39, false))
-					{
 						return null;
-					}
 				}
 				else if (slotID >= 30 && slotID < 39 && !this.mergeItemStack(itemstack1, 3, 30, false))
-				{
 					return null;
-				}
 			}
 			else if (!this.mergeItemStack(itemstack1, 3, 39, false))
-			{
 				return null;
-			}
 
 			if (itemstack1.stackSize == 0)
-			{
 				slot.putStack((ItemStack) null);
-			}
 			else
-			{
 				slot.onSlotChanged();
-			}
 
 			if (itemstack1.stackSize == itemstack.stackSize)
-			{
 				return null;
-			}
 
 			slot.onPickupFromSlot(player, itemstack1);
 		}

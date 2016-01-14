@@ -21,7 +21,7 @@ public class CropomatorCategory implements IRecipeCategory
 	private static final int INPUT_SLOT = 0;
 	private static final int OUTPUT_SLOT = 1;
 	private static final int FUEL_SLOT = 2;
-	
+
 	IDrawableStatic fuelDrawable = JEIPluginManager.jeiHelper.getGuiHelper().createDrawable(GUICropomator.backgroundTexture, 176, 0, 14, 14);
 	IDrawableStatic progressDrawable = JEIPluginManager.jeiHelper.getGuiHelper().createDrawable(GUICropomator.backgroundTexture, 177, 14, 23, 16);
 
@@ -33,7 +33,7 @@ public class CropomatorCategory implements IRecipeCategory
 	protected final IDrawableAnimated progress = JEIPluginManager.jeiHelper.getGuiHelper().createAnimatedDrawable(progressDrawable, Config.cropomatorProcessTime, IDrawableAnimated.StartDirection.LEFT, false);
 	@Nonnull
 	private final String localizedName = StatCollector.translateToLocal("recipe.cropomator");
-	
+
 	@Nonnull
 	@Override
 	public String getUid()

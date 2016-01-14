@@ -32,20 +32,16 @@ public class PouchRollbackRecipes implements IRecipe
 		ItemStack pouch = null;
 		ItemStack newPouch = null;
 		for (int i = 0; i < invCraft.getSizeInventory(); i++)
-		{
 			if (invCraft.getStackInSlot(i) != null)
-			{
 				if (invCraft.getStackInSlot(i).getItem() instanceof ItemPouch)
 					pouch = invCraft.getStackInSlot(i);
-			}
-		}
 
 		if (pouch == null || pouch.getItemDamage() == 0)
 			return null;
 
 		newPouch = pouch.copy();
 		newPouch.setItemDamage(0);
-		
+
 		return newPouch;
 	}
 
@@ -65,7 +61,6 @@ public class PouchRollbackRecipes implements IRecipe
 	public ItemStack[] getRemainingItems(InventoryCrafting invCraft)
 	{
 		ItemStack[] ret = new ItemStack[9];
-		ItemStack stackToClear = null;
 
 		for (int i = 0; i < invCraft.getSizeInventory(); i++)
 			if (invCraft.getStackInSlot(i) != null)

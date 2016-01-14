@@ -1,7 +1,6 @@
 package com.oitsjustjose.criss_cross.lib;
 
 import com.oitsjustjose.criss_cross.CrissCross;
-import com.oitsjustjose.criss_cross.blocks.BlockAtmosManipulator;
 import com.oitsjustjose.criss_cross.blocks.BlockCobblegen;
 import com.oitsjustjose.criss_cross.blocks.BlockCropomator;
 import com.oitsjustjose.criss_cross.blocks.BlockElectroextractor;
@@ -31,7 +30,7 @@ public class LibBlocks
 		cobblegen = new BlockCobblegen();
 		stonegen = new BlockStonegen();
 		scribe = new BlockScribe();
-//TODO: atmosManipulator = new BlockAtmosManipulator();
+		// TODO: atmosManipulator = new BlockAtmosManipulator();
 		NetworkRegistry.INSTANCE.registerGuiHandler(CrissCross.instance, new GUIHandler());
 	}
 }

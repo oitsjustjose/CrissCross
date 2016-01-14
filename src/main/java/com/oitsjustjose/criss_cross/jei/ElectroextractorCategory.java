@@ -21,10 +21,10 @@ public class ElectroextractorCategory implements IRecipeCategory
 	private static final int INPUT_SLOT = 0;
 	private static final int OUTPUT_SLOT = 1;
 	private static final int FUEL_SLOT = 2;
-	
+
 	IDrawableStatic fuelDrawable = JEIPluginManager.jeiHelper.getGuiHelper().createDrawable(GUIElectroextractor.backgroundTexture, 176, 0, 14, 14);
 	IDrawableStatic progressDrawable = JEIPluginManager.jeiHelper.getGuiHelper().createDrawable(GUIElectroextractor.backgroundTexture, 177, 14, 23, 16);
-	
+
 	@Nonnull
 	protected final IDrawableAnimated fuel = JEIPluginManager.jeiHelper.getGuiHelper().createAnimatedDrawable(fuelDrawable, Config.electroextractorProcessTime, IDrawableAnimated.StartDirection.TOP, true);
 	@Nonnull

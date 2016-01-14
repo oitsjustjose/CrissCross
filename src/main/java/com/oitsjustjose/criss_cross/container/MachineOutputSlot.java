@@ -27,9 +27,7 @@ public class MachineOutputSlot extends Slot
 	public ItemStack decrStackSize(int slot)
 	{
 		if (this.getHasStack())
-		{
 			this.temp += Math.min(slot, this.getStack().stackSize);
-		}
 
 		return super.decrStackSize(slot);
 	}

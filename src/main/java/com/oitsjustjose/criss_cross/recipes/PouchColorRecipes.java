@@ -46,7 +46,6 @@ public class PouchColorRecipes implements IRecipe
 			ItemStack itemstack1 = invCraft.getStackInSlot(k);
 
 			if (itemstack1 != null)
-			{
 				if (itemstack1.getItem() instanceof ItemPouch)
 				{
 					pouch = (ItemPouch) itemstack1.getItem();
@@ -60,13 +59,13 @@ public class PouchColorRecipes implements IRecipe
 					if (pouch.hasColor(itemstack1))
 					{
 						int l = pouch.getColor(itemstack);
-						float f = (float) (l >> 16 & 255) / 255.0F;
-						float f1 = (float) (l >> 8 & 255) / 255.0F;
-						float f2 = (float) (l & 255) / 255.0F;
-						i = (int) ((float) i + Math.max(f, Math.max(f1, f2)) * 255.0F);
-						aint[0] = (int) ((float) aint[0] + f * 255.0F);
-						aint[1] = (int) ((float) aint[1] + f1 * 255.0F);
-						aint[2] = (int) ((float) aint[2] + f2 * 255.0F);
+						float f = (l >> 16 & 255) / 255.0F;
+						float f1 = (l >> 8 & 255) / 255.0F;
+						float f2 = (l & 255) / 255.0F;
+						i = (int) (i + Math.max(f, Math.max(f1, f2)) * 255.0F);
+						aint[0] = (int) (aint[0] + f * 255.0F);
+						aint[1] = (int) (aint[1] + f1 * 255.0F);
+						aint[2] = (int) (aint[2] + f2 * 255.0F);
 						++j;
 					}
 				}
@@ -85,7 +84,6 @@ public class PouchColorRecipes implements IRecipe
 					aint[2] += j2;
 					++j;
 				}
-			}
 		}
 
 		if (pouch == null)
@@ -97,10 +95,10 @@ public class PouchColorRecipes implements IRecipe
 			int j1 = aint[1] / j;
 			int k1 = aint[2] / j;
 			float f3 = (float) i / (float) j;
-			float f4 = (float) Math.max(i1, Math.max(j1, k1));
-			i1 = (int) ((float) i1 * f3 / f4);
-			j1 = (int) ((float) j1 * f3 / f4);
-			k1 = (int) ((float) k1 * f3 / f4);
+			float f4 = Math.max(i1, Math.max(j1, k1));
+			i1 = (int) (i1 * f3 / f4);
+			j1 = (int) (j1 * f3 / f4);
+			k1 = (int) (k1 * f3 / f4);
 			int lvt_12_3_ = (i1 << 8) + j1;
 			lvt_12_3_ = (lvt_12_3_ << 8) + k1;
 			pouch.setColor(itemstack, lvt_12_3_);
@@ -124,7 +122,6 @@ public class PouchColorRecipes implements IRecipe
 	public ItemStack[] getRemainingItems(InventoryCrafting invCraft)
 	{
 		ItemStack[] ret = new ItemStack[9];
-		ItemStack stackToClear = null;
 
 		for (int i = 0; i < invCraft.getSizeInventory(); i++)
 			if (invCraft.getStackInSlot(i) != null)

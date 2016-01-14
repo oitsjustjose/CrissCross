@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.oitsjustjose.criss_cross.CrissCross;
 import com.oitsjustjose.criss_cross.lib.Lib;
-import com.oitsjustjose.criss_cross.util.ClientProxy;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;

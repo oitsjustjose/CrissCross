@@ -34,12 +34,12 @@ public class GUIHandler implements IGuiHandler
 	public static final int Scribe = 6;
 	public static final int AtmosManipulator = 7;
 
-	@Override public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
+	@Override
+	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
 	{
 		TileEntity tile = world.getTileEntity(new BlockPos(x, y, z));
 
 		if (tile != null)
-		{
 			switch (ID)
 			{
 			case 0: // Cropomator
@@ -57,7 +57,6 @@ public class GUIHandler implements IGuiHandler
 			case 7: // AtmosManipulator
 				return new ContainerAtmosManipulator(player, ((TileAtmosManipulator) tile));
 			}
-		}
 
 		if (player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ItemPouch)
 			return new ContainerPouch(player, player.inventory.currentItem);
@@ -71,7 +70,6 @@ public class GUIHandler implements IGuiHandler
 		TileEntity tile = world.getTileEntity(new BlockPos(x, y, z));
 
 		if (tile != null)
-		{
 			switch (ID)
 			{
 			case 0: // Cropomator
@@ -89,7 +87,6 @@ public class GUIHandler implements IGuiHandler
 			case 7: // AtmosManipulator
 				return new GUIAtmosManipulator(player, ((TileAtmosManipulator) tile));
 			}
-		}
 
 		if (player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ItemPouch)
 			return new GUIPouch(player, player.inventory.currentItem);

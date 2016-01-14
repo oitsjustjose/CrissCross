@@ -18,9 +18,7 @@ public class ItemHelper
 	public static ItemStack cloneStack(Item item, int stackSize)
 	{
 		if (item == null)
-		{
 			return null;
-		}
 		ItemStack stack = new ItemStack(item, stackSize);
 
 		return stack;
@@ -30,9 +28,7 @@ public class ItemHelper
 	{
 
 		if (item == null)
-		{
 			return null;
-		}
 		ItemStack stack = new ItemStack(item, stackSize);
 
 		return stack;
@@ -42,9 +38,7 @@ public class ItemHelper
 	{
 
 		if (stack == null)
-		{
 			return null;
-		}
 		ItemStack retStack = stack.copy();
 		retStack.stackSize = stackSize;
 
@@ -55,9 +49,7 @@ public class ItemHelper
 	{
 
 		if (stack == null)
-		{
 			return null;
-		}
 		ItemStack retStack = stack.copy();
 
 		return retStack;
@@ -72,24 +64,16 @@ public class ItemHelper
 	{
 		ItemStack[] dmgItems = new ItemStack[2];
 		for (int i = 0; i < inv.getSizeInventory(); i++)
-		{
 			if (inv.getStackInSlot(i) != null)
-			{
 				if (dmgItems[0] == null)
-				{
 					dmgItems[0] = inv.getStackInSlot(i);
-				}
 				else
 				{
 					dmgItems[1] = inv.getStackInSlot(i);
 					break;
 				}
-			}
-		}
 		if (dmgItems[0] == null || dmgItems[0].getItem() == null)
-		{
 			return null;
-		}
 		else if (dmgItems[1] != null && dmgItems[0].getItem() == dmgItems[1].getItem() && dmgItems[0].stackSize == 1 && dmgItems[1].stackSize == 1 && dmgItems[0].getItem().isRepairable())
 		{
 			Item theItem = dmgItems[0].getItem();
@@ -105,12 +89,10 @@ public class ItemHelper
 			IRecipe recipe;
 			for (int i = 0; i < CraftingManager.getInstance().getRecipeList().size(); i++)
 			{
-				recipe = (IRecipe) CraftingManager.getInstance().getRecipeList().get(i);
+				recipe = CraftingManager.getInstance().getRecipeList().get(i);
 
 				if (recipe.matches(inv, world))
-				{
 					return recipe.getCraftingResult(inv);
-				}
 			}
 			return null;
 		}

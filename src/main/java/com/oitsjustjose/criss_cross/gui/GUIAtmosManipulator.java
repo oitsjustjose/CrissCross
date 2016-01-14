@@ -5,12 +5,10 @@ import java.io.IOException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
-import com.ibm.icu.impl.ICUService.Key;
 import com.oitsjustjose.criss_cross.tileentity.TileAtmosManipulator;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
@@ -55,17 +53,13 @@ public class GUIAtmosManipulator extends GuiScreen
 	protected void keyTyped(char typedChar, int keyCode) throws IOException
 	{
 		if (keyCode == mc.gameSettings.keyBindInventory.getKeyCode())
-		{
 			this.mc.displayGuiScreen(null);
-		}
 		if (keyCode == 1)
 		{
 			this.mc.displayGuiScreen((GuiScreen) null);
 
 			if (this.mc.currentScreen == null)
-			{
 				this.mc.setIngameFocus();
-			}
 		}
 	}
 

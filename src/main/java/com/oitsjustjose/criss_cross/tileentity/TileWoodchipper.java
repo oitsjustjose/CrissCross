@@ -2,7 +2,7 @@ package com.oitsjustjose.criss_cross.tileentity;
 
 import java.util.ArrayList;
 
-import com.oitsjustjose.criss_cross.blocks.BlockWoodchipper;
+import com.oitsjustjose.criss_cross.blocks.BlockMachineBase;
 import com.oitsjustjose.criss_cross.container.ContainerWoodchipper;
 import com.oitsjustjose.criss_cross.lib.Config;
 import com.oitsjustjose.criss_cross.lib.Lib;
@@ -43,9 +43,7 @@ public class TileWoodchipper extends TileEntityLockable implements ITickable, IS
 		boolean flag1 = false;
 
 		if (this.fuelTime > 0)
-		{
 			--this.fuelTime;
-		}
 
 		if (!this.worldObj.isRemote)
 		{
@@ -64,9 +62,7 @@ public class TileWoodchipper extends TileEntityLockable implements ITickable, IS
 							--this.ItemStacks[1].stackSize;
 
 							if (this.ItemStacks[1].stackSize == 0)
-							{
 								this.ItemStacks[1] = ItemStacks[1].getItem().getContainerItem(ItemStacks[1]);
-							}
 						}
 					}
 				}
@@ -83,22 +79,18 @@ public class TileWoodchipper extends TileEntityLockable implements ITickable, IS
 					}
 				}
 				else
-				{
 					this.processTime = 0;
-				}
 			}
 
 			if (flag != this.fuelTime > 0)
 			{
 				flag1 = true;
-				BlockWoodchipper.updateBlockState(this.fuelTime > 0, this.worldObj, this.pos);
+				BlockMachineBase.updateBlockState(this.fuelTime > 0, this.worldObj, this.pos);
 			}
 		}
 
 		if (flag1)
-		{
 			this.markDirty();
-		}
 	}
 
 	public static ArrayList<ItemStack> getFuels()
@@ -136,17 +128,13 @@ public class TileWoodchipper extends TileEntityLockable implements ITickable, IS
 				itemstack = this.ItemStacks[slot].splitStack(qtyToDecr);
 
 				if (this.ItemStacks[slot].stackSize == 0)
-				{
 					this.ItemStacks[slot] = null;
-				}
 
 				return itemstack;
 			}
 		}
 		else
-		{
 			return null;
-		}
 	}
 
 	@Override
@@ -159,9 +147,7 @@ public class TileWoodchipper extends TileEntityLockable implements ITickable, IS
 			return itemstack;
 		}
 		else
-		{
 			return null;
-		}
 	}
 
 	@Override
@@ -170,9 +156,7 @@ public class TileWoodchipper extends TileEntityLockable implements ITickable, IS
 		this.ItemStacks[slot] = itemstack;
 
 		if (itemstack != null && itemstack.stackSize > this.getInventoryStackLimit())
-		{
 			itemstack.stackSize = this.getInventoryStackLimit();
-		}
 	}
 
 	@Override
@@ -184,7 +168,7 @@ public class TileWoodchipper extends TileEntityLockable implements ITickable, IS
 	@Override
 	public boolean hasCustomName()
 	{
-		return this.customName != null && this.customName.length() > 0;
+		return TileWoodchipper.customName != null && TileWoodchipper.customName.length() > 0;
 	}
 
 	@Override
@@ -200,9 +184,7 @@ public class TileWoodchipper extends TileEntityLockable implements ITickable, IS
 			byte b0 = nbttagcompound1.getByte("Slot");
 
 			if (b0 >= 0 && b0 < this.ItemStacks.length)
-			{
 				this.ItemStacks[b0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-			}
 		}
 
 		this.fuelTime = tag.getShort("FuelTime");
@@ -222,7 +204,6 @@ public class TileWoodchipper extends TileEntityLockable implements ITickable, IS
 		NBTTagList nbttaglist = new NBTTagList();
 
 		for (int i = 0; i < this.ItemStacks.length; ++i)
-		{
 			if (this.ItemStacks[i] != null)
 			{
 				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
@@ -230,7 +211,6 @@ public class TileWoodchipper extends TileEntityLockable implements ITickable, IS
 				this.ItemStacks[i].writeToNBT(nbttagcompound1);
 				nbttaglist.appendTag(nbttagcompound1);
 			}
-		}
 
 		tag.setTag("Items", nbttaglist);
 	}
@@ -251,9 +231,7 @@ public class TileWoodchipper extends TileEntityLockable implements ITickable, IS
 	public int getBurnTimeRemainingScaled(int par1)
 	{
 		if (this.fuelUsetime == 0)
-		{
 			this.fuelUsetime = proTicks;
-		}
 
 		return this.fuelTime * par1 / this.fuelUsetime;
 	}
@@ -290,13 +268,11 @@ public class TileWoodchipper extends TileEntityLockable implements ITickable, IS
 	public static boolean removeFuel(ItemStack itemstack)
 	{
 		for (int i = 0; i < fuelItems.size(); i++)
-		{
 			if (fuelItems.get(i) == itemstack)
 			{
 				fuelItems.remove(i);
 				return true;
 			}
-		}
 		return false;
 	}
 
@@ -316,19 +292,13 @@ public class TileWoodchipper extends TileEntityLockable implements ITickable, IS
 			ItemStack output = WoodchipperRecipes.getInstance().getResult(input);
 			ItemStack outputSlot = ItemStacks[2];
 			if (outputSlot == null)
-			{
 				ItemStacks[2] = output.copy();
-			}
 			else if (outputSlot.isItemEqual(output))
-			{
 				outputSlot.stackSize += output.stackSize;
-			}
 
 			--input.stackSize;
 			if (input.stackSize <= 0)
-			{
 				ItemStacks[0] = null;
-			}
 		}
 	}
 
@@ -348,9 +318,10 @@ public class TileWoodchipper extends TileEntityLockable implements ITickable, IS
 		return false;
 	}
 
+	@Override
 	public boolean isUseableByPlayer(EntityPlayer player)
 	{
-		return this.worldObj.getTileEntity(this.pos) != this ? false : player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) <= 64.0D;
+		return this.worldObj.getTileEntity(this.pos) != this ? false : player.getDistanceSq(this.pos.getX() + 0.5D, this.pos.getY() + 0.5D, this.pos.getZ() + 0.5D) <= 64.0D;
 	}
 
 	@Override
@@ -417,7 +388,7 @@ public class TileWoodchipper extends TileEntityLockable implements ITickable, IS
 	@Override
 	public String getName()
 	{
-		return this.hasCustomName() ? this.customName : "container.woodchipper";
+		return this.hasCustomName() ? TileWoodchipper.customName : "container.woodchipper";
 	}
 
 	@Override
