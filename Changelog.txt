@@ -1,3 +1,13 @@
+1.3.6:
+-Added: XP quantity from Electrolytic Dust when smelted
+-Changed: Config file for Electroextractor now requires full Ore Dictionary name like oreIron, oreGold
+-Changed: Default Electroextractor fuel is now redstone dust, not blocks
+-Changed: Default Electroextractor Ore Dictionary configs to reflect new parsing
+-Changed: Electroextractor default (non-configurable) recipe for sand from cobblestone
+-Changed: Refactoring in Woodchipper recipes
+-Changed: Moved water bucket addition to the block generator tile classes
+-Fixed: ItemStack stacksize expectation for Cropomator - no visible change, but fixes JEI recipe
+
 1.3.5:
 -Fixed: world load / unload issues with machines
 -Removed: support for 1.8.8, as Forge's ModelBakery has changed, and this change is not reflected in 1.8.8 builds
