@@ -25,7 +25,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class TileElectroextractor extends TileEntityLockable implements ITickable, ISidedInventory
 {
 	private static int proTicks = Config.electroextractorProcessTime;
-	private static int qty = Config.eeOutput;
+	private static int qty = Config.electroextractorOutput;
 	private static final int[] slotsTop = new int[] { 0 };
 	private static final int[] slotsBottom = new int[] { 2, 1 };
 	private static final int[] slotsSides = new int[] { 1 };

@@ -65,7 +65,7 @@ public class CraftingRecipes
 		GameRegistry.addRecipe(new ItemStack(LibBlocks.woodchipper), new Object[] { "I#I", "SCS", "I#I", '#', Items.diamond_axe, 'I', Blocks.iron_bars, 'S', Items.golden_axe, 'C', centerItem });
 
 		// Electroextractor Recipe
-		unlocItem = Config.eeRecipeItem.split(":");
+		unlocItem = Config.electroextractorRecipeItem.split(":");
 		centerItem = new ItemStack(Blocks.diamond_block);
 
 		if (Config.findItemStack(unlocItem[0], unlocItem[1]) != null)
@@ -78,7 +78,7 @@ public class CraftingRecipes
 		}
 		else
 		{
-			LogHelper.warn(Config.eeRecipeItem + " could not be implemented into the Electroextractor's Crafting Recipe.");
+			LogHelper.warn(Config.electroextractorRecipeItem + " could not be implemented into the Electroextractor's Crafting Recipe.");
 			LogHelper.warn("The fallback, " + centerItem.getDisplayName() + ", has been used instead");
 			LogHelper.warn("Please confirm you have the name and formatting correct.");
 			System.out.println();

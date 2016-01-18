@@ -31,12 +31,12 @@ public class Config
 	public static String[] defaultCropomatorCatalysts = new String[] { "minecraft:dye:15" };
 	// Electroextractor Configs
 	public static int electroextractorProcessTime;
-	public static int eeOutput;
-	public static String eeRecipeItem;
-	public static String[] eeFuels;
-	public static String[] eeOreDictInputs;
-	public static String[] defaultEEOreDictInputs = new String[] { "Iron:12428902", "Gold:16772608", "Aluminum:15987699", "Cobalt:17663", "Ardite:13938485", "Copper:16751872", "Tin:15132390", "Silver:13297640", "Lead:5722979", "Platinum:11067903", "Mithril:4433113", "Nickel:16580553" };
-	public static String[] defaultEEFuels = new String[] { "minecraft:redstone_block" };
+	public static int electroextractorOutput;
+	public static String electroextractorRecipeItem;
+	public static String[] electroextractorFuels;
+	public static String[] electroextractorOreDictInputs;
+	public static String[] defaultelEctroextractorOreDictInputs = new String[] { "oreIron:12428902", "oreGold:16772608" };
+	public static String[] defaultElectroextractorFuels = new String[] { "minecraft:redstone" };
 	// Woodchipper Configs
 	public static int woodchipperProcessTime;
 	public static int woodchipperOutput;
@@ -51,7 +51,6 @@ public class Config
 
 	public static void init(File configFile)
 	{
-		// Create the configuration object from the given configuration file
 		if (config == null)
 		{
 			config = new Configuration(configFile);
@@ -103,22 +102,22 @@ public class Config
 		electroextractorProcessTime = property.getInt();
 		propertyOrder.add(property.getName());
 
-		property = config.get(category, "Electroextractor OreDictionary Entries", defaultEEOreDictInputs, "Formatted as <OreDictName>:<DecimalColorYouWant>." + "\n" + " Remove the 'ore' part of the oredict name (i.e. 'oreIron' should be entered as 'Iron')" + "\n" + "Use http://www.colorpicker.com/ to find a color and http://bit.ly/1RhPhcX to convert it from Hex to Decimal.");
-		eeOreDictInputs = property.getStringList();
+		property = config.get(category, "Electroextractor OreDictionary Entries", defaultelEctroextractorOreDictInputs, "Formatted as <OreDictName>:<DecimalColorYouWant>." + "\n" + "Use http://www.colorpicker.com/ to find a color and http://bit.ly/1RhPhcX to convert it from Hex to Decimal.");
+		electroextractorOreDictInputs = property.getStringList();
 		propertyOrder.add(property.getName());
 
-		property = config.get(category, "Electroextractor's Fuel Items", defaultEEFuels, "Items considered as fuel for the Electroextractor. Formatted as: <modid>:<item>:<meta> or <modid>:<item>.");
-		eeFuels = property.getStringList();
+		property = config.get(category, "Electroextractor's Fuel Items", defaultElectroextractorFuels, "Items considered as fuel for the Electroextractor. Formatted as: <modid>:<item>:<meta> or <modid>:<item>.");
+		electroextractorFuels = property.getStringList();
 		propertyOrder.add(property.getName());
 
 		property = config.get(category, "Electroextractor Output Quantity", 2);
 		property.comment = "Quantity output by the Electroextractor";
-		eeOutput = property.getInt();
+		electroextractorOutput = property.getInt();
 		propertyOrder.add(property.getName());
 
 		property = config.get(category, "Electroextractor Crafting Item", "minecraft:diamond_block");
 		property.comment = "Key crafting ingredient in Electroextractor's Recipe. Formatted as: <modid>:<item>:<meta> or <modid>:<item>.";
-		eeRecipeItem = property.getString();
+		electroextractorRecipeItem = property.getString();
 		propertyOrder.add(property.getName());
 
 		Electroextractor.setPropertyOrder(propertyOrder);
@@ -175,7 +174,6 @@ public class Config
 			loadConfiguration();
 	}
 
-	// put this here because most references to finditemstack are due to this confighandler
 	public static ItemStack findItemStack(String modid, String name)
 	{
 		if (GameRegistry.findItem(modid, name) != null)

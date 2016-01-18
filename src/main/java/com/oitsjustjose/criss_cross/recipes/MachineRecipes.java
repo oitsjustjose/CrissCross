@@ -40,9 +40,9 @@ public class MachineRecipes
 		parseWoodchipperRecipes();
 		parseScribeRecipes();
 
-		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.diamond_ore), new ItemStack(Items.diamond, Config.eeOutput));
-		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.emerald_ore), new ItemStack(Items.emerald, Config.eeOutput));
-		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.coal_ore), new ItemStack(Items.coal, Config.eeOutput));
+		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.diamond_ore), new ItemStack(Items.diamond, Config.electroextractorOutput));
+		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.emerald_ore), new ItemStack(Items.emerald, Config.electroextractorOutput));
+		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.coal_ore), new ItemStack(Items.coal, Config.electroextractorOutput));
 		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.gravel), new ItemStack(Items.flint));
 		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.cobblestone, 1), new ItemStack(Blocks.sand, 2));
 		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.sandstone, 1, Short.MAX_VALUE), new ItemStack(Blocks.sand, 4));
@@ -275,19 +275,19 @@ public class MachineRecipes
 	static void parseElectroextractorRecipes()
 	{
 		ArrayList<String> dustNames = ItemDust.getDusts();
-		for (int i = 0; i < Config.eeOreDictInputs.length; i++)
+		for (int i = 0; i < Config.electroextractorOreDictInputs.length; i++)
 		{
-			String[] entry = Config.eeOreDictInputs[i].split(":");
+			String[] entry = Config.electroextractorOreDictInputs[i].split(":");
 			if (doesOreNameExist(entry[0]) && doesOreNameExist(entry[0].replace("ore", "ingot")))
 			{
 				List<ItemStack> ores = OreDictionary.getOres(entry[0]);
 				ItemDust.addDustType(entry[0].replace("ore", ""), Integer.parseInt(entry[1]));
 				for (int j = 0; j < ores.size(); j++)
-					ElectroextractorRecipes.getInstance().addRecipe(ores.get(j), new ItemStack(LibItems.dusts, Config.eeOutput, dustNames.size() - 1));
+					ElectroextractorRecipes.getInstance().addRecipe(ores.get(j), new ItemStack(LibItems.dusts, Config.electroextractorOutput, dustNames.size() - 1));
 			}
 			else
 			{
-				LogHelper.warn("Your oreDictionary Entry " + Config.eeOreDictInputs[i] + " could not be registered.");
+				LogHelper.warn("Your oreDictionary Entry " + Config.electroextractorOreDictInputs[i] + " could not be registered.");
 				if (!doesOreNameExist(entry[0]))
 					LogHelper.warn("This is because your oreDictionary Entry was not valid or registered as " + entry[0] + ".");
 				else if (!doesOreNameExist(entry[0].replace("ore", "ingot")))
@@ -308,16 +308,16 @@ public class MachineRecipes
 
 	static void parseElectroextractorFuels()
 	{
-		for (int i = 0; i < Config.eeFuels.length; i++)
+		for (int i = 0; i < Config.electroextractorFuels.length; i++)
 			try
 			{
-				String[] parts = Config.eeFuels[i].split(":");
+				String[] parts = Config.electroextractorFuels[i].split(":");
 				if (parts.length == 2)
 					if (Config.findItemStack(parts[0], parts[1]) != null)
 						TileElectroextractor.addFuel(Config.findItemStack(parts[0], parts[1]));
 					else
 					{
-						LogHelper.warn("Item " + Config.eeFuels[i] + " could not be added to the Electroextractor's fuel list.");
+						LogHelper.warn("Item " + Config.electroextractorFuels[i] + " could not be added to the Electroextractor's fuel list.");
 						LogHelper.warn("Please confirm you have the name and formatting correct.");
 					}
 
@@ -329,7 +329,7 @@ public class MachineRecipes
 					}
 					else
 					{
-						LogHelper.warn("Item " + Config.eeFuels[i] + " could not be added to the Electroextractor's fuel list.");
+						LogHelper.warn("Item " + Config.electroextractorFuels[i] + " could not be added to the Electroextractor's fuel list.");
 						LogHelper.warn("Please confirm you have the name and formatting correct.");
 					}
 			}
