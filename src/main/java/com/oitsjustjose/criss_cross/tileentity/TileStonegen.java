@@ -6,6 +6,7 @@ import com.oitsjustjose.criss_cross.blocks.BlockStonegen;
 import com.oitsjustjose.criss_cross.container.ContainerStonegen;
 import com.oitsjustjose.criss_cross.lib.Config;
 import com.oitsjustjose.criss_cross.lib.Lib;
+import com.oitsjustjose.criss_cross.lib.LibItems;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -25,6 +26,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TileStonegen extends TileEntityLockable implements ITickable, ISidedInventory
 {
+	public TileStonegen()
+	{
+		this.addFuel(new ItemStack(Items.water_bucket));
+		this.addFuel(new ItemStack(LibItems.buckets));
+	}
+
 	private static int proTicks = Config.blockGeneratorProcessTimes;
 	private static final int[] slotsTop = new int[] { 0 };
 	private static final int[] slotsBottom = new int[] { 2, 1 };

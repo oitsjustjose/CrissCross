@@ -6,6 +6,7 @@ import com.oitsjustjose.criss_cross.blocks.BlockCobblegen;
 import com.oitsjustjose.criss_cross.container.ContainerCobblegen;
 import com.oitsjustjose.criss_cross.lib.Config;
 import com.oitsjustjose.criss_cross.lib.Lib;
+import com.oitsjustjose.criss_cross.lib.LibItems;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -25,6 +26,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TileCobblegen extends TileEntityLockable implements ITickable, ISidedInventory
 {
+	public TileCobblegen()
+	{
+		this.addFuel(new ItemStack(Items.water_bucket));
+		this.addFuel(new ItemStack(LibItems.buckets));
+	}
+
 	private static int proTicks = Config.blockGeneratorProcessTimes;
 	private static final int[] slotsTop = new int[] { 0 };
 	private static final int[] slotsBottom = new int[] { 2, 1 };
@@ -97,7 +104,6 @@ public class TileCobblegen extends TileEntityLockable implements ITickable, ISid
 			this.markDirty();
 	}
 
-	
 	public static ArrayList<ItemStack> getFuels()
 	{
 		return fuelItems;
@@ -317,7 +323,7 @@ public class TileCobblegen extends TileEntityLockable implements ITickable, ISid
 
 	public static int getFuelAmount(ItemStack itemstack)
 	{
-		if(itemstack == null)
+		if (itemstack == null)
 			return 0;
 		return isItemFuel(itemstack) ? proTicks : 0;
 	}
