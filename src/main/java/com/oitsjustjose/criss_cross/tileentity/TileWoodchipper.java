@@ -297,7 +297,6 @@ public class TileWoodchipper extends TileEntityLockable implements ITickable, IS
 	{
 		if (this.canProcess())
 		{
-
 			ItemStack input = ItemStacks[0];
 			ItemStack output = WoodchipperRecipes.getInstance().getResult(input);
 			ItemStack outputSlot = ItemStacks[2];
