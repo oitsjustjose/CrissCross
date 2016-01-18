@@ -40,22 +40,22 @@ public class ContainerElectroextractor extends Container
 	public void updateProgressBar(int timeType1, int timeType2)
 	{
 		if (timeType1 == 0)
-			this.electroextractor.crushTime = timeType2;
+			this.electroextractor.processTime = timeType2;
 
 		if (timeType1 == 1)
 			this.electroextractor.fuelTime = timeType2;
 
 		if (timeType1 == 2)
-			this.electroextractor.fuelInUseTime = timeType2;
+			this.electroextractor.currentFuelBuffer = timeType2;
 	}
 
 	@Override
 	public void onCraftGuiOpened(ICrafting crafting)
 	{
 		super.onCraftGuiOpened(crafting);
-		crafting.sendProgressBarUpdate(this, 0, this.electroextractor.crushTime);
+		crafting.sendProgressBarUpdate(this, 0, this.electroextractor.processTime);
 		crafting.sendProgressBarUpdate(this, 1, this.electroextractor.fuelTime);
-		crafting.sendProgressBarUpdate(this, 2, this.electroextractor.fuelInUseTime);
+		crafting.sendProgressBarUpdate(this, 2, this.electroextractor.currentFuelBuffer);
 	}
 
 	@Override
@@ -66,16 +66,16 @@ public class ContainerElectroextractor extends Container
 		{
 			ICrafting crafting = this.crafters.get(i);
 
-			if (this.lastUseTime != this.electroextractor.crushTime)
-				crafting.sendProgressBarUpdate(this, 0, this.electroextractor.crushTime);
+			if (this.lastUseTime != this.electroextractor.processTime)
+				crafting.sendProgressBarUpdate(this, 0, this.electroextractor.processTime);
 			if (this.lastCrushTime != this.electroextractor.fuelTime)
 				crafting.sendProgressBarUpdate(this, 1, this.electroextractor.fuelTime);
-			if (this.lastFuelTime != this.electroextractor.fuelInUseTime)
-				crafting.sendProgressBarUpdate(this, 2, this.electroextractor.fuelInUseTime);
+			if (this.lastFuelTime != this.electroextractor.currentFuelBuffer)
+				crafting.sendProgressBarUpdate(this, 2, this.electroextractor.currentFuelBuffer);
 		}
-		this.lastUseTime = this.electroextractor.crushTime;
+		this.lastUseTime = this.electroextractor.processTime;
 		this.lastCrushTime = this.electroextractor.fuelTime;
-		this.lastFuelTime = this.electroextractor.fuelInUseTime;
+		this.lastFuelTime = this.electroextractor.currentFuelBuffer;
 	}
 
 	@Override

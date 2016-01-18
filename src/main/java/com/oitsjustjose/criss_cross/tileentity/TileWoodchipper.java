@@ -2,7 +2,7 @@ package com.oitsjustjose.criss_cross.tileentity;
 
 import java.util.ArrayList;
 
-import com.oitsjustjose.criss_cross.blocks.BlockMachineBase;
+import com.oitsjustjose.criss_cross.blocks.BlockWoodchipper;
 import com.oitsjustjose.criss_cross.container.ContainerWoodchipper;
 import com.oitsjustjose.criss_cross.lib.Config;
 import com.oitsjustjose.criss_cross.lib.Lib;
@@ -18,6 +18,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntityLockable;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -31,16 +32,16 @@ public class TileWoodchipper extends TileEntityLockable implements ITickable, IS
 	private static ArrayList<ItemStack> fuelItems = new ArrayList<ItemStack>();
 	private static String customName;
 	private ItemStack[] ItemStacks = new ItemStack[3];
-
 	public int fuelTime;
 	public int processTime;
-	public int fuelUsetime;
+	public int totalTime;
+	public int currentFuelBuffer;
 
 	@Override
 	public void update()
 	{
-		boolean flag = this.fuelTime > 0;
-		boolean flag1 = false;
+		boolean isBurning = this.isUsingFuel();
+		boolean flag = false;
 
 		if (this.fuelTime > 0)
 			--this.fuelTime;
@@ -51,11 +52,11 @@ public class TileWoodchipper extends TileEntityLockable implements ITickable, IS
 			{
 				if (this.fuelTime == 0 && this.canProcess())
 				{
-					this.fuelUsetime = this.fuelTime = getItemBurnTime(this.ItemStacks[1]);
+					this.currentFuelBuffer = this.fuelTime = getFuelAmount(this.ItemStacks[1]);
 
 					if (this.fuelTime > 0)
 					{
-						flag1 = true;
+						flag = true;
 
 						if (this.ItemStacks[1] != null)
 						{
@@ -74,22 +75,25 @@ public class TileWoodchipper extends TileEntityLockable implements ITickable, IS
 					if (this.processTime == proTicks)
 					{
 						this.processTime = 0;
+						this.totalTime = this.getFuelAmount(this.ItemStacks[0]);
 						this.processItem();
-						flag1 = true;
+						flag = true;
 					}
 				}
 				else
 					this.processTime = 0;
 			}
+			else if (!this.isUsingFuel() && this.processTime > 0)
+				this.processTime = MathHelper.clamp_int(this.processTime - 2, 0, this.totalTime);
 
-			if (flag != this.fuelTime > 0)
+			if (isBurning != this.fuelTime > 0)
 			{
-				flag1 = true;
-				BlockMachineBase.updateBlockState(this.fuelTime > 0, this.worldObj, this.pos);
+				flag = true;
+				BlockWoodchipper.updateBlockState(this.isUsingFuel(), this.worldObj, this.pos);
 			}
 		}
 
-		if (flag1)
+		if (flag)
 			this.markDirty();
 	}
 
@@ -189,10 +193,11 @@ public class TileWoodchipper extends TileEntityLockable implements ITickable, IS
 
 		this.fuelTime = tag.getShort("FuelTime");
 		this.processTime = tag.getShort("WorkTime");
-		if (this.ItemStacks[1] != null)
-			this.fuelUsetime = getItemBurnTime(this.ItemStacks[1]);
-		else
-			this.fuelUsetime = 0;
+		this.totalTime = tag.getShort("WorkTimeTotal");
+		this.currentFuelBuffer = getFuelAmount(this.ItemStacks[1]);
+
+		if (tag.hasKey("CustomName", 8))
+			this.customName = tag.getString("CustomName");
 	}
 
 	@Override
@@ -201,6 +206,8 @@ public class TileWoodchipper extends TileEntityLockable implements ITickable, IS
 		super.writeToNBT(tag);
 		tag.setShort("FuelTime", (short) this.fuelTime);
 		tag.setShort("WorkTime", (short) this.processTime);
+		tag.setShort("WorkTimeTotal", (short) this.totalTime);
+
 		NBTTagList nbttaglist = new NBTTagList();
 
 		for (int i = 0; i < this.ItemStacks.length; ++i)
@@ -213,6 +220,9 @@ public class TileWoodchipper extends TileEntityLockable implements ITickable, IS
 			}
 
 		tag.setTag("Items", nbttaglist);
+
+		if (this.hasCustomName())
+			tag.setString("CustomName", this.customName);
 	}
 
 	@Override
@@ -230,10 +240,10 @@ public class TileWoodchipper extends TileEntityLockable implements ITickable, IS
 	@SideOnly(Side.CLIENT)
 	public int getBurnTimeRemainingScaled(int par1)
 	{
-		if (this.fuelUsetime == 0)
-			this.fuelUsetime = proTicks;
+		if (this.currentFuelBuffer == 0)
+			this.currentFuelBuffer = proTicks;
 
-		return this.fuelTime * par1 / this.fuelUsetime;
+		return this.fuelTime * par1 / this.currentFuelBuffer;
 	}
 
 	public boolean isUsingFuel()
@@ -302,8 +312,10 @@ public class TileWoodchipper extends TileEntityLockable implements ITickable, IS
 		}
 	}
 
-	public static int getItemBurnTime(ItemStack itemstack)
+	public static int getFuelAmount(ItemStack itemstack)
 	{
+		if(itemstack == null)
+			return 0;
 		return isItemFuel(itemstack) ? proTicks : 0;
 	}
 
@@ -347,9 +359,11 @@ public class TileWoodchipper extends TileEntityLockable implements ITickable, IS
 		case 0:
 			return this.fuelTime;
 		case 1:
-			return this.fuelUsetime;
+			return this.currentFuelBuffer;
 		case 2:
 			return this.processTime;
+		case 3:
+			return this.totalTime;
 		default:
 			return 0;
 		}
@@ -364,18 +378,20 @@ public class TileWoodchipper extends TileEntityLockable implements ITickable, IS
 			this.fuelTime = value;
 			break;
 		case 1:
-			this.fuelUsetime = value;
+			this.currentFuelBuffer = value;
 			break;
 		case 2:
 			this.processTime = value;
 			break;
+		case 3:
+			this.totalTime = value;
 		}
 	}
 
 	@Override
 	public int getFieldCount()
 	{
-		return 3;
+		return 4;
 	}
 
 	@Override

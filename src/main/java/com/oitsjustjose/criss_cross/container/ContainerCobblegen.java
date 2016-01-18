@@ -48,7 +48,7 @@ public class ContainerCobblegen extends Container
 			this.cobblegen.fuelTime = timeType2;
 			break;
 		case 2:
-			this.cobblegen.fuelUsetime = timeType2;
+			this.cobblegen.currentFuelBuffer = timeType2;
 			break;
 		}
 	}
@@ -59,7 +59,7 @@ public class ContainerCobblegen extends Container
 		super.onCraftGuiOpened(crafting);
 		crafting.sendProgressBarUpdate(this, 0, this.cobblegen.processTime);
 		crafting.sendProgressBarUpdate(this, 1, this.cobblegen.fuelTime);
-		crafting.sendProgressBarUpdate(this, 2, this.cobblegen.fuelUsetime);
+		crafting.sendProgressBarUpdate(this, 2, this.cobblegen.currentFuelBuffer);
 	}
 
 	@Override
@@ -74,12 +74,12 @@ public class ContainerCobblegen extends Container
 				crafting.sendProgressBarUpdate(this, 0, this.cobblegen.processTime);
 			if (this.lastChopTime != this.cobblegen.fuelTime)
 				crafting.sendProgressBarUpdate(this, 1, this.cobblegen.fuelTime);
-			if (this.lastFuelTime != this.cobblegen.fuelUsetime)
-				crafting.sendProgressBarUpdate(this, 2, this.cobblegen.fuelUsetime);
+			if (this.lastFuelTime != this.cobblegen.currentFuelBuffer)
+				crafting.sendProgressBarUpdate(this, 2, this.cobblegen.currentFuelBuffer);
 		}
 		this.lastUseTime = this.cobblegen.processTime;
 		this.lastChopTime = this.cobblegen.fuelTime;
-		this.lastFuelTime = this.cobblegen.fuelUsetime;
+		this.lastFuelTime = this.cobblegen.currentFuelBuffer;
 	}
 
 	@Override

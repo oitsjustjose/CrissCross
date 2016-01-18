@@ -2,7 +2,7 @@ package com.oitsjustjose.criss_cross.tileentity;
 
 import java.util.ArrayList;
 
-import com.oitsjustjose.criss_cross.blocks.BlockMachineBase;
+import com.oitsjustjose.criss_cross.blocks.BlockCropomator;
 import com.oitsjustjose.criss_cross.container.ContainerCropomator;
 import com.oitsjustjose.criss_cross.lib.Config;
 import com.oitsjustjose.criss_cross.lib.Lib;
@@ -18,6 +18,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntityLockable;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -30,33 +31,32 @@ public class TileCropomator extends TileEntityLockable implements ITickable, ISi
 	private static final int[] slotsSides = new int[] { 1 };
 	private static ArrayList<ItemStack> fuelItems = new ArrayList<ItemStack>();
 	private static String customName;
-
 	private ItemStack[] ItemStacks = new ItemStack[3];
-
-	public int catalystTime;
+	public int fuelTime;
 	public int processTime;
-	public int catalystInUseTime;
+	public int totalTime;
+	public int currentFuelBuffer;
 
 	@Override
 	public void update()
 	{
-		boolean flag = this.catalystTime > 0;
-		boolean flag1 = false;
+		boolean isBurning = this.isUsingFuel();
+		boolean flag = false;
 
-		if (this.catalystTime > 0)
-			--this.catalystTime;
+		if (this.fuelTime > 0)
+			--this.fuelTime;
 
 		if (!this.worldObj.isRemote)
 		{
-			if (this.catalystTime != 0 || this.ItemStacks[1] != null && this.ItemStacks[0] != null)
+			if (this.fuelTime != 0 || this.ItemStacks[1] != null && this.ItemStacks[0] != null)
 			{
-				if (this.catalystTime == 0 && this.canProcess())
+				if (this.fuelTime == 0 && this.canProcess())
 				{
-					this.catalystInUseTime = this.catalystTime = getItemBurnTime(this.ItemStacks[1]);
+					this.currentFuelBuffer = this.fuelTime = getItemBurnTime(this.ItemStacks[1]);
 
-					if (this.catalystTime > 0)
+					if (this.fuelTime > 0)
 					{
-						flag1 = true;
+						flag = true;
 
 						if (this.ItemStacks[1] != null)
 						{
@@ -75,22 +75,25 @@ public class TileCropomator extends TileEntityLockable implements ITickable, ISi
 					if (this.processTime == proTicks)
 					{
 						this.processTime = 0;
+						this.totalTime = this.getItemBurnTime(this.ItemStacks[0]);
 						this.processItem();
-						flag1 = true;
+						flag = true;
 					}
 				}
 				else
 					this.processTime = 0;
 			}
+			else if (!this.isUsingFuel() && this.processTime > 0)
+				this.processTime = MathHelper.clamp_int(this.processTime - 2, 0, this.totalTime);
 
-			if (flag != this.catalystTime > 0)
+			if (isBurning != this.fuelTime > 0)
 			{
-				flag1 = true;
-				BlockMachineBase.updateBlockState(this.catalystTime > 0, this.worldObj, this.pos);
+				flag = true;
+				BlockCropomator.updateBlockState(this.isUsingFuel(), this.worldObj, this.pos);
 			}
 		}
 
-		if (flag1)
+		if (flag)
 			this.markDirty();
 	}
 
@@ -188,20 +191,23 @@ public class TileCropomator extends TileEntityLockable implements ITickable, ISi
 				this.ItemStacks[b0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
 		}
 
-		this.catalystTime = tag.getShort("BonemealTime");
-		this.processTime = tag.getShort("ProcessTime");
-		if (this.ItemStacks[1] != null)
-			this.catalystInUseTime = getItemBurnTime(this.ItemStacks[1]);
-		else
-			this.catalystInUseTime = 0;
+		this.fuelTime = tag.getShort("FuelTime");
+		this.processTime = tag.getShort("WorkTime");
+		this.totalTime = tag.getShort("WorkTimeTotal");
+		this.currentFuelBuffer = getItemBurnTime(this.ItemStacks[1]);
+
+		if (tag.hasKey("CustomName", 8))
+			this.customName = tag.getString("CustomName");
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound tag)
 	{
 		super.writeToNBT(tag);
-		tag.setShort("BonemealTime", (short) this.catalystTime);
-		tag.setShort("ProcessTime", (short) this.processTime);
+		tag.setShort("FuelTime", (short) this.fuelTime);
+		tag.setShort("WorkTime", (short) this.processTime);
+		tag.setShort("WorkTimeTotal", (short) this.totalTime);
+
 		NBTTagList nbttaglist = new NBTTagList();
 
 		for (int i = 0; i < this.ItemStacks.length; ++i)
@@ -214,6 +220,9 @@ public class TileCropomator extends TileEntityLockable implements ITickable, ISi
 			}
 
 		tag.setTag("Items", nbttaglist);
+
+		if (this.hasCustomName())
+			tag.setString("CustomName", this.customName);
 	}
 
 	@Override
@@ -231,15 +240,15 @@ public class TileCropomator extends TileEntityLockable implements ITickable, ISi
 	@SideOnly(Side.CLIENT)
 	public int getBurnTimeRemainingScaled(int par1)
 	{
-		if (this.catalystInUseTime == 0)
-			this.catalystInUseTime = proTicks;
+		if (this.currentFuelBuffer == 0)
+			this.currentFuelBuffer = proTicks;
 
-		return this.catalystTime * par1 / this.catalystInUseTime;
+		return this.fuelTime * par1 / this.currentFuelBuffer;
 	}
 
 	public boolean isUsingFuel()
 	{
-		return this.catalystTime > 0;
+		return this.fuelTime > 0;
 	}
 
 	private boolean canProcess()
@@ -305,6 +314,8 @@ public class TileCropomator extends TileEntityLockable implements ITickable, ISi
 
 	public static int getItemBurnTime(ItemStack itemstack)
 	{
+		if (itemstack == null)
+			return 0;
 		return isItemCatalyst(itemstack) ? proTicks : 0;
 	}
 
@@ -341,11 +352,13 @@ public class TileCropomator extends TileEntityLockable implements ITickable, ISi
 		switch (id)
 		{
 		case 0:
-			return this.catalystTime;
+			return this.fuelTime;
 		case 1:
-			return this.catalystInUseTime;
+			return this.currentFuelBuffer;
 		case 2:
 			return this.processTime;
+		case 3:
+			return this.totalTime;
 		default:
 			return 0;
 		}
@@ -357,21 +370,23 @@ public class TileCropomator extends TileEntityLockable implements ITickable, ISi
 		switch (id)
 		{
 		case 0:
-			this.catalystTime = value;
+			this.fuelTime = value;
 			break;
 		case 1:
-			this.catalystInUseTime = value;
+			this.currentFuelBuffer = value;
 			break;
 		case 2:
 			this.processTime = value;
 			break;
+		case 3:
+			this.totalTime = value;
 		}
 	}
 
 	@Override
 	public int getFieldCount()
 	{
-		return 3;
+		return 4;
 	}
 
 	@Override

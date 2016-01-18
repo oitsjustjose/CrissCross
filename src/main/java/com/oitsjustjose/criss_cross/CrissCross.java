@@ -1,5 +1,6 @@
 package com.oitsjustjose.criss_cross;
 
+import com.oitsjustjose.criss_cross.gui.GUIHandler;
 import com.oitsjustjose.criss_cross.lib.Config;
 import com.oitsjustjose.criss_cross.lib.CreativeTab;
 import com.oitsjustjose.criss_cross.lib.Lib;
@@ -19,8 +20,9 @@ import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 
-@Mod(modid = Lib.MODID, name = Lib.NAME, version = Lib.VERSION, guiFactory = Lib.GUI_FACTORY, acceptedMinecraftVersions = "1.8.8, 1.8.9")
+@Mod(modid = Lib.MODID, name = Lib.NAME, version = Lib.VERSION, guiFactory = Lib.GUI_FACTORY, acceptedMinecraftVersions = "1.8.9")
 public class CrissCross
 {
 	public static CreativeTabs CCTab = new CreativeTab();
@@ -41,6 +43,8 @@ public class CrissCross
 		LibBlocks.init();
 		LibItems.init();
 		CraftingRecipes.init();
+		
+		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GUIHandler());
 	}
 
 	@EventHandler

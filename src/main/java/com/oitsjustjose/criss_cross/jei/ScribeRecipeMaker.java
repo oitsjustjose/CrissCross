@@ -8,7 +8,6 @@ import javax.annotation.Nonnull;
 
 import com.oitsjustjose.criss_cross.recipes.machine.ScribeRecipes;
 
-import mezz.jei.util.StackUtil;
 import net.minecraft.item.ItemStack;
 
 public class ScribeRecipeMaker
@@ -26,7 +25,7 @@ public class ScribeRecipeMaker
 			ItemStack input = entry.getKey();
 			ItemStack output = entry.getValue();
 
-			List<ItemStack> inputs = StackUtil.getSubtypes(input);
+			List<ItemStack> inputs = JEIPluginManager.jeiHelper.getStackHelper().getSubtypes(input);
 			ScribeRecipeJEI recipe = new ScribeRecipeJEI(inputs, output);
 			recipes.add(recipe);
 		}

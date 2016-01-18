@@ -1,16 +1,13 @@
 package com.oitsjustjose.criss_cross.lib;
 
-import com.oitsjustjose.criss_cross.CrissCross;
 import com.oitsjustjose.criss_cross.blocks.BlockCobblegen;
 import com.oitsjustjose.criss_cross.blocks.BlockCropomator;
 import com.oitsjustjose.criss_cross.blocks.BlockElectroextractor;
 import com.oitsjustjose.criss_cross.blocks.BlockScribe;
 import com.oitsjustjose.criss_cross.blocks.BlockStonegen;
 import com.oitsjustjose.criss_cross.blocks.BlockWoodchipper;
-import com.oitsjustjose.criss_cross.gui.GUIHandler;
 
 import net.minecraft.block.Block;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 public class LibBlocks
 {
@@ -31,6 +28,5 @@ public class LibBlocks
 		stonegen = new BlockStonegen();
 		scribe = new BlockScribe();
 		// TODO: atmosManipulator = new BlockAtmosManipulator();
-		NetworkRegistry.INSTANCE.registerGuiHandler(CrissCross.instance, new GUIHandler());
 	}
 }

@@ -30,9 +30,6 @@ public class ClientProxy extends CommonProxy
 			register(i, "");
 	}
 
-	// WARNING: The following code is BULLSHIT and should be handled by FORGE. But it isn't. So sorry if you can't understand much. Just remember
-	// kids:
-	// EVERYTHING HAS TO BE IN LOWER CASE. NOTHING YOU LEARNED IN SCHOOL ABOUT CAPITALIZATION MATTERS ANYMORE.
 	@SideOnly(Side.CLIENT)
 	private static void register(Item item, String customName)
 	{

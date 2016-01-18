@@ -42,13 +42,13 @@ public class ContainerScribe extends Container
 		switch (timeType1)
 		{
 		case 0:
-			this.scribe.writingTime = timeType2;
+			this.scribe.processTime = timeType2;
 			break;
 		case 1:
 			this.scribe.fuelTime = timeType2;
 			break;
 		case 2:
-			this.scribe.fuelUsetime = timeType2;
+			this.scribe.currentFuelBuffer = timeType2;
 			break;
 		}
 	}
@@ -57,9 +57,9 @@ public class ContainerScribe extends Container
 	public void onCraftGuiOpened(ICrafting crafting)
 	{
 		super.onCraftGuiOpened(crafting);
-		crafting.sendProgressBarUpdate(this, 0, this.scribe.writingTime);
+		crafting.sendProgressBarUpdate(this, 0, this.scribe.processTime);
 		crafting.sendProgressBarUpdate(this, 1, this.scribe.fuelTime);
-		crafting.sendProgressBarUpdate(this, 2, this.scribe.fuelUsetime);
+		crafting.sendProgressBarUpdate(this, 2, this.scribe.currentFuelBuffer);
 	}
 
 	@Override
@@ -70,16 +70,16 @@ public class ContainerScribe extends Container
 		{
 			ICrafting crafting = this.crafters.get(i);
 
-			if (this.lastUseTime != this.scribe.writingTime)
-				crafting.sendProgressBarUpdate(this, 0, this.scribe.writingTime);
+			if (this.lastUseTime != this.scribe.processTime)
+				crafting.sendProgressBarUpdate(this, 0, this.scribe.processTime);
 			if (this.lastChopTime != this.scribe.fuelTime)
 				crafting.sendProgressBarUpdate(this, 1, this.scribe.fuelTime);
-			if (this.lastFuelTime != this.scribe.fuelUsetime)
-				crafting.sendProgressBarUpdate(this, 2, this.scribe.fuelUsetime);
+			if (this.lastFuelTime != this.scribe.currentFuelBuffer)
+				crafting.sendProgressBarUpdate(this, 2, this.scribe.currentFuelBuffer);
 		}
-		this.lastUseTime = this.scribe.writingTime;
+		this.lastUseTime = this.scribe.processTime;
 		this.lastChopTime = this.scribe.fuelTime;
-		this.lastFuelTime = this.scribe.fuelUsetime;
+		this.lastFuelTime = this.scribe.currentFuelBuffer;
 	}
 
 	@Override

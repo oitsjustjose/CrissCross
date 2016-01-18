@@ -48,7 +48,7 @@ public class ContainerWoodchipper extends Container
 			this.woodchipper.fuelTime = timeType2;
 			break;
 		case 2:
-			this.woodchipper.fuelUsetime = timeType2;
+			this.woodchipper.currentFuelBuffer = timeType2;
 			break;
 		}
 	}
@@ -59,7 +59,7 @@ public class ContainerWoodchipper extends Container
 		super.onCraftGuiOpened(crafting);
 		crafting.sendProgressBarUpdate(this, 0, this.woodchipper.processTime);
 		crafting.sendProgressBarUpdate(this, 1, this.woodchipper.fuelTime);
-		crafting.sendProgressBarUpdate(this, 2, this.woodchipper.fuelUsetime);
+		crafting.sendProgressBarUpdate(this, 2, this.woodchipper.currentFuelBuffer);
 	}
 
 	@Override
@@ -74,12 +74,12 @@ public class ContainerWoodchipper extends Container
 				crafting.sendProgressBarUpdate(this, 0, this.woodchipper.processTime);
 			if (this.lastChopTime != this.woodchipper.fuelTime)
 				crafting.sendProgressBarUpdate(this, 1, this.woodchipper.fuelTime);
-			if (this.lastFuelTime != this.woodchipper.fuelUsetime)
-				crafting.sendProgressBarUpdate(this, 2, this.woodchipper.fuelUsetime);
+			if (this.lastFuelTime != this.woodchipper.currentFuelBuffer)
+				crafting.sendProgressBarUpdate(this, 2, this.woodchipper.currentFuelBuffer);
 		}
 		this.lastUseTime = this.woodchipper.processTime;
 		this.lastChopTime = this.woodchipper.fuelTime;
-		this.lastFuelTime = this.woodchipper.fuelUsetime;
+		this.lastFuelTime = this.woodchipper.currentFuelBuffer;
 	}
 
 	@Override

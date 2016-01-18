@@ -43,10 +43,10 @@ public class ContainerCropomator extends Container
 			this.cropomator.processTime = timeType2;
 
 		if (timeType1 == 1)
-			this.cropomator.catalystTime = timeType2;
+			this.cropomator.fuelTime = timeType2;
 
 		if (timeType1 == 2)
-			this.cropomator.catalystInUseTime = timeType2;
+			this.cropomator.currentFuelBuffer = timeType2;
 	}
 
 	@Override
@@ -54,8 +54,8 @@ public class ContainerCropomator extends Container
 	{
 		super.onCraftGuiOpened(crafting);
 		crafting.sendProgressBarUpdate(this, 0, this.cropomator.processTime);
-		crafting.sendProgressBarUpdate(this, 1, this.cropomator.catalystTime);
-		crafting.sendProgressBarUpdate(this, 2, this.cropomator.catalystInUseTime);
+		crafting.sendProgressBarUpdate(this, 1, this.cropomator.fuelTime);
+		crafting.sendProgressBarUpdate(this, 2, this.cropomator.currentFuelBuffer);
 	}
 
 	@Override
@@ -68,14 +68,14 @@ public class ContainerCropomator extends Container
 
 			if (this.lastUseTime != this.cropomator.processTime)
 				crafting.sendProgressBarUpdate(this, 0, this.cropomator.processTime);
-			if (this.lastProcessTime != this.cropomator.catalystTime)
-				crafting.sendProgressBarUpdate(this, 1, this.cropomator.catalystTime);
-			if (this.lastCatalystInUseTime != this.cropomator.catalystInUseTime)
-				crafting.sendProgressBarUpdate(this, 2, this.cropomator.catalystInUseTime);
+			if (this.lastProcessTime != this.cropomator.fuelTime)
+				crafting.sendProgressBarUpdate(this, 1, this.cropomator.fuelTime);
+			if (this.lastCatalystInUseTime != this.cropomator.currentFuelBuffer)
+				crafting.sendProgressBarUpdate(this, 2, this.cropomator.currentFuelBuffer);
 		}
 		this.lastUseTime = this.cropomator.processTime;
-		this.lastProcessTime = this.cropomator.catalystTime;
-		this.lastCatalystInUseTime = this.cropomator.catalystInUseTime;
+		this.lastProcessTime = this.cropomator.fuelTime;
+		this.lastCatalystInUseTime = this.cropomator.currentFuelBuffer;
 	}
 
 	@Override
