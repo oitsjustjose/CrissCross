@@ -10,10 +10,8 @@ import com.oitsjustjose.criss_cross.recipes.machine.CropomatorRecipes;
 import com.oitsjustjose.criss_cross.recipes.machine.ElectroextractorRecipes;
 import com.oitsjustjose.criss_cross.recipes.machine.ScribeRecipes;
 import com.oitsjustjose.criss_cross.recipes.machine.WoodchipperRecipes;
-import com.oitsjustjose.criss_cross.tileentity.TileCobblegen;
 import com.oitsjustjose.criss_cross.tileentity.TileCropomator;
 import com.oitsjustjose.criss_cross.tileentity.TileElectroextractor;
-import com.oitsjustjose.criss_cross.tileentity.TileStonegen;
 import com.oitsjustjose.criss_cross.tileentity.TileWoodchipper;
 import com.oitsjustjose.criss_cross.util.ItemHelper;
 import com.oitsjustjose.criss_cross.util.LogHelper;
@@ -26,6 +24,7 @@ import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -33,31 +32,26 @@ public class MachineRecipes
 {
 	public static void init()
 	{
-		initCropomatorRecipes();
-		initCropomatorFuels();
-		initElectroextractorFuels();
-		initElectroextractorOreDictionary();
-		initWoodchipperFuels();
-		initWoodchipperOreDictionary();
-		initScribeRecipes();
-
-		TileStonegen.addFuel(new ItemStack(Items.water_bucket));
-		TileStonegen.addFuel(new ItemStack(LibItems.buckets));
-		TileCobblegen.addFuel(new ItemStack(Items.water_bucket));
-		TileCobblegen.addFuel(new ItemStack(LibItems.buckets));
+		parseCropomatorRecipes();
+		parseCropomatorFuels();
+		parseElectroextractorFuels();
+		parseElectroextractorRecipes();
+		parseWoodchipperFuels();
+		parseWoodchipperRecipes();
+		parseScribeRecipes();
 
 		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.diamond_ore), new ItemStack(Items.diamond, Config.eeOutput));
 		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.emerald_ore), new ItemStack(Items.emerald, Config.eeOutput));
 		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.coal_ore), new ItemStack(Items.coal, Config.eeOutput));
 		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.gravel), new ItemStack(Items.flint));
-		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.cobblestone, 16), new ItemStack(Blocks.sand, 16));
+		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.cobblestone, 1), new ItemStack(Blocks.sand, 2));
 		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.sandstone, 1, Short.MAX_VALUE), new ItemStack(Blocks.sand, 4));
 		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.red_sandstone, 1, Short.MAX_VALUE), new ItemStack(Blocks.sand, 4, 1));
 
 		registerOreDict();
 	}
 
-	public static void registerOreDict()
+	static void registerOreDict()
 	{
 		ArrayList<String> dustNames = ItemDust.getDusts();
 
@@ -65,7 +59,7 @@ public class MachineRecipes
 			OreDictionary.registerOre("dust" + dustNames.get(i), new ItemStack(LibItems.dusts, 1, i));
 	}
 
-	public static void initScribeRecipes()
+	static void parseScribeRecipes()
 	{
 		for (int i = 0; i < Config.scribeRecipes.length; i++)
 			try
@@ -119,7 +113,7 @@ public class MachineRecipes
 			}
 	}
 
-	public static void initCropomatorRecipes()
+	static void parseCropomatorRecipes()
 	{
 		for (int i = 0; i < Config.cropomatorInputs.length; i++)
 			try
@@ -128,8 +122,10 @@ public class MachineRecipes
 				if (parts.length == 2)
 					if (Config.findItemStack(parts[0], parts[1]) != null)
 					{
-						ItemStack newStack = Config.findItemStack(parts[0], parts[1]);
-						CropomatorRecipes.getInstance().addRecipe(newStack, new ItemStack(newStack.getItem(), Config.cropomatorOutput, newStack.getItemDamage()));
+						ItemStack inputStack = Config.findItemStack(parts[0], parts[1]);
+						ItemStack outputStack = inputStack.copy();
+						outputStack.stackSize = Config.cropomatorOutput;
+						CropomatorRecipes.getInstance().addRecipe(inputStack, outputStack);
 					}
 					else
 					{
@@ -140,9 +136,10 @@ public class MachineRecipes
 				if (parts.length == 3)
 					if (Config.findItemStack(parts[0], parts[1]) != null)
 					{
-						ItemStack newStack = new ItemStack(Config.findItemStack(parts[0], parts[1]).getItem(), 1, Integer.parseInt(parts[2]));
-						newStack.stackSize = Config.cropomatorOutput;
-						CropomatorRecipes.getInstance().addRecipe(newStack, new ItemStack(newStack.getItem(), Config.cropomatorOutput, newStack.getItemDamage()));
+						ItemStack inputStack = new ItemStack(Config.findItemStack(parts[0], parts[1]).getItem(), 1, Integer.parseInt(parts[2]));
+						ItemStack outputStack = inputStack.copy();
+						outputStack.stackSize = Config.cropomatorOutput;
+						CropomatorRecipes.getInstance().addRecipe(inputStack, outputStack);
 					}
 					else
 					{
@@ -156,7 +153,7 @@ public class MachineRecipes
 			}
 	}
 
-	public static void initCropomatorFuels()
+	static void parseCropomatorFuels()
 	{
 		for (int i = 0; i < Config.cropomatorCatalysts.length; i++)
 			try
@@ -189,12 +186,9 @@ public class MachineRecipes
 			}
 	}
 
-	// All Credit goes to TeamCoFH for the code. After so many algorithms
-	// attempted, I gave up and used one that worked:
-
-	public static void initWoodchipperOreDictionary()
+	static void parseWoodchipperRecipes()
 	{
-		Container local1 = new Container()
+		Container container = new Container()
 		{
 			@Override
 			public boolean canInteractWith(EntityPlayer p)
@@ -202,47 +196,50 @@ public class MachineRecipes
 				return false;
 			}
 		};
-		InventoryCrafting localInventoryCrafting = new InventoryCrafting(local1, 3, 3);
+
+		InventoryCrafting invCraft = new InventoryCrafting(container, 3, 3);
+
 		for (int i = 0; i < 9; i++)
-			localInventoryCrafting.setInventorySlotContents(i, null);
-		List<ItemStack> localArrayList = OreDictionary.getOres("logWood");
-		for (int j = 0; j < localArrayList.size(); j++)
+			invCraft.setInventorySlotContents(i, null);
+
+		List<ItemStack> oreLogs = OreDictionary.getOres("logWood");
+
+		for (int j = 0; j < oreLogs.size(); j++)
 		{
-			ItemStack localItemStack1 = localArrayList.get(j);
-			ItemStack localItemStack3;
-			ItemStack localItemStack4;
-			if (ItemHelper.getItemDamage(localItemStack1) == 32767)
+			ItemStack currentLog = oreLogs.get(j);
+			ItemStack metaStack, plank;
+			if (ItemHelper.getItemDamage(currentLog) == 32767)
 				for (int k = 0; k < 16; k++)
 				{
-					localItemStack3 = ItemHelper.cloneStack(localItemStack1, 1);
-					localItemStack3.setItemDamage(k);
-					localInventoryCrafting.setInventorySlotContents(0, localItemStack3);
-					localItemStack4 = ItemHelper.findMatchingRecipe(localInventoryCrafting, null);
-					if (localItemStack4 != null)
+					metaStack = ItemHelper.cloneStack(currentLog, 1);
+					metaStack.setItemDamage(k);
+					invCraft.setInventorySlotContents(0, metaStack);
+					plank = ItemHelper.findMatchingRecipe(invCraft, null);
+					if (plank != null)
 					{
-						ItemStack localItemStack5 = localItemStack4.copy();
-						ItemStack tmp129_127 = localItemStack5;
-						tmp129_127.stackSize = Config.woodchipperOutput;
-						WoodchipperRecipes.getInstance().addRecipe(localItemStack3, localItemStack5);
+						ItemStack metaPlank = plank.copy();
+						ItemStack temp = metaPlank;
+						temp.stackSize = Config.woodchipperOutput;
+						WoodchipperRecipes.getInstance().addRecipe(metaStack, metaPlank);
 					}
 				}
 			else
 			{
-				ItemStack localItemStack2 = localItemStack1.copy();
-				localInventoryCrafting.setInventorySlotContents(0, localItemStack2);
-				localItemStack3 = ItemHelper.findMatchingRecipe(localInventoryCrafting, null);
-				if (localItemStack3 != null)
+				ItemStack nonMetaStack = currentLog.copy();
+				invCraft.setInventorySlotContents(0, nonMetaStack);
+				metaStack = ItemHelper.findMatchingRecipe(invCraft, null);
+				if (metaStack != null)
 				{
-					localItemStack4 = localItemStack3.copy();
-					ItemStack temp = localItemStack4;
+					plank = metaStack.copy();
+					ItemStack temp = plank;
 					temp.stackSize = Config.woodchipperOutput;
-					WoodchipperRecipes.getInstance().addRecipe(localItemStack2, localItemStack4);
+					WoodchipperRecipes.getInstance().addRecipe(nonMetaStack, plank);
 				}
 			}
 		}
 	}
 
-	public static void initWoodchipperFuels()
+	static void parseWoodchipperFuels()
 	{
 		for (int i = 0; i < Config.woodchipperFuels.length; i++)
 			try
@@ -274,8 +271,42 @@ public class MachineRecipes
 				LogHelper.warn("Error reading itemstack for Woodchipper's energy sources at item: " + (i + 1));
 			}
 	}
+	
+	static void parseElectroextractorRecipes()
+	{
+		ArrayList<String> dustNames = ItemDust.getDusts();
+		for (int i = 0; i < Config.eeOreDictInputs.length; i++)
+		{
+			String[] entry = Config.eeOreDictInputs[i].split(":");
+			if (doesOreNameExist(entry[0]) && doesOreNameExist(entry[0].replace("ore", "ingot")))
+			{
+				List<ItemStack> ores = OreDictionary.getOres(entry[0]);
+				ItemDust.addDustType(entry[0].replace("ore", ""), Integer.parseInt(entry[1]));
+				for (int j = 0; j < ores.size(); j++)
+					ElectroextractorRecipes.getInstance().addRecipe(ores.get(j), new ItemStack(LibItems.dusts, Config.eeOutput, dustNames.size() - 1));
+			}
+			else
+			{
+				LogHelper.warn("Your oreDictionary Entry " + Config.eeOreDictInputs[i] + " could not be registered.");
+				if (!doesOreNameExist(entry[0]))
+					LogHelper.warn("This is because your oreDictionary Entry was not valid or registered as " + entry[0] + ".");
+				else if (!doesOreNameExist(entry[0].replace("ore", "ingot")))
+					LogHelper.warn("This is because your oreDictionary Entry does not have an ingot for " + entry[0] + ".");
+			}
+		}
 
-	static void initElectroextractorFuels()
+		for (int i = 0; i < dustNames.size(); i++)
+		{
+			ItemStack ingot = null;
+
+			if (doesOreNameExist("ingot" + dustNames.get(i)))
+				ingot = OreDictionary.getOres("ingot" + dustNames.get(i)).get(0);
+			if (ingot != null)
+				GameRegistry.addSmelting(new ItemStack(LibItems.dusts, 1, i), ingot, FurnaceRecipes.instance().getSmeltingExperience(ingot));
+		}
+	}
+
+	static void parseElectroextractorFuels()
 	{
 		for (int i = 0; i < Config.eeFuels.length; i++)
 			try
@@ -306,39 +337,6 @@ public class MachineRecipes
 			{
 				LogHelper.warn("Error reading itemstack for electroextractor's energy sources at item: " + (i + 1));
 			}
-	}
-
-	static void initElectroextractorOreDictionary()
-	{
-		ArrayList<String> dustNames = ItemDust.getDusts();
-		for (int i = 0; i < Config.eeOreDictInputs.length; i++)
-		{
-			String[] entry = Config.eeOreDictInputs[i].split(":");
-			if (doesOreNameExist("ore" + entry[0]) && doesOreNameExist("ingot" + entry[0]))
-			{
-				List<ItemStack> ores = OreDictionary.getOres("ore" + entry[0]);
-				ItemDust.addDustType(entry[0], Integer.parseInt(entry[1]));
-				for (int j = 0; j < ores.size(); j++)
-					ElectroextractorRecipes.getInstance().addRecipe(ores.get(j), new ItemStack(LibItems.dusts, Config.eeOutput, dustNames.size() - 1));
-			}
-			else
-			{
-				LogHelper.warn("Your oreDictionary Entry " + Config.eeOreDictInputs[i] + " could not be registered.");
-				if (!doesOreNameExist("ore" + entry[0]))
-					LogHelper.warn("This is because your oreDictionary Entry was not valid or registered as " + entry[0] + ".");
-				else if (!doesOreNameExist("ingot" + entry[0]))
-					LogHelper.warn("This is because your oreDictionary Entry does not have an ingot for " + entry[0] + ".");
-			}
-		}
-
-		for (int i = 0; i < dustNames.size(); i++)
-		{
-			ItemStack ingot = null;
-			if (doesOreNameExist("ingot" + dustNames.get(i)))
-				ingot = OreDictionary.getOres("ingot" + dustNames.get(i)).get(0);
-			if (ingot != null)
-				GameRegistry.addSmelting(new ItemStack(LibItems.dusts, 1, i), ingot, 0.0F);
-		}
 	}
 
 	static ItemStack getEnchantedBook(int id)
