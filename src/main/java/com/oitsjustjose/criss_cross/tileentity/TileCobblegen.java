@@ -62,17 +62,7 @@ public class TileCobblegen extends TileEntityLockable implements ITickable, ISid
 					this.currentFuelBuffer = this.fuelTime = getFuelAmount(this.ItemStacks[1]);
 
 					if (this.fuelTime > 0)
-					{
 						flag = true;
-
-						if (this.ItemStacks[1] != null)
-						{
-							--this.ItemStacks[1].stackSize;
-
-							if (this.ItemStacks[1].stackSize == 0)
-								this.ItemStacks[1] = ItemStacks[1].getItem().getContainerItem(ItemStacks[1]);
-						}
-					}
 				}
 
 				if (this.isUsingFuel() && this.canProcess())
