@@ -20,18 +20,18 @@ public class ContainerStonegen extends Container
 	private int lastChopTime;
 	private int lastFuelTime;
 
-	public ContainerStonegen(EntityPlayer player, TileStonegen Stonegen)
+	public ContainerStonegen(EntityPlayer player, TileStonegen stonegen)
 	{
 		this.player = player;
-		this.Stonegen = Stonegen;
+		this.Stonegen = stonegen;
 
 		lastUseTime = 0;
 		lastChopTime = 0;
 		lastFuelTime = 0;
 
-		this.addSlotToContainer(new Slot(Stonegen, 0, 56, 17)); // input
-		this.addSlotToContainer(new Slot(Stonegen, 1, 56, 53)); // catalyst
-		this.addSlotToContainer(new MachineOutputSlot(player, Stonegen, 2, 116, 35));
+		this.addSlotToContainer(new Slot(stonegen, 0, 54, 34)); // LAVA
+		this.addSlotToContainer(new Slot(stonegen, 1, 26, 34)); // WATER
+		this.addSlotToContainer(new MachineOutputSlot(player, stonegen, 2, 116, 35));
 		this.addInventorySlots();
 	}
 

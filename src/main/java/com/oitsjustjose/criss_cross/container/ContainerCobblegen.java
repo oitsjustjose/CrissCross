@@ -29,8 +29,8 @@ public class ContainerCobblegen extends Container
 		lastChopTime = 0;
 		lastFuelTime = 0;
 
-		this.addSlotToContainer(new Slot(cobblegen, 0, 56, 17)); // input
-		this.addSlotToContainer(new Slot(cobblegen, 1, 56, 53)); // catalyst
+		this.addSlotToContainer(new Slot(cobblegen, 0, 54, 34)); // LAVA
+		this.addSlotToContainer(new Slot(cobblegen, 1, 26, 34)); // WATER
 		this.addSlotToContainer(new MachineOutputSlot(player, cobblegen, 2, 116, 35));
 		this.addInventorySlots();
 	}
