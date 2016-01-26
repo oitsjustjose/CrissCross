@@ -21,8 +21,12 @@ import net.minecraft.tileentity.TileEntityLockable;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.MathHelper;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.wrapper.SidedInvWrapper;
 
 public class TileStonegen extends TileEntityLockable implements ITickable, ISidedInventory
 {
@@ -266,7 +270,7 @@ public class TileStonegen extends TileEntityLockable implements ITickable, ISide
 	private boolean canProcess()
 	{
 		ItemStack input = this.ItemStacks[0];
-		if (input != null)
+		if (input != null && isValid(input))
 		{
 			ItemStack output = new ItemStack(Blocks.stone);
 			ItemStack outputSlot = this.ItemStacks[2];
@@ -443,5 +447,22 @@ public class TileStonegen extends TileEntityLockable implements ITickable, ISide
 	public boolean canExtractItem(int slot, ItemStack itemstack, EnumFacing direction)
 	{
 		return direction != EnumFacing.DOWN || slot != 1;
+	}
+	
+	IItemHandler handlerTop = new SidedInvWrapper(this, EnumFacing.UP);
+	IItemHandler handlerBottom = new SidedInvWrapper(this, EnumFacing.DOWN);
+	IItemHandler handlerSide = new SidedInvWrapper(this, EnumFacing.WEST);
+
+	@Override
+	public <T> T getCapability(Capability<T> capability, EnumFacing facing)
+	{
+		if (facing != null && capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+			if (facing == EnumFacing.DOWN)
+				return (T) handlerBottom;
+			else if (facing == EnumFacing.UP)
+				return (T) handlerTop;
+			else
+				return (T) handlerSide;
+		return super.getCapability(capability, facing);
 	}
 }

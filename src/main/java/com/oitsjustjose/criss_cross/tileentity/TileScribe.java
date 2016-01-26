@@ -17,6 +17,7 @@ import net.minecraft.tileentity.TileEntityLockable;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.MathHelper;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -401,5 +402,10 @@ public class TileScribe extends TileEntityLockable implements ITickable, ISidedI
 	public boolean canExtractItem(int slot, ItemStack itemstack, EnumFacing direction)
 	{
 		return false;
+	}
+	@Override
+	public <T> T getCapability(Capability<T> capability, EnumFacing facing)
+	{
+		return null;
 	}
 }
