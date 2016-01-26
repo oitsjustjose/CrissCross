@@ -13,8 +13,6 @@ import com.oitsjustjose.criss_cross.util.CommonProxy;
 import com.oitsjustjose.criss_cross.util.LogHelper;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.common.ForgeModContainer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -45,9 +43,6 @@ public class CrissCross
 		LibBlocks.init();
 		LibItems.init();
 		CraftingRecipes.init();
-		
-		if(ForgeModContainer.replaceVanillaBucketModel)
-			ModelLoader.setBucketModelDefinition(LibItems.buckets);
 		
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GUIHandler());
 	}
