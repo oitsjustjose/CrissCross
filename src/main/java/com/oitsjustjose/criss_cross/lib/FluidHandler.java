@@ -16,7 +16,7 @@ public class FluidHandler
 	{
 		FluidContainerData[] fluidC = FluidContainerRegistry.getRegisteredFluidContainerData();
 		for (FluidContainerData f : fluidC)
-			if (f.fluid.isFluidEqual(new FluidStack(FluidRegistry.WATER, 1000)) && f.fluid.amount == 1000)
+			if (f.fluid.isFluidEqual(new FluidStack(FluidRegistry.WATER, 1000)) && f.fluid.amount >= 1000)
 				waterContainers.add(f.filledContainer);
 	}
 }
