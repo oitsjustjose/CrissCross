@@ -3,16 +3,19 @@ package com.oitsjustjose.criss_cross.gui;
 import org.lwjgl.opengl.GL11;
 
 import com.oitsjustjose.criss_cross.container.ContainerWoodchipper;
+import com.oitsjustjose.criss_cross.lib.Lib;
 import com.oitsjustjose.criss_cross.tileentity.TileWoodchipper;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
+import net.minecraftforge.common.ForgeModContainer;
 
 public class GUIWoodchipper extends GuiContainer
 {
-	public static final ResourceLocation backgroundTexture = new ResourceLocation("crisscross", "textures/gui/woodchipper.png");
+	public static final ResourceLocation texture = new ResourceLocation(Lib.MODID.toLowerCase(), "textures/gui/woodchipper.png");
+	public static final ResourceLocation altTexture = new ResourceLocation(Lib.MODID.toLowerCase(), "textures/gui/woodchipper_alt.png");
 
 	private TileWoodchipper woodchipper;
 
@@ -20,6 +23,13 @@ public class GUIWoodchipper extends GuiContainer
 	{
 		super(new ContainerWoodchipper(player, woodchipper));
 		this.woodchipper = woodchipper;
+	}
+
+	public static ResourceLocation getBackground()
+	{
+		if (ForgeModContainer.replaceVanillaBucketModel)
+			return altTexture;
+		return texture;
 	}
 
 	@Override
@@ -33,7 +43,7 @@ public class GUIWoodchipper extends GuiContainer
 	protected void drawGuiContainerBackgroundLayer(float partialTickTime, int mouseX, int mouseY)
 	{
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.mc.renderEngine.bindTexture(backgroundTexture);
+		this.mc.renderEngine.bindTexture(getBackground());
 		int k = (this.width - this.xSize) / 2;
 		int l = (this.height - this.ySize) / 2;
 		this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);

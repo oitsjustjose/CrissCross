@@ -3,6 +3,7 @@ package com.oitsjustjose.criss_cross.gui;
 import org.lwjgl.opengl.GL11;
 
 import com.oitsjustjose.criss_cross.container.ContainerCropomator;
+import com.oitsjustjose.criss_cross.lib.Lib;
 import com.oitsjustjose.criss_cross.tileentity.TileCropomator;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -12,7 +13,7 @@ import net.minecraft.util.StatCollector;
 
 public class GUICropomator extends GuiContainer
 {
-	public static final ResourceLocation backgroundTexture = new ResourceLocation("crisscross", "textures/gui/cropomator.png");
+	public static final ResourceLocation backgroundTexture = new ResourceLocation(Lib.MODID.toLowerCase(), "textures/gui/cropomator.png");
 
 	private TileCropomator cropomator;
 

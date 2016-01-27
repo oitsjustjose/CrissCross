@@ -14,7 +14,7 @@ import net.minecraftforge.common.ForgeModContainer;
 
 public class GUICobblegen extends GuiContainer
 {
-	public static final ResourceLocation texture = new ResourceLocation("crisscross", "textures/gui/cobblegen.png");
+	public static final ResourceLocation texture = new ResourceLocation(Lib.MODID.toLowerCase(), "textures/gui/cobblegen.png");
 	public static final ResourceLocation altTexture = new ResourceLocation(Lib.MODID.toLowerCase(), "textures/gui/cobblegen_alt.png");
 
 	private TileCobblegen cobblegen;

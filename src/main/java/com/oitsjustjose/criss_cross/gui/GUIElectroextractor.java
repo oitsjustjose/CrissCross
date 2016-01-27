@@ -3,6 +3,7 @@ package com.oitsjustjose.criss_cross.gui;
 import org.lwjgl.opengl.GL11;
 
 import com.oitsjustjose.criss_cross.container.ContainerElectroextractor;
+import com.oitsjustjose.criss_cross.lib.Lib;
 import com.oitsjustjose.criss_cross.tileentity.TileElectroextractor;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -12,7 +13,7 @@ import net.minecraft.util.StatCollector;
 
 public class GUIElectroextractor extends GuiContainer
 {
-	public static final ResourceLocation backgroundTexture = new ResourceLocation("crisscross", "textures/gui/electroextractor.png");
+	public static final ResourceLocation backgroundTexture = new ResourceLocation(Lib.MODID.toLowerCase(), "textures/gui/electroextractor.png");
 
 	private TileElectroextractor electroextractor;
 

@@ -41,9 +41,7 @@ public class Config
 	public static int woodchipperProcessTime;
 	public static int woodchipperOutput;
 	public static String woodchipperRecipeItem;
-	public static String[] woodchipperFuels;
-	public static String[] defaultWoodchipperFuels = new String[] { "minecraft:water_bucket", "minecraft:potion:0", "crisscross:special_bucket:0" };
-	// Scribe Configs
+		// Scribe Configs
 	public static String[] scribeRecipes;
 	public static String[] defaultScribeRecipes = new String[] { "minecraft:fish:3*16=6", "minecraft:spider_eye:0*8=18", "minecraft:obsidian:0*8=3", "minecraft:prismarine_shard:0*16=8", "minecraft:feather:0*32=2", "minecraft:blaze_rod:0*8=20", "minecraft:blaze_powder:0*16=50", "minecraft:piston:0*4=19", "minecraft:prismarine_crystals:0*16=61", "minecraft:fish:0*16=62", "minecraft:potion:8269*1=5", "minecraft:slime:0*8=33", "minecraft:rotten_flesh:0*48=17", "minecraft:double_plant:4*64=7", "ingotIron*24=34", "ingotGold*12=49", "gemQuartz*16=48", "gemDiamond*8=51", "gemEmerald*3=21", "logWood*16=4", "blockIron*4=0", "blockQuartz*16=16", "blockLapis*12=35", "blockRedstone*8=32" };
 	// Block Generator Configs (stone and cobble)
@@ -129,10 +127,6 @@ public class Config
 
 		property = config.get(category, "Woodchipper Process Time", 400, "Amount of time for the Woodchipper to complete a process", 20, Short.MAX_VALUE);
 		woodchipperProcessTime = property.getInt();
-		propertyOrder.add(property.getName());
-
-		property = config.get(category, "Woodchipper Fuel Items", defaultWoodchipperFuels, "Items considered as fuel for the Woodchipper. Formatted as: <modid>:<item>:<meta> or <modid>:<item>.");
-		woodchipperFuels = property.getStringList();
 		propertyOrder.add(property.getName());
 
 		property = config.get(category, "Woodchipper Output Quantity", 6, "Amount of planks yielded from a log", 0, 64);

@@ -33,7 +33,7 @@ public class ScribeCategory implements IRecipeCategory
 	public ScribeCategory()
 	{
 		super();
-		progressDrawable = JEIPluginManager.jeiHelper.getGuiHelper().createDrawable(GUIWoodchipper.backgroundTexture, 177, 14, 23, 16);
+		progressDrawable = JEIPluginManager.jeiHelper.getGuiHelper().createDrawable(GUIWoodchipper.texture, 177, 14, 23, 16);
 		progress = JEIPluginManager.jeiHelper.getGuiHelper().createAnimatedDrawable(progressDrawable, 700, IDrawableAnimated.StartDirection.LEFT, false);
 		background = JEIPluginManager.jeiHelper.getGuiHelper().createDrawable(GUIScribe.backgroundTexture, 33, 30, 110, 34);
 		localizedName = StatCollector.translateToLocal("recipe.scribe");

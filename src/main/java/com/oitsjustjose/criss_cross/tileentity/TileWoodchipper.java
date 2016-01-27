@@ -1,7 +1,5 @@
 package com.oitsjustjose.criss_cross.tileentity;
 
-import java.util.ArrayList;
-
 import com.oitsjustjose.criss_cross.blocks.BlockWoodchipper;
 import com.oitsjustjose.criss_cross.container.ContainerWoodchipper;
 import com.oitsjustjose.criss_cross.lib.Config;
@@ -20,6 +18,9 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.MathHelper;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -33,7 +34,6 @@ public class TileWoodchipper extends TileEntityLockable implements ITickable, IS
 	private static final int[] slotsTop = new int[] { 0 };
 	private static final int[] slotsBottom = new int[] { 2, 1 };
 	private static final int[] slotsSides = new int[] { 1 };
-	private static ArrayList<ItemStack> fuelItems = new ArrayList<ItemStack>();
 	private static String customName;
 	private ItemStack[] ItemStacks = new ItemStack[3];
 	public int fuelTime;
@@ -99,11 +99,6 @@ public class TileWoodchipper extends TileEntityLockable implements ITickable, IS
 
 		if (flag)
 			this.markDirty();
-	}
-
-	public static ArrayList<ItemStack> getFuels()
-	{
-		return fuelItems;
 	}
 
 	@Override
@@ -274,22 +269,6 @@ public class TileWoodchipper extends TileEntityLockable implements ITickable, IS
 		return false;
 	}
 
-	public static void addFuel(ItemStack itemstack)
-	{
-		fuelItems.add(itemstack);
-	}
-
-	public static boolean removeFuel(ItemStack itemstack)
-	{
-		for (int i = 0; i < fuelItems.size(); i++)
-			if (fuelItems.get(i) == itemstack)
-			{
-				fuelItems.remove(i);
-				return true;
-			}
-		return false;
-	}
-
 	public static boolean isValidForWoodchipper(ItemStack itemstack)
 	{
 		if (WoodchipperRecipes.getInstance().getResult(itemstack) != null)
@@ -317,20 +296,14 @@ public class TileWoodchipper extends TileEntityLockable implements ITickable, IS
 
 	public static int getFuelAmount(ItemStack itemstack)
 	{
-		if(itemstack == null)
+		if (itemstack == null)
 			return 0;
 		return isItemFuel(itemstack) ? proTicks : 0;
 	}
 
 	public static boolean isItemFuel(ItemStack itemstack)
 	{
-		for (int i = 0; i < fuelItems.size(); i++)
-		{
-			ItemStack temp = fuelItems.get(i);
-			if (temp.getItem() == itemstack.getItem() && temp.getItemDamage() == itemstack.getItemDamage())
-				return true;
-		}
-		return false;
+		return FluidContainerRegistry.containsFluid(itemstack, new FluidStack(FluidRegistry.WATER, 1000));
 	}
 
 	@Override
@@ -439,7 +412,7 @@ public class TileWoodchipper extends TileEntityLockable implements ITickable, IS
 	{
 		return direction != EnumFacing.DOWN || slot != 1;
 	}
-	
+
 	IItemHandler handlerTop = new SidedInvWrapper(this, EnumFacing.UP);
 	IItemHandler handlerBottom = new SidedInvWrapper(this, EnumFacing.DOWN);
 	IItemHandler handlerSide = new SidedInvWrapper(this, EnumFacing.WEST);

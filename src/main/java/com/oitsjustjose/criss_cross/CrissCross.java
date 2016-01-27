@@ -3,6 +3,7 @@ package com.oitsjustjose.criss_cross;
 import com.oitsjustjose.criss_cross.gui.GUIHandler;
 import com.oitsjustjose.criss_cross.lib.Config;
 import com.oitsjustjose.criss_cross.lib.CreativeTab;
+import com.oitsjustjose.criss_cross.lib.FluidHandler;
 import com.oitsjustjose.criss_cross.lib.Lib;
 import com.oitsjustjose.criss_cross.lib.LibBlocks;
 import com.oitsjustjose.criss_cross.lib.LibItems;
@@ -43,7 +44,7 @@ public class CrissCross
 		LibBlocks.init();
 		LibItems.init();
 		CraftingRecipes.init();
-		
+
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GUIHandler());
 	}
 
@@ -51,10 +52,11 @@ public class CrissCross
 	public void postInit(FMLPostInitializationEvent event)
 	{
 		MachineRecipes.init();
+		FluidHandler.init();
 
 		if (event.getSide().isClient())
 			ClientProxy.init();
-
+		
 		LogHelper.info("Successfully loaded!");
 	}
 }

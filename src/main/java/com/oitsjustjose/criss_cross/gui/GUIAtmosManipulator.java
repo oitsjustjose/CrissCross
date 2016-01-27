@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
+import com.oitsjustjose.criss_cross.lib.Lib;
 import com.oitsjustjose.criss_cross.tileentity.TileAtmosManipulator;
 
 import net.minecraft.client.gui.GuiButton;
@@ -18,7 +19,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GUIAtmosManipulator extends GuiScreen
 {
-	static final ResourceLocation texture = new ResourceLocation("crisscross", "textures/gui/atmosmanipulator.png");
+	static final ResourceLocation texture = new ResourceLocation(Lib.MODID.toLowerCase(), "textures/gui/atmosmanipulator.png");
 	final EntityPlayer player;
 	final int RAINID = 0;
 	final int SUNID = 1;

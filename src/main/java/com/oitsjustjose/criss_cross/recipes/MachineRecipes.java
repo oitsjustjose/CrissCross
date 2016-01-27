@@ -12,7 +12,6 @@ import com.oitsjustjose.criss_cross.recipes.machine.ScribeRecipes;
 import com.oitsjustjose.criss_cross.recipes.machine.WoodchipperRecipes;
 import com.oitsjustjose.criss_cross.tileentity.TileCropomator;
 import com.oitsjustjose.criss_cross.tileentity.TileElectroextractor;
-import com.oitsjustjose.criss_cross.tileentity.TileWoodchipper;
 import com.oitsjustjose.criss_cross.util.ItemHelper;
 import com.oitsjustjose.criss_cross.util.LogHelper;
 
@@ -36,7 +35,6 @@ public class MachineRecipes
 		parseCropomatorFuels();
 		parseElectroextractorFuels();
 		parseElectroextractorRecipes();
-		parseWoodchipperFuels();
 		parseWoodchipperRecipes();
 		parseScribeRecipes();
 
@@ -237,39 +235,6 @@ public class MachineRecipes
 				}
 			}
 		}
-	}
-
-	static void parseWoodchipperFuels()
-	{
-		for (int i = 0; i < Config.woodchipperFuels.length; i++)
-			try
-			{
-				String[] parts = Config.woodchipperFuels[i].split(":");
-				if (parts.length == 2)
-					if (Config.findItemStack(parts[0], parts[1]) != null)
-						TileWoodchipper.addFuel(Config.findItemStack(parts[0], parts[1]));
-					else
-					{
-						LogHelper.warn("Item " + Config.woodchipperFuels[i] + " could not be added to the Woodchipper's fuel list.");
-						LogHelper.warn("Please confirm you have the name and formatting correct.");
-					}
-
-				if (parts.length == 3)
-					if (Config.findItemStack(parts[0], parts[1]) != null)
-					{
-						ItemStack newStack = new ItemStack(Config.findItemStack(parts[0], parts[1]).getItem(), 1, Integer.parseInt(parts[2]));
-						TileWoodchipper.addFuel(newStack);
-					}
-					else
-					{
-						LogHelper.warn("Item " + Config.woodchipperFuels[i] + " could not be added to the Woodchipper's fuel list.");
-						LogHelper.warn("Please confirm you have the name and formatting correct.");
-					}
-			}
-			catch (Exception e)
-			{
-				LogHelper.warn("Error reading itemstack for Woodchipper's energy sources at item: " + (i + 1));
-			}
 	}
 	
 	static void parseElectroextractorRecipes()

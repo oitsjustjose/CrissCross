@@ -22,6 +22,9 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.MathHelper;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -41,7 +44,6 @@ public class TileCobblegen extends TileEntityLockable implements ITickable, ISid
 	private static final int[] slotsBottom = new int[] { 2, 1 };
 	private static final int[] slotsSides = new int[] { 1 };
 	private static ArrayList<ItemStack> fuelItems = new ArrayList<ItemStack>();
-	private static String customName;
 	private ItemStack[] ItemStacks = new ItemStack[3];
 	public int fuelTime;
 	public int processTime;
@@ -173,12 +175,7 @@ public class TileCobblegen extends TileEntityLockable implements ITickable, ISid
 	@Override
 	public boolean hasCustomName()
 	{
-		return TileCobblegen.customName != null && TileCobblegen.customName.length() > 0;
-	}
-
-	public void setCustomInventoryName(String newName)
-	{
-		TileCobblegen.customName = newName;
+		return false;
 	}
 
 	@Override
@@ -201,9 +198,6 @@ public class TileCobblegen extends TileEntityLockable implements ITickable, ISid
 		this.processTime = tag.getShort("WorkTime");
 		this.totalTime = tag.getShort("WorkTimeTotal");
 		this.currentFuelBuffer = getFuelAmount(this.ItemStacks[1]);
-
-		if (tag.hasKey("CustomName", 8))
-			this.customName = tag.getString("CustomName");
 	}
 
 	@Override
@@ -226,9 +220,6 @@ public class TileCobblegen extends TileEntityLockable implements ITickable, ISid
 			}
 
 		tag.setTag("Items", nbttaglist);
-
-		if (this.hasCustomName())
-			tag.setString("CustomName", this.customName);
 	}
 
 	@Override
@@ -292,16 +283,14 @@ public class TileCobblegen extends TileEntityLockable implements ITickable, ISid
 
 	public static boolean isValid(ItemStack itemstack)
 	{
-		if (itemstack.getItem() == Items.lava_bucket)
-			return true;
-		return false;
+		return FluidContainerRegistry.containsFluid(itemstack, new FluidStack(FluidRegistry.LAVA, 1000));
+
 	}
 
 	public void processItem()
 	{
 		if (this.canProcess())
 		{
-
 			ItemStack input = ItemStacks[0];
 			ItemStack output = new ItemStack(Blocks.cobblestone);
 			ItemStack outputSlot = ItemStacks[2];
@@ -324,13 +313,7 @@ public class TileCobblegen extends TileEntityLockable implements ITickable, ISid
 
 	public static boolean isItemFuel(ItemStack itemstack)
 	{
-		for (int i = 0; i < fuelItems.size(); i++)
-		{
-			ItemStack temp = fuelItems.get(i);
-			if (temp.getItem() == itemstack.getItem() && temp.getItemDamage() == itemstack.getItemDamage())
-				return true;
-		}
-		return false;
+		return FluidContainerRegistry.containsFluid(itemstack, new FluidStack(FluidRegistry.WATER, 1000));
 	}
 
 	@Override
@@ -407,7 +390,7 @@ public class TileCobblegen extends TileEntityLockable implements ITickable, ISid
 	@Override
 	public String getName()
 	{
-		return this.hasCustomName() ? TileCobblegen.customName : "container.cobblegen";
+		return "container.cobblegen";
 	}
 
 	@Override

@@ -1,3 +1,15 @@
+1.3.7:
+-Added: Capabilities Compatibility to all TileEntities
+-Added: JEI Progress Clickable Compatibility
+-Added: Everful Bucket is now a "Fluid Container", meaning it'll (kinda) work on tanks: not perfectly
+-Changed: CrissCross now reuqires Forge 11.15.1.1722 or newer for the Capabilities API
+-Changed: Specialty Bucket textures
+-Changed: Generalized Machines to using fluid containers instead of specific items
+-Changed: GUIs for Stone & Cobblestone Generators
+-Changed: Alternate GUI Textures if Forge Bucket Model is enabled
+-Removed: Ability to customize Woodchipper fuels (see above with fluid containers)
+-Fixed: Stone Generators accepting anything as a catalyst instead of specifically 
+_____________________________________________________________________________________________________
 1.3.6:
 -Added: XP quantity from Electrolytic Dust when smelted
 -Changed: Config file for Electroextractor now requires full Ore Dictionary name like oreIron, oreGold
@@ -7,15 +19,17 @@
 -Changed: Refactoring in Woodchipper recipes
 -Changed: Moved water bucket addition to the block generator tile classes
 -Fixed: ItemStack stacksize expectation for Cropomator - no visible change, but fixes JEI recipe
-
+_____________________________________________________________________________________________________
 1.3.5:
 -Fixed: world load / unload issues with machines
 -Removed: support for 1.8.8, as Forge's ModelBakery has changed, and this change is not reflected in 1.8.8 builds
+_____________________________________________________________________________________________________
 1.3.4:
 -Added: animations to JEI Recipe Lists
 -Fixed: Proxy Crash
 -Fixed: unlocalized name discrepancies
 -Removed: atmos manipulator (temporarily) - was never completely implemented
+_____________________________________________________________________________________________________
 1.3.3:
 -Added: JEI Integration for machines (except Cobble and Stone generators.. you know what those do)
 -Added (WIP, not functional): Atmos Manipulator - changes weather, need to work on packet handling..
@@ -23,7 +37,7 @@
 -Changed: Scribe Recipes are configurable
 -Changed: Configuration GUI - now better organized, but will require you to reconfigure the mod again
 -Changed: Version Numbering. The old one (and I) was dumb.
-
+_____________________________________________________________________________________________________
 1.31:
 -Changed: Pouches are now made differently; they no longer store color in Metadata, instead they use NBT, and can be any hex color!
 	Note: Pouches can be dyed via Ore Dictionary Dyes! Unlike leather armor and sheep (might make a fix for that in V-Tweaks...)

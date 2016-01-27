@@ -11,6 +11,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 
 public class LibItems
 {
@@ -37,5 +40,7 @@ public class LibItems
 
 		mantleSmasherMkI = new ItemMantleSmasher(mkI);
 		mantleSmasherMkII = new ItemMantleSmasher(mkII);
+		
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(FluidRegistry.WATER, 4000), new ItemStack(buckets, 1, 0), new ItemStack(buckets, 1, 0));
 	}
 }
