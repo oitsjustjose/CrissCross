@@ -1,14 +1,17 @@
-1.3.7:
+1.3.8:
+-Added: Dependency on Forge 11.15.1.1722 or newer
 -Added: Capabilities Compatibility to all TileEntities
 -Added: JEI Progress Clickable Compatibility
 -Added: Everful Bucket is now a "Fluid Container", meaning it'll (kinda) work on tanks: not perfectly
--Changed: CrissCross now reuqires Forge 11.15.1.1722 or newer for the Capabilities API
 -Changed: Specialty Bucket textures
 -Changed: Generalized Machines to using fluid containers instead of specific items
 -Changed: GUIs for Stone & Cobblestone Generators
 -Changed: Alternate GUI Textures if Forge Bucket Model is enabled
 -Removed: Ability to customize Woodchipper fuels (see above with fluid containers)
 -Fixed: Stone Generators accepting anything as a catalyst instead of specifically 
+_____________________________________________________________________________________________________
+1.3.7:
+-Fixed: Water bucket consumption for cobblestone generators
 _____________________________________________________________________________________________________
 1.3.6:
 -Added: XP quantity from Electrolytic Dust when smelted
