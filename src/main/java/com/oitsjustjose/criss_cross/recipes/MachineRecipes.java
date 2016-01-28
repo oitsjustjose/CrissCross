@@ -31,22 +31,30 @@ public class MachineRecipes
 {
 	public static void init()
 	{
-		parseCropomatorRecipes();
-		parseCropomatorFuels();
-		parseElectroextractorFuels();
-		parseElectroextractorRecipes();
-		parseWoodchipperRecipes();
-		parseScribeRecipes();
+		if (Config.enableCropomator)
+		{
+			parseCropomatorRecipes();
+			parseCropomatorFuels();
+		}
+		if (Config.enableWoodchipper)
+			parseWoodchipperRecipes();
+		if (Config.enableScribe)
+			parseScribeRecipes();
+		if (Config.enableElectroextractor)
+		{
+			parseElectroextractorFuels();
+			parseElectroextractorRecipes();
 
-		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.diamond_ore), new ItemStack(Items.diamond, Config.electroextractorOutput));
-		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.emerald_ore), new ItemStack(Items.emerald, Config.electroextractorOutput));
-		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.coal_ore), new ItemStack(Items.coal, Config.electroextractorOutput));
-		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.gravel), new ItemStack(Items.flint));
-		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.cobblestone, 1), new ItemStack(Blocks.sand, 2));
-		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.sandstone, 1, Short.MAX_VALUE), new ItemStack(Blocks.sand, 4));
-		ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.red_sandstone, 1, Short.MAX_VALUE), new ItemStack(Blocks.sand, 4, 1));
+			ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.diamond_ore), new ItemStack(Items.diamond, Config.electroextractorOutput));
+			ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.emerald_ore), new ItemStack(Items.emerald, Config.electroextractorOutput));
+			ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.coal_ore), new ItemStack(Items.coal, Config.electroextractorOutput));
+			ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.gravel), new ItemStack(Items.flint));
+			ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.cobblestone, 1), new ItemStack(Blocks.sand, 2));
+			ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.sandstone, 1, Short.MAX_VALUE), new ItemStack(Blocks.sand, 4));
+			ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.red_sandstone, 1, Short.MAX_VALUE), new ItemStack(Blocks.sand, 4, 1));
 
-		registerOreDict();
+			registerOreDict();
+		}
 	}
 
 	static void registerOreDict()
@@ -236,7 +244,7 @@ public class MachineRecipes
 			}
 		}
 	}
-	
+
 	static void parseElectroextractorRecipes()
 	{
 		ArrayList<String> dustNames = ItemDust.getDusts();

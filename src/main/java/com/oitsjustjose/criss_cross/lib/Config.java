@@ -187,11 +187,11 @@ public class Config
 		enableWoodchipper = property.getBoolean();
 		propertyOrder.add(property.getName());
 
-		property = config.get(category, "Cobblestone Generator", true);
+		property = config.get(category, "CobblestoneGenerator", true);
 		enableCobblestoneGenerator = property.getBoolean();
 		propertyOrder.add(property.getName());
 
-		property = config.get(category, "Stone Generator", true);
+		property = config.get(category, "StoneGenerator", true);
 		enableStoneGenerator = property.getBoolean();
 		propertyOrder.add(property.getName());
 
@@ -203,7 +203,7 @@ public class Config
 		enablePouches = property.getBoolean();
 		propertyOrder.add(property.getName());
 
-		property = config.get(category, "Mantle Smashers", true);
+		property = config.get(category, "MantleSmashers", true);
 		enableMantlesmashers = property.getBoolean();
 		propertyOrder.add(property.getName());
 
@@ -211,7 +211,7 @@ public class Config
 		enableInfiniapple = property.getBoolean();
 		propertyOrder.add(property.getName());
 
-		property = config.get(category, "Special Buckets", true);
+		property = config.get(category, "SpecialBuckets", true);
 		enableBuckets = property.getBoolean();
 		propertyOrder.add(property.getName());
 
