@@ -29,6 +29,7 @@ public class ConfigGUI extends GuiConfig
 		list.add(new ConfigElement(Config.Electroextractor));
 		list.add(new ConfigElement(Config.Woodchipper));
 		list.add(new ConfigElement(Config.OtherMachines));
+		list.add(new ConfigElement(Config.FeatureControl));
 
 		return list;
 	}

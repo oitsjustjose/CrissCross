@@ -21,6 +21,7 @@ public class Config
 	public static ConfigCategory Electroextractor;
 	public static ConfigCategory Woodchipper;
 	public static ConfigCategory OtherMachines;
+	public static ConfigCategory FeatureControl;
 	// Cropomator Configs
 	public static int cropomatorProcessTime;
 	public static int cropomatorOutput;
@@ -41,11 +42,22 @@ public class Config
 	public static int woodchipperProcessTime;
 	public static int woodchipperOutput;
 	public static String woodchipperRecipeItem;
-		// Scribe Configs
+	// Scribe Configs
 	public static String[] scribeRecipes;
 	public static String[] defaultScribeRecipes = new String[] { "minecraft:fish:3*16=6", "minecraft:spider_eye:0*8=18", "minecraft:obsidian:0*8=3", "minecraft:prismarine_shard:0*16=8", "minecraft:feather:0*32=2", "minecraft:blaze_rod:0*8=20", "minecraft:blaze_powder:0*16=50", "minecraft:piston:0*4=19", "minecraft:prismarine_crystals:0*16=61", "minecraft:fish:0*16=62", "minecraft:potion:8269*1=5", "minecraft:slime:0*8=33", "minecraft:rotten_flesh:0*48=17", "minecraft:double_plant:4*64=7", "ingotIron*24=34", "ingotGold*12=49", "gemQuartz*16=48", "gemDiamond*8=51", "gemEmerald*3=21", "logWood*16=4", "blockIron*4=0", "blockQuartz*16=16", "blockLapis*12=35", "blockRedstone*8=32" };
 	// Block Generator Configs (stone and cobble)
 	public static int blockGeneratorProcessTimes;
+	// Feature enabler
+	public static boolean enableCropomator;
+	public static boolean enableElectroextractor;
+	public static boolean enableWoodchipper;
+	public static boolean enableCobblestoneGenerator;
+	public static boolean enableStoneGenerator;
+	public static boolean enableScribe;
+	public static boolean enablePouches;
+	public static boolean enableMantlesmashers;
+	public static boolean enableInfiniapple;
+	public static boolean enableBuckets;
 
 	public static void init(File configFile)
 	{
@@ -155,6 +167,55 @@ public class Config
 		propertyOrder.add(property.getName());
 
 		OtherMachines.setPropertyOrder(propertyOrder);
+
+		// Feature Control
+		category = "feature control";
+		propertyOrder = Lists.newArrayList();
+		FeatureControl = config.getCategory(category);
+		config.setCategoryRequiresMcRestart(category, true);
+		config.setCategoryComment(category, "Enable / Disable Features");
+
+		property = config.get(category, "Cropomator", true);
+		enableCropomator = property.getBoolean();
+		propertyOrder.add(property.getName());
+
+		property = config.get(category, "Electroextractor", true);
+		enableElectroextractor = property.getBoolean();
+		propertyOrder.add(property.getName());
+
+		property = config.get(category, "Woodchipper", true);
+		enableWoodchipper = property.getBoolean();
+		propertyOrder.add(property.getName());
+
+		property = config.get(category, "Cobblestone Generator", true);
+		enableCobblestoneGenerator = property.getBoolean();
+		propertyOrder.add(property.getName());
+
+		property = config.get(category, "Stone Generator", true);
+		enableStoneGenerator = property.getBoolean();
+		propertyOrder.add(property.getName());
+
+		property = config.get(category, "Scribe", true);
+		enableScribe = property.getBoolean();
+		propertyOrder.add(property.getName());
+
+		property = config.get(category, "Pouches", true);
+		enablePouches = property.getBoolean();
+		propertyOrder.add(property.getName());
+
+		property = config.get(category, "Mantle Smashers", true);
+		enableMantlesmashers = property.getBoolean();
+		propertyOrder.add(property.getName());
+
+		property = config.get(category, "Infiniapple", true);
+		enableInfiniapple = property.getBoolean();
+		propertyOrder.add(property.getName());
+
+		property = config.get(category, "Special Buckets", true);
+		enableBuckets = property.getBoolean();
+		propertyOrder.add(property.getName());
+
+		FeatureControl.setPropertyOrder(propertyOrder);
 
 		if (config.hasChanged())
 			config.save();

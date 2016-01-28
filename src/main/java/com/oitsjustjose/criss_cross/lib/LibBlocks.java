@@ -21,12 +21,17 @@ public class LibBlocks
 
 	public static void init()
 	{
-		cropomator = new BlockCropomator();
-		electroextractor = new BlockElectroextractor();
-		woodchipper = new BlockWoodchipper();
-		cobblegen = new BlockCobblegen();
-		stonegen = new BlockStonegen();
-		scribe = new BlockScribe();
-		// TODO: atmosManipulator = new BlockAtmosManipulator();
+		if (Config.enableCropomator)
+			cropomator = new BlockCropomator();
+		if (Config.enableElectroextractor)
+			electroextractor = new BlockElectroextractor();
+		if (Config.enableWoodchipper)
+			woodchipper = new BlockWoodchipper();
+		if (Config.enableCobblestoneGenerator)
+			cobblegen = new BlockCobblegen();
+		if (Config.enableStoneGenerator)
+			stonegen = new BlockStonegen();
+		if (Config.enableScribe)
+			scribe = new BlockScribe();
 	}
 }
