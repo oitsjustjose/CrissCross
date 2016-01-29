@@ -47,7 +47,7 @@ public class JEIPluginManager implements IModPlugin
 		registry.addRecipeClickArea(GUICropomator.class, 78, 32, 28, 23, Lib.CROPOMATOR_UID);
 		registry.addRecipeClickArea(GUIElectroextractor.class, 78, 32, 28, 23, Lib.ELECTROEXTRACTOR_UID);
 		registry.addRecipeClickArea(GUIWoodchipper.class, 78, 32, 28, 23, Lib.WOODCHIPPER_UID);
-		registry.addRecipeClickArea(GUIScribe.class, 88, 32, 28, 23, Lib.SCRIBE_UID);
+		registry.addRecipeClickArea(GUIScribe.class, 72, 0, 28, 16, Lib.SCRIBE_UID);
 	}
 
 	@Override

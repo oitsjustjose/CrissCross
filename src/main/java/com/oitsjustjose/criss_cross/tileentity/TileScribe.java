@@ -23,13 +23,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TileScribe extends TileEntityLockable implements ITickable, ISidedInventory
 {
-	private static int proTicks = 100;
+	private static int proTicks = 1;
 	private static String customName;
 	private ItemStack[] ItemStacks = new ItemStack[3];
-	public int fuelTime;
+	public int bookTime;
 	public int processTime;
 	public int totalTime;
-	public int currentFuelBuffer;
+	public int currentBookBuffer;
 
 	@Override
 	public void update()
@@ -37,18 +37,18 @@ public class TileScribe extends TileEntityLockable implements ITickable, ISidedI
 		boolean isBurning = this.hasConsumedBook();
 		boolean flag = false;
 
-		if (this.fuelTime > 0)
-			--this.fuelTime;
+		if (this.bookTime > 0)
+			--this.bookTime;
 
 		if (!this.worldObj.isRemote)
 		{
-			if (this.fuelTime != 0 || this.ItemStacks[1] != null && this.ItemStacks[0] != null)
+			if (this.bookTime != 0 || this.ItemStacks[1] != null && this.ItemStacks[0] != null)
 			{
-				if (this.fuelTime == 0 && this.canProcess())
+				if (this.bookTime == 0 && this.canProcess())
 				{
-					this.currentFuelBuffer = this.fuelTime = getBookUseTime(this.ItemStacks[1]);
+					this.currentBookBuffer = this.bookTime = getBookUseTime(this.ItemStacks[1]);
 
-					if (this.fuelTime > 0)
+					if (this.bookTime > 0)
 						flag = true;
 				}
 
@@ -74,7 +74,7 @@ public class TileScribe extends TileEntityLockable implements ITickable, ISidedI
 			else if (!this.hasConsumedBook() && this.processTime > 0)
 				this.processTime = MathHelper.clamp_int(this.processTime - 2, 0, this.totalTime);
 
-			if (isBurning != this.fuelTime > 0)
+			if (isBurning != this.bookTime > 0)
 			{
 				flag = true;
 				BlockScribe.updateBlockState(this.hasConsumedBook(), this.worldObj, this.pos);
@@ -173,10 +173,10 @@ public class TileScribe extends TileEntityLockable implements ITickable, ISidedI
 				this.ItemStacks[b0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
 		}
 
-		this.fuelTime = tag.getShort("FuelTime");
+		this.bookTime = tag.getShort("FuelTime");
 		this.processTime = tag.getShort("WorkTime");
 		this.totalTime = tag.getShort("WorkTimeTotal");
-		this.currentFuelBuffer = getBookUseTime(this.ItemStacks[1]);
+		this.currentBookBuffer = getBookUseTime(this.ItemStacks[1]);
 
 		if (tag.hasKey("CustomName", 8))
 			this.customName = tag.getString("CustomName");
@@ -186,7 +186,7 @@ public class TileScribe extends TileEntityLockable implements ITickable, ISidedI
 	public void writeToNBT(NBTTagCompound tag)
 	{
 		super.writeToNBT(tag);
-		tag.setShort("FuelTime", (short) this.fuelTime);
+		tag.setShort("FuelTime", (short) this.bookTime);
 		tag.setShort("WorkTime", (short) this.processTime);
 		tag.setShort("WorkTimeTotal", (short) this.totalTime);
 
@@ -222,15 +222,15 @@ public class TileScribe extends TileEntityLockable implements ITickable, ISidedI
 	@SideOnly(Side.CLIENT)
 	public int getBurnTimeRemainingScaled(int par1)
 	{
-		if (this.currentFuelBuffer == 0)
-			this.currentFuelBuffer = proTicks;
+		if (this.currentBookBuffer == 0)
+			this.currentBookBuffer = proTicks;
 
-		return this.fuelTime * par1 / this.currentFuelBuffer;
+		return this.bookTime * par1 / this.currentBookBuffer;
 	}
 
 	public boolean hasConsumedBook()
 	{
-		return this.fuelTime > 0;
+		return this.bookTime > 0;
 	}
 
 	private boolean canProcess()
@@ -315,9 +315,9 @@ public class TileScribe extends TileEntityLockable implements ITickable, ISidedI
 		switch (id)
 		{
 		case 0:
-			return this.fuelTime;
+			return this.bookTime;
 		case 1:
-			return this.currentFuelBuffer;
+			return this.currentBookBuffer;
 		case 2:
 			return this.processTime;
 		case 3:
@@ -333,10 +333,10 @@ public class TileScribe extends TileEntityLockable implements ITickable, ISidedI
 		switch (id)
 		{
 		case 0:
-			this.fuelTime = value;
+			this.bookTime = value;
 			break;
 		case 1:
-			this.currentFuelBuffer = value;
+			this.currentBookBuffer = value;
 			break;
 		case 2:
 			this.processTime = value;

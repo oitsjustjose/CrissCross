@@ -3,11 +3,9 @@ package com.oitsjustjose.criss_cross.jei;
 import javax.annotation.Nonnull;
 
 import com.oitsjustjose.criss_cross.gui.GUIScribe;
-import com.oitsjustjose.criss_cross.gui.GUIWoodchipper;
 import com.oitsjustjose.criss_cross.lib.Lib;
 
 import mezz.jei.api.gui.IDrawable;
-import mezz.jei.api.gui.IDrawableAnimated;
 import mezz.jei.api.gui.IDrawableStatic;
 import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
@@ -26,16 +24,14 @@ public class ScribeCategory implements IRecipeCategory
 
 	private final IDrawableStatic progressDrawable;
 
-	private final IDrawableAnimated progress;
 	private final IDrawable background;
 	private final String localizedName;
 
 	public ScribeCategory()
 	{
 		super();
-		progressDrawable = JEIPluginManager.jeiHelper.getGuiHelper().createDrawable(GUIWoodchipper.texture, 177, 14, 23, 16);
-		progress = JEIPluginManager.jeiHelper.getGuiHelper().createAnimatedDrawable(progressDrawable, 700, IDrawableAnimated.StartDirection.LEFT, false);
-		background = JEIPluginManager.jeiHelper.getGuiHelper().createDrawable(GUIScribe.backgroundTexture, 33, 30, 110, 34);
+		progressDrawable = JEIPluginManager.jeiHelper.getGuiHelper().createDrawable(GUIScribe.texture, 177, 14, 23, 16);
+		background = JEIPluginManager.jeiHelper.getGuiHelper().createDrawable(GUIScribe.texture, 39, 16, 98, 50);
 		localizedName = StatCollector.translateToLocal("recipe.scribe");
 	}
 
@@ -69,7 +65,6 @@ public class ScribeCategory implements IRecipeCategory
 	@Override
 	public void drawAnimations(Minecraft minecraft)
 	{
-		progress.draw(minecraft, 57, 5);
 	}
 
 	@Override
@@ -78,9 +73,9 @@ public class ScribeCategory implements IRecipeCategory
 	{
 		IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
 
-		guiItemStacks.init(INPUT_SLOT, true, 34, 4);
-		guiItemStacks.init(OUTPUT_SLOT, false, 88, 4);
-		guiItemStacks.init(FUEL_SLOT, true, 0, 4);
+		guiItemStacks.init(INPUT_SLOT, true, 80, 30);
+		guiItemStacks.init(OUTPUT_SLOT, false, 40, 8);
+		guiItemStacks.init(FUEL_SLOT, true, 0, 30);
 
 		if (recipeWrapper instanceof ScribeRecipeJEI)
 		{

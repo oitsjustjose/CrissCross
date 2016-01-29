@@ -29,9 +29,9 @@ public class ContainerScribe extends Container
 		fuelTime = 0;
 		lastFuelTime = 0;
 
-		this.addSlotToContainer(new Slot(scribe, 0, 68, 35)); // input
-		this.addSlotToContainer(new Slot(scribe, 1, 34, 35)); // book
-		this.addSlotToContainer(new MachineOutputSlot(player, scribe, 2, 122, 35));
+		this.addSlotToContainer(new Slot(scribe, 0, 120, 47)); // input
+		this.addSlotToContainer(new Slot(scribe, 1, 40, 47)); // book
+		this.addSlotToContainer(new MachineOutputSlot(player, scribe, 2, 80, 25));
 		this.addInventorySlots();
 	}
 
@@ -45,10 +45,10 @@ public class ContainerScribe extends Container
 			this.scribe.processTime = timeType2;
 			break;
 		case 1:
-			this.scribe.fuelTime = timeType2;
+			this.scribe.bookTime = timeType2;
 			break;
 		case 2:
-			this.scribe.currentFuelBuffer = timeType2;
+			this.scribe.currentBookBuffer = timeType2;
 			break;
 		}
 	}
@@ -58,8 +58,8 @@ public class ContainerScribe extends Container
 	{
 		super.onCraftGuiOpened(crafting);
 		crafting.sendProgressBarUpdate(this, 0, this.scribe.processTime);
-		crafting.sendProgressBarUpdate(this, 1, this.scribe.fuelTime);
-		crafting.sendProgressBarUpdate(this, 2, this.scribe.currentFuelBuffer);
+		crafting.sendProgressBarUpdate(this, 1, this.scribe.bookTime);
+		crafting.sendProgressBarUpdate(this, 2, this.scribe.currentBookBuffer);
 	}
 
 	@Override
@@ -72,14 +72,14 @@ public class ContainerScribe extends Container
 
 			if (this.lastUseTime != this.scribe.processTime)
 				crafting.sendProgressBarUpdate(this, 0, this.scribe.processTime);
-			if (this.fuelTime != this.scribe.fuelTime)
-				crafting.sendProgressBarUpdate(this, 1, this.scribe.fuelTime);
-			if (this.lastFuelTime != this.scribe.currentFuelBuffer)
-				crafting.sendProgressBarUpdate(this, 2, this.scribe.currentFuelBuffer);
+			if (this.fuelTime != this.scribe.bookTime)
+				crafting.sendProgressBarUpdate(this, 1, this.scribe.bookTime);
+			if (this.lastFuelTime != this.scribe.currentBookBuffer)
+				crafting.sendProgressBarUpdate(this, 2, this.scribe.currentBookBuffer);
 		}
 		this.lastUseTime = this.scribe.processTime;
-		this.fuelTime = this.scribe.fuelTime;
-		this.lastFuelTime = this.scribe.currentFuelBuffer;
+		this.fuelTime = this.scribe.bookTime;
+		this.lastFuelTime = this.scribe.currentBookBuffer;
 	}
 
 	@Override
