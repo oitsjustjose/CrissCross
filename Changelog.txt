@@ -1,7 +1,13 @@
 1.3.9:
+-Added: Ability to completely enable/disable any parts
 -Changed: Scribes are no longer picky about having the EXACT stack size for a recipe, just the minimum
 -Changed: GUI for scribe - completely redesigned! :D
 -Changed: Scribe is now instantaneous
+-Changed: GUI for Electroextractor - also redesigned!
+-Changed: GUI for Cropomator - you guessed it, redesigned!
+-Changed: JEI Recipe GUI to reflect changes in newly redesigned GUIs
+-Broke: How the word redesigned sounds in your head
+-Fixed: Scribes eating your book if you messed up / changed the recipe
 1.3.8:
 -Added: Dependency on Forge 11.15.1.1722 or newer
 -Added: Capabilities Compatibility to all TileEntities
