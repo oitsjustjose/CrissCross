@@ -29,8 +29,8 @@ public class ContainerElectroextractor extends Container
 		lastCrushTime = 0;
 		lastFuelTime = 0;
 
-		this.addSlotToContainer(new Slot(electroextractor, 0, 56, 17)); // input
-		this.addSlotToContainer(new Slot(electroextractor, 1, 56, 53)); // fuelitem
+		this.addSlotToContainer(new Slot(electroextractor, 0, 56, 35)); // input
+		this.addSlotToContainer(new Slot(electroextractor, 1, 8, 56)); // fuelitem
 		this.addSlotToContainer(new MachineOutputSlot(player, electroextractor, 2, 116, 35));
 		this.addInventorySlots();
 	}

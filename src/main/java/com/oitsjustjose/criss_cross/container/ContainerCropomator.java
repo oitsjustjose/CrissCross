@@ -29,8 +29,8 @@ public class ContainerCropomator extends Container
 		lastProcessTime = 0;
 		lastCatalystInUseTime = 0;
 
-		this.addSlotToContainer(new Slot(cropomator, 0, 56, 17)); // input
-		this.addSlotToContainer(new Slot(cropomator, 1, 56, 53)); // catalyst
+		this.addSlotToContainer(new Slot(cropomator, 0, 56, 35)); // input
+		this.addSlotToContainer(new Slot(cropomator, 1, 8, 56)); // catalyst
 		this.addSlotToContainer(new MachineOutputSlot(player, cropomator, 2, 116, 35));
 		this.addInventorySlots();
 	}
