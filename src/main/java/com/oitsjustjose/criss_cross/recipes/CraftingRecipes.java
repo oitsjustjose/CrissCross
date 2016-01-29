@@ -20,24 +20,38 @@ public class CraftingRecipes
 	{
 		initStaticRecipes();
 		initUserRecipes();
-		CraftingManager.getInstance().getRecipeList().add(new PouchColorRecipes());
-		CraftingManager.getInstance().getRecipeList().add(new PouchRollbackRecipes());
-		// Am I doing this correctly? I hope so, hard to tell w/o NEI :|
-		RecipeSorter.register("CrissCross:PouchColorRecipes", PouchColorRecipes.class, Category.SHAPELESS, "");
-		RecipeSorter.register("CrissCross:PouchRollbackRecipes", PouchRollbackRecipes.class, Category.SHAPELESS, "");
+		if (Config.enablePouches)
+		{
+			CraftingManager.getInstance().getRecipeList().add(new PouchColorRecipes());
+			CraftingManager.getInstance().getRecipeList().add(new PouchRollbackRecipes());
+
+			RecipeSorter.register("CrissCross:PouchColorRecipes", PouchColorRecipes.class, Category.SHAPELESS, "");
+			RecipeSorter.register("CrissCross:PouchRollbackRecipes", PouchRollbackRecipes.class, Category.SHAPELESS, "");
+		}
 	}
 
 	static void initStaticRecipes()
 	{
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LibBlocks.cobblegen), "CPC", "#$#", "CPC", '$', "blockIron", 'C', "cobblestone", 'P', Blocks.piston, '#', Items.stone_pickaxe));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LibBlocks.stonegen), "CPC", "#$#", "CPC", '$', "blockIron", 'C', "stone", 'P', Blocks.piston, '#', Items.stone_pickaxe));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LibBlocks.scribe), "BWB", "FES", "BWB", 'B', Items.book, 'W', "plankWood", 'F', Items.feather, 'S', "dyeBlack", 'E', Blocks.enchanting_table));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LibItems.buckets, 1, 0), "DFD", "WBW", "DFD", 'W', Items.water_bucket, 'B', Items.bucket, 'D', "gemDiamond", 'F', "blockDiamond"));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LibItems.buckets, 1, 1), "OGO", "GBG", "OGO", 'B', Items.bucket, 'G', "blockGlass", 'O', Blocks.obsidian));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LibItems.infiniApple, 1, 0), "###", "#N#", "###", '#', new ItemStack(Items.golden_apple, 1, 1), 'N', Items.nether_star));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LibItems.mantleSmasherMkI), "## ", "#PI", " II", '#', "blockEmerald", 'I', "blockIron", 'P', Items.diamond_pickaxe));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LibItems.mantleSmasherMkII), "## ", "#PI", " IN", '#', "blockDiamond", 'I', "blockGold", 'P', LibItems.mantleSmasherMkI, 'N', Items.nether_star));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LibItems.pouch), "SDS", "LCL", "LLL", 'S', Items.string, 'D', "gemDiamond", 'L', Items.leather, 'C', Blocks.chest));
+		if (Config.enableCobblestoneGenerator)
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LibBlocks.cobblegen), "CPC", "#$#", "CPC", '$', "blockIron", 'C', "cobblestone", 'P', Blocks.piston, '#', Items.stone_pickaxe));
+		if (Config.enableStoneGenerator)
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LibBlocks.stonegen), "CPC", "#$#", "CPC", '$', "blockIron", 'C', "stone", 'P', Blocks.piston, '#', Items.stone_pickaxe));
+		if (Config.enableScribe)
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LibBlocks.scribe), "BWB", "FES", "BWB", 'B', Items.book, 'W', "plankWood", 'F', Items.feather, 'S', "dyeBlack", 'E', Blocks.enchanting_table));
+		if (Config.enableBuckets)
+		{
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LibItems.buckets, 1, 0), "DFD", "WBW", "DFD", 'W', Items.water_bucket, 'B', Items.bucket, 'D', "gemDiamond", 'F', "blockDiamond"));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LibItems.buckets, 1, 1), "OGO", "GBG", "OGO", 'B', Items.bucket, 'G', "blockGlass", 'O', Blocks.obsidian));
+		}
+		if (Config.enableInfiniapple)
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LibItems.infiniApple, 1, 0), "###", "#N#", "###", '#', new ItemStack(Items.golden_apple, 1, 1), 'N', Items.nether_star));
+		if (Config.enableMantlesmashers)
+		{
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LibItems.mantleSmasherMkI), "## ", "#PI", " II", '#', "blockEmerald", 'I', "blockIron", 'P', Items.diamond_pickaxe));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LibItems.mantleSmasherMkII), "## ", "#PI", " IN", '#', "blockDiamond", 'I', "blockGold", 'P', LibItems.mantleSmasherMkI, 'N', Items.nether_star));
+		}
+		if (Config.enablePouches)
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(LibItems.pouch), "SDS", "LCL", "LLL", 'S', Items.string, 'D', "gemDiamond", 'L', Items.leather, 'C', Blocks.chest));
 	}
 
 	static void initUserRecipes()
