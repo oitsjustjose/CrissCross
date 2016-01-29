@@ -19,7 +19,7 @@ repositories {
 
 apply plugin: 'net.minecraftforge.gradle.forge'
 
-version = "1.3.9"
+version = "1.3.9.1"
 group= "com.oitsjustjose.criss_cross"
 archivesBaseName = "CrissCross-1.8.9"
 
