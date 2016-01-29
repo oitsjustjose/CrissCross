@@ -4,17 +4,25 @@ import com.oitsjustjose.criss_cross.CrissCross;
 import com.oitsjustjose.criss_cross.event.PouchCleanEvent;
 import com.oitsjustjose.criss_cross.gui.GUIHandler;
 import com.oitsjustjose.criss_cross.lib.Lib;
+import com.oitsjustjose.criss_cross.recipes.PouchColorRecipes;
+import com.oitsjustjose.criss_cross.recipes.PouchRollbackRecipes;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.RecipeSorter;
+import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraftforge.oredict.RecipeSorter.Category;
 
 public class ItemPouch extends Item
 {
@@ -26,6 +34,11 @@ public class ItemPouch extends Item
 		GameRegistry.registerItem(this, "pouch");
 		MinecraftForge.EVENT_BUS.register(new PouchCleanEvent());
 		Lib.add(this);
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(this), "SDS", "LCL", "LLL", 'S', Items.string, 'D', "gemDiamond", 'L', Items.leather, 'C', Blocks.chest));
+		CraftingManager.getInstance().getRecipeList().add(new PouchColorRecipes());
+		CraftingManager.getInstance().getRecipeList().add(new PouchRollbackRecipes());
+		RecipeSorter.register("CrissCross:PouchColorRecipes", PouchColorRecipes.class, Category.SHAPELESS, "");
+		RecipeSorter.register("CrissCross:PouchRollbackRecipes", PouchRollbackRecipes.class, Category.SHAPELESS, "");
 	}
 
 	// Dye specific code below: allows for custom pouch colors, not just your standard 16 colors

@@ -9,7 +9,10 @@ import com.oitsjustjose.criss_cross.tileentity.TileScribe;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryHelper;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
@@ -18,6 +21,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class BlockScribe extends BlockMachineBase
 {
@@ -28,6 +32,7 @@ public class BlockScribe extends BlockMachineBase
 		super(unlocName, Material.iron);
 		GameRegistry.registerTileEntity(TileScribe.class, unlocName);
 		GameRegistry.registerBlock(this, unlocName.toLowerCase());
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(this), "BWB", "FES", "BWB", 'B', Items.book, 'W', "plankWood", 'F', Items.feather, 'S', "dyeBlack", 'E', Blocks.enchanting_table));
 	}
 
 	@Override

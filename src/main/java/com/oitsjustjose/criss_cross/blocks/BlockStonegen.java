@@ -7,12 +7,16 @@ import com.oitsjustjose.criss_cross.tileentity.TileStonegen;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryHelper;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class BlockStonegen extends BlockMachineBase
 {
@@ -23,6 +27,7 @@ public class BlockStonegen extends BlockMachineBase
 		super(unlocName, Material.iron);
 		GameRegistry.registerTileEntity(TileStonegen.class, unlocName);
 		GameRegistry.registerBlock(this, unlocName.toLowerCase());
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(this), "CPC", "#$#", "CPC", '$', "blockIron", 'C', "stone", 'P', Blocks.piston, '#', Items.stone_pickaxe));
 	}
 
 	@Override
