@@ -39,7 +39,7 @@ public class GUIScribe extends GuiContainer
 		int l = (this.height - this.ySize) / 2;
 		this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
 
-		if (this.scribe.isUsingFuel())
+		if (this.scribe.hasConsumedBook())
 		{
 			int i1 = this.scribe.getProgressScaled(24);
 			this.drawTexturedModalRect(k + 89, l + 36, 176, 14, i1 + 1, 16);

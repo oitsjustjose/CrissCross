@@ -52,18 +52,13 @@ public class MachineRecipes
 			ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.cobblestone, 1), new ItemStack(Blocks.sand, 2));
 			ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.sandstone, 1, Short.MAX_VALUE), new ItemStack(Blocks.sand, 4));
 			ElectroextractorRecipes.getInstance().addRecipe(new ItemStack(Blocks.red_sandstone, 1, Short.MAX_VALUE), new ItemStack(Blocks.sand, 4, 1));
-
-			registerOreDict();
+			
+			for (int i = 0; i < ItemDust.getDusts().size(); i++)
+				OreDictionary.registerOre("dust" + ItemDust.getDusts().get(i), new ItemStack(LibItems.dusts, 1, i));
 		}
 	}
 
-	static void registerOreDict()
-	{
-		ArrayList<String> dustNames = ItemDust.getDusts();
 
-		for (int i = 0; i < dustNames.size(); i++)
-			OreDictionary.registerOre("dust" + dustNames.get(i), new ItemStack(LibItems.dusts, 1, i));
-	}
 
 	static void parseScribeRecipes()
 	{

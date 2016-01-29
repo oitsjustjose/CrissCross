@@ -17,7 +17,7 @@ public class ContainerScribe extends Container
 	EntityPlayer player;
 
 	private int lastUseTime;
-	private int lastChopTime;
+	private int fuelTime;
 	private int lastFuelTime;
 
 	public ContainerScribe(EntityPlayer player, TileScribe scribe)
@@ -26,7 +26,7 @@ public class ContainerScribe extends Container
 		this.scribe = scribe;
 
 		lastUseTime = 0;
-		lastChopTime = 0;
+		fuelTime = 0;
 		lastFuelTime = 0;
 
 		this.addSlotToContainer(new Slot(scribe, 0, 68, 35)); // input
@@ -72,13 +72,13 @@ public class ContainerScribe extends Container
 
 			if (this.lastUseTime != this.scribe.processTime)
 				crafting.sendProgressBarUpdate(this, 0, this.scribe.processTime);
-			if (this.lastChopTime != this.scribe.fuelTime)
+			if (this.fuelTime != this.scribe.fuelTime)
 				crafting.sendProgressBarUpdate(this, 1, this.scribe.fuelTime);
 			if (this.lastFuelTime != this.scribe.currentFuelBuffer)
 				crafting.sendProgressBarUpdate(this, 2, this.scribe.currentFuelBuffer);
 		}
 		this.lastUseTime = this.scribe.processTime;
-		this.lastChopTime = this.scribe.fuelTime;
+		this.fuelTime = this.scribe.fuelTime;
 		this.lastFuelTime = this.scribe.currentFuelBuffer;
 	}
 

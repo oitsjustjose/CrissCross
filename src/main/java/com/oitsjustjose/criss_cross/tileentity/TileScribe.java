@@ -23,7 +23,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TileScribe extends TileEntityLockable implements ITickable, ISidedInventory
 {
-	private static int proTicks = 700;
+	private static int proTicks = 100;
 	private static String customName;
 	private ItemStack[] ItemStacks = new ItemStack[3];
 	public int fuelTime;
@@ -34,7 +34,7 @@ public class TileScribe extends TileEntityLockable implements ITickable, ISidedI
 	@Override
 	public void update()
 	{
-		boolean isBurning = this.isUsingFuel();
+		boolean isBurning = this.hasConsumedBook();
 		boolean flag = false;
 
 		if (this.fuelTime > 0)
@@ -49,20 +49,10 @@ public class TileScribe extends TileEntityLockable implements ITickable, ISidedI
 					this.currentFuelBuffer = this.fuelTime = getBookUseTime(this.ItemStacks[1]);
 
 					if (this.fuelTime > 0)
-					{
 						flag = true;
-
-						if (this.ItemStacks[1] != null)
-						{
-							--this.ItemStacks[1].stackSize;
-
-							if (this.ItemStacks[1].stackSize == 0)
-								this.ItemStacks[1] = ItemStacks[1].getItem().getContainerItem(ItemStacks[1]);
-						}
-					}
 				}
 
-				if (this.isUsingFuel() && this.canProcess())
+				if (this.hasConsumedBook() && this.canProcess())
 				{
 					++this.processTime;
 
@@ -72,22 +62,24 @@ public class TileScribe extends TileEntityLockable implements ITickable, ISidedI
 						this.processTime = 0;
 						this.totalTime = this.getBookUseTime(this.ItemStacks[0]);
 						this.processItem();
+						this.ItemStacks[1] = null;
+						if(this.ItemStacks[0].stackSize < 1)
+							this.ItemStacks[0] = null;
 						flag = true;
 					}
 				}
 				else
 					this.processTime = 0;
 			}
-			else if (!this.isUsingFuel() && this.processTime > 0)
+			else if (!this.hasConsumedBook() && this.processTime > 0)
 				this.processTime = MathHelper.clamp_int(this.processTime - 2, 0, this.totalTime);
 
 			if (isBurning != this.fuelTime > 0)
 			{
 				flag = true;
-				BlockScribe.updateBlockState(this.isUsingFuel(), this.worldObj, this.pos);
+				BlockScribe.updateBlockState(this.hasConsumedBook(), this.worldObj, this.pos);
 			}
 		}
-
 		if (flag)
 			this.markDirty();
 	}
@@ -236,7 +228,7 @@ public class TileScribe extends TileEntityLockable implements ITickable, ISidedI
 		return this.fuelTime * par1 / this.currentFuelBuffer;
 	}
 
-	public boolean isUsingFuel()
+	public boolean hasConsumedBook()
 	{
 		return this.fuelTime > 0;
 	}
@@ -246,25 +238,28 @@ public class TileScribe extends TileEntityLockable implements ITickable, ISidedI
 		ItemStack input = this.ItemStacks[0];
 		if (input != null)
 		{
-			ItemStack output = ScribeRecipes.getInstance().getResult(input);
-			if (output == null)
-				return false;
-			ItemStack outputSlot = this.ItemStacks[2];
-			if (outputSlot == null)
-				return true;
-			if (!outputSlot.isItemEqual(output))
-				return false;
-			int result = outputSlot.stackSize + output.stackSize;
-			return result <= output.getMaxStackSize();
+			if (this.ItemStacks[1] != null && isBook(ItemStacks[1]))
+			{
+				ItemStack output = ScribeRecipes.getInstance().getResult(input);
+				if (output == null)
+					return false;
+				ItemStack outputSlot = this.ItemStacks[2];
+				if (input.stackSize < ScribeRecipes.getInstance().getInputStackSizeForOutput(output))
+					return false;
+				if (outputSlot == null)
+					return true;
+				if (!outputSlot.isItemEqual(output))
+					return false;
+				int result = outputSlot.stackSize + output.stackSize;
+				return result <= output.getMaxStackSize();
+			}
 		}
 		return false;
 	}
 
 	public static boolean isValidForScribe(ItemStack itemstack)
 	{
-		if (ScribeRecipes.getInstance().getResult(itemstack) != null)
-			return true;
-		return false;
+		return (ScribeRecipes.getInstance().getResult(itemstack) != null);
 	}
 
 	public void processItem()
@@ -278,23 +273,19 @@ public class TileScribe extends TileEntityLockable implements ITickable, ISidedI
 				ItemStacks[2] = output.copy();
 			else if (outputSlot.isItemEqual(output))
 				outputSlot.stackSize += output.stackSize;
-			ItemStacks[0] = null;
+			int qtyToDecr = ScribeRecipes.getInstance().getInputStackSizeForOutput(output);
+			input.stackSize -= qtyToDecr;
 		}
 	}
 
 	public static int getBookUseTime(ItemStack itemstack)
 	{
-		if (itemstack == null)
-			return 0;
-		return isBook(itemstack) ? proTicks : 0;
+		return itemstack == null ? 0 : (isBook(itemstack) ? proTicks : 0);
 	}
 
 	public static boolean isBook(ItemStack itemstack)
 	{
-		ItemStack temp = new ItemStack(Items.writable_book);
-		if (temp.getItem() == itemstack.getItem() && temp.getItemDamage() == itemstack.getItemDamage())
-			return true;
-		return false;
+		return itemstack.getItem() == Items.writable_book;
 	}
 
 	@Override
@@ -403,6 +394,7 @@ public class TileScribe extends TileEntityLockable implements ITickable, ISidedI
 	{
 		return false;
 	}
+
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing)
 	{
