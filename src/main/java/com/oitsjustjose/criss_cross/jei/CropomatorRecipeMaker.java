@@ -4,15 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Nonnull;
-
 import com.oitsjustjose.criss_cross.recipes.machine.CropomatorRecipes;
 
 import net.minecraft.item.ItemStack;
 
 public class CropomatorRecipeMaker
 {
-	@Nonnull
 	public static List<CropomatorRecipeJEI> getRecipes()
 	{
 		Map<ItemStack, ItemStack> cropomatorMap = CropomatorRecipes.getInstance().getRecipeList();

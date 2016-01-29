@@ -1,7 +1,5 @@
 package com.oitsjustjose.criss_cross.jei;
 
-import javax.annotation.Nonnull;
-
 import com.oitsjustjose.criss_cross.gui.GUIWoodchipper;
 import com.oitsjustjose.criss_cross.lib.Config;
 import com.oitsjustjose.criss_cross.lib.FluidHandler;
@@ -62,7 +60,7 @@ public class WoodchipperCategory implements IRecipeCategory
 	}
 
 	@Override
-	public void setRecipe(@Nonnull IRecipeLayout recipeLayout, @Nonnull IRecipeWrapper recipeWrapper)
+	public void setRecipe(IRecipeLayout recipeLayout, IRecipeWrapper recipeWrapper)
 	{		
 		recipeLayout.getItemStacks().init(INPUT_SLOT, true, 0, 0);
 		recipeLayout.getItemStacks().init(OUTPUT_SLOT, false, 60, 18);

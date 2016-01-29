@@ -4,15 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Nonnull;
-
 import com.oitsjustjose.criss_cross.recipes.machine.ScribeRecipes;
 
 import net.minecraft.item.ItemStack;
 
 public class ScribeRecipeMaker
 {
-	@Nonnull
 	public static List<ScribeRecipeJEI> getRecipes()
 	{
 		ScribeRecipes scribeRecipes = ScribeRecipes.getInstance();
@@ -33,8 +30,7 @@ public class ScribeRecipeMaker
 		return recipes;
 	}
 
-	@SuppressWarnings("unchecked")
-	private static Map<ItemStack, ItemStack> getMap(@Nonnull ScribeRecipes recipes)
+	private static Map<ItemStack, ItemStack> getMap(ScribeRecipes recipes)
 	{
 		return recipes.getRecipeList();
 	}

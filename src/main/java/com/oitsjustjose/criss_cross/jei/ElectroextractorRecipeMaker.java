@@ -4,15 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Nonnull;
-
 import com.oitsjustjose.criss_cross.recipes.machine.ElectroextractorRecipes;
 
 import net.minecraft.item.ItemStack;
 
 public class ElectroextractorRecipeMaker
 {
-	@Nonnull
 	public static List<ElectroextractorRecipeJEI> getRecipes()
 	{
 		Map<ItemStack, ItemStack> electroextractorMap = ElectroextractorRecipes.getInstance().getRecipeList();

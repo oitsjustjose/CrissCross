@@ -1,7 +1,5 @@
 package com.oitsjustjose.criss_cross.jei;
 
-import javax.annotation.Nonnull;
-
 import com.oitsjustjose.criss_cross.gui.GUIScribe;
 import com.oitsjustjose.criss_cross.lib.Lib;
 
@@ -35,21 +33,18 @@ public class ScribeCategory implements IRecipeCategory
 		localizedName = StatCollector.translateToLocal("recipe.scribe");
 	}
 
-	@Nonnull
 	@Override
 	public String getUid()
 	{
 		return Lib.SCRIBE_UID;
 	}
 
-	@Nonnull
 	@Override
 	public String getTitle()
 	{
 		return localizedName;
 	}
 
-	@Nonnull
 	@Override
 	public IDrawable getBackground()
 	{
@@ -68,8 +63,7 @@ public class ScribeCategory implements IRecipeCategory
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
-	public void setRecipe(@Nonnull IRecipeLayout recipeLayout, @Nonnull IRecipeWrapper recipeWrapper)
+	public void setRecipe(IRecipeLayout recipeLayout, IRecipeWrapper recipeWrapper)
 	{
 		IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
 
