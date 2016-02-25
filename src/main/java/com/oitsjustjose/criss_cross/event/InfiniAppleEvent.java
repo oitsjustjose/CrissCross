@@ -17,9 +17,6 @@ public class InfiniAppleEvent
 
 		if (player.inventory.hasItem(LibItems.infiniApple))
 			if (player.getFoodStats() != null)
-			{
 				player.getFoodStats().setFoodLevel(20);
-				player.getFoodStats().setFoodSaturationLevel(5.0F);
-			}
 	}
 }
