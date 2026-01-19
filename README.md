@@ -1,2 +1,3 @@
-# CrissCross
-A Criss-Cross-Confused mod that adds all sorts of machines that feel kinda sorta vanilla-ish! Highly configurable, no RF, no EU, just fuels and recipes!
+# This Repo has Moved!
+
+This repository has been moved to a [new location!](https://git.oitsjustjose.com/me/CrissCross)
